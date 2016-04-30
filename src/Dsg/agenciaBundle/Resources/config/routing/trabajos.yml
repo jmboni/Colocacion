@@ -3,7 +3,7 @@ trabajos:
     defaults: { _controller: "DsgagenciaBundle:Trabajos:index" }
 
 trabajos_show:
-    path:     /{id}/show
+    path:     /{compania}/{localidad}/{id}/{posicion}
     defaults: { _controller: "DsgagenciaBundle:Trabajos:show" }
 
 trabajos_new:

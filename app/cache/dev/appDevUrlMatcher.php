@@ -138,7 +138,7 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             }
 
             // trabajos_show
-            if (preg_match('#^/trabajos/(?P<id>[^/]++)/show$#s', $pathinfo, $matches)) {
+            if (preg_match('#^/trabajos/(?P<compania>[^/]++)/(?P<localidad>[^/]++)/(?P<id>[^/]++)/(?P<posicion>[^/]++)$#s', $pathinfo, $matches)) {
                 return $this->mergeDefaults(array_replace($matches, array('_route' => 'trabajos_show')), array (  '_controller' => 'Dsg\\agenciaBundle\\Controller\\TrabajosController::showAction',));
             }
 
@@ -189,7 +189,16 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
         // dsgagencia_homepage
         if (0 === strpos($pathinfo, '/hello') && preg_match('#^/hello/(?P<name>[^/]++)$#s', $pathinfo, $matches)) {
-            return $this->mergeDefaults(array_replace($matches, array('_route' => 'dsgagencia_homepage')), array (  '_controller' => 'Dsg\\agenciaBundle\\Controller\\DefaultController::indexAction',));
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'dsgagencia_homepage')), array (  '_controller' => 'Dsg\\agenciaBundle\\Controller\\TrabajosController::indexAction',));
+        }
+
+        // dsgagencia_index
+        if (rtrim($pathinfo, '/') === '') {
+            if (substr($pathinfo, -1) !== '/') {
+                return $this->redirect($pathinfo.'/', 'dsgagencia_index');
+            }
+
+            return array (  '_controller' => 'Dsg\\agenciaBundle\\Controller\\TrabajosController::indexAction',  '_route' => 'dsgagencia_index',);
         }
 
         // homepage

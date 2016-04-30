@@ -4,4 +4,9 @@ dsgagencia_trabajos:
 
 dsgagencia_homepage:
     path:     /hello/{name}
-    defaults: { _controller: DsgagenciaBundle:Default:index }
+    defaults: { _controller: DsgagenciaBundle:Trabajos:index }
+
+
+dsgagencia_index:
+    path:     /
+    defaults: { _controller: DsgagenciaBundle:Trabajos:index }
