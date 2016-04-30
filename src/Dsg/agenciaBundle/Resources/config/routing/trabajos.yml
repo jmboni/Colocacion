@@ -1,0 +1,30 @@
+trabajos:
+    path:     /
+    defaults: { _controller: "DsgagenciaBundle:Trabajos:index" }
+
+trabajos_show:
+    path:     /{id}/show
+    defaults: { _controller: "DsgagenciaBundle:Trabajos:show" }
+
+trabajos_new:
+    path:     /new
+    defaults: { _controller: "DsgagenciaBundle:Trabajos:new" }
+
+trabajos_create:
+    path:     /create
+    defaults: { _controller: "DsgagenciaBundle:Trabajos:create" }
+    methods:  POST
+
+trabajos_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "DsgagenciaBundle:Trabajos:edit" }
+
+trabajos_update:
+    path:     /{id}/update
+    defaults: { _controller: "DsgagenciaBundle:Trabajos:update" }
+    methods:  [POST, PUT]
+
+trabajos_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "DsgagenciaBundle:Trabajos:delete" }
+    methods:  [POST, DELETE]

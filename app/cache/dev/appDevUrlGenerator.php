@@ -12,7 +12,17 @@ use Psr\Log\LoggerInterface;
  */
 class appDevUrlGenerator extends Symfony\Component\Routing\Generator\UrlGenerator
 {
-    private static $declaredRoutes = array(
+    private static $declaredRoutes;
+
+    /**
+     * Constructor.
+     */
+    public function __construct(RequestContext $context, LoggerInterface $logger = null)
+    {
+        $this->context = $context;
+        $this->logger = $logger;
+        if (null === self::$declaredRoutes) {
+            self::$declaredRoutes = array(
         '_wdt' => array (  0 =>   array (    0 => 'token',  ),  1 =>   array (    '_controller' => 'web_profiler.controller.profiler:toolbarAction',  ),  2 =>   array (  ),  3 =>   array (    0 =>     array (      0 => 'variable',      1 => '/',      2 => '[^/]++',      3 => 'token',    ),    1 =>     array (      0 => 'text',      1 => '/_wdt',    ),  ),  4 =>   array (  ),  5 =>   array (  ),),
         '_profiler_home' => array (  0 =>   array (  ),  1 =>   array (    '_controller' => 'web_profiler.controller.profiler:homeAction',  ),  2 =>   array (  ),  3 =>   array (    0 =>     array (      0 => 'text',      1 => '/_profiler/',    ),  ),  4 =>   array (  ),  5 =>   array (  ),),
         '_profiler_search' => array (  0 =>   array (  ),  1 =>   array (    '_controller' => 'web_profiler.controller.profiler:searchAction',  ),  2 =>   array (  ),  3 =>   array (    0 =>     array (      0 => 'text',      1 => '/_profiler/search',    ),  ),  4 =>   array (  ),  5 =>   array (  ),),
@@ -29,16 +39,17 @@ class appDevUrlGenerator extends Symfony\Component\Routing\Generator\UrlGenerato
         '_configurator_step' => array (  0 =>   array (    0 => 'index',  ),  1 =>   array (    '_controller' => 'Sensio\\Bundle\\DistributionBundle\\Controller\\ConfiguratorController::stepAction',  ),  2 =>   array (  ),  3 =>   array (    0 =>     array (      0 => 'variable',      1 => '/',      2 => '[^/]++',      3 => 'index',    ),    1 =>     array (      0 => 'text',      1 => '/_configurator/step',    ),  ),  4 =>   array (  ),  5 =>   array (  ),),
         '_configurator_final' => array (  0 =>   array (  ),  1 =>   array (    '_controller' => 'Sensio\\Bundle\\DistributionBundle\\Controller\\ConfiguratorController::finalAction',  ),  2 =>   array (  ),  3 =>   array (    0 =>     array (      0 => 'text',      1 => '/_configurator/final',    ),  ),  4 =>   array (  ),  5 =>   array (  ),),
         '_twig_error_test' => array (  0 =>   array (    0 => 'code',    1 => '_format',  ),  1 =>   array (    '_controller' => 'twig.controller.preview_error:previewErrorPageAction',    '_format' => 'html',  ),  2 =>   array (    'code' => '\\d+',  ),  3 =>   array (    0 =>     array (      0 => 'variable',      1 => '.',      2 => '[^/]++',      3 => '_format',    ),    1 =>     array (      0 => 'variable',      1 => '/',      2 => '\\d+',      3 => 'code',    ),    2 =>     array (      0 => 'text',      1 => '/_error',    ),  ),  4 =>   array (  ),  5 =>   array (  ),),
+        'trabajos' => array (  0 =>   array (  ),  1 =>   array (    '_controller' => 'Dsg\\agenciaBundle\\Controller\\TrabajosController::indexAction',  ),  2 =>   array (  ),  3 =>   array (    0 =>     array (      0 => 'text',      1 => '/trabajos/',    ),  ),  4 =>   array (  ),  5 =>   array (  ),),
+        'trabajos_show' => array (  0 =>   array (    0 => 'id',  ),  1 =>   array (    '_controller' => 'Dsg\\agenciaBundle\\Controller\\TrabajosController::showAction',  ),  2 =>   array (  ),  3 =>   array (    0 =>     array (      0 => 'text',      1 => '/show',    ),    1 =>     array (      0 => 'variable',      1 => '/',      2 => '[^/]++',      3 => 'id',    ),    2 =>     array (      0 => 'text',      1 => '/trabajos',    ),  ),  4 =>   array (  ),  5 =>   array (  ),),
+        'trabajos_new' => array (  0 =>   array (  ),  1 =>   array (    '_controller' => 'Dsg\\agenciaBundle\\Controller\\TrabajosController::newAction',  ),  2 =>   array (  ),  3 =>   array (    0 =>     array (      0 => 'text',      1 => '/trabajos/new',    ),  ),  4 =>   array (  ),  5 =>   array (  ),),
+        'trabajos_create' => array (  0 =>   array (  ),  1 =>   array (    '_controller' => 'Dsg\\agenciaBundle\\Controller\\TrabajosController::createAction',  ),  2 =>   array (    '_method' => 'POST',  ),  3 =>   array (    0 =>     array (      0 => 'text',      1 => '/trabajos/create',    ),  ),  4 =>   array (  ),  5 =>   array (  ),),
+        'trabajos_edit' => array (  0 =>   array (    0 => 'id',  ),  1 =>   array (    '_controller' => 'Dsg\\agenciaBundle\\Controller\\TrabajosController::editAction',  ),  2 =>   array (  ),  3 =>   array (    0 =>     array (      0 => 'text',      1 => '/edit',    ),    1 =>     array (      0 => 'variable',      1 => '/',      2 => '[^/]++',      3 => 'id',    ),    2 =>     array (      0 => 'text',      1 => '/trabajos',    ),  ),  4 =>   array (  ),  5 =>   array (  ),),
+        'trabajos_update' => array (  0 =>   array (    0 => 'id',  ),  1 =>   array (    '_controller' => 'Dsg\\agenciaBundle\\Controller\\TrabajosController::updateAction',  ),  2 =>   array (    '_method' => 'POST|PUT',  ),  3 =>   array (    0 =>     array (      0 => 'text',      1 => '/update',    ),    1 =>     array (      0 => 'variable',      1 => '/',      2 => '[^/]++',      3 => 'id',    ),    2 =>     array (      0 => 'text',      1 => '/trabajos',    ),  ),  4 =>   array (  ),  5 =>   array (  ),),
+        'trabajos_delete' => array (  0 =>   array (    0 => 'id',  ),  1 =>   array (    '_controller' => 'Dsg\\agenciaBundle\\Controller\\TrabajosController::deleteAction',  ),  2 =>   array (    '_method' => 'POST|DELETE',  ),  3 =>   array (    0 =>     array (      0 => 'text',      1 => '/delete',    ),    1 =>     array (      0 => 'variable',      1 => '/',      2 => '[^/]++',      3 => 'id',    ),    2 =>     array (      0 => 'text',      1 => '/trabajos',    ),  ),  4 =>   array (  ),  5 =>   array (  ),),
+        'dsgagencia_homepage' => array (  0 =>   array (    0 => 'name',  ),  1 =>   array (    '_controller' => 'Dsg\\agenciaBundle\\Controller\\DefaultController::indexAction',  ),  2 =>   array (  ),  3 =>   array (    0 =>     array (      0 => 'variable',      1 => '/',      2 => '[^/]++',      3 => 'name',    ),    1 =>     array (      0 => 'text',      1 => '/hello',    ),  ),  4 =>   array (  ),  5 =>   array (  ),),
         'homepage' => array (  0 =>   array (  ),  1 =>   array (    '_controller' => 'AppBundle\\Controller\\DefaultController::indexAction',  ),  2 =>   array (  ),  3 =>   array (    0 =>     array (      0 => 'text',      1 => '/',    ),  ),  4 =>   array (  ),  5 =>   array (  ),),
     );
-
-    /**
-     * Constructor.
-     */
-    public function __construct(RequestContext $context, LoggerInterface $logger = null)
-    {
-        $this->context = $context;
-        $this->logger = $logger;
+        }
     }
 
     public function generate($name, $parameters = array(), $referenceType = self::ABSOLUTE_PATH)

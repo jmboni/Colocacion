@@ -17,6 +17,9 @@
       <parameter key="DoctrineBundle">Doctrine\Bundle\DoctrineBundle\DoctrineBundle</parameter>
       <parameter key="SensioFrameworkExtraBundle">Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle</parameter>
       <parameter key="AppBundle">AppBundle\AppBundle</parameter>
+      <parameter key="DsgagenciaBundle">Dsg\agenciaBundle\DsgagenciaBundle</parameter>
+      <parameter key="PropelBundle">Propel\Bundle\PropelBundle\PropelBundle</parameter>
+      <parameter key="DoctrineFixturesBundle">Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle</parameter>
       <parameter key="DebugBundle">Symfony\Bundle\DebugBundle\DebugBundle</parameter>
       <parameter key="WebProfilerBundle">Symfony\Bundle\WebProfilerBundle\WebProfilerBundle</parameter>
       <parameter key="SensioDistributionBundle">Sensio\Bundle\DistributionBundle\SensioDistributionBundle</parameter>
@@ -24,19 +27,21 @@
     </parameter>
     <parameter key="kernel.charset">UTF-8</parameter>
     <parameter key="kernel.container_class">appDevDebugProjectContainer</parameter>
+    <parameter key="database_driver">pdo_mysql</parameter>
     <parameter key="database_host">127.0.0.1</parameter>
     <parameter key="database_port">null</parameter>
     <parameter key="database_name">agencia</parameter>
     <parameter key="database_user">jmboni</parameter>
-    <parameter key="database_password">c9</parameter>
+    <parameter key="database_password">null</parameter>
     <parameter key="mailer_transport">smtp</parameter>
     <parameter key="mailer_host">127.0.0.1</parameter>
     <parameter key="mailer_user">null</parameter>
     <parameter key="mailer_password">null</parameter>
-    <parameter key="secret">524f87812088e3b0c156f6e057e9dd105e5ff1c1</parameter>
-    <parameter key="database_driver">pdo_mysql</parameter>
-    <parameter key="database_path">null</parameter>
     <parameter key="locale">en</parameter>
+    <parameter key="secret">524f87812088e3b0c156f6e057e9dd105e5ff1c1</parameter>
+    <parameter key="debug_toolbar">true</parameter>
+    <parameter key="debug_redirects">false</parameter>
+    <parameter key="use_assetic_controller">true</parameter>
     <parameter key="controller_resolver.class">Symfony\Bundle\FrameworkBundle\Controller\ControllerResolver</parameter>
     <parameter key="controller_name_converter.class">Symfony\Bundle\FrameworkBundle\Controller\ControllerNameParser</parameter>
     <parameter key="response_listener.class">Symfony\Component\HttpKernel\EventListener\ResponseListener</parameter>
@@ -303,6 +308,7 @@
     <parameter key="monolog.handler.console.class">Symfony\Bridge\Monolog\Handler\ConsoleHandler</parameter>
     <parameter key="monolog.handler.group.class">Monolog\Handler\GroupHandler</parameter>
     <parameter key="monolog.handler.buffer.class">Monolog\Handler\BufferHandler</parameter>
+    <parameter key="monolog.handler.deduplication.class">Monolog\Handler\DeduplicationHandler</parameter>
     <parameter key="monolog.handler.rotating_file.class">Monolog\Handler\RotatingFileHandler</parameter>
     <parameter key="monolog.handler.syslog.class">Monolog\Handler\SyslogHandler</parameter>
     <parameter key="monolog.handler.syslogudp.class">Monolog\Handler\SyslogUdpHandler</parameter>
@@ -337,6 +343,7 @@
     <parameter key="monolog.mongo.client.class">MongoClient</parameter>
     <parameter key="monolog.handler.elasticsearch.class">Monolog\Handler\ElasticSearchHandler</parameter>
     <parameter key="monolog.elastica.client.class">Elastica\Client</parameter>
+    <parameter key="monolog.use_microseconds">true</parameter>
     <parameter key="monolog.swift_mailer.handlers" type="collection"/>
     <parameter key="monolog.handlers_to_channels" type="collection">
       <parameter key="monolog.handler.console_very_verbose" type="collection">
@@ -419,6 +426,7 @@
     <parameter key="assetic.node.bin">/home/ubuntu/.nvm/versions/node/v4.4.0/bin/node</parameter>
     <parameter key="assetic.ruby.bin">/usr/local/rvm/rubies/ruby-2.3.0/bin/ruby</parameter>
     <parameter key="assetic.sass.bin">/usr/bin/sass</parameter>
+    <parameter key="assetic.reactjsx.bin">/usr/bin/jsx</parameter>
     <parameter key="assetic.filter.cssrewrite.class">Assetic\Filter\CssRewriteFilter</parameter>
     <parameter key="assetic.twig_extension.functions" type="collection"/>
     <parameter key="assetic.controller.class">Symfony\Bundle\AsseticBundle\Controller\AsseticController</parameter>
@@ -427,19 +435,14 @@
     <parameter key="assetic.use_controller_worker.class">Symfony\Bundle\AsseticBundle\Factory\Worker\UseControllerWorker</parameter>
     <parameter key="assetic.request_listener.class">Symfony\Bundle\AsseticBundle\EventListener\RequestListener</parameter>
     <parameter key="doctrine_cache.apc.class">Doctrine\Common\Cache\ApcCache</parameter>
+    <parameter key="doctrine_cache.apcu.class">Doctrine\Common\Cache\ApcuCache</parameter>
     <parameter key="doctrine_cache.array.class">Doctrine\Common\Cache\ArrayCache</parameter>
+    <parameter key="doctrine_cache.chain.class">Doctrine\Common\Cache\ChainCache</parameter>
+    <parameter key="doctrine_cache.couchbase.class">Doctrine\Common\Cache\CouchbaseCache</parameter>
+    <parameter key="doctrine_cache.couchbase.connection.class">Couchbase</parameter>
+    <parameter key="doctrine_cache.couchbase.hostnames">localhost:8091</parameter>
     <parameter key="doctrine_cache.file_system.class">Doctrine\Common\Cache\FilesystemCache</parameter>
     <parameter key="doctrine_cache.php_file.class">Doctrine\Common\Cache\PhpFileCache</parameter>
-    <parameter key="doctrine_cache.mongodb.class">Doctrine\Common\Cache\MongoDBCache</parameter>
-    <parameter key="doctrine_cache.mongodb.collection.class">MongoCollection</parameter>
-    <parameter key="doctrine_cache.mongodb.connection.class">MongoClient</parameter>
-    <parameter key="doctrine_cache.mongodb.server">localhost:27017</parameter>
-    <parameter key="doctrine_cache.riak.class">Doctrine\Common\Cache\RiakCache</parameter>
-    <parameter key="doctrine_cache.riak.bucket.class">Riak\Bucket</parameter>
-    <parameter key="doctrine_cache.riak.connection.class">Riak\Connection</parameter>
-    <parameter key="doctrine_cache.riak.bucket_property_list.class">Riak\BucketPropertyList</parameter>
-    <parameter key="doctrine_cache.riak.host">localhost</parameter>
-    <parameter key="doctrine_cache.riak.port">8087</parameter>
     <parameter key="doctrine_cache.memcache.class">Doctrine\Common\Cache\MemcacheCache</parameter>
     <parameter key="doctrine_cache.memcache.connection.class">Memcache</parameter>
     <parameter key="doctrine_cache.memcache.host">localhost</parameter>
@@ -448,13 +451,27 @@
     <parameter key="doctrine_cache.memcached.connection.class">Memcached</parameter>
     <parameter key="doctrine_cache.memcached.host">localhost</parameter>
     <parameter key="doctrine_cache.memcached.port">11211</parameter>
+    <parameter key="doctrine_cache.mongodb.class">Doctrine\Common\Cache\MongoDBCache</parameter>
+    <parameter key="doctrine_cache.mongodb.collection.class">MongoCollection</parameter>
+    <parameter key="doctrine_cache.mongodb.connection.class">MongoClient</parameter>
+    <parameter key="doctrine_cache.mongodb.server">localhost:27017</parameter>
+    <parameter key="doctrine_cache.predis.client.class">Predis\Client</parameter>
+    <parameter key="doctrine_cache.predis.scheme">tcp</parameter>
+    <parameter key="doctrine_cache.predis.host">localhost</parameter>
+    <parameter key="doctrine_cache.predis.port">6379</parameter>
     <parameter key="doctrine_cache.redis.class">Doctrine\Common\Cache\RedisCache</parameter>
     <parameter key="doctrine_cache.redis.connection.class">Redis</parameter>
     <parameter key="doctrine_cache.redis.host">localhost</parameter>
     <parameter key="doctrine_cache.redis.port">6379</parameter>
-    <parameter key="doctrine_cache.couchbase.class">Doctrine\Common\Cache\CouchbaseCache</parameter>
-    <parameter key="doctrine_cache.couchbase.connection.class">Couchbase</parameter>
-    <parameter key="doctrine_cache.couchbase.hostnames">localhost:8091</parameter>
+    <parameter key="doctrine_cache.riak.class">Doctrine\Common\Cache\RiakCache</parameter>
+    <parameter key="doctrine_cache.riak.bucket.class">Riak\Bucket</parameter>
+    <parameter key="doctrine_cache.riak.connection.class">Riak\Connection</parameter>
+    <parameter key="doctrine_cache.riak.bucket_property_list.class">Riak\BucketPropertyList</parameter>
+    <parameter key="doctrine_cache.riak.host">localhost</parameter>
+    <parameter key="doctrine_cache.riak.port">8087</parameter>
+    <parameter key="doctrine_cache.sqlite3.class">Doctrine\Common\Cache\SQLite3Cache</parameter>
+    <parameter key="doctrine_cache.sqlite3.connection.class">SQLite3</parameter>
+    <parameter key="doctrine_cache.void.class">Doctrine\Common\Cache\VoidCache</parameter>
     <parameter key="doctrine_cache.wincache.class">Doctrine\Common\Cache\WinCacheCache</parameter>
     <parameter key="doctrine_cache.xcache.class">Doctrine\Common\Cache\XcacheCache</parameter>
     <parameter key="doctrine_cache.zenddata.class">Doctrine\Common\Cache\ZendDataCache</parameter>
@@ -536,6 +553,119 @@
     <parameter key="sensio_framework_extra.converter.doctrine.class">Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\DoctrineParamConverter</parameter>
     <parameter key="sensio_framework_extra.converter.datetime.class">Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\DateTimeParamConverter</parameter>
     <parameter key="sensio_framework_extra.view.listener.class">Sensio\Bundle\FrameworkExtraBundle\EventListener\TemplateListener</parameter>
+    <parameter key="propel.logging">true</parameter>
+    <parameter key="propel.configuration" type="collection">
+      <parameter key="database" type="collection">
+        <parameter key="connections" type="collection">
+          <parameter key="default" type="collection">
+            <parameter key="adapter">mysql</parameter>
+            <parameter key="user">jmboni</parameter>
+            <parameter key="password"></parameter>
+            <parameter key="dsn">mysql:host=127.0.0.1;dbname=agencia;charset=UTF8</parameter>
+            <parameter key="classname">\Propel\Runtime\Connection\DebugPDO</parameter>
+            <parameter key="options" type="collection">
+              <parameter key="ATTR_PERSISTENT">false</parameter>
+            </parameter>
+            <parameter key="attributes" type="collection">
+              <parameter key="ATTR_EMULATE_PREPARES">false</parameter>
+            </parameter>
+            <parameter key="slaves" type="collection"/>
+          </parameter>
+        </parameter>
+        <parameter key="adapters" type="collection">
+          <parameter key="mysql" type="collection">
+            <parameter key="tableType">InnoDB</parameter>
+            <parameter key="tableEngineKeyword">ENGINE</parameter>
+          </parameter>
+          <parameter key="sqlite" type="collection"/>
+          <parameter key="oracle" type="collection">
+            <parameter key="autoincrementSequencePattern">${table}_SEQ</parameter>
+          </parameter>
+        </parameter>
+      </parameter>
+      <parameter key="general" type="collection">
+        <parameter key="project"></parameter>
+        <parameter key="version">2.0.0-dev</parameter>
+      </parameter>
+      <parameter key="exclude_tables" type="collection"/>
+      <parameter key="paths" type="collection">
+        <parameter key="projectDir">/home/ubuntu/workspace/web</parameter>
+        <parameter key="schemaDir">/home/ubuntu/workspace/web</parameter>
+        <parameter key="outputDir">/home/ubuntu/workspace/web</parameter>
+        <parameter key="phpDir">/home/ubuntu/workspace/web/generated-classes</parameter>
+        <parameter key="phpConfDir">/home/ubuntu/workspace/web/generated-conf</parameter>
+        <parameter key="sqlDir">/home/ubuntu/workspace/web/generated-sql</parameter>
+        <parameter key="migrationDir">/home/ubuntu/workspace/web/generated-migrations</parameter>
+        <parameter key="composerDir">null</parameter>
+      </parameter>
+      <parameter key="migrations" type="collection">
+        <parameter key="samePhpName">false</parameter>
+        <parameter key="addVendorInfo">false</parameter>
+        <parameter key="tableName">propel_migration</parameter>
+        <parameter key="parserClass">null</parameter>
+      </parameter>
+      <parameter key="runtime" type="collection">
+        <parameter key="connections" type="collection"/>
+        <parameter key="logging">true</parameter>
+        <parameter key="log" type="collection"/>
+      </parameter>
+      <parameter key="generator" type="collection">
+        <parameter key="platformClass">null</parameter>
+        <parameter key="packageObjectModel">true</parameter>
+        <parameter key="namespaceAutoPackage">true</parameter>
+        <parameter key="connections" type="collection"/>
+        <parameter key="schema" type="collection">
+          <parameter key="basename">schema</parameter>
+          <parameter key="autoPrefix">false</parameter>
+          <parameter key="autoPackage">false</parameter>
+          <parameter key="autoNamespace">false</parameter>
+          <parameter key="transform">false</parameter>
+        </parameter>
+        <parameter key="dateTime" type="collection">
+          <parameter key="useDateTimeClass">true</parameter>
+          <parameter key="dateTimeClass">DateTime</parameter>
+        </parameter>
+        <parameter key="objectModel" type="collection">
+          <parameter key="addGenericAccessors">true</parameter>
+          <parameter key="addGenericMutators">true</parameter>
+          <parameter key="emulateForeignKeyConstraints">false</parameter>
+          <parameter key="addClassLevelComment">true</parameter>
+          <parameter key="defaultKeyType">phpName</parameter>
+          <parameter key="addSaveMethod">true</parameter>
+          <parameter key="namespaceMap">Map</parameter>
+          <parameter key="addTimeStamp">false</parameter>
+          <parameter key="addHooks">true</parameter>
+          <parameter key="classPrefix">null</parameter>
+          <parameter key="useLeftJoinsInDoJoinMethods">true</parameter>
+          <parameter key="pluralizerClass">\Propel\Common\Pluralizer\StandardEnglishPluralizer</parameter>
+          <parameter key="entityNotFoundExceptionClass">\Propel\Runtime\Exception\EntityNotFoundException</parameter>
+          <parameter key="builders" type="collection">
+            <parameter key="object">\Propel\Generator\Builder\Om\ObjectBuilder</parameter>
+            <parameter key="objectstub">\Propel\Generator\Builder\Om\ExtensionObjectBuilder</parameter>
+            <parameter key="objectmultiextend">\Propel\Generator\Builder\Om\MultiExtendObjectBuilder</parameter>
+            <parameter key="query">\Propel\Generator\Builder\Om\QueryBuilder</parameter>
+            <parameter key="querystub">\Propel\Generator\Builder\Om\ExtensionQueryBuilder</parameter>
+            <parameter key="queryinheritance">\Propel\Generator\Builder\Om\QueryInheritanceBuilder</parameter>
+            <parameter key="queryinheritancestub">\Propel\Generator\Builder\Om\ExtensionQueryInheritanceBuilder</parameter>
+            <parameter key="tablemap">\Propel\Generator\Builder\Om\TableMapBuilder</parameter>
+            <parameter key="interface">\Propel\Generator\Builder\Om\InterfaceBuilder</parameter>
+          </parameter>
+        </parameter>
+      </parameter>
+    </parameter>
+    <parameter key="propel.dbal.default_connection">default</parameter>
+    <parameter key="propel.schema_locator.class">Propel\Bundle\PropelBundle\Service\SchemaLocator</parameter>
+    <parameter key="propel.data_collector.class">Propel\Bundle\PropelBundle\DataCollector\PropelDataCollector</parameter>
+    <parameter key="propel.logger.class">Propel\Bundle\PropelBundle\Logger\PropelLogger</parameter>
+    <parameter key="propel.twig.extension.syntax.class">Propel\Bundle\PropelBundle\Twig\Extension\SyntaxExtension</parameter>
+    <parameter key="form.type_guesser.propel.class">Propel\Bundle\PropelBundle\Form\TypeGuesser</parameter>
+    <parameter key="propel.form.type.model.class">Propel\Bundle\PropelBundle\Form\Type\ModelType</parameter>
+    <parameter key="propel.dumper.yaml.class">Propel\Bundle\PropelBundle\DataFixtures\Dumper\YamlDataDumper</parameter>
+    <parameter key="propel.loader.yaml.class">Propel\Bundle\PropelBundle\DataFixtures\Loader\YamlDataLoader</parameter>
+    <parameter key="propel.loader.xml.class">Propel\Bundle\PropelBundle\DataFixtures\Loader\XmlDataLoader</parameter>
+    <parameter key="propel.converter.propel.class">Propel\Bundle\PropelBundle\Request\ParamConverter\PropelParamConverter</parameter>
+    <parameter key="propel.security.acl.provider.model.class">Propel\Bundle\PropelBundle\Security\Acl\AuditableAclProvider</parameter>
+    <parameter key="propel.security.user.provider.class">Propel\Bundle\PropelBundle\Security\User\PropelUserProvider</parameter>
     <parameter key="web_profiler.controller.profiler.class">Symfony\Bundle\WebProfilerBundle\Controller\ProfilerController</parameter>
     <parameter key="web_profiler.controller.router.class">Symfony\Bundle\WebProfilerBundle\Controller\RouterController</parameter>
     <parameter key="web_profiler.controller.exception.class">Symfony\Bundle\WebProfilerBundle\Controller\ExceptionController</parameter>
@@ -594,17 +724,21 @@
         <parameter>twig</parameter>
         <parameter>@WebProfiler/Collector/twig.html.twig</parameter>
       </parameter>
-      <parameter key="data_collector.security" type="collection">
-        <parameter>security</parameter>
-        <parameter>@Security/Collector/security.html.twig</parameter>
+      <parameter key="data_collector.doctrine" type="collection">
+        <parameter>db</parameter>
+        <parameter>@Doctrine/Collector/db.html.twig</parameter>
       </parameter>
       <parameter key="swiftmailer.data_collector" type="collection">
         <parameter>swiftmailer</parameter>
         <parameter>@Swiftmailer/Collector/swiftmailer.html.twig</parameter>
       </parameter>
-      <parameter key="data_collector.doctrine" type="collection">
-        <parameter>db</parameter>
-        <parameter>@Doctrine/Collector/db.html.twig</parameter>
+      <parameter key="data_collector.security" type="collection">
+        <parameter>security</parameter>
+        <parameter>@Security/Collector/security.html.twig</parameter>
+      </parameter>
+      <parameter key="propel.data_collector" type="collection">
+        <parameter>propel</parameter>
+        <parameter>PropelBundle:Collector:propel</parameter>
       </parameter>
       <parameter key="data_collector.dump" type="collection">
         <parameter>dump</parameter>
@@ -677,6 +811,19 @@
           <service class="Symfony\Bundle\FrameworkBundle\CacheWarmer\RouterCacheWarmer" public="false">
             <tag name="kernel.cache_warmer"/>
             <argument type="service" id="router"/>
+          </service>
+        </argument>
+        <argument type="service">
+          <service class="Symfony\Bundle\TwigBundle\CacheWarmer\TemplateCacheCacheWarmer" public="false">
+            <tag name="kernel.cache_warmer"/>
+            <argument type="service" id="service_container"/>
+            <argument type="service">
+              <service class="Symfony\Bundle\FrameworkBundle\CacheWarmer\TemplateFinder" public="false">
+                <argument type="service" id="kernel"/>
+                <argument type="service" id="templating.filename_parser"/>
+                <argument>/home/ubuntu/workspace/app/Resources</argument>
+              </service>
+            </argument>
           </service>
         </argument>
         <argument type="service">
@@ -1014,11 +1161,7 @@
     <service id="session.save_listener" class="Symfony\Component\HttpKernel\EventListener\SaveSessionListener">
       <tag name="kernel.event_subscriber"/>
     </service>
-    <service id="security.secure_random" class="Symfony\Component\Security\Core\Util\SecureRandom">
-      <tag name="monolog.logger" channel="security"/>
-      <argument>/home/ubuntu/workspace/app/cache/dev/secure_random.seed</argument>
-      <argument type="service" id="monolog.logger.security" on-invalid="ignore"/>
-    </service>
+    <service id="security.secure_random" class="Symfony\Component\Security\Core\Util\SecureRandom"/>
     <service id="form.resolved_type_factory" class="Symfony\Component\Form\Extension\DataCollector\Proxy\ResolvedTypeFactoryDataCollectorProxy">
       <argument type="service">
         <service class="Symfony\Component\Form\ResolvedFormTypeFactory" public="false"/>
@@ -1062,6 +1205,7 @@
               <argument key="reset">form.type.reset</argument>
               <argument key="currency">form.type.currency</argument>
               <argument key="entity">form.type.entity</argument>
+              <argument key="model">propel.form.type.model</argument>
             </argument>
             <argument type="collection">
               <argument key="form" type="collection">
@@ -1080,6 +1224,7 @@
             <argument type="collection">
               <argument>form.type_guesser.validator</argument>
               <argument>form.type_guesser.doctrine</argument>
+              <argument>form.type_guesser.propel</argument>
             </argument>
           </service>
         </argument>
@@ -1106,6 +1251,18 @@
     </service>
     <service id="form.type.choice" class="Symfony\Component\Form\Extension\Core\Type\ChoiceType">
       <tag name="form.type" alias="choice"/>
+      <argument type="service">
+        <service class="Symfony\Component\Form\ChoiceList\Factory\CachingFactoryDecorator" public="false">
+          <argument type="service">
+            <service class="Symfony\Component\Form\ChoiceList\Factory\PropertyAccessDecorator" public="false">
+              <argument type="service">
+                <service class="Symfony\Component\Form\ChoiceList\Factory\DefaultChoiceListFactory" public="false"/>
+              </argument>
+              <argument type="service" id="property_accessor"/>
+            </service>
+          </argument>
+        </service>
+      </argument>
     </service>
     <service id="form.type.collection" class="Symfony\Component\Form\Extension\Core\Type\CollectionType">
       <tag name="form.type" alias="collection"/>
@@ -1272,9 +1429,12 @@
             <argument type="service" id="service_container"/>
             <argument type="collection">
               <argument key="validator.expression">validator.expression</argument>
+              <argument key="Symfony\Component\Validator\Constraints\ExpressionValidator">validator.expression</argument>
               <argument key="Symfony\Component\Validator\Constraints\EmailValidator">validator.email</argument>
               <argument key="security.validator.user_password">security.validator.user_password</argument>
+              <argument key="Symfony\Component\Security\Core\Validator\Constraints\UserPasswordValidator">security.validator.user_password</argument>
               <argument key="doctrine.orm.validator.unique">doctrine.orm.validator.unique</argument>
+              <argument key="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntityValidator">doctrine.orm.validator.unique</argument>
             </argument>
           </service>
         </argument>
@@ -1403,6 +1563,26 @@
       </call>
       <call method="add">
         <argument type="service">
+          <service class="Doctrine\Bundle\DoctrineBundle\DataCollector\DoctrineDataCollector" public="false">
+            <tag name="data_collector" template="@Doctrine/Collector/db.html.twig" id="db" priority="250"/>
+            <argument type="service" id="doctrine"/>
+            <call method="addLogger">
+              <argument>default</argument>
+              <argument type="service" id="doctrine.dbal.logger.profiling.default"/>
+            </call>
+          </service>
+        </argument>
+      </call>
+      <call method="add">
+        <argument type="service">
+          <service class="Symfony\Bundle\SwiftmailerBundle\DataCollector\MessageDataCollector" public="false">
+            <tag name="data_collector" template="@Swiftmailer/Collector/swiftmailer.html.twig" id="swiftmailer" priority="245"/>
+            <argument type="service" id="service_container"/>
+          </service>
+        </argument>
+      </call>
+      <call method="add">
+        <argument type="service">
           <service class="Symfony\Bundle\SecurityBundle\DataCollector\SecurityDataCollector" public="false">
             <tag name="data_collector" template="@Security/Collector/security.html.twig" id="security"/>
             <argument type="service" id="security.token_storage" on-invalid="ignore"/>
@@ -1412,21 +1592,9 @@
       </call>
       <call method="add">
         <argument type="service">
-          <service class="Symfony\Bundle\SwiftmailerBundle\DataCollector\MessageDataCollector" public="false">
-            <tag name="data_collector" template="@Swiftmailer/Collector/swiftmailer.html.twig" id="swiftmailer"/>
-            <argument type="service" id="service_container"/>
-          </service>
-        </argument>
-      </call>
-      <call method="add">
-        <argument type="service">
-          <service class="Doctrine\Bundle\DoctrineBundle\DataCollector\DoctrineDataCollector" public="false">
-            <tag name="data_collector" template="@Doctrine/Collector/db.html.twig" id="db"/>
-            <argument type="service" id="doctrine"/>
-            <call method="addLogger">
-              <argument>default</argument>
-              <argument type="service" id="doctrine.dbal.logger.profiling.default"/>
-            </call>
+          <service class="Propel\Bundle\PropelBundle\DataCollector\PropelDataCollector" public="false">
+            <tag name="data_collector" template="PropelBundle:Collector:propel" id="propel"/>
+            <argument type="service" id="propel.logger"/>
           </service>
         </argument>
       </call>
@@ -1556,9 +1724,9 @@
     <service id="debug.debug_handlers_listener" class="Symfony\Component\HttpKernel\EventListener\DebugHandlersListener">
       <tag name="kernel.event_subscriber"/>
       <tag name="monolog.logger" channel="php"/>
-      <argument></argument>
-      <argument type="service" id="monolog.logger.php" on-invalid="null"/>
       <argument>null</argument>
+      <argument type="service" id="monolog.logger.php" on-invalid="null"/>
+      <argument>-4182</argument>
       <argument>null</argument>
       <argument>true</argument>
       <argument>null</argument>
@@ -1712,7 +1880,7 @@
       <argument type="collection">
         <argument type="service">
           <service class="Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider" public="false">
-            <argument>57234b3faac623.26245536</argument>
+            <argument>57251fca52cd92.55746227</argument>
           </service>
         </argument>
       </argument>
@@ -1835,7 +2003,7 @@
         <argument type="service">
           <service class="Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener" public="false">
             <argument type="service" id="security.token_storage"/>
-            <argument>57234b3faac623.26245536</argument>
+            <argument>57251fca52cd92.55746227</argument>
             <argument type="service" id="monolog.logger.security" on-invalid="null"/>
             <argument type="service" id="security.authentication.manager"/>
           </service>
@@ -1937,6 +2105,7 @@
               <service class="Symfony\Bridge\Twig\Extension\HttpFoundationExtension" public="false">
                 <tag name="twig.extension"/>
                 <argument type="service" id="request_stack"/>
+                <argument type="service" id="router.request_context" on-invalid="ignore"/>
               </service>
             </argument>
           </service>
@@ -2004,6 +2173,7 @@
           <service class="Symfony\Bridge\Twig\Extension\HttpFoundationExtension" public="false">
             <tag name="twig.extension"/>
             <argument type="service" id="request_stack"/>
+            <argument type="service" id="router.request_context" on-invalid="ignore"/>
           </service>
         </argument>
       </call>
@@ -2057,6 +2227,9 @@
             <tag name="twig.extension"/>
           </service>
         </argument>
+      </call>
+      <call method="addExtension">
+        <argument type="service" id="propel.twig.extension.syntax"/>
       </call>
       <call method="addExtension">
         <argument type="service">
@@ -2230,15 +2403,15 @@
     <service id="assetic.filter.cssrewrite" class="Assetic\Filter\CssRewriteFilter">
       <tag name="assetic.filter" alias="cssrewrite"/>
     </service>
-    <service id="assetic.controller" class="Symfony\Bundle\AsseticBundle\Controller\AsseticController" scope="prototype">
-      <argument type="service" id="request"/>
+    <service id="assetic.controller" class="Symfony\Bundle\AsseticBundle\Controller\AsseticController">
       <argument type="service" id="assetic.asset_manager"/>
-      <argument type="service" id="assetic.cache"/>
+      <argument type="service">
+        <service class="Assetic\Cache\FilesystemCache" public="false">
+          <argument>/home/ubuntu/workspace/app/cache/dev/assetic/assets</argument>
+        </service>
+      </argument>
       <argument>false</argument>
       <argument type="service" id="profiler" on-invalid="null"/>
-    </service>
-    <service id="assetic.cache" class="Assetic\Cache\FilesystemCache" public="false">
-      <argument>/home/ubuntu/workspace/app/cache/dev/assetic/assets</argument>
     </service>
     <service id="assetic.request_listener" class="Symfony\Bundle\AsseticBundle\EventListener\RequestListener">
       <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest"/>
@@ -2265,9 +2438,10 @@
         <argument key="port">null</argument>
         <argument key="dbname">agencia</argument>
         <argument key="user">jmboni</argument>
-        <argument key="password">c9</argument>
+        <argument key="password">null</argument>
         <argument key="charset">UTF8</argument>
         <argument key="driverOptions" type="collection"/>
+        <argument key="defaultTableOptions" type="collection"/>
       </argument>
       <argument type="service">
         <service class="Doctrine\DBAL\Configuration" public="false">
@@ -2340,7 +2514,9 @@
       <argument type="service">
         <service class="Doctrine\ORM\Configuration" public="false">
           <call method="setEntityNamespaces">
-            <argument type="collection"/>
+            <argument type="collection">
+              <argument key="DsgagenciaBundle">Dsg\agenciaBundle\Entity</argument>
+            </argument>
           </call>
           <call method="setMetadataCacheImpl">
             <argument type="service" id="doctrine_cache.providers.doctrine.orm.default_metadata_cache"/>
@@ -2353,7 +2529,19 @@
           </call>
           <call method="setMetadataDriverImpl">
             <argument type="service">
-              <service class="Doctrine\Common\Persistence\Mapping\Driver\MappingDriverChain" public="false"/>
+              <service class="Doctrine\Common\Persistence\Mapping\Driver\MappingDriverChain" public="false">
+                <call method="addDriver">
+                  <argument type="service">
+                    <service class="Doctrine\ORM\Mapping\Driver\AnnotationDriver" public="false">
+                      <argument type="service" id="annotation_reader"/>
+                      <argument type="collection">
+                        <argument>/home/ubuntu/workspace/src/Dsg/agenciaBundle/Entity</argument>
+                      </argument>
+                    </service>
+                  </argument>
+                  <argument>Dsg\agenciaBundle\Entity</argument>
+                </call>
+              </service>
             </argument>
           </call>
           <call method="setProxyDir">
@@ -2412,6 +2600,11 @@
         <argument>0</argument>
         <argument>datetime</argument>
       </call>
+      <call method="add">
+        <argument type="service" id="propel.converter.propel.orm"/>
+        <argument>1</argument>
+        <argument>propel</argument>
+      </call>
     </service>
     <service id="sensio_framework_extra.converter.doctrine.orm" class="Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\DoctrineParamConverter">
       <tag name="request.param_converter" converter="doctrine.orm"/>
@@ -2437,6 +2630,336 @@
       <argument type="service" id="security.role_hierarchy" on-invalid="null"/>
       <argument type="service" id="security.token_storage" on-invalid="null"/>
       <argument type="service" id="security.authorization_checker" on-invalid="null"/>
+    </service>
+    <service id="propel.schema_locator" class="Propel\Bundle\PropelBundle\Service\SchemaLocator">
+      <argument type="service" id="file_locator"/>
+    </service>
+    <service id="propel.logger" class="Propel\Bundle\PropelBundle\Logger\PropelLogger">
+      <tag name="monolog.logger" channel="propel"/>
+      <argument type="service" id="monolog.logger.propel" on-invalid="null"/>
+      <argument type="service" id="debug.stopwatch" on-invalid="null"/>
+    </service>
+    <service id="propel.twig.extension.syntax" class="Propel\Bundle\PropelBundle\Twig\Extension\SyntaxExtension">
+      <tag name="twig.extension"/>
+    </service>
+    <service id="form.type_guesser.propel" class="Propel\Bundle\PropelBundle\Form\TypeGuesser">
+      <tag name="form.type_guesser"/>
+    </service>
+    <service id="propel.form.type.model" class="Propel\Bundle\PropelBundle\Form\Type\ModelType">
+      <tag name="form.type" alias="model"/>
+    </service>
+    <service id="propel.dumper.yaml" class="Propel\Bundle\PropelBundle\DataFixtures\Dumper\YamlDataDumper">
+      <argument>/home/ubuntu/workspace/app</argument>
+      <argument type="collection">
+        <argument key="database" type="collection">
+          <argument key="connections" type="collection">
+            <argument key="default" type="collection">
+              <argument key="adapter">mysql</argument>
+              <argument key="user">jmboni</argument>
+              <argument key="password"></argument>
+              <argument key="dsn">mysql:host=127.0.0.1;dbname=agencia;charset=UTF8</argument>
+              <argument key="classname">\Propel\Runtime\Connection\DebugPDO</argument>
+              <argument key="options" type="collection">
+                <argument key="ATTR_PERSISTENT">false</argument>
+              </argument>
+              <argument key="attributes" type="collection">
+                <argument key="ATTR_EMULATE_PREPARES">false</argument>
+              </argument>
+              <argument key="slaves" type="collection"/>
+            </argument>
+          </argument>
+          <argument key="adapters" type="collection">
+            <argument key="mysql" type="collection">
+              <argument key="tableType">InnoDB</argument>
+              <argument key="tableEngineKeyword">ENGINE</argument>
+            </argument>
+            <argument key="sqlite" type="collection"/>
+            <argument key="oracle" type="collection">
+              <argument key="autoincrementSequencePattern">${table}_SEQ</argument>
+            </argument>
+          </argument>
+        </argument>
+        <argument key="general" type="collection">
+          <argument key="project"></argument>
+          <argument key="version">2.0.0-dev</argument>
+        </argument>
+        <argument key="exclude_tables" type="collection"/>
+        <argument key="paths" type="collection">
+          <argument key="projectDir">/home/ubuntu/workspace/web</argument>
+          <argument key="schemaDir">/home/ubuntu/workspace/web</argument>
+          <argument key="outputDir">/home/ubuntu/workspace/web</argument>
+          <argument key="phpDir">/home/ubuntu/workspace/web/generated-classes</argument>
+          <argument key="phpConfDir">/home/ubuntu/workspace/web/generated-conf</argument>
+          <argument key="sqlDir">/home/ubuntu/workspace/web/generated-sql</argument>
+          <argument key="migrationDir">/home/ubuntu/workspace/web/generated-migrations</argument>
+          <argument key="composerDir">null</argument>
+        </argument>
+        <argument key="migrations" type="collection">
+          <argument key="samePhpName">false</argument>
+          <argument key="addVendorInfo">false</argument>
+          <argument key="tableName">propel_migration</argument>
+          <argument key="parserClass">null</argument>
+        </argument>
+        <argument key="runtime" type="collection">
+          <argument key="connections" type="collection"/>
+          <argument key="logging">true</argument>
+          <argument key="log" type="collection"/>
+        </argument>
+        <argument key="generator" type="collection">
+          <argument key="platformClass">null</argument>
+          <argument key="packageObjectModel">true</argument>
+          <argument key="namespaceAutoPackage">true</argument>
+          <argument key="connections" type="collection"/>
+          <argument key="schema" type="collection">
+            <argument key="basename">schema</argument>
+            <argument key="autoPrefix">false</argument>
+            <argument key="autoPackage">false</argument>
+            <argument key="autoNamespace">false</argument>
+            <argument key="transform">false</argument>
+          </argument>
+          <argument key="dateTime" type="collection">
+            <argument key="useDateTimeClass">true</argument>
+            <argument key="dateTimeClass">DateTime</argument>
+          </argument>
+          <argument key="objectModel" type="collection">
+            <argument key="addGenericAccessors">true</argument>
+            <argument key="addGenericMutators">true</argument>
+            <argument key="emulateForeignKeyConstraints">false</argument>
+            <argument key="addClassLevelComment">true</argument>
+            <argument key="defaultKeyType">phpName</argument>
+            <argument key="addSaveMethod">true</argument>
+            <argument key="namespaceMap">Map</argument>
+            <argument key="addTimeStamp">false</argument>
+            <argument key="addHooks">true</argument>
+            <argument key="classPrefix">null</argument>
+            <argument key="useLeftJoinsInDoJoinMethods">true</argument>
+            <argument key="pluralizerClass">\Propel\Common\Pluralizer\StandardEnglishPluralizer</argument>
+            <argument key="entityNotFoundExceptionClass">\Propel\Runtime\Exception\EntityNotFoundException</argument>
+            <argument key="builders" type="collection">
+              <argument key="object">\Propel\Generator\Builder\Om\ObjectBuilder</argument>
+              <argument key="objectstub">\Propel\Generator\Builder\Om\ExtensionObjectBuilder</argument>
+              <argument key="objectmultiextend">\Propel\Generator\Builder\Om\MultiExtendObjectBuilder</argument>
+              <argument key="query">\Propel\Generator\Builder\Om\QueryBuilder</argument>
+              <argument key="querystub">\Propel\Generator\Builder\Om\ExtensionQueryBuilder</argument>
+              <argument key="queryinheritance">\Propel\Generator\Builder\Om\QueryInheritanceBuilder</argument>
+              <argument key="queryinheritancestub">\Propel\Generator\Builder\Om\ExtensionQueryInheritanceBuilder</argument>
+              <argument key="tablemap">\Propel\Generator\Builder\Om\TableMapBuilder</argument>
+              <argument key="interface">\Propel\Generator\Builder\Om\InterfaceBuilder</argument>
+            </argument>
+          </argument>
+        </argument>
+      </argument>
+    </service>
+    <service id="propel.loader.yaml" class="Propel\Bundle\PropelBundle\DataFixtures\Loader\YamlDataLoader">
+      <argument>/home/ubuntu/workspace/app</argument>
+      <argument type="collection">
+        <argument key="database" type="collection">
+          <argument key="connections" type="collection">
+            <argument key="default" type="collection">
+              <argument key="adapter">mysql</argument>
+              <argument key="user">jmboni</argument>
+              <argument key="password"></argument>
+              <argument key="dsn">mysql:host=127.0.0.1;dbname=agencia;charset=UTF8</argument>
+              <argument key="classname">\Propel\Runtime\Connection\DebugPDO</argument>
+              <argument key="options" type="collection">
+                <argument key="ATTR_PERSISTENT">false</argument>
+              </argument>
+              <argument key="attributes" type="collection">
+                <argument key="ATTR_EMULATE_PREPARES">false</argument>
+              </argument>
+              <argument key="slaves" type="collection"/>
+            </argument>
+          </argument>
+          <argument key="adapters" type="collection">
+            <argument key="mysql" type="collection">
+              <argument key="tableType">InnoDB</argument>
+              <argument key="tableEngineKeyword">ENGINE</argument>
+            </argument>
+            <argument key="sqlite" type="collection"/>
+            <argument key="oracle" type="collection">
+              <argument key="autoincrementSequencePattern">${table}_SEQ</argument>
+            </argument>
+          </argument>
+        </argument>
+        <argument key="general" type="collection">
+          <argument key="project"></argument>
+          <argument key="version">2.0.0-dev</argument>
+        </argument>
+        <argument key="exclude_tables" type="collection"/>
+        <argument key="paths" type="collection">
+          <argument key="projectDir">/home/ubuntu/workspace/web</argument>
+          <argument key="schemaDir">/home/ubuntu/workspace/web</argument>
+          <argument key="outputDir">/home/ubuntu/workspace/web</argument>
+          <argument key="phpDir">/home/ubuntu/workspace/web/generated-classes</argument>
+          <argument key="phpConfDir">/home/ubuntu/workspace/web/generated-conf</argument>
+          <argument key="sqlDir">/home/ubuntu/workspace/web/generated-sql</argument>
+          <argument key="migrationDir">/home/ubuntu/workspace/web/generated-migrations</argument>
+          <argument key="composerDir">null</argument>
+        </argument>
+        <argument key="migrations" type="collection">
+          <argument key="samePhpName">false</argument>
+          <argument key="addVendorInfo">false</argument>
+          <argument key="tableName">propel_migration</argument>
+          <argument key="parserClass">null</argument>
+        </argument>
+        <argument key="runtime" type="collection">
+          <argument key="connections" type="collection"/>
+          <argument key="logging">true</argument>
+          <argument key="log" type="collection"/>
+        </argument>
+        <argument key="generator" type="collection">
+          <argument key="platformClass">null</argument>
+          <argument key="packageObjectModel">true</argument>
+          <argument key="namespaceAutoPackage">true</argument>
+          <argument key="connections" type="collection"/>
+          <argument key="schema" type="collection">
+            <argument key="basename">schema</argument>
+            <argument key="autoPrefix">false</argument>
+            <argument key="autoPackage">false</argument>
+            <argument key="autoNamespace">false</argument>
+            <argument key="transform">false</argument>
+          </argument>
+          <argument key="dateTime" type="collection">
+            <argument key="useDateTimeClass">true</argument>
+            <argument key="dateTimeClass">DateTime</argument>
+          </argument>
+          <argument key="objectModel" type="collection">
+            <argument key="addGenericAccessors">true</argument>
+            <argument key="addGenericMutators">true</argument>
+            <argument key="emulateForeignKeyConstraints">false</argument>
+            <argument key="addClassLevelComment">true</argument>
+            <argument key="defaultKeyType">phpName</argument>
+            <argument key="addSaveMethod">true</argument>
+            <argument key="namespaceMap">Map</argument>
+            <argument key="addTimeStamp">false</argument>
+            <argument key="addHooks">true</argument>
+            <argument key="classPrefix">null</argument>
+            <argument key="useLeftJoinsInDoJoinMethods">true</argument>
+            <argument key="pluralizerClass">\Propel\Common\Pluralizer\StandardEnglishPluralizer</argument>
+            <argument key="entityNotFoundExceptionClass">\Propel\Runtime\Exception\EntityNotFoundException</argument>
+            <argument key="builders" type="collection">
+              <argument key="object">\Propel\Generator\Builder\Om\ObjectBuilder</argument>
+              <argument key="objectstub">\Propel\Generator\Builder\Om\ExtensionObjectBuilder</argument>
+              <argument key="objectmultiextend">\Propel\Generator\Builder\Om\MultiExtendObjectBuilder</argument>
+              <argument key="query">\Propel\Generator\Builder\Om\QueryBuilder</argument>
+              <argument key="querystub">\Propel\Generator\Builder\Om\ExtensionQueryBuilder</argument>
+              <argument key="queryinheritance">\Propel\Generator\Builder\Om\QueryInheritanceBuilder</argument>
+              <argument key="queryinheritancestub">\Propel\Generator\Builder\Om\ExtensionQueryInheritanceBuilder</argument>
+              <argument key="tablemap">\Propel\Generator\Builder\Om\TableMapBuilder</argument>
+              <argument key="interface">\Propel\Generator\Builder\Om\InterfaceBuilder</argument>
+            </argument>
+          </argument>
+        </argument>
+      </argument>
+      <argument>null</argument>
+    </service>
+    <service id="propel.loader.xml" class="Propel\Bundle\PropelBundle\DataFixtures\Loader\XmlDataLoader">
+      <argument>/home/ubuntu/workspace/app</argument>
+      <argument type="collection">
+        <argument key="database" type="collection">
+          <argument key="connections" type="collection">
+            <argument key="default" type="collection">
+              <argument key="adapter">mysql</argument>
+              <argument key="user">jmboni</argument>
+              <argument key="password"></argument>
+              <argument key="dsn">mysql:host=127.0.0.1;dbname=agencia;charset=UTF8</argument>
+              <argument key="classname">\Propel\Runtime\Connection\DebugPDO</argument>
+              <argument key="options" type="collection">
+                <argument key="ATTR_PERSISTENT">false</argument>
+              </argument>
+              <argument key="attributes" type="collection">
+                <argument key="ATTR_EMULATE_PREPARES">false</argument>
+              </argument>
+              <argument key="slaves" type="collection"/>
+            </argument>
+          </argument>
+          <argument key="adapters" type="collection">
+            <argument key="mysql" type="collection">
+              <argument key="tableType">InnoDB</argument>
+              <argument key="tableEngineKeyword">ENGINE</argument>
+            </argument>
+            <argument key="sqlite" type="collection"/>
+            <argument key="oracle" type="collection">
+              <argument key="autoincrementSequencePattern">${table}_SEQ</argument>
+            </argument>
+          </argument>
+        </argument>
+        <argument key="general" type="collection">
+          <argument key="project"></argument>
+          <argument key="version">2.0.0-dev</argument>
+        </argument>
+        <argument key="exclude_tables" type="collection"/>
+        <argument key="paths" type="collection">
+          <argument key="projectDir">/home/ubuntu/workspace/web</argument>
+          <argument key="schemaDir">/home/ubuntu/workspace/web</argument>
+          <argument key="outputDir">/home/ubuntu/workspace/web</argument>
+          <argument key="phpDir">/home/ubuntu/workspace/web/generated-classes</argument>
+          <argument key="phpConfDir">/home/ubuntu/workspace/web/generated-conf</argument>
+          <argument key="sqlDir">/home/ubuntu/workspace/web/generated-sql</argument>
+          <argument key="migrationDir">/home/ubuntu/workspace/web/generated-migrations</argument>
+          <argument key="composerDir">null</argument>
+        </argument>
+        <argument key="migrations" type="collection">
+          <argument key="samePhpName">false</argument>
+          <argument key="addVendorInfo">false</argument>
+          <argument key="tableName">propel_migration</argument>
+          <argument key="parserClass">null</argument>
+        </argument>
+        <argument key="runtime" type="collection">
+          <argument key="connections" type="collection"/>
+          <argument key="logging">true</argument>
+          <argument key="log" type="collection"/>
+        </argument>
+        <argument key="generator" type="collection">
+          <argument key="platformClass">null</argument>
+          <argument key="packageObjectModel">true</argument>
+          <argument key="namespaceAutoPackage">true</argument>
+          <argument key="connections" type="collection"/>
+          <argument key="schema" type="collection">
+            <argument key="basename">schema</argument>
+            <argument key="autoPrefix">false</argument>
+            <argument key="autoPackage">false</argument>
+            <argument key="autoNamespace">false</argument>
+            <argument key="transform">false</argument>
+          </argument>
+          <argument key="dateTime" type="collection">
+            <argument key="useDateTimeClass">true</argument>
+            <argument key="dateTimeClass">DateTime</argument>
+          </argument>
+          <argument key="objectModel" type="collection">
+            <argument key="addGenericAccessors">true</argument>
+            <argument key="addGenericMutators">true</argument>
+            <argument key="emulateForeignKeyConstraints">false</argument>
+            <argument key="addClassLevelComment">true</argument>
+            <argument key="defaultKeyType">phpName</argument>
+            <argument key="addSaveMethod">true</argument>
+            <argument key="namespaceMap">Map</argument>
+            <argument key="addTimeStamp">false</argument>
+            <argument key="addHooks">true</argument>
+            <argument key="classPrefix">null</argument>
+            <argument key="useLeftJoinsInDoJoinMethods">true</argument>
+            <argument key="pluralizerClass">\Propel\Common\Pluralizer\StandardEnglishPluralizer</argument>
+            <argument key="entityNotFoundExceptionClass">\Propel\Runtime\Exception\EntityNotFoundException</argument>
+            <argument key="builders" type="collection">
+              <argument key="object">\Propel\Generator\Builder\Om\ObjectBuilder</argument>
+              <argument key="objectstub">\Propel\Generator\Builder\Om\ExtensionObjectBuilder</argument>
+              <argument key="objectmultiextend">\Propel\Generator\Builder\Om\MultiExtendObjectBuilder</argument>
+              <argument key="query">\Propel\Generator\Builder\Om\QueryBuilder</argument>
+              <argument key="querystub">\Propel\Generator\Builder\Om\ExtensionQueryBuilder</argument>
+              <argument key="queryinheritance">\Propel\Generator\Builder\Om\QueryInheritanceBuilder</argument>
+              <argument key="queryinheritancestub">\Propel\Generator\Builder\Om\ExtensionQueryInheritanceBuilder</argument>
+              <argument key="tablemap">\Propel\Generator\Builder\Om\TableMapBuilder</argument>
+              <argument key="interface">\Propel\Generator\Builder\Om\InterfaceBuilder</argument>
+            </argument>
+          </argument>
+        </argument>
+      </argument>
+    </service>
+    <service id="propel.converter.propel.orm" class="Propel\Bundle\PropelBundle\Request\ParamConverter\PropelParamConverter">
+      <tag name="request.param_converter" converter="propel" priority="1"/>
+      <call method="setRouter">
+        <argument type="service" id="router" on-invalid="null"/>
+      </call>
     </service>
     <service id="data_collector.dump" class="Symfony\Component\HttpKernel\DataCollector\DumpDataCollector">
       <tag name="data_collector" id="dump" template="@Debug/Profiler/dump.html.twig"/>
@@ -2512,17 +3035,21 @@
           <argument>twig</argument>
           <argument>@WebProfiler/Collector/twig.html.twig</argument>
         </argument>
-        <argument key="data_collector.security" type="collection">
-          <argument>security</argument>
-          <argument>@Security/Collector/security.html.twig</argument>
+        <argument key="data_collector.doctrine" type="collection">
+          <argument>db</argument>
+          <argument>@Doctrine/Collector/db.html.twig</argument>
         </argument>
         <argument key="swiftmailer.data_collector" type="collection">
           <argument>swiftmailer</argument>
           <argument>@Swiftmailer/Collector/swiftmailer.html.twig</argument>
         </argument>
-        <argument key="data_collector.doctrine" type="collection">
-          <argument>db</argument>
-          <argument>@Doctrine/Collector/db.html.twig</argument>
+        <argument key="data_collector.security" type="collection">
+          <argument>security</argument>
+          <argument>@Security/Collector/security.html.twig</argument>
+        </argument>
+        <argument key="propel.data_collector" type="collection">
+          <argument>propel</argument>
+          <argument>PropelBundle:Collector:propel</argument>
         </argument>
         <argument key="data_collector.dump" type="collection">
           <argument>dump</argument>
@@ -2598,18 +3125,6 @@
         <argument type="service" id="monolog.handler.debug"/>
       </call>
     </service>
-    <service id="monolog.logger.security" class="Symfony\Bridge\Monolog\Logger">
-      <argument>security</argument>
-      <call method="pushHandler">
-        <argument type="service" id="monolog.handler.console"/>
-      </call>
-      <call method="pushHandler">
-        <argument type="service" id="monolog.handler.main"/>
-      </call>
-      <call method="pushHandler">
-        <argument type="service" id="monolog.handler.debug"/>
-      </call>
-    </service>
     <service id="monolog.logger.templating" class="Symfony\Bridge\Monolog\Logger">
       <argument>templating</argument>
       <call method="pushHandler">
@@ -2670,6 +3185,18 @@
         <argument type="service" id="monolog.handler.debug"/>
       </call>
     </service>
+    <service id="monolog.logger.security" class="Symfony\Bridge\Monolog\Logger">
+      <argument>security</argument>
+      <call method="pushHandler">
+        <argument type="service" id="monolog.handler.console"/>
+      </call>
+      <call method="pushHandler">
+        <argument type="service" id="monolog.handler.main"/>
+      </call>
+      <call method="pushHandler">
+        <argument type="service" id="monolog.handler.debug"/>
+      </call>
+    </service>
     <service id="monolog.logger.assetic" class="Symfony\Bridge\Monolog\Logger">
       <argument>assetic</argument>
       <call method="pushHandler">
@@ -2686,6 +3213,18 @@
       <argument>doctrine</argument>
       <call method="pushHandler">
         <argument type="service" id="monolog.handler.console_very_verbose"/>
+      </call>
+      <call method="pushHandler">
+        <argument type="service" id="monolog.handler.main"/>
+      </call>
+      <call method="pushHandler">
+        <argument type="service" id="monolog.handler.debug"/>
+      </call>
+    </service>
+    <service id="monolog.logger.propel" class="Symfony\Bridge\Monolog\Logger">
+      <argument>propel</argument>
+      <call method="pushHandler">
+        <argument type="service" id="monolog.handler.console"/>
       </call>
       <call method="pushHandler">
         <argument type="service" id="monolog.handler.main"/>
@@ -2770,6 +3309,14 @@
         <argument>Doctrine</argument>
       </call>
       <call method="addPath">
+        <argument>/home/ubuntu/workspace/src/Dsg/agenciaBundle/Resources/views</argument>
+        <argument>Dsgagencia</argument>
+      </call>
+      <call method="addPath">
+        <argument>/home/ubuntu/workspace/vendor/propel/propel-bundle/Resources/views</argument>
+        <argument>Propel</argument>
+      </call>
+      <call method="addPath">
         <argument>/home/ubuntu/workspace/vendor/symfony/symfony/src/Symfony/Bundle/DebugBundle/Resources/views</argument>
         <argument>Debug</argument>
       </call>
@@ -2790,6 +3337,9 @@
     </service>
     <service id="logger" class="Symfony\Bridge\Monolog\Logger">
       <argument>app</argument>
+      <call method="useMicrosecondTimestamps">
+        <argument>true</argument>
+      </call>
       <call method="pushHandler">
         <argument type="service" id="monolog.handler.console"/>
       </call>

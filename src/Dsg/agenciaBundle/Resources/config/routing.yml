@@ -1,0 +1,7 @@
+dsgagencia_trabajos:
+    resource: "@DsgagenciaBundle/Resources/config/routing/trabajos.yml"
+    prefix:   /trabajos
+
+dsgagencia_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: DsgagenciaBundle:Default:index }
