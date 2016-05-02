@@ -1,79 +1,101 @@
 <?php
+
 namespace Dsg\agenciaBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
-use Dsg\agenciaBundle\Entity\Categoria;
 use Dsg\agenciaBundle\Funciones\Amigable;
 
-
-
 /**
- * Agencia\BaseDatosBundle\Entity\Trabajos
- *
- * @ORM\Table(name="trabajos")
- * @ORM\Entity
+ * Trabajos
  */
-
-class Trabajos{
+class Trabajos
+{
     /**
-    * @ORM\Id
-    * @ORM\Column(type="integer")
-    * @ORM\GeneratedValue
-    */
-    protected $id;
-
-    /** @ORM\Column(type="string", nullable=true) */
-    protected $tipo;
-
-    /** @ORM\Column(type="string") */
-    protected $compania;
-
-    /** @ORM\Column(type="string", nullable=true) */
-    protected $logo;
-
-    /** @ORM\Column(type="string", nullable=true) */
-    protected $url;
-
-    /** @ORM\Column(type="string") */
-    protected $posicion;
-
-    /** @ORM\Column(type="string") */
-    protected $localidad;
-
-    /** @ORM\Column(type="text") */
-    protected $descripcion;
-
-    /** @ORM\Column(type="text") */
-    protected $how_to_apply;
-
-    /** @ORM\Column(type="string", unique=true) */
-    protected $token;    
-
-    /** @ORM\Column(type="boolean") */
-    protected $publico=1;    
-
-    /** @ORM\Column(type="boolean") */
-    protected $activado=0;    
-
-    /** @ORM\Column(type="string") */
-    protected $email;
-
-    /** @ORM\Column(type="datetime") */
-    protected $finaliza;
-
-    /** @ORM\Column(type="datetime") */
-    protected $creado;
-
-    /** @ORM\Column(type="datetime") */
-    protected $actualizado;
-
-    /** 
-     * @ORM\ManyToOne(targetEntity="Categoria", inversedBy="trabajo") 
-     * @ORM\JoinColumn(name="categoria_id", referencedColumnName="id")
+     * @var integer
      */
-    protected $categoria;
+    private $id;
 
+    /**
+     * @var string
+     */
+    private $tipo;
+
+    /**
+     * @var string
+     */
+    private $compania;
+
+    /**
+     * @var string
+     */
+    private $logo;
+
+    /**
+     * @var string
+     */
+    private $url;
+
+    /**
+     * @var string
+     */
+    private $posicion;
+
+    /**
+     * @var string
+     */
+    private $localidad;
+
+    /**
+     * @var string
+     */
+    private $descripcion;
+
+    /**
+     * @var string
+     */
+    private $how_to_apply;
+
+    /**
+     * @var string
+     */
+    private $token;
+
+    /**
+     * @var boolean
+     */
+    private $publico;
+
+    /**
+     * @var boolean
+     */
+    private $activado;
+
+    /**
+     * @var string
+     */
+    private $email;
+
+    /**
+     * @var \DateTime
+     */
+    private $finaliza;
+
+    /**
+     * @var \DateTime
+     */
+    private $creado;
+
+    /**
+     * @var \DateTime
+     */
+    private $actualizado;
+
+    /**
+     * @var \Dsg\agenciaBundle\Entity\Categoria
+     */
+    private $categoria;
+    
+    
     /**
      * [__construct description]
      */
@@ -83,25 +105,7 @@ class Trabajos{
         $this->actualizado =new \DateTime();
     }
 
-    /**
-     * @ORM\PrePersist
-     */
-    public function prePersistEvent() {
-        $this->actualizado =new \DateTime();
-
-        return $this;
-    }
-
-    /**
-     * @ORM\PreUpdate
-     */
-    public function preUpdateEvent() {
-        $this->actualizado = new \DateTime();
-
-        return $this;
-    }
-
-
+    
     /**
      * Get id
      *
@@ -121,7 +125,7 @@ class Trabajos{
     public function setTipo($tipo)
     {
         $this->tipo = $tipo;
-    
+
         return $this;
     }
 
@@ -144,7 +148,7 @@ class Trabajos{
     public function setCompania($compania)
     {
         $this->compania = $compania;
-    
+
         return $this;
     }
 
@@ -167,7 +171,7 @@ class Trabajos{
     public function setLogo($logo)
     {
         $this->logo = $logo;
-    
+
         return $this;
     }
 
@@ -190,7 +194,7 @@ class Trabajos{
     public function setUrl($url)
     {
         $this->url = $url;
-    
+
         return $this;
     }
 
@@ -213,7 +217,7 @@ class Trabajos{
     public function setPosicion($posicion)
     {
         $this->posicion = $posicion;
-    
+
         return $this;
     }
 
@@ -236,7 +240,7 @@ class Trabajos{
     public function setLocalidad($localidad)
     {
         $this->localidad = $localidad;
-    
+
         return $this;
     }
 
@@ -259,7 +263,7 @@ class Trabajos{
     public function setDescripcion($descripcion)
     {
         $this->descripcion = $descripcion;
-    
+
         return $this;
     }
 
@@ -282,7 +286,7 @@ class Trabajos{
     public function setHowToApply($howToApply)
     {
         $this->how_to_apply = $howToApply;
-    
+
         return $this;
     }
 
@@ -305,7 +309,7 @@ class Trabajos{
     public function setToken($token)
     {
         $this->token = $token;
-    
+
         return $this;
     }
 
@@ -328,7 +332,7 @@ class Trabajos{
     public function setPublico($publico)
     {
         $this->publico = $publico;
-    
+
         return $this;
     }
 
@@ -351,7 +355,7 @@ class Trabajos{
     public function setActivado($activado)
     {
         $this->activado = $activado;
-    
+
         return $this;
     }
 
@@ -374,7 +378,7 @@ class Trabajos{
     public function setEmail($email)
     {
         $this->email = $email;
-    
+
         return $this;
     }
 
@@ -397,7 +401,7 @@ class Trabajos{
     public function setFinaliza($finaliza)
     {
         $this->finaliza = $finaliza;
-    
+
         return $this;
     }
 
@@ -420,7 +424,7 @@ class Trabajos{
     public function setCreado($creado)
     {
         $this->creado = $creado;
-    
+
         return $this;
     }
 
@@ -443,7 +447,7 @@ class Trabajos{
     public function setActualizado($actualizado)
     {
         $this->actualizado = $actualizado;
-    
+
         return $this;
     }
 
@@ -460,31 +464,18 @@ class Trabajos{
     /**
      * Set categoria
      *
-     * @param Agencia\BaseDatosBundle\Entity\Categoria $categoria
+     * @param \Dsg\agenciaBundle\Entity\Categoria $categoria
      * @return Trabajos
      */
     public function setCategoria(\Dsg\agenciaBundle\Entity\Categoria $categoria = null)
     {
         $this->categoria = $categoria;
-    
+
         return $this;
     }
-
-    /**
-     * Get categoria
-     *
-     * @return Agencia\BaseDatosBundle\Entity\Categoria 
-     */
-    public function getCategoria()
-    {
-        return $this->categoria;
-    }
-
-    public function __toString() {
-        return sprintf('%s at %s (%s)', $this->getPosicion(), $this->getCompania(), $this->getLocalidad());
-    }
-
-    // Añadimos estos métodos para hacer url amigables
+    
+    
+        // Añadimos estos métodos para hacer url amigables
     public function getCompaniaSlug()
     {
         return Amigable::urlAmigable($this->getCompania()); ;
@@ -499,4 +490,48 @@ class Trabajos{
     {
         return Amigable::urlAmigable($this->getLocalidad());
     }
+
+    /**
+     * Get categoria
+     *
+     * @return \Dsg\agenciaBundle\Entity\Categoria 
+     */
+    public function getCategoria()
+    {
+        return $this->categoria;
+    }
+    /**
+     * @ORM\PrePersist
+     */
+    public function setCreadoValue()
+    {
+        if(!$this->getCreado())
+        {
+            $this->creado = new \DateTime();
+        }
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function setFinalizaValue()
+    {
+        if(!$this->getFinaliza()) {
+            $now = $this->getCreado() ? $this->getCreado()->format('U') : time();
+            $this->finaliza = new \DateTime(date('Y-m-d H:i:s', $now + 86400 * 30));
+        }
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function setActualizadoValue()
+    {
+        $this->actualizado = new \DateTime();
+    }
+    
+    public function __toString() {
+        return sprintf('%s at %s at %s (%s)', $this->getCategoria(), $this->getPosicion(), $this->getCompania(), $this->getLocalidad());
+    }
+    
 }

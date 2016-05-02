@@ -11,41 +11,65 @@ class CargarDatosTrabajos extends AbstractFixture implements OrderedFixtureInter
 {
     public function load(ObjectManager $em)
     {
-
-         $trabajo_dsg = new Trabajos();
-         $trabajo_dsg->setCategoria($em->merge($this->getReference("categoria-programacion")));
-         $trabajo_dsg->setTipo('tiempo completo');
-         $trabajo_dsg->setCompania('DSG Consultores');
-         $trabajo_dsg->setLogo('sensio-labs.gif');
-         $trabajo_dsg->setUrl('http://www.dsgconsultores.com/');
-         $trabajo_dsg->setPosicion('Programador java');
-         $trabajo_dsg->setLocalidad('Almeria, España');
-         $trabajo_dsg->setDescripcion('You\'ve already developed websites with symfony and you want to work with Open-Source technologies. You have a minimum of 3 years experience in web development with PHP or Java and you wish to participate to development of Web 2.0 sites using the best frameworks available.');
-         $trabajo_dsg->setHowToApply('Envia tu CV a dsg');
-         $trabajo_dsg->setPublico(true);
-         $trabajo_dsg->setActivado(true);
-         $trabajo_dsg->setToken('trabajo_dsg');
-         $trabajo_dsg->setEmail('colacacion@dsgconsultores.com');
-         $trabajo_dsg->setFinaliza(new \DateTime('+30 days'));
-         $job_aea = new Trabajos();
-         $job_aea->setCategoria($em->merge($this->getReference("categoria-diseño")));
-         $job_aea->setTipo('Freelance');
-         $job_aea->setCompania('Asociacion de Estudios');
-         $job_aea->setLogo('extreme-sensio.gif');
-         $job_aea->setUrl('http://www.asoaciaion.com/');
-         $job_aea->setPosicion('Diseñador grafico');
-         $job_aea->setLocalidad('Almeria, España');
-         $job_aea->setDescripcion('Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in.');
-         $job_aea->setHowToApply('Send your resume to fabien.potencier [at] sensio.com');
-         $job_aea->setPublico(true);
-         $job_aea->setActivado(true);
-         $job_aea->setToken('job_extreme_sensio');
-         $job_aea->setEmail('job@example.com');
-         $job_aea->setFinaliza(new \DateTime('+30 days'));
-
-         $em->persist($trabajo_dsg);
-         $em->persist($job_aea);
-         $em->flush();
+        
+            $trabajo_dsg = new Trabajos();
+            $trabajo_dsg->setCategoria($em->merge($this->getReference("categoria-programacion")));
+            $trabajo_dsg->setTipo('tiempo total');
+            $trabajo_dsg->setCompania('DSG Consultores');
+            $trabajo_dsg->setLogo('sensio-labs.gif');
+            $trabajo_dsg->setUrl('http://www.dsgconsultores.com/');
+            $trabajo_dsg->setPosicion('Programador');
+            $trabajo_dsg->setLocalidad('Almeria, España');
+            $trabajo_dsg->setDescripcion('Programador Web con experiencia');
+            $trabajo_dsg->setHowToApply('Envia tu CV a DSG Consultores');
+            $trabajo_dsg->setPublico(true);
+            $trabajo_dsg->setActivado(true);
+            $trabajo_dsg->setToken('DSG_Consultores');
+            $trabajo_dsg->setEmail('direccion@dsgconsultores.com');
+            $trabajo_dsg->setCreado(new \DateTime('2005-12-01'));
+            $trabajo_dsg->setactualizado(new \DateTime());
+            
+            $trabajo_aea = new Trabajos();
+            $trabajo_aea->setCategoria($em->merge($this->getReference("categoria-diseño")));
+            $trabajo_aea->setTipo('tiempo parcial');
+            $trabajo_aea->setCompania('AEA');
+            $trabajo_aea->setLogo('sensio-labs.gif');
+            $trabajo_aea->setUrl('http://www.estudiosalmerienses.com/');
+            $trabajo_aea->setPosicion('Diseñador');
+            $trabajo_aea->setLocalidad('Almeria, España');
+            $trabajo_aea->setDescripcion('Diseñador Web con experiencia');
+            $trabajo_aea->setHowToApply('Envia tu CV a AEA');
+            $trabajo_aea->setPublico(true);
+            $trabajo_aea->setActivado(true);
+            $trabajo_aea->setToken('AEA');
+            $trabajo_aea->setEmail('soporte@estudiosalmerienses.com');
+            $trabajo_aea->setFinaliza(new \DateTime('2016-05-30'));
+            $trabajo_aea->setactualizado(new \DateTime());
+            
+            $em->persist($trabajo_dsg);
+            $em->persist($trabajo_aea);
+            
+        for($i = 100; $i <= 130; $i++)
+        {
+            $trabajo_indalopost = new Trabajos();
+            $trabajo_indalopost->setCategoria($em->merge($this->getReference("categoria-construcción")));
+            $trabajo_indalopost->setTipo('tiempo parcial');
+            $trabajo_indalopost->setCompania('Indalopost' .$i);
+            $trabajo_indalopost->setLogo('sensio-labs.gif');
+            $trabajo_indalopost->setUrl('http://www.indalopost.com/');
+            $trabajo_indalopost->setPosicion('Repartidor');
+            $trabajo_indalopost->setLocalidad('Almeria, España');
+            $trabajo_indalopost->setDescripcion('Serivcio de recogida de correspondencia y entrega en las dependencias de Correos, Manipulado y Franqueo.');
+            $trabajo_indalopost->setHowToApply('Envia tu CV a Indalopost');
+            $trabajo_indalopost->setPublico(true);
+            $trabajo_indalopost->setActivado(true);
+            $trabajo_indalopost->setToken('Indalopost_'.$i);
+            $trabajo_indalopost->setEmail('indalopost@indalopost.com');
+            
+            $em->persist($trabajo_indalopost);
+        }
+        
+        $em->flush();
     }
 
     public function getOrder()

@@ -3,88 +3,48 @@
 namespace Dsg\agenciaBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Dsg\agenciaBundle\Funciones\Amigable;
 
-use Dsg\agenciaBundle\Entity\Afiliados;
-use Dsg\agenciaBundle\Entity\Trabajos;
-//use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
- * Agencia\BaseDatosBundle\Entity\Categoria
- *
- * @ORM\Table(name="categoria")
- * @ORM\Entity
+ * Categoria
  */
 class Categoria
 {
     /**
-     * @var integer $id
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @var integer
      */
     private $id;
 
     /**
-     * @var string $nombre
-     *
-     * @ORM\Column(name="nombre", type="string", length=255, nullable=false, unique=true)
+     * @var string
      */
     private $nombre;
 
     /**
-     * @var \DateTime $creado
-     *
-     * @ORM\Column(name="creado", type="datetime")
+     * @var \Doctrine\Common\Collections\Collection
      */
-    private $creado;
+    private $trabajos;
 
     /**
-     * @var \DateTime $actualizado
-     *
-     * @ORM\Column(name="actualizado", type="datetime")
+     * @var \Doctrine\Common\Collections\Collection
      */
-    private $actualizado;
+    private $afiliados;
+    
+    
+    private $trabajosactivos;
 
     /**
-     * [__construct description]
+     * Constructor
      */
     public function __construct()
     {
+        $this->trabajos = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->afiliados = new \Doctrine\Common\Collections\ArrayCollection();
         $this->creado = new \DateTime();
     }
-
-    /**
-     * @ORM\PrePersist
-     */
-    public function prePersistEvent() {
-        $this->actualizado = new \DateTime();
-
-        return $this;
-    }
-
-    /**
-     * @ORM\PreUpdate
-     */
-    public function preUpdateEvent() {
-        $this->actualizado = new \DateTime();
-        return $this;
-    }
-
-    /**
-     * @ORM\OneToMany(targetEntity="Trabajos", mappedBy="categoria") 
-     */
-    protected $trabajo;
- 
-    /**
-     * @ORM\ManyToMany(targetEntity="Afiliados",inversedBy="afiliado")
-     * @ORM\JoinTable(name="categoria_afiliado", 
-     *     joinColumns={@ORM\JoinColumn(name="categoria_id", referencedColumnName="id", onDelete="CASCADE")},
-     *     inverseJoinColumns={@ORM\JoinColumn(name="afiliado_id", referencedColumnName="id")}
-     * )
-     */
-    protected $afiliado;
-
+    
+    
     /**
      * Get id
      *
@@ -104,7 +64,7 @@ class Categoria
     public function setNombre($nombre)
     {
         $this->nombre = $nombre;
-    
+
         return $this;
     }
 
@@ -119,121 +79,141 @@ class Categoria
     }
 
     /**
-     * Set creado
+     * Add trabajos
      *
-     * @param \DateTime $creado
+     * @param \Dsg\agenciaBundle\Entity\Trabajos $trabajos
      * @return Categoria
      */
-    public function setCreado($creado)
+    public function addTrabajo(\Dsg\agenciaBundle\Entity\Trabajos $trabajos)
     {
-        $this->creado = $creado;
-    
+        $this->trabajos[] = $trabajos;
+
         return $this;
     }
 
     /**
-     * Get creado
+     * Remove trabajos
      *
-     * @return \DateTime 
+     * @param \Dsg\agenciaBundle\Entity\Trabajos $trabajos
      */
-    public function getCreado()
+    public function removeTrabajo(\Dsg\agenciaBundle\Entity\Trabajos $trabajos)
     {
-        return $this->creado;
+        $this->trabajos->removeElement($trabajos);
     }
 
     /**
-     * Set actualizado
+     * Get trabajos
      *
-     * @param \DateTime $actualizado
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTrabajos()
+    {
+        return $this->trabajos;
+    }
+
+    /**
+     * Add afiliados
+     *
+     * @param \Dsg\agenciaBundle\Entity\Afiliados $afiliados
      * @return Categoria
      */
-    public function setActualizado($actualizado)
+    public function addAfiliado(\Dsg\agenciaBundle\Entity\Afiliados $afiliados)
     {
-        $this->actualizado = $actualizado;
-    
+        $this->afiliados[] = $afiliados;
+
         return $this;
     }
 
     /**
-     * Get actualizado
+     * Remove afiliados
      *
-     * @return \DateTime 
+     * @param \Dsg\agenciaBundle\Entity\Afiliados $afiliados
      */
-    public function getActualizado()
+    public function removeAfiliado(\Dsg\agenciaBundle\Entity\Afiliados $afiliados)
     {
-        return $this->actualizado;
+        $this->afiliados->removeElement($afiliados);
     }
+
+    /**
+     * Get afiliados
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAfiliados()
+    {
+        return $this->afiliados;
+    }
+    
+    /**
+     * Set Trabajos Activos
+     *
+     */ 
+    public function setTrabajosActivos($trabajos)
+    {
+        $this->trabajosactivos = $trabajos;
+    }
+ 
+    /**
+     * Get Trabajos activos
+     *
+     * @return trabajos activos
+     */
+    public function getTrabajosActivos()
+    {
+        return $this->trabajosactivos;
+    }
+    
+    private $masTrabajos;
+    
+    public function setMasTrabajos($trabajos)
+    {
+        $this->masTrabajos = $trabajos >=  0 ? $trabajos : 0;
+    }
+
+    public function getMasTrabajos()
+    {
+        return $this->masTrabajos;
+    }
+    
+    /**
+     * @var string
+     */
+    private $slug;
 
 
     /**
-     * Add trabajo
+     * Set slug
      *
-     * @param Agencia\BaseDatosBundle\Entity\Trabajos $trabajo
+     * @param string $slug
      * @return Categoria
      */
-    public function addTrabajo(\Dsg\agenciaBundle\Entity\Trabajos $trabajo)
+    public function setSlug($slug)
     {
-        $this->trabajo[] = $trabajo;
-    
+        $this->slug = $slug;
+
         return $this;
     }
 
     /**
-     * Remove trabajo
+     * Get slug
      *
-     * @param Agencia\BaseDatosBundle\Entity\Trabajos $trabajo
+     * @return string 
      */
-    public function removeTrabajo(\Dsg\agenciaBundle\Entity\Trabajos $trabajo)
+    public function getSlug()
     {
-        $this->removeTrabajo($trabajo);
+        return $this->slug;
     }
-
-    /**
-     * Get trabajo
-     *
-     * @return Doctrine\Common\Collections\Collection 
-     */
-    public function getTrabajo()
-    {
-        return $this->trabajo;
-    }
-
-    /**
-     * Add afiliado
-     *
-     * @param Agencia\BaseDatosBundle\Entity\Afiliados $afiliado
-     * @return Categoria
-     */
-    public function addAfiliado(\Dsg\agenciaBundle\Entity\Afiliados $afiliado)
-    {
-        $this->afiliado[] = $afiliado;
     
-        return $this;
-    }
-
+    
     /**
-     * Remove afiliado
-     *
-     * @param Agencia\BaseDatosBundle\Entity\Afiliados $afiliado
+     * @ORM\PrePersist
      */
-    public function removeAfiliado(\Dsg\agenciaBundle\Entity\Afiliados $afiliado)
+    public function setSlugValue()
     {
-        $this->afiliado->removeElement($afiliado);
+        $this->slug = Amigable::urlAmigable($this->getNombre());
     }
-
-    /**
-     * Get afiliado
-     *
-     * @return Doctrine\Common\Collections\Collection 
-     */
-    public function getAfiliado()
-    {
-        return $this->afiliado;
-    }
-
+    
     public function __toString() {
-        return $this->getNombre();
+        return sprintf('%s', $this->getNombre());
     }
-
-
 }

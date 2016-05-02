@@ -1,0 +1,64 @@
+Dsg\agenciaBundle\Entity\Trabajos:
+    type: entity
+    repositoryClass: Dsg\agenciaBundle\Repository\TrabajosRepository
+    table: trabajos
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        tipo:
+            type: string
+            length: 255
+            nullable: true
+        compania:
+            type: string
+            length: 255
+        logo:
+            type: string
+            length: 255
+            nullable: true
+        url:
+            type: string
+            length: 255
+            nullable: true
+        posicion:
+            type: string
+            length: 255
+        localidad:
+            type: string
+            length: 255
+        descripcion:
+            type: text
+        how_to_apply:
+            type: text
+        token:
+            type: string
+            length: 255
+            unique: true
+        publico:
+            type: boolean
+            nullable: true
+        activado:
+            type: boolean
+            nullable: true
+        email:
+            type: string
+            length: 255
+        finaliza:
+            type: datetime
+        creado:
+            type: datetime
+        actualizado:
+            type: datetime
+            nullable: true
+    manyToOne:
+        categoria:
+            targetEntity: Categoria
+            inversedBy: trabajo
+            joinColumn:
+                name: categoria_id
+                referencedColumnName: id
+    lifecycleCallbacks:
+        prePersist: [ setCreadoValue, setFinalizaValue ]
+        preUpdate: [ setActualizadoValue ]

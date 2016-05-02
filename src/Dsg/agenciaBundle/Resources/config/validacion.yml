@@ -1,0 +1,23 @@
+Dsg\agenciaBundle\Entity\Trabajos:
+    properties:
+        tipo:
+            - NotBlank: ~
+        email:
+            - NotBlank: ~
+            - Email: ~
+        categoria:
+            - NotBlank: ~
+        compania:
+            - NotBlank: ~
+        posicion:
+            - NotBlank: ~
+        localidad:
+            - NotBlank: ~
+        descripcion:
+            - NotBlank: ~
+        how_to_apply:
+            - NotBlank: ~
+        token:
+            - NotBlank: ~
+        url:
+            - Url: ~

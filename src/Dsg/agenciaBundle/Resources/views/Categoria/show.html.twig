@@ -1,0 +1,56 @@
+{% extends 'DsgagenciaBundle::layout.html.twig' %}
+
+{% block title %}
+    Trabajos en la categoría {{ categoria.nombre }} categoria
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <!-- CSS carousel-->
+    <link rel="stylesheet" href="{{ asset('bundles/dsgagencia/css/jobs.css') }}" type="text/css" media="all" />
+{% endblock %}
+
+{% block content %}
+        <!-- Three columns of text below the carousel -->
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2 class="panel-title">{{ categoria.nombre }}</h2>
+            </div>
+             <!--Incluimos la plantilla de listar trabajos-->
+            {{ include ('DsgagenciaBundle::listar.html.twig', {'trabajos': categoria.trabajosactivos}) }}
+            
+            {% if last_page > 1 %}
+                <div class="pagination">
+                    <a href={{ path('dsgagencia_categoria', { 'slug': categoria.slug, 'page': 1 }) }}>
+                        <img src={{ asset('bundles/dsgagencia/images/first.png') }} alt="First page" title="First page" />
+                    </a>
+                    <a href={{ path('dsgagencia_categoria', { 'slug': categoria.slug, 'page': previous_page }) }}>
+                        <img src={{ asset('bundles/dsgagencia/images/previous.png') }} alt="Previous page" title="Previous page" />
+                    </a>
+                    
+                    {% for page in 1..last_page %}
+                        {% if page == current_page %}
+                            {{ page }}
+                        {% else %}
+                            <a href={{ path('dsgagencia_categoria', { 'slug': categoria.slug, 'page': page }) }}>{{ page }}</a>
+                        {% endif %}
+                    {% endfor %}
+                    
+                    <a href={{ path('dsgagencia_categoria', { 'slug': categoria.slug, 'page': next_page }) }}>
+                        <img src={{ asset('bundles/dsgagencia/images/next.png') }} alt="Next page" title="Next page" />
+                    </a>
+                    <a href={{ path('dsgagencia_categoria', { 'slug': categoria.slug, 'page': last_page }) }}>
+                        <img src={{ asset('bundles/dsgagencia/images/last.png') }} alt="Last page" title="Last page" />
+                    </a>
+                </div>
+            {% endif %}
+ 
+            <div class="pagination_desc">
+                <strong>{{ total_trabajos }}</strong> jobs in this categoria
+         
+                {% if last_page > 1 %}
+                    - page <strong>{{ current_page }}/{{ last_page }}</strong>
+                {% endif %}
+            </div>
+        </div>
+{% endblock %}

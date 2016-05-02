@@ -12,15 +12,19 @@ class CargarDatosCategoria extends AbstractFixture implements OrderedFixtureInte
     {
         $disenno = new Categoria();
         $disenno->setNombre('Diseño');
+        $disenno->setSlugValue('Diseño');
 
         $programacion = new Categoria();
         $programacion->setNombre('Programación');
+        $programacion->setSlugValue('Programación');
 
         $restauracion = new Categoria();
         $restauracion->setNombre('Restauración');
+        $restauracion->setSlugValue('Restauración');
 
         $construccion = new Categoria();
         $construccion->setNombre('Construcción');
+        $construccion->setSlugValue('Construcción');
 
         $em->persist($disenno);
         $em->persist($programacion);

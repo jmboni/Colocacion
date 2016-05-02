@@ -8,6 +8,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Dsg\agenciaBundle\Entity\Trabajos;
 use Dsg\agenciaBundle\Form\TrabajosType;
 
+use Doctrine\ORM\Query;
+
 /**
  * Trabajos controller.
  *
@@ -19,14 +21,26 @@ class TrabajosController extends Controller
      * Lists all Trabajos entities.
      *
      */
+
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-
-        $entities = $em->getRepository('DsgagenciaBundle:Trabajos')->findAll();
+        
+        $em = $this->getDoctrine()->getEntityManager();
+        
+        $categorias = $em->getRepository('DsgagenciaBundle:Categoria')->getTrabajosCategorias();
+        
+        foreach($categorias as $categoria) {
+            $categoria->setTrabajosActivos($em->getRepository('DsgagenciaBundle:Trabajos')->getTrabajosActivos($categoria->getId(),$this->container->getParameter('max_trabajos_indexpag')));
+            
+            $categoria->setMasTrabajos(
+                $em->getRepository('DsgagenciaBundle:Trabajos')
+                   ->countTrabajosActivos($categoria->getId()) -  $this->container->getParameter('max_trabajos_indexpag')
+            );
+        }
 
         return $this->render('DsgagenciaBundle:Trabajos:index.html.twig', array(
-            'entities' => $entities,
+            'categorias' => $categorias,
         ));
     }
     /**
@@ -44,7 +58,12 @@ class TrabajosController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('trabajos_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('trabajos_show', array(
+                'compania' => $entity->getCompaniaSlug(),
+                'localidad' => $entity->getLocalidadSlug(),
+                'id' => $entity->getId(),
+                'posicion' => $entity->getPosicionSlug()
+            )));
         }
 
         return $this->render('DsgagenciaBundle:Trabajos:new.html.twig', array(
@@ -95,7 +114,7 @@ class TrabajosController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('DsgagenciaBundle:Trabajos')->find($id);
+        $entity = $em->getRepository('DsgagenciaBundle:Trabajos')->getTrabajoActivo($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Trabajos entity.');

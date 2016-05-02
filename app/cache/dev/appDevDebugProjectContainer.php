@@ -656,25 +656,28 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getDoctrine_Orm_DefaultEntityManagerService()
     {
-        $a = new \Doctrine\Common\Persistence\Mapping\Driver\MappingDriverChain();
-        $a->addDriver(new \Doctrine\ORM\Mapping\Driver\AnnotationDriver($this->get('annotation_reader'), array(0 => ($this->targetDirs[3].'/src/Dsg/agenciaBundle/Entity'))), 'Dsg\\agenciaBundle\\Entity');
+        $a = new \Doctrine\ORM\Mapping\Driver\SimplifiedYamlDriver(array(($this->targetDirs[3].'/src/Dsg/agenciaBundle/Resources/config/doctrine') => 'Dsg\\agenciaBundle\\Entity'));
+        $a->setGlobalBasename('mapping');
 
-        $b = new \Doctrine\ORM\Configuration();
-        $b->setEntityNamespaces(array('DsgagenciaBundle' => 'Dsg\\agenciaBundle\\Entity'));
-        $b->setMetadataCacheImpl($this->get('doctrine_cache.providers.doctrine.orm.default_metadata_cache'));
-        $b->setQueryCacheImpl($this->get('doctrine_cache.providers.doctrine.orm.default_query_cache'));
-        $b->setResultCacheImpl($this->get('doctrine_cache.providers.doctrine.orm.default_result_cache'));
-        $b->setMetadataDriverImpl($a);
-        $b->setProxyDir((__DIR__.'/doctrine/orm/Proxies'));
-        $b->setProxyNamespace('Proxies');
-        $b->setAutoGenerateProxyClasses(true);
-        $b->setClassMetadataFactoryName('Doctrine\\ORM\\Mapping\\ClassMetadataFactory');
-        $b->setDefaultRepositoryClassName('Doctrine\\ORM\\EntityRepository');
-        $b->setNamingStrategy(new \Doctrine\ORM\Mapping\UnderscoreNamingStrategy());
-        $b->setQuoteStrategy(new \Doctrine\ORM\Mapping\DefaultQuoteStrategy());
-        $b->setEntityListenerResolver($this->get('doctrine.orm.default_entity_listener_resolver'));
+        $b = new \Doctrine\Common\Persistence\Mapping\Driver\MappingDriverChain();
+        $b->addDriver($a, 'Dsg\\agenciaBundle\\Entity');
 
-        $this->services['doctrine.orm.default_entity_manager'] = $instance = \Doctrine\ORM\EntityManager::create($this->get('doctrine.dbal.default_connection'), $b);
+        $c = new \Doctrine\ORM\Configuration();
+        $c->setEntityNamespaces(array('DsgagenciaBundle' => 'Dsg\\agenciaBundle\\Entity'));
+        $c->setMetadataCacheImpl($this->get('doctrine_cache.providers.doctrine.orm.default_metadata_cache'));
+        $c->setQueryCacheImpl($this->get('doctrine_cache.providers.doctrine.orm.default_query_cache'));
+        $c->setResultCacheImpl($this->get('doctrine_cache.providers.doctrine.orm.default_result_cache'));
+        $c->setMetadataDriverImpl($b);
+        $c->setProxyDir((__DIR__.'/doctrine/orm/Proxies'));
+        $c->setProxyNamespace('Proxies');
+        $c->setAutoGenerateProxyClasses(true);
+        $c->setClassMetadataFactoryName('Doctrine\\ORM\\Mapping\\ClassMetadataFactory');
+        $c->setDefaultRepositoryClassName('Doctrine\\ORM\\EntityRepository');
+        $c->setNamingStrategy(new \Doctrine\ORM\Mapping\UnderscoreNamingStrategy());
+        $c->setQuoteStrategy(new \Doctrine\ORM\Mapping\DefaultQuoteStrategy());
+        $c->setEntityListenerResolver($this->get('doctrine.orm.default_entity_listener_resolver'));
+
+        $this->services['doctrine.orm.default_entity_manager'] = $instance = \Doctrine\ORM\EntityManager::create($this->get('doctrine.dbal.default_connection'), $c);
 
         $this->get('doctrine.orm.default_manager_configurator')->configure($instance);
 
@@ -1507,7 +1510,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getLocaleListenerService()
     {
-        return $this->services['locale_listener'] = new \Symfony\Component\HttpKernel\EventListener\LocaleListener('en', $this->get('router', ContainerInterface::NULL_ON_INVALID_REFERENCE), $this->get('request_stack'));
+        return $this->services['locale_listener'] = new \Symfony\Component\HttpKernel\EventListener\LocaleListener('es', $this->get('router', ContainerInterface::NULL_ON_INVALID_REFERENCE), $this->get('request_stack'));
     }
 
     /**
@@ -1874,7 +1877,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getPropel_Dumper_YamlService()
     {
-        return $this->services['propel.dumper.yaml'] = new \Propel\Bundle\PropelBundle\DataFixtures\Dumper\YamlDataDumper($this->targetDirs[2], array('database' => array('connections' => array('default' => array('adapter' => 'mysql', 'user' => 'jmboni', 'password' => '', 'dsn' => 'mysql:host=127.0.0.1;dbname=agencia;charset=UTF8', 'classname' => '\\Propel\\Runtime\\Connection\\DebugPDO', 'options' => array('ATTR_PERSISTENT' => false), 'attributes' => array('ATTR_EMULATE_PREPARES' => false), 'slaves' => array())), 'adapters' => array('mysql' => array('tableType' => 'InnoDB', 'tableEngineKeyword' => 'ENGINE'), 'sqlite' => array(), 'oracle' => array('autoincrementSequencePattern' => '${table}_SEQ'))), 'general' => array('project' => '', 'version' => '2.0.0-dev'), 'exclude_tables' => array(), 'paths' => array('projectDir' => ($this->targetDirs[3].'/web'), 'schemaDir' => ($this->targetDirs[3].'/web'), 'outputDir' => ($this->targetDirs[3].'/web'), 'phpDir' => ($this->targetDirs[3].'/web/generated-classes'), 'phpConfDir' => ($this->targetDirs[3].'/web/generated-conf'), 'sqlDir' => ($this->targetDirs[3].'/web/generated-sql'), 'migrationDir' => ($this->targetDirs[3].'/web/generated-migrations'), 'composerDir' => NULL), 'migrations' => array('samePhpName' => false, 'addVendorInfo' => false, 'tableName' => 'propel_migration', 'parserClass' => NULL), 'runtime' => array('connections' => array(), 'logging' => true, 'log' => array()), 'generator' => array('platformClass' => NULL, 'packageObjectModel' => true, 'namespaceAutoPackage' => true, 'connections' => array(), 'schema' => array('basename' => 'schema', 'autoPrefix' => false, 'autoPackage' => false, 'autoNamespace' => false, 'transform' => false), 'dateTime' => array('useDateTimeClass' => true, 'dateTimeClass' => 'DateTime'), 'objectModel' => array('addGenericAccessors' => true, 'addGenericMutators' => true, 'emulateForeignKeyConstraints' => false, 'addClassLevelComment' => true, 'defaultKeyType' => 'phpName', 'addSaveMethod' => true, 'namespaceMap' => 'Map', 'addTimeStamp' => false, 'addHooks' => true, 'classPrefix' => NULL, 'useLeftJoinsInDoJoinMethods' => true, 'pluralizerClass' => '\\Propel\\Common\\Pluralizer\\StandardEnglishPluralizer', 'entityNotFoundExceptionClass' => '\\Propel\\Runtime\\Exception\\EntityNotFoundException', 'builders' => array('object' => '\\Propel\\Generator\\Builder\\Om\\ObjectBuilder', 'objectstub' => '\\Propel\\Generator\\Builder\\Om\\ExtensionObjectBuilder', 'objectmultiextend' => '\\Propel\\Generator\\Builder\\Om\\MultiExtendObjectBuilder', 'query' => '\\Propel\\Generator\\Builder\\Om\\QueryBuilder', 'querystub' => '\\Propel\\Generator\\Builder\\Om\\ExtensionQueryBuilder', 'queryinheritance' => '\\Propel\\Generator\\Builder\\Om\\QueryInheritanceBuilder', 'queryinheritancestub' => '\\Propel\\Generator\\Builder\\Om\\ExtensionQueryInheritanceBuilder', 'tablemap' => '\\Propel\\Generator\\Builder\\Om\\TableMapBuilder', 'interface' => '\\Propel\\Generator\\Builder\\Om\\InterfaceBuilder')))));
+        return $this->services['propel.dumper.yaml'] = new \Propel\Bundle\PropelBundle\DataFixtures\Dumper\YamlDataDumper($this->targetDirs[2], array('database' => array('connections' => array('default' => array('adapter' => 'mysql', 'user' => 'jmboni', 'password' => '', 'dsn' => 'mysql:host=127.0.0.1;dbname=agencia;charset=UTF8', 'classname' => '\\Propel\\Runtime\\Connection\\DebugPDO', 'options' => array('ATTR_PERSISTENT' => false), 'attributes' => array('ATTR_EMULATE_PREPARES' => false), 'slaves' => array())), 'adapters' => array('mysql' => array('tableType' => 'InnoDB', 'tableEngineKeyword' => 'ENGINE'), 'sqlite' => array(), 'oracle' => array('autoincrementSequencePattern' => '${table}_SEQ'))), 'general' => array('project' => '', 'version' => '2.0.0-dev'), 'exclude_tables' => array(), 'paths' => array('projectDir' => $this->targetDirs[3], 'schemaDir' => $this->targetDirs[3], 'outputDir' => $this->targetDirs[3], 'phpDir' => ($this->targetDirs[3].'/generated-classes'), 'phpConfDir' => ($this->targetDirs[3].'/generated-conf'), 'sqlDir' => ($this->targetDirs[3].'/generated-sql'), 'migrationDir' => ($this->targetDirs[3].'/generated-migrations'), 'composerDir' => NULL), 'migrations' => array('samePhpName' => false, 'addVendorInfo' => false, 'tableName' => 'propel_migration', 'parserClass' => NULL), 'runtime' => array('connections' => array(), 'logging' => true, 'log' => array()), 'generator' => array('platformClass' => NULL, 'packageObjectModel' => true, 'namespaceAutoPackage' => true, 'connections' => array(), 'schema' => array('basename' => 'schema', 'autoPrefix' => false, 'autoPackage' => false, 'autoNamespace' => false, 'transform' => false), 'dateTime' => array('useDateTimeClass' => true, 'dateTimeClass' => 'DateTime'), 'objectModel' => array('addGenericAccessors' => true, 'addGenericMutators' => true, 'emulateForeignKeyConstraints' => false, 'addClassLevelComment' => true, 'defaultKeyType' => 'phpName', 'addSaveMethod' => true, 'namespaceMap' => 'Map', 'addTimeStamp' => false, 'addHooks' => true, 'classPrefix' => NULL, 'useLeftJoinsInDoJoinMethods' => true, 'pluralizerClass' => '\\Propel\\Common\\Pluralizer\\StandardEnglishPluralizer', 'entityNotFoundExceptionClass' => '\\Propel\\Runtime\\Exception\\EntityNotFoundException', 'builders' => array('object' => '\\Propel\\Generator\\Builder\\Om\\ObjectBuilder', 'objectstub' => '\\Propel\\Generator\\Builder\\Om\\ExtensionObjectBuilder', 'objectmultiextend' => '\\Propel\\Generator\\Builder\\Om\\MultiExtendObjectBuilder', 'query' => '\\Propel\\Generator\\Builder\\Om\\QueryBuilder', 'querystub' => '\\Propel\\Generator\\Builder\\Om\\ExtensionQueryBuilder', 'queryinheritance' => '\\Propel\\Generator\\Builder\\Om\\QueryInheritanceBuilder', 'queryinheritancestub' => '\\Propel\\Generator\\Builder\\Om\\ExtensionQueryInheritanceBuilder', 'tablemap' => '\\Propel\\Generator\\Builder\\Om\\TableMapBuilder', 'interface' => '\\Propel\\Generator\\Builder\\Om\\InterfaceBuilder')))));
     }
 
     /**
@@ -1900,7 +1903,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getPropel_Loader_XmlService()
     {
-        return $this->services['propel.loader.xml'] = new \Propel\Bundle\PropelBundle\DataFixtures\Loader\XmlDataLoader($this->targetDirs[2], array('database' => array('connections' => array('default' => array('adapter' => 'mysql', 'user' => 'jmboni', 'password' => '', 'dsn' => 'mysql:host=127.0.0.1;dbname=agencia;charset=UTF8', 'classname' => '\\Propel\\Runtime\\Connection\\DebugPDO', 'options' => array('ATTR_PERSISTENT' => false), 'attributes' => array('ATTR_EMULATE_PREPARES' => false), 'slaves' => array())), 'adapters' => array('mysql' => array('tableType' => 'InnoDB', 'tableEngineKeyword' => 'ENGINE'), 'sqlite' => array(), 'oracle' => array('autoincrementSequencePattern' => '${table}_SEQ'))), 'general' => array('project' => '', 'version' => '2.0.0-dev'), 'exclude_tables' => array(), 'paths' => array('projectDir' => ($this->targetDirs[3].'/web'), 'schemaDir' => ($this->targetDirs[3].'/web'), 'outputDir' => ($this->targetDirs[3].'/web'), 'phpDir' => ($this->targetDirs[3].'/web/generated-classes'), 'phpConfDir' => ($this->targetDirs[3].'/web/generated-conf'), 'sqlDir' => ($this->targetDirs[3].'/web/generated-sql'), 'migrationDir' => ($this->targetDirs[3].'/web/generated-migrations'), 'composerDir' => NULL), 'migrations' => array('samePhpName' => false, 'addVendorInfo' => false, 'tableName' => 'propel_migration', 'parserClass' => NULL), 'runtime' => array('connections' => array(), 'logging' => true, 'log' => array()), 'generator' => array('platformClass' => NULL, 'packageObjectModel' => true, 'namespaceAutoPackage' => true, 'connections' => array(), 'schema' => array('basename' => 'schema', 'autoPrefix' => false, 'autoPackage' => false, 'autoNamespace' => false, 'transform' => false), 'dateTime' => array('useDateTimeClass' => true, 'dateTimeClass' => 'DateTime'), 'objectModel' => array('addGenericAccessors' => true, 'addGenericMutators' => true, 'emulateForeignKeyConstraints' => false, 'addClassLevelComment' => true, 'defaultKeyType' => 'phpName', 'addSaveMethod' => true, 'namespaceMap' => 'Map', 'addTimeStamp' => false, 'addHooks' => true, 'classPrefix' => NULL, 'useLeftJoinsInDoJoinMethods' => true, 'pluralizerClass' => '\\Propel\\Common\\Pluralizer\\StandardEnglishPluralizer', 'entityNotFoundExceptionClass' => '\\Propel\\Runtime\\Exception\\EntityNotFoundException', 'builders' => array('object' => '\\Propel\\Generator\\Builder\\Om\\ObjectBuilder', 'objectstub' => '\\Propel\\Generator\\Builder\\Om\\ExtensionObjectBuilder', 'objectmultiextend' => '\\Propel\\Generator\\Builder\\Om\\MultiExtendObjectBuilder', 'query' => '\\Propel\\Generator\\Builder\\Om\\QueryBuilder', 'querystub' => '\\Propel\\Generator\\Builder\\Om\\ExtensionQueryBuilder', 'queryinheritance' => '\\Propel\\Generator\\Builder\\Om\\QueryInheritanceBuilder', 'queryinheritancestub' => '\\Propel\\Generator\\Builder\\Om\\ExtensionQueryInheritanceBuilder', 'tablemap' => '\\Propel\\Generator\\Builder\\Om\\TableMapBuilder', 'interface' => '\\Propel\\Generator\\Builder\\Om\\InterfaceBuilder')))));
+        return $this->services['propel.loader.xml'] = new \Propel\Bundle\PropelBundle\DataFixtures\Loader\XmlDataLoader($this->targetDirs[2], array('database' => array('connections' => array('default' => array('adapter' => 'mysql', 'user' => 'jmboni', 'password' => '', 'dsn' => 'mysql:host=127.0.0.1;dbname=agencia;charset=UTF8', 'classname' => '\\Propel\\Runtime\\Connection\\DebugPDO', 'options' => array('ATTR_PERSISTENT' => false), 'attributes' => array('ATTR_EMULATE_PREPARES' => false), 'slaves' => array())), 'adapters' => array('mysql' => array('tableType' => 'InnoDB', 'tableEngineKeyword' => 'ENGINE'), 'sqlite' => array(), 'oracle' => array('autoincrementSequencePattern' => '${table}_SEQ'))), 'general' => array('project' => '', 'version' => '2.0.0-dev'), 'exclude_tables' => array(), 'paths' => array('projectDir' => $this->targetDirs[3], 'schemaDir' => $this->targetDirs[3], 'outputDir' => $this->targetDirs[3], 'phpDir' => ($this->targetDirs[3].'/generated-classes'), 'phpConfDir' => ($this->targetDirs[3].'/generated-conf'), 'sqlDir' => ($this->targetDirs[3].'/generated-sql'), 'migrationDir' => ($this->targetDirs[3].'/generated-migrations'), 'composerDir' => NULL), 'migrations' => array('samePhpName' => false, 'addVendorInfo' => false, 'tableName' => 'propel_migration', 'parserClass' => NULL), 'runtime' => array('connections' => array(), 'logging' => true, 'log' => array()), 'generator' => array('platformClass' => NULL, 'packageObjectModel' => true, 'namespaceAutoPackage' => true, 'connections' => array(), 'schema' => array('basename' => 'schema', 'autoPrefix' => false, 'autoPackage' => false, 'autoNamespace' => false, 'transform' => false), 'dateTime' => array('useDateTimeClass' => true, 'dateTimeClass' => 'DateTime'), 'objectModel' => array('addGenericAccessors' => true, 'addGenericMutators' => true, 'emulateForeignKeyConstraints' => false, 'addClassLevelComment' => true, 'defaultKeyType' => 'phpName', 'addSaveMethod' => true, 'namespaceMap' => 'Map', 'addTimeStamp' => false, 'addHooks' => true, 'classPrefix' => NULL, 'useLeftJoinsInDoJoinMethods' => true, 'pluralizerClass' => '\\Propel\\Common\\Pluralizer\\StandardEnglishPluralizer', 'entityNotFoundExceptionClass' => '\\Propel\\Runtime\\Exception\\EntityNotFoundException', 'builders' => array('object' => '\\Propel\\Generator\\Builder\\Om\\ObjectBuilder', 'objectstub' => '\\Propel\\Generator\\Builder\\Om\\ExtensionObjectBuilder', 'objectmultiextend' => '\\Propel\\Generator\\Builder\\Om\\MultiExtendObjectBuilder', 'query' => '\\Propel\\Generator\\Builder\\Om\\QueryBuilder', 'querystub' => '\\Propel\\Generator\\Builder\\Om\\ExtensionQueryBuilder', 'queryinheritance' => '\\Propel\\Generator\\Builder\\Om\\QueryInheritanceBuilder', 'queryinheritancestub' => '\\Propel\\Generator\\Builder\\Om\\ExtensionQueryInheritanceBuilder', 'tablemap' => '\\Propel\\Generator\\Builder\\Om\\TableMapBuilder', 'interface' => '\\Propel\\Generator\\Builder\\Om\\InterfaceBuilder')))));
     }
 
     /**
@@ -1913,7 +1916,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getPropel_Loader_YamlService()
     {
-        return $this->services['propel.loader.yaml'] = new \Propel\Bundle\PropelBundle\DataFixtures\Loader\YamlDataLoader($this->targetDirs[2], array('database' => array('connections' => array('default' => array('adapter' => 'mysql', 'user' => 'jmboni', 'password' => '', 'dsn' => 'mysql:host=127.0.0.1;dbname=agencia;charset=UTF8', 'classname' => '\\Propel\\Runtime\\Connection\\DebugPDO', 'options' => array('ATTR_PERSISTENT' => false), 'attributes' => array('ATTR_EMULATE_PREPARES' => false), 'slaves' => array())), 'adapters' => array('mysql' => array('tableType' => 'InnoDB', 'tableEngineKeyword' => 'ENGINE'), 'sqlite' => array(), 'oracle' => array('autoincrementSequencePattern' => '${table}_SEQ'))), 'general' => array('project' => '', 'version' => '2.0.0-dev'), 'exclude_tables' => array(), 'paths' => array('projectDir' => ($this->targetDirs[3].'/web'), 'schemaDir' => ($this->targetDirs[3].'/web'), 'outputDir' => ($this->targetDirs[3].'/web'), 'phpDir' => ($this->targetDirs[3].'/web/generated-classes'), 'phpConfDir' => ($this->targetDirs[3].'/web/generated-conf'), 'sqlDir' => ($this->targetDirs[3].'/web/generated-sql'), 'migrationDir' => ($this->targetDirs[3].'/web/generated-migrations'), 'composerDir' => NULL), 'migrations' => array('samePhpName' => false, 'addVendorInfo' => false, 'tableName' => 'propel_migration', 'parserClass' => NULL), 'runtime' => array('connections' => array(), 'logging' => true, 'log' => array()), 'generator' => array('platformClass' => NULL, 'packageObjectModel' => true, 'namespaceAutoPackage' => true, 'connections' => array(), 'schema' => array('basename' => 'schema', 'autoPrefix' => false, 'autoPackage' => false, 'autoNamespace' => false, 'transform' => false), 'dateTime' => array('useDateTimeClass' => true, 'dateTimeClass' => 'DateTime'), 'objectModel' => array('addGenericAccessors' => true, 'addGenericMutators' => true, 'emulateForeignKeyConstraints' => false, 'addClassLevelComment' => true, 'defaultKeyType' => 'phpName', 'addSaveMethod' => true, 'namespaceMap' => 'Map', 'addTimeStamp' => false, 'addHooks' => true, 'classPrefix' => NULL, 'useLeftJoinsInDoJoinMethods' => true, 'pluralizerClass' => '\\Propel\\Common\\Pluralizer\\StandardEnglishPluralizer', 'entityNotFoundExceptionClass' => '\\Propel\\Runtime\\Exception\\EntityNotFoundException', 'builders' => array('object' => '\\Propel\\Generator\\Builder\\Om\\ObjectBuilder', 'objectstub' => '\\Propel\\Generator\\Builder\\Om\\ExtensionObjectBuilder', 'objectmultiextend' => '\\Propel\\Generator\\Builder\\Om\\MultiExtendObjectBuilder', 'query' => '\\Propel\\Generator\\Builder\\Om\\QueryBuilder', 'querystub' => '\\Propel\\Generator\\Builder\\Om\\ExtensionQueryBuilder', 'queryinheritance' => '\\Propel\\Generator\\Builder\\Om\\QueryInheritanceBuilder', 'queryinheritancestub' => '\\Propel\\Generator\\Builder\\Om\\ExtensionQueryInheritanceBuilder', 'tablemap' => '\\Propel\\Generator\\Builder\\Om\\TableMapBuilder', 'interface' => '\\Propel\\Generator\\Builder\\Om\\InterfaceBuilder')))), NULL);
+        return $this->services['propel.loader.yaml'] = new \Propel\Bundle\PropelBundle\DataFixtures\Loader\YamlDataLoader($this->targetDirs[2], array('database' => array('connections' => array('default' => array('adapter' => 'mysql', 'user' => 'jmboni', 'password' => '', 'dsn' => 'mysql:host=127.0.0.1;dbname=agencia;charset=UTF8', 'classname' => '\\Propel\\Runtime\\Connection\\DebugPDO', 'options' => array('ATTR_PERSISTENT' => false), 'attributes' => array('ATTR_EMULATE_PREPARES' => false), 'slaves' => array())), 'adapters' => array('mysql' => array('tableType' => 'InnoDB', 'tableEngineKeyword' => 'ENGINE'), 'sqlite' => array(), 'oracle' => array('autoincrementSequencePattern' => '${table}_SEQ'))), 'general' => array('project' => '', 'version' => '2.0.0-dev'), 'exclude_tables' => array(), 'paths' => array('projectDir' => $this->targetDirs[3], 'schemaDir' => $this->targetDirs[3], 'outputDir' => $this->targetDirs[3], 'phpDir' => ($this->targetDirs[3].'/generated-classes'), 'phpConfDir' => ($this->targetDirs[3].'/generated-conf'), 'sqlDir' => ($this->targetDirs[3].'/generated-sql'), 'migrationDir' => ($this->targetDirs[3].'/generated-migrations'), 'composerDir' => NULL), 'migrations' => array('samePhpName' => false, 'addVendorInfo' => false, 'tableName' => 'propel_migration', 'parserClass' => NULL), 'runtime' => array('connections' => array(), 'logging' => true, 'log' => array()), 'generator' => array('platformClass' => NULL, 'packageObjectModel' => true, 'namespaceAutoPackage' => true, 'connections' => array(), 'schema' => array('basename' => 'schema', 'autoPrefix' => false, 'autoPackage' => false, 'autoNamespace' => false, 'transform' => false), 'dateTime' => array('useDateTimeClass' => true, 'dateTimeClass' => 'DateTime'), 'objectModel' => array('addGenericAccessors' => true, 'addGenericMutators' => true, 'emulateForeignKeyConstraints' => false, 'addClassLevelComment' => true, 'defaultKeyType' => 'phpName', 'addSaveMethod' => true, 'namespaceMap' => 'Map', 'addTimeStamp' => false, 'addHooks' => true, 'classPrefix' => NULL, 'useLeftJoinsInDoJoinMethods' => true, 'pluralizerClass' => '\\Propel\\Common\\Pluralizer\\StandardEnglishPluralizer', 'entityNotFoundExceptionClass' => '\\Propel\\Runtime\\Exception\\EntityNotFoundException', 'builders' => array('object' => '\\Propel\\Generator\\Builder\\Om\\ObjectBuilder', 'objectstub' => '\\Propel\\Generator\\Builder\\Om\\ExtensionObjectBuilder', 'objectmultiextend' => '\\Propel\\Generator\\Builder\\Om\\MultiExtendObjectBuilder', 'query' => '\\Propel\\Generator\\Builder\\Om\\QueryBuilder', 'querystub' => '\\Propel\\Generator\\Builder\\Om\\ExtensionQueryBuilder', 'queryinheritance' => '\\Propel\\Generator\\Builder\\Om\\QueryInheritanceBuilder', 'queryinheritancestub' => '\\Propel\\Generator\\Builder\\Om\\ExtensionQueryInheritanceBuilder', 'tablemap' => '\\Propel\\Generator\\Builder\\Om\\TableMapBuilder', 'interface' => '\\Propel\\Generator\\Builder\\Om\\InterfaceBuilder')))), NULL);
     }
 
     /**
@@ -2173,7 +2176,7 @@ class appDevDebugProjectContainer extends Container
 
         $e = new \Symfony\Component\Security\Http\AccessMap();
 
-        return $this->services['security.firewall.map.context.main'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => new \Symfony\Component\Security\Http\Firewall\ChannelListener($e, new \Symfony\Component\Security\Http\EntryPoint\RetryAuthenticationEntryPoint(80, 443), $a), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($b, array(0 => new \Symfony\Component\Security\Core\User\InMemoryUserProvider()), 'main', $a, $this->get('debug.event_dispatcher', ContainerInterface::NULL_ON_INVALID_REFERENCE)), 2 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($b, '57251fca52cd92.55746227', $a, $c), 3 => new \Symfony\Component\Security\Http\Firewall\AccessListener($b, $this->get('security.access.decision_manager'), $e, $c)), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($b, $this->get('security.authentication.trust_resolver'), new \Symfony\Component\Security\Http\HttpUtils($d, $d), 'main', NULL, NULL, NULL, $a, false));
+        return $this->services['security.firewall.map.context.main'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => new \Symfony\Component\Security\Http\Firewall\ChannelListener($e, new \Symfony\Component\Security\Http\EntryPoint\RetryAuthenticationEntryPoint(80, 443), $a), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($b, array(0 => new \Symfony\Component\Security\Core\User\InMemoryUserProvider()), 'main', $a, $this->get('debug.event_dispatcher', ContainerInterface::NULL_ON_INVALID_REFERENCE)), 2 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($b, '5727981a9d0cb7.83717597', $a, $c), 3 => new \Symfony\Component\Security\Http\Firewall\AccessListener($b, $this->get('security.access.decision_manager'), $e, $c)), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($b, $this->get('security.authentication.trust_resolver'), new \Symfony\Component\Security\Http\HttpUtils($d, $d), 'main', NULL, NULL, NULL, $a, false));
     }
 
     /**
@@ -3523,7 +3526,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getSecurity_Authentication_ManagerService()
     {
-        $this->services['security.authentication.manager'] = $instance = new \Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager(array(0 => new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('57251fca52cd92.55746227')), true);
+        $this->services['security.authentication.manager'] = $instance = new \Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager(array(0 => new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('5727981a9d0cb7.83717597')), true);
 
         $instance->setEventDispatcher($this->get('debug.event_dispatcher'));
 
@@ -3737,11 +3740,13 @@ class appDevDebugProjectContainer extends Container
             'mailer_host' => '127.0.0.1',
             'mailer_user' => NULL,
             'mailer_password' => NULL,
-            'locale' => 'en',
+            'locale' => 'es',
             'secret' => '524f87812088e3b0c156f6e057e9dd105e5ff1c1',
             'debug_toolbar' => true,
             'debug_redirects' => false,
             'use_assetic_controller' => true,
+            'max_trabajos_indexpag' => 10,
+            'max_trabajos_categoriapag' => 10,
             'controller_resolver.class' => 'Symfony\\Bundle\\FrameworkBundle\\Controller\\ControllerResolver',
             'controller_name_converter.class' => 'Symfony\\Bundle\\FrameworkBundle\\Controller\\ControllerNameParser',
             'response_listener.class' => 'Symfony\\Component\\HttpKernel\\EventListener\\ResponseListener',
@@ -3798,7 +3803,7 @@ class appDevDebugProjectContainer extends Container
             'kernel.trusted_proxies' => array(
 
             ),
-            'kernel.default_locale' => 'en',
+            'kernel.default_locale' => 'es',
             'session.class' => 'Symfony\\Component\\HttpFoundation\\Session\\Session',
             'session.flashbag.class' => 'Symfony\\Component\\HttpFoundation\\Session\\Flash\\FlashBag',
             'session.attribute_bag.class' => 'Symfony\\Component\\HttpFoundation\\Session\\Attribute\\AttributeBag',
@@ -4313,13 +4318,13 @@ class appDevDebugProjectContainer extends Container
 
                 ),
                 'paths' => array(
-                    'projectDir' => ($this->targetDirs[3].'/web'),
-                    'schemaDir' => ($this->targetDirs[3].'/web'),
-                    'outputDir' => ($this->targetDirs[3].'/web'),
-                    'phpDir' => ($this->targetDirs[3].'/web/generated-classes'),
-                    'phpConfDir' => ($this->targetDirs[3].'/web/generated-conf'),
-                    'sqlDir' => ($this->targetDirs[3].'/web/generated-sql'),
-                    'migrationDir' => ($this->targetDirs[3].'/web/generated-migrations'),
+                    'projectDir' => $this->targetDirs[3],
+                    'schemaDir' => $this->targetDirs[3],
+                    'outputDir' => $this->targetDirs[3],
+                    'phpDir' => ($this->targetDirs[3].'/generated-classes'),
+                    'phpConfDir' => ($this->targetDirs[3].'/generated-conf'),
+                    'sqlDir' => ($this->targetDirs[3].'/generated-sql'),
+                    'migrationDir' => ($this->targetDirs[3].'/generated-migrations'),
                     'composerDir' => NULL,
                 ),
                 'migrations' => array(

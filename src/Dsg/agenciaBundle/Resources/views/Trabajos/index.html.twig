@@ -2,24 +2,32 @@
 
 {% block stylesheets %}
     {{ parent() }}
+    <!-- CSS carousel-->
+    <link rel="stylesheet" href="{{ asset('public/css/carousel.css') }}" type="text/css" media="all" />
+    <link rel="stylesheet" href="{{ asset('public/css/trabajos.css') }}" type="text/css" media="all" />
 {% endblock %}
-
-{% block content %}
-    <!-- Three columns of text below the carousel -->
-      <div class="row">
-        {% for entity in entities %}
-            <div class="col-lg-4">
-                {% if entity.logo %}
-                <a href="{{ entity.url }}">
-                    <img width="30%" max-height="10px" src="{{ asset('public/upload/') }}{{ entity.logo }}"
-                     alt="{{ entity.compania }} logo" />
-                </a>
+{% block body %}
+    {{ parent() }}
+    {{ include('DsgagenciaBundle::/Trabajos/carousel.html.twig') }}
+{% endblock %}
+   {% block content %}
+        <!-- Three columns of text below the carousel -->
+        <div class="panel panel-default">
+        {% for categoria in categorias %}
+                <div class="panel-heading">
+                    <h2 class="panel-title"><a href={{ path('dsgagencia_categoria', { 'slug': categoria.slug }) }}>{{ categoria.nombre }}</a></h2>
+                </div>
+                
+                <!--Incluimos la plantilla de listar trabajos-->
+                {{ include ('DsgagenciaBundle::listar.html.twig', {'trabajos': categoria.trabajosactivos}) }}
+                
+                {% if categoria.masTrabajos %}
+                    <div class="mas center-block">
+                    <a class="btn btn-primary" href="{{ path('dsgagencia_categoria', { 'slug': categoria.slug}) }}" role="button">{{categoria.masTrabajos }} ofertas más...</a>
+                    </div>
                 {% endif %}
-                <h2>{{ entity.posicion }}</h2>
-                <h3>{{ entity.compania}}</h3>
-                <p>{{ entity.localidad }}</p>
-                <p><a class="btn btn-default" href="{{ path('trabajos_show', { 'id': entity.id,'compania': entity.companiaSlug,'localidad': entity.localidadSlug,'posicion': entity.posicionSlug}) }}" role="button">Ver más</a></p>
-            </div><!-- /.col-lg-4 -->
+                <div class="clearfix"></div>
+                <br/>
         {% endfor %}
-    </div>
-{% endblock %}
+        </div>
+    {% endblock %}

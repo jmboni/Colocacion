@@ -10,3 +10,7 @@ dsgagencia_homepage:
 dsgagencia_index:
     path:     /
     defaults: { _controller: DsgagenciaBundle:Trabajos:index }
+    
+dsgagencia_categoria:
+    pattern:  /categoria/{slug}/{page}
+    defaults: { _controller: DsgagenciaBundle:Categoria:show, page: 1 }

@@ -1,44 +1,53 @@
 {% extends 'DsgagenciaBundle::layout.html.twig' %}
 
 {% block stylesheets %}
+    <!-- CSS carousel-->
+    <link rel="stylesheet" href="{{ asset('bundles/dsgagencia/css/job.css') }}" type="text/css" media="all" />
     {{ parent() }}
-    
 {% endblock %}
 
 {% block content %}
-    <div id="job">
-        <h1>{{ entity.compania }}</h1>
-        <h2>{{ entity.localidad }}</h2>
-        <h3>
-            {{ entity.posicion }}
-            <small> - {{ entity.tipo }}</small>
-        </h3>
-
-        {% if entity.logo %}
-            <div class="logo">
-                <a href="{{ entity.url }}">
-                    <img src="{{ asset('public/upload/') }}{{ entity.logo }}"
-                         alt="{{ entity.compania }} logo" />
-                </a>
+<div class="row">
+    <div class="col-xs-10 col-xs-offset-1">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <!-- Podemos utilizar la clase "panel-title" para dar estilo de título
+                al encabezado del panel -->
+                <h1 class="panel-title">{{ entity.compania }}</h1>
+                </div>
+                <div class="panel-body">
+                    {% if entity.logo %}
+                    <div class="logo">
+                        <a href="{{ entity.url }}">
+                            <img src="{{ asset('public/upload/') }}{{ entity.logo }}"
+                                 alt="{{ entity.compania }} logo" />
+                        </a>
+                    </div>
+                    <h3>
+                        {{ entity.posicion }}
+                        <small> - {{ entity.tipo }}</small>
+                    </h3>
+                    <h3>
+                        {{ entity.localidad }}
+                    </h3>
+                {% endif %}
+                    {{ entity.descripcion|nl2br }}
+                    
+                     <h4>How to apply?</h4>
+        
+                    <p class="how_to_apply">{{ entity.howtoapply }}</p>
+                    
+                    <a href="{{ path('trabajos_edit', { 'id': entity.id }) }}">Editar
+                    </a>
+                </div>
+                
+                <!-- Siempre podemos agregar y personalizar otros elementos dentro de un
+                panel, con estilos compatibles de manera predeterminada. Aquí agregamos
+                un pie para el panel (alineado a la derecha) con un botón predeterminado -->
+                <div class="panel-footer text-right">
+                    <small>Creado el {{ entity.creado|date('m/d/Y') }}</small>
             </div>
-        {% endif %}
-
-        <div class="description">
-            {{ entity.descripcion|nl2br }}
-        </div>
-
-        <h4>How to apply?</h4>
-
-        <p class="how_to_apply">{{ entity.howtoapply }}</p>
-
-        <div class="meta">
-            <small>posted on {{ entity.creado|date('m/d/Y') }}</small>
-        </div>
-
-        <div style="padding: 20px 0">
-            <a href="{{ path('trabajos_edit', { 'id': entity.id }) }}">
-                Edit
-            </a>
         </div>
     </div>
+</div>
 {% endblock %}

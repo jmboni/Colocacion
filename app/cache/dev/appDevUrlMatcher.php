@@ -201,6 +201,11 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             return array (  '_controller' => 'Dsg\\agenciaBundle\\Controller\\TrabajosController::indexAction',  '_route' => 'dsgagencia_index',);
         }
 
+        // dsgagencia_categoria
+        if (0 === strpos($pathinfo, '/categoria') && preg_match('#^/categoria/(?P<slug>[^/]++)(?:/(?P<page>[^/]++))?$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'dsgagencia_categoria')), array (  '_controller' => 'Dsg\\agenciaBundle\\Controller\\CategoriaController::showAction',  'page' => 1,));
+        }
+
         // homepage
         if (rtrim($pathinfo, '/') === '') {
             if (substr($pathinfo, -1) !== '/') {
