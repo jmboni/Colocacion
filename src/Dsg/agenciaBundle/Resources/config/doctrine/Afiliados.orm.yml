@@ -1,0 +1,37 @@
+Dsg\agenciaBundle\Entity\Afiliados:
+    type: entity
+    table: afiliados
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        url:
+            type: string
+            length: 255
+        email:
+            type: string
+            length: 255
+            unique: true
+        token:
+            type: string
+            length: 255
+        activado:
+            type: boolean
+            nullable: true
+        creado:
+            type: datetime
+    manyToMany:
+        categoria:
+            targetEntity: Categoria
+            inversedBy: afiliados
+            joinTable:
+                name: categoria_afiliado
+                joinColumns:
+                    afiliado_id:
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    categoria_id:
+                        referencedColumnName: id
+    lifecycleCallbacks:
+        prePersist: [ setCreadoValue ]

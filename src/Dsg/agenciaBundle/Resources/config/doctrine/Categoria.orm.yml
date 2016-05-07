@@ -1,0 +1,25 @@
+Dsg\agenciaBundle\Entity\Categoria:
+    type: entity
+    repositoryClass: Dsg\agenciaBundle\Repository\CategoriaRepository
+    table: categoria
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        nombre:
+            type: string
+            length: 255
+            unique: true
+        slug:
+            type: string
+            length: 255
+            unique: true
+    oneToMany:
+        trabajos:
+            targetEntity: Trabajos
+            mappedBy: categoria
+    manyToMany:
+        afiliados:
+            targetEntity: Afiliados
+            mappedBy: categorias

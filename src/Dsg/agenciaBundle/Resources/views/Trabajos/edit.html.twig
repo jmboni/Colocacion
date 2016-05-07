@@ -1,0 +1,23 @@
+{% extends 'DsgagenciaBundle::layout.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <!-- CSS carousel-->
+    <link rel="stylesheet" href="{{ asset('bundles/dsgagencia/css/job.css') }}" type="text/css" media="all" />
+{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+    <h1>Trabajos edit</h1>
+
+    {{ form(edit_form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('trabajos') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

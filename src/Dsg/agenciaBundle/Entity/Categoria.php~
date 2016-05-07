@@ -1,0 +1,178 @@
+<?php
+
+namespace Dsg\agenciaBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Dsg\agenciaBundle\Funciones\Amigable;
+
+
+/**
+ * Categoria
+ */
+class Categoria
+{
+    /**
+     * @var integer
+     */
+    private $id;
+
+    /**
+     * @var string
+     */
+    private $nombre;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $trabajos;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $afiliados;
+    
+    
+    private $trabajosactivos;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->trabajos = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->afiliados = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->creado = new \DateTime();
+    }
+    
+    
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set nombre
+     *
+     * @param string $nombre
+     * @return Categoria
+     */
+    public function setNombre($nombre)
+    {
+        $this->nombre = $nombre;
+
+        return $this;
+    }
+
+    /**
+     * Get nombre
+     *
+     * @return string 
+     */
+    public function getNombre()
+    {
+        return $this->nombre;
+    }
+
+    /**
+     * Add trabajos
+     *
+     * @param \Dsg\agenciaBundle\Entity\Trabajos $trabajos
+     * @return Categoria
+     */
+    public function addTrabajo(\Dsg\agenciaBundle\Entity\Trabajos $trabajos)
+    {
+        $this->trabajos[] = $trabajos;
+
+        return $this;
+    }
+
+    /**
+     * Remove trabajos
+     *
+     * @param \Dsg\agenciaBundle\Entity\Trabajos $trabajos
+     */
+    public function removeTrabajo(\Dsg\agenciaBundle\Entity\Trabajos $trabajos)
+    {
+        $this->trabajos->removeElement($trabajos);
+    }
+
+    /**
+     * Get trabajos
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTrabajos()
+    {
+        return $this->trabajos;
+    }
+
+    /**
+     * Add afiliados
+     *
+     * @param \Dsg\agenciaBundle\Entity\Afiliados $afiliados
+     * @return Categoria
+     */
+    public function addAfiliado(\Dsg\agenciaBundle\Entity\Afiliados $afiliados)
+    {
+        $this->afiliados[] = $afiliados;
+
+        return $this;
+    }
+
+    /**
+     * Remove afiliados
+     *
+     * @param \Dsg\agenciaBundle\Entity\Afiliados $afiliados
+     */
+    public function removeAfiliado(\Dsg\agenciaBundle\Entity\Afiliados $afiliados)
+    {
+        $this->afiliados->removeElement($afiliados);
+    }
+
+    /**
+     * Get afiliados
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAfiliados()
+    {
+        return $this->afiliados;
+    }
+    
+    /**
+     * Set Trabajos Activos
+     *
+     */ 
+    public function setTrabajosActivos($trabajos)
+    {
+        $this->trabajosactivos = $trabajos;
+    }
+ 
+    /**
+     * Get Trabajos activos
+     *
+     * @return trabajos activos
+     */
+    public function getTrabajosActivos()
+    {
+        return $this->trabajosactivos;
+    }
+    
+    private $masTrabajos;
+    
+    public function setMasTrabajos($trabajos)
+    {
+        $this->masTrabajos = $trabajos >=  0 ? $trabajos : 0;
+    }
+
+    public function getMasTrabajos()
+    {
+        return $this->masTrabajos;
+    }
+    
+}

@@ -1,0 +1,16 @@
+dsgagencia_trabajos:
+    resource: "@DsgagenciaBundle/Resources/config/routing/trabajos.yml"
+    prefix:   /trabajos
+
+dsgagencia_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: DsgagenciaBundle:Trabajos:index }
+
+
+dsgagencia_index:
+    path:     /
+    defaults: { _controller: DsgagenciaBundle:Trabajos:index }
+    
+dsgagencia_categoria:
+    pattern:  /categoria/{slug}/{page}
+    defaults: { _controller: DsgagenciaBundle:Categoria:show, page: 1 }

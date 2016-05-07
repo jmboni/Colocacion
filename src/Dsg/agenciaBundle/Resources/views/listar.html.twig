@@ -1,0 +1,5 @@
+{% for entity in categoria.trabajosactivos %}
+    <div class="panel-body">
+        <p><strong>{{ entity.posicion }}</strong> - {{ entity.compania}} - {{ entity.localidad }}<a class="btn btn-default pull-right" href="{{ path('trabajos_show', { 'id': entity.id,'compania': entity.companiaSlug,'localidad': entity.localidadSlug,'posicion': entity.posicionSlug}) }}" role="button">Ver más</a></p>
+    </div>
+{% endfor %}

@@ -1,0 +1,21 @@
+{% extends 'DsgagenciaBundle::layout.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/dsgagencia/css/admin.css') }}" type="text/css" media="all" />
+{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+    <h1>Insertar oferta nueva</h1>
+
+    {{ form(form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('trabajos') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+{% endblock %}
