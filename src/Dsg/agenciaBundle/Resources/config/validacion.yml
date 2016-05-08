@@ -22,3 +22,5 @@ Dsg\agenciaBundle\Entity\Trabajos:
             - NotBlank: ~
         url:
             - Url: ~
+        file:
+            - Image: ~

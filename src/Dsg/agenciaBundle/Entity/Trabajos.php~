@@ -95,6 +95,8 @@ class Trabajos
      */
     private $categoria;
     
+    public $file;
+    
     
     /**
      * [__construct description]
@@ -138,6 +140,8 @@ class Trabajos
     {
         return $this->tipo;
     }
+    
+    
 
     /**
      * Set compania
@@ -474,11 +478,8 @@ class Trabajos
         return $this;
     }
     
-    public function __toString() {
-        return sprintf('%s at %s (%s)', $this->getPosicion(), $this->getCompania(), $this->getLocalidad());
-    }
-
-    // Añadimos estos métodos para hacer url amigables
+    
+        // Añadimos estos métodos para hacer url amigables
     public function getCompaniaSlug()
     {
         return Amigable::urlAmigable($this->getCompania()); ;
@@ -513,6 +514,11 @@ class Trabajos
             $this->creado = new \DateTime();
         }
     }
+    
+    
+    public function __toString() {
+        return sprintf('%s at %s at %s (%s)', $this->getCategoria(), $this->getPosicion(), $this->getCompania(), $this->getLocalidad());
+    }
 
     /**
      * @ORM\PrePersist
@@ -532,4 +538,40 @@ class Trabajos
     {
         $this->actualizado = new \DateTime();
     }
+    
+    public static function getTipos()
+    {
+        return array('Tiempo-completo' => 'Tiempo Completo', 'Media-jornada' => 'Media Jornada', 'Autonomo' => 'Autonomo');
+    }
+     
+    public static function getTipoValues()
+    {
+        return array_keys(self::getTipos());
+    }
+    
+    
+    
+     protected function getUploadDir()
+    {
+        return 'public/upload';
+    }
+ 
+    protected function getUploadRootDir()
+    {
+        return __DIR__.'/../../../../web/'.$this->getUploadDir();
+    }
+ 
+    public function getWebPath()
+    {
+        return null === $this->logo ? null : $this->getUploadDir().'/'.$this->logo;
+    }
+ 
+    public function getAbsolutePath()
+    {
+        return null === $this->logo ? null : $this->getUploadRootDir().'/'.$this->logo;
+    }    
+    
+    
+    
+    
 }

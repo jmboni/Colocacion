@@ -17,9 +17,8 @@ class TrabajosType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            //->add('tipo', 'choice', array('choices' =>array('Jornada Completa' => 'Jornada completa', 'Media jornada' => 'Media jornada','Autonomo' =>'Autonomo'),'choices_as_values' => true,))
-            ->add('tipo', 'choice', array('choices' => Trabajos::getTipos(), 'expanded' => true))
-            ->add('categoria')
+            ->add('tipo', 'choice', array('choices' => Trabajos::getTipos(), 'choices_as_values' => true,))
+            ->add('categoria', null,  array('placeholder'=> 'Selecciona una categoría'))
             ->add('compania')
             ->add('logo', null, array('label' => 'Logotipo empresa'))
             ->add('url')
@@ -28,8 +27,9 @@ class TrabajosType extends AbstractType
             ->add('descripcion')
             ->add('how_to_apply', null, array('label' => '¿Como suscribirse?'))
             ->add('token')
-            ->add('publico', null, array('label' => '¿La oferta es publica?'))
+            ->add('publico', null, array('label' => '¿Es publica?'))
             ->add('email')
+            ->add('file', 'file', array('label' => 'Logotipo empresa', 'required' => false))
         ;
     }
     
@@ -48,6 +48,6 @@ class TrabajosType extends AbstractType
      */
     public function getName()
     {
-        return 'formulariotTrabajos';
+        return 'formularioTrabajos';
     }
 }

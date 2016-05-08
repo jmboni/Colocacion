@@ -3,6 +3,7 @@
 namespace Dsg\agenciaBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Dsg\agenciaBundle\Entity\Trabajos;
@@ -43,58 +44,10 @@ class TrabajosController extends Controller
             'categorias' => $categorias,
         ));
     }
-    /**
-     * Creates a new Trabajos entity.
-     *
-     */
-    public function createAction(Request $request)
-    {
-        $entity = new Trabajos();
-        $form = $this->createCreateForm(new TrabajosType(), $entity);
-        $form->bind($request);
-
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            
-            $em->persist($entity);
-            $em->flush();
-
-            return $this->redirect($this->generateUrl('trabajos_show', array(
-                'compania' => $entity->getCompaniaSlug(),
-                'localidad' => $entity->getLocalidadSlug(),
-                'id' => $entity->getId(),
-                'posicion' => $entity->getPosicionSlug()
-            )));
-        }
-
-        return $this->render('DsgagenciaBundle:Trabajos:new.html.twig', array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        ));
-    }
+   
     
     
-
-    /**
-     * Creates a form to create a Trabajos entity.
-     *
-     * @param Trabajos $entity The entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createCreateForm(Trabajos $entity)
-    {
-        $form = $this->createForm(new TrabajosType(), $entity, array(
-            'action' => $this->generateUrl('trabajos_create'),
-            'method' => 'POST',
-        ));
-
-        $form->add('submit', 'submit', array('label' => 'Create'));
-
-        return $form;
-    }
-
-    /**
+     /**
      * Displays a form to create a new Trabajos entity.
      *
      */
@@ -108,6 +61,64 @@ class TrabajosController extends Controller
             'form'   => $form->createView(),
         ));
     }
+    
+
+    /**
+     * Creates a form to create a Trabajos entity.
+     *
+     * @param Trabajos $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createCreateForm(Trabajos $entity)
+    {
+        $form = $this->createForm(new TrabajosType(), $entity, array(
+            'action' => $this->generateUrl('trabajos_create'),
+            'method' => 'POST'
+        ));
+
+        $form->add('submit', 'submit', array('label' => 'Crear'));
+
+        return $form;
+    }
+    
+    
+    
+    /**
+     * Creates a new Trabajos entity.
+     *
+     */
+    public function createAction(Request $request)
+    {
+        $entity = new Trabajos();
+        $form = $this->createCreateForm($entity);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            
+            $em->persist($entity);
+            $em->flush();
+            
+            $this->addFlash('Mensaje', 'La oferta ha sido creada con exito');
+
+            return $this->redirectToRoute($this->generateUrl('trabajos_show', array(
+                'compania' => $entity->getCompaniaSlug(),
+                'localidad' => $entity->getLocalidadSlug(),
+                'id' => $entity->getId(),
+                'posicion' => $entity->getPosicionSlug()
+            )));
+        }
+
+        return $this->render('DsgagenciaBundle:Trabajos:new.html.twig', array(
+            'entity' => $entity,
+            'form'   => $form->createView()
+        ));
+    }
+   
+    
+    
+    
 
     /**
      * Finds and displays a Trabajos entity.
@@ -130,6 +141,8 @@ class TrabajosController extends Controller
             'delete_form' => $deleteForm->createView(),
         ));
     }
+    
+    
 
     /**
      * Displays a form to edit an existing Trabajos entity.

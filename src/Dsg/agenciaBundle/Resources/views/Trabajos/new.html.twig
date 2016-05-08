@@ -5,17 +5,91 @@
     <link rel="stylesheet" href="{{ asset('bundles/dsgagencia/css/admin.css') }}" type="text/css" media="all" />
 {% endblock %}
 
-{% block body %}
+{% block formulario %}
     {{ parent() }}
-    <h1>Insertar oferta nueva</h1>
-
-    {{ form(form) }}
-
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('trabajos') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
+    <div class="main container">
+        <div class="row well">
+            <div class="col-xs-4>
+                <div class="page-header">
+                    <h2>Insertar oferta nueva</h2>
+                </div>
+                {{ form_start(form,{ 'attr':{'role': 'form'} }) }}
+    
+                    <div class="form-group">
+                        {{ form_label(form.categoria)}}
+                        {{ form_widget(form.categoria, {'attr' : {'class' : 'form-control', 'placeholder' : 'Categoria'}}) }}
+                        <span class="text-danger">{{ form_errors(form.categoria)}}</span>
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.tipo)}}
+                        {{ form_widget(form.tipo, {'attr' : {'class' : 'form-control'}}) }}
+                        <span class="text-danger">{{ form_errors(form.tipo)}}</span>
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.compania)}}
+                        {{ form_widget(form.compania, {'attr' : {'class' : 'form-control', 'placeholder' : 'Empresa'}}) }}
+                        <span class="text-danger">{{ form_errors(form.compania)}}</span>
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.logo)}}
+                        {{ form_widget(form.logo, {'attr' : {'class' : 'form-control'}}) }}
+                        <span class="text-danger">{{ form_errors(form.logo)}}</span>
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.file)}}
+                        {{ form_widget(form.file, {'attr' : {'class' : 'form-control'}}) }}
+                        <span class="text-danger">{{ form_errors(form.file)}}</span>
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.url)}}
+                        {{ form_widget(form.url, {'attr' : {'class' : 'form-control', 'placeholder' : 'Website empresa'}}) }}
+                        <span class="text-danger">{{ form_errors(form.url)}}</span>
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.posicion)}}
+                        {{ form_widget(form.posicion, {'attr' : {'class' : 'form-control', 'placeholder' : 'Puesto a desemplear'}}) }}
+                        <span class="text-danger">{{ form_errors(form.posicion)}}</span>
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.localidad)}}
+                        {{ form_widget(form.localidad, {'attr' : {'class' : 'form-control', 'placeholder' : 'Localidad oferta'}}) }}
+                        <span class="text-danger">{{ form_errors(form.localidad)}}</span>
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.descripcion)}}
+                        {{ form_widget(form.descripcion, {'attr' : {'class' : 'form-control', 'placeholder' : 'Descripción oferta'}}) }}
+                        <span class="text-danger">{{ form_errors(form.descripcion)}}</span>
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.how_to_apply)}}
+                        {{ form_widget(form.how_to_apply, {'attr' : {'class' : 'form-control', 'placeholder' : 'Como apuntarse'}}) }}
+                        <span class="text-danger">{{ form_errors(form.how_to_apply)}}</span>
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.token)}}
+                        {{ form_widget(form.token, {'attr' : {'class' : 'form-control'}}) }}
+                        <span class="text-danger">{{ form_errors(form.token)}}</span>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            {{ form_widget(form.publico)}}
+                        </label>
+                        {{ form_label(form.publico)}}
+                        <span class="text-danger">{{ form_errors(form.publico)}}</span>
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.email)}}
+                        {{ form_widget(form.email, {'attr' : {'class' : 'form-control', 'placeholder' : 'Email de contacto'}}) }}
+                        <span class="text-danger">{{ form_errors(form.email)}}</span>
+                    </div>
+                    
+                    <p>
+                        {{ form_widget( form.submit, {'label' : 'Crear' , 'attr' : {'class' : 'btn btn-info'}}) }}
+                        <a href="{{ path('trabajos') }}" class="btn btn-info" role="button">Volver a la lista</a>
+                    </p>
+                        
+                {{ form_end(form)}}
+            </div>
+        </div>
+    </div>>
 {% endblock %}
