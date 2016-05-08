@@ -20,7 +20,7 @@ class TrabajosType extends AbstractType
             ->add('tipo', 'choice', array('choices' => Trabajos::getTipos(), 'choices_as_values' => true,))
             ->add('categoria', null,  array('placeholder'=> 'Selecciona una categoría'))
             ->add('compania')
-            ->add('logo', null, array('label' => 'Logotipo empresa'))
+            //->add('logo', null, array('label' => 'Logotipo empresa'))
             ->add('url')
             ->add('posicion')
             ->add('localidad')

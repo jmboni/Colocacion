@@ -327,7 +327,14 @@ class Trabajos
     {
         return $this->token;
     }
-
+    
+    public function setTokenValue()
+    {
+        if(!$this->getToken()) {
+            $this->token = sha1($this->getEmail().rand(11111, 99999));
+        }
+    }
+    
     /**
      * Set publico
      *

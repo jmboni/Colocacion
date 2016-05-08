@@ -55,6 +55,7 @@ class TrabajosController extends Controller
     public function newAction()
     {
         $entity = new Trabajos();
+        $entity->setTipo('Tiempo Completo');
         $form   = $this->createCreateForm($entity);
 
         return $this->render('DsgagenciaBundle:Trabajos:new.html.twig', array(

@@ -46,11 +46,6 @@
                         <span class="text-danger">{{ form_errors(form.compania)}}</span>
                     </div>
                     <div class="form-group">
-                        {{ form_label(form.logo)}}
-                        {{ form_widget(form.logo, {'attr' : {'class' : 'form-control'}}) }}
-                        <span class="text-danger">{{ form_errors(form.logo)}}</span>
-                    </div>
-                    <div class="form-group">
                         {{ form_label(form.file)}}
                         {{ form_widget(form.file, {'attr' : {'class' : 'form-control'}}) }}
                         <span class="text-danger">{{ form_errors(form.file)}}</span>
@@ -106,5 +101,5 @@
                 {{ form_end(form)}}
             </div>
         </div>
-    </div>>
+    </div>
 {% endblock %}
