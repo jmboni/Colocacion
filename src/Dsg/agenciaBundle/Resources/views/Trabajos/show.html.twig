@@ -44,8 +44,7 @@
             
                         <p class="how_to_apply">{{ entity.howtoapply }}</p>
                         
-                        <a href="{{ path('trabajos_edit', { 'id': entity.id }) }}">Editar
-                        </a>
+                        <a href="{{ path('trabajos_edit', { 'token': entity.token }) }}">Editar</a>
                     </div>
                     
                     <!-- Siempre podemos agregar y personalizar otros elementos dentro de un

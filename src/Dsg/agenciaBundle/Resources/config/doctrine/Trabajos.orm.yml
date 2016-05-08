@@ -60,7 +60,7 @@ Dsg\agenciaBundle\Entity\Trabajos:
                 name: categoria_id
                 referencedColumnName: id
     lifecycleCallbacks:
-        prePersist: [ preUpload, setCreadoValue, setFinalizaValue ]
+        prePersist: [ setTokenValue, preUpload, setCreadoValue, setFinalizaValue ]
         preUpdate: [ preUpload, setActualizadoValue ]
         postPersist: [ upload ]
         postUpdate: [ upload ]

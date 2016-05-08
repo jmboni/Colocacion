@@ -4,6 +4,7 @@ namespace Dsg\agenciaBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Dsg\agenciaBundle\Funciones\Amigable;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * Trabajos
@@ -326,7 +327,14 @@ class Trabajos
     {
         return $this->token;
     }
-
+    
+    public function setTokenValue()
+    {
+        if(!$this->getToken()) {
+            $this->token = sha1($this->getEmail().rand(11111, 99999));
+        }
+    }
+    
     /**
      * Set publico
      *
@@ -541,7 +549,7 @@ class Trabajos
     
     public static function getTipos()
     {
-        return array('Tiempo-completo' => 'Tiempo Completo', 'Media-jornada' => 'Media Jornada', 'Autonomo' => 'Autonomo');
+        return array('Tiempo completo' => 'Tiempo Completo', 'Media jornada' => 'Media Jornada', 'Autonomo' => 'Autonomo');
     }
      
     public static function getTipoValues()
@@ -550,15 +558,15 @@ class Trabajos
     }
     
     
-    
+    //Subir imagenes
      protected function getUploadDir()
     {
-        return 'public/upload';
+        return 'upload';
     }
  
     protected function getUploadRootDir()
     {
-        return __DIR__.'/../../../../web/'.$this->getUploadDir();
+        return __DIR__.'/../../../../web/public/'.$this->getUploadDir();
     }
  
     public function getWebPath()
@@ -573,5 +581,42 @@ class Trabajos
     
     
     
-    
+    /**
+     * @ORM\PrePersist
+     */
+    public function preUpload()
+    {
+        //if (null !== $this->file) {
+             $this->logo = uniqid().'.'.$this->file->guessExtension();
+         //}
+    }
+
+    /**
+     * @ORM\PostPersist
+     */
+    public function upload()
+    {
+        if (null === $this->file) {
+            return;
+        }
+ 
+        // If there is an error when moving the file, an exception will
+        // be automatically thrown by move(). This will properly prevent
+        // the entity from being persisted to the database on error
+        $this->file->move($this->getUploadRootDir(), $this->logo);
+ 
+        unset($this->file);
+    }
+
+    /**
+     * @ORM\PostRemove
+     */
+    public function removeUpload()
+    {
+        if(file_exists($file)) {
+            if ($file = $this->getAbsolutePath()) {
+                unlink($file);
+            }
+        }    
+    }
 }

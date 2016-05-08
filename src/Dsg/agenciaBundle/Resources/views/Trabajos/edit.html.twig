@@ -29,7 +29,7 @@
                     <h2>Actualizando oferta</h2>
                 </div>
                 
-                <form action={{ path('trabajos_update', { 'id': entity.id }) }} method="post" {{ form_enctype(edit_form) }}>
+                <form action={{ path('trabajos_update', { 'token': entity.token }) }} method="post" {{ form_enctype(edit_form) }}>
                     <div class="form-group">
                         {{ form_label(edit_form.categoria)}}
                         {{ form_widget(edit_form.categoria, {'attr' : {'class' : 'form-control', 'placeholder' : 'Categoria'}}) }}
@@ -75,11 +75,6 @@
                         {{ form_widget(edit_form.how_to_apply, {'attr' : {'class' : 'form-control', 'placeholder' : 'Como apuntarse'}}) }}
                         <span class="text-danger">{{ form_errors(edit_form.how_to_apply)}}</span>
                     </div>
-                    <div class="form-group">
-                        {{ form_label(edit_form.token)}}
-                        {{ form_widget(edit_form.token, {'attr' : {'class' : 'form-control'}}) }}
-                        <span class="text-danger">{{ form_errors(edit_form.token)}}</span>
-                    </div>
                     <div class="checkbox">
                         <label>
                             {{ form_widget(edit_form.publico)}}
@@ -94,13 +89,13 @@
                     </div>
                     
                     <p>
-                        {{ form_widget( edit_form.submit, {'label' : 'Crear' , 'attr' : {'class' : 'btn btn-info'}}) }}
                         <a href="{{ path('trabajos') }}" class="btn btn-info" role="button">Volver a la lista</a>
                         <a href="" class="btn btn-info" role="button">Vista previa</a>
+                        <button type="submit" class="btn btn-info">Actualizar</button>
                     </p>
                         
                 {{ form_end(edit_form)}}
             </div>
         </div>
-    </div>>
+    </div>
 {% endblock %}

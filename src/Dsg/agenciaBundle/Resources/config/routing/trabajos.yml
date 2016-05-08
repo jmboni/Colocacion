@@ -16,15 +16,15 @@ trabajos_create:
     requirements: { _method: post }
 
 trabajos_edit:
-    path:     /{id}/edit
+    path:     /{token}/edit
     defaults: { _controller: "DsgagenciaBundle:Trabajos:edit" }
 
 trabajos_update:
-    path:     /{id}/update
+    path:     /{token}/update
     defaults: { _controller: "DsgagenciaBundle:Trabajos:update" }
-    methods:  [POST, PUT]
+    requirements: { _method: post|put }
 
 trabajos_delete:
-    path:     /{id}/delete
+    path:     /{token}/delete
     defaults: { _controller: "DsgagenciaBundle:Trabajos:delete" }
-    methods:  [POST, DELETE]
+    requirements: { _method: post|delete }

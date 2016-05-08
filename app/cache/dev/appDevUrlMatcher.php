@@ -159,12 +159,12 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             not_trabajos_create:
 
             // trabajos_edit
-            if (preg_match('#^/trabajos/(?P<id>[^/]++)/edit$#s', $pathinfo, $matches)) {
+            if (preg_match('#^/trabajos/(?P<token>[^/]++)/edit$#s', $pathinfo, $matches)) {
                 return $this->mergeDefaults(array_replace($matches, array('_route' => 'trabajos_edit')), array (  '_controller' => 'Dsg\\agenciaBundle\\Controller\\TrabajosController::editAction',));
             }
 
             // trabajos_update
-            if (preg_match('#^/trabajos/(?P<id>[^/]++)/update$#s', $pathinfo, $matches)) {
+            if (preg_match('#^/trabajos/(?P<token>[^/]++)/update$#s', $pathinfo, $matches)) {
                 if (!in_array($this->context->getMethod(), array('POST', 'PUT'))) {
                     $allow = array_merge($allow, array('POST', 'PUT'));
                     goto not_trabajos_update;
@@ -175,7 +175,7 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             not_trabajos_update:
 
             // trabajos_delete
-            if (preg_match('#^/trabajos/(?P<id>[^/]++)/delete$#s', $pathinfo, $matches)) {
+            if (preg_match('#^/trabajos/(?P<token>[^/]++)/delete$#s', $pathinfo, $matches)) {
                 if (!in_array($this->context->getMethod(), array('POST', 'DELETE'))) {
                     $allow = array_merge($allow, array('POST', 'DELETE'));
                     goto not_trabajos_delete;

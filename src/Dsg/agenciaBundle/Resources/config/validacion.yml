@@ -18,8 +18,6 @@ Dsg\agenciaBundle\Entity\Trabajos:
             - NotBlank: ~
         how_to_apply:
             - NotBlank: ~
-        token:
-            - NotBlank: ~
         url:
             - Url: ~
         file:

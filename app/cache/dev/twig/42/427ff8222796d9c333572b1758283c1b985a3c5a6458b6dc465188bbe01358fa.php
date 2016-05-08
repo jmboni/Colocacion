@@ -22,20 +22,20 @@ class __TwigTemplate_9305b52c17125a1c471b9805e085c47aef4958f893df1f53e681116f8a5
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_7fb5352b85732a5586a14549016d4fa662a162dc75a3edd22ba9f73a618eaf5e = $this->env->getExtension("native_profiler");
-        $__internal_7fb5352b85732a5586a14549016d4fa662a162dc75a3edd22ba9f73a618eaf5e->enter($__internal_7fb5352b85732a5586a14549016d4fa662a162dc75a3edd22ba9f73a618eaf5e_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "DsgagenciaBundle:Trabajos:show.html.twig"));
+        $__internal_527791604dfd5f1ddb99763c04a16756ef55bafe8aeb8c882914a900f21d4c1c = $this->env->getExtension("native_profiler");
+        $__internal_527791604dfd5f1ddb99763c04a16756ef55bafe8aeb8c882914a900f21d4c1c->enter($__internal_527791604dfd5f1ddb99763c04a16756ef55bafe8aeb8c882914a900f21d4c1c_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "DsgagenciaBundle:Trabajos:show.html.twig"));
 
         $this->parent->display($context, array_merge($this->blocks, $blocks));
         
-        $__internal_7fb5352b85732a5586a14549016d4fa662a162dc75a3edd22ba9f73a618eaf5e->leave($__internal_7fb5352b85732a5586a14549016d4fa662a162dc75a3edd22ba9f73a618eaf5e_prof);
+        $__internal_527791604dfd5f1ddb99763c04a16756ef55bafe8aeb8c882914a900f21d4c1c->leave($__internal_527791604dfd5f1ddb99763c04a16756ef55bafe8aeb8c882914a900f21d4c1c_prof);
 
     }
 
     // line 3
     public function block_stylesheets($context, array $blocks = array())
     {
-        $__internal_d6bad58931d98e8427c0083a71edebbf5e94a0c6efad738a8a0326dfe4342668 = $this->env->getExtension("native_profiler");
-        $__internal_d6bad58931d98e8427c0083a71edebbf5e94a0c6efad738a8a0326dfe4342668->enter($__internal_d6bad58931d98e8427c0083a71edebbf5e94a0c6efad738a8a0326dfe4342668_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "stylesheets"));
+        $__internal_cae6835c9c9da0bac944c476fd3f5f76310c6348902128598466df4869c4dbf0 = $this->env->getExtension("native_profiler");
+        $__internal_cae6835c9c9da0bac944c476fd3f5f76310c6348902128598466df4869c4dbf0->enter($__internal_cae6835c9c9da0bac944c476fd3f5f76310c6348902128598466df4869c4dbf0_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "stylesheets"));
 
         // line 4
         echo "    <!-- CSS carousel-->
@@ -49,15 +49,15 @@ class __TwigTemplate_9305b52c17125a1c471b9805e085c47aef4958f893df1f53e681116f8a5
         echo "
 ";
         
-        $__internal_d6bad58931d98e8427c0083a71edebbf5e94a0c6efad738a8a0326dfe4342668->leave($__internal_d6bad58931d98e8427c0083a71edebbf5e94a0c6efad738a8a0326dfe4342668_prof);
+        $__internal_cae6835c9c9da0bac944c476fd3f5f76310c6348902128598466df4869c4dbf0->leave($__internal_cae6835c9c9da0bac944c476fd3f5f76310c6348902128598466df4869c4dbf0_prof);
 
     }
 
     // line 9
     public function block_content($context, array $blocks = array())
     {
-        $__internal_0ad8866aeffff0a86b87ea73c4798f8cee0ded7913167e948e07f682e1ad2577 = $this->env->getExtension("native_profiler");
-        $__internal_0ad8866aeffff0a86b87ea73c4798f8cee0ded7913167e948e07f682e1ad2577->enter($__internal_0ad8866aeffff0a86b87ea73c4798f8cee0ded7913167e948e07f682e1ad2577_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "content"));
+        $__internal_acf084832b152e88ddfcca12fea1afc4bfd9ae4a8d525689d9a3d82768dd7aef = $this->env->getExtension("native_profiler");
+        $__internal_acf084832b152e88ddfcca12fea1afc4bfd9ae4a8d525689d9a3d82768dd7aef->enter($__internal_acf084832b152e88ddfcca12fea1afc4bfd9ae4a8d525689d9a3d82768dd7aef_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "content"));
 
         // line 10
         echo "    ";
@@ -143,9 +143,8 @@ class __TwigTemplate_9305b52c17125a1c471b9805e085c47aef4958f893df1f53e681116f8a5
                         
                         <a href=\"";
         // line 47
-        echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("trabajos_edit", array("id" => $this->getAttribute((isset($context["entity"]) ? $context["entity"] : $this->getContext($context, "entity")), "id", array()))), "html", null, true);
-        echo "\">Editar
-                        </a>
+        echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("trabajos_edit", array("token" => $this->getAttribute((isset($context["entity"]) ? $context["entity"] : $this->getContext($context, "entity")), "token", array()))), "html", null, true);
+        echo "\">Editar</a>
                     </div>
                     
                     <!-- Siempre podemos agregar y personalizar otros elementos dentro de un
@@ -153,7 +152,7 @@ class __TwigTemplate_9305b52c17125a1c471b9805e085c47aef4958f893df1f53e681116f8a5
                     un pie para el panel (alineado a la derecha) con un botón predeterminado -->
                     <div class=\"panel-footer text-right\">
                         <small>Creado el ";
-        // line 55
+        // line 54
         echo twig_escape_filter($this->env, twig_date_format_filter($this->env, $this->getAttribute((isset($context["entity"]) ? $context["entity"] : $this->getContext($context, "entity")), "creado", array()), "m/d/Y"), "html", null, true);
         echo "</small>
                 </div>
@@ -162,7 +161,7 @@ class __TwigTemplate_9305b52c17125a1c471b9805e085c47aef4958f893df1f53e681116f8a5
     </div>
 ";
         
-        $__internal_0ad8866aeffff0a86b87ea73c4798f8cee0ded7913167e948e07f682e1ad2577->leave($__internal_0ad8866aeffff0a86b87ea73c4798f8cee0ded7913167e948e07f682e1ad2577_prof);
+        $__internal_acf084832b152e88ddfcca12fea1afc4bfd9ae4a8d525689d9a3d82768dd7aef->leave($__internal_acf084832b152e88ddfcca12fea1afc4bfd9ae4a8d525689d9a3d82768dd7aef_prof);
 
     }
 
@@ -178,7 +177,7 @@ class __TwigTemplate_9305b52c17125a1c471b9805e085c47aef4958f893df1f53e681116f8a5
 
     public function getDebugInfo()
     {
-        return array (  157 => 55,  146 => 47,  141 => 45,  133 => 41,  127 => 38,  121 => 35,  117 => 34,  110 => 30,  105 => 29,  101 => 28,  98 => 27,  96 => 26,  90 => 23,  82 => 17,  72 => 13,  68 => 11,  63 => 10,  57 => 9,  48 => 6,  44 => 5,  41 => 4,  35 => 3,  11 => 1,);
+        return array (  156 => 54,  146 => 47,  141 => 45,  133 => 41,  127 => 38,  121 => 35,  117 => 34,  110 => 30,  105 => 29,  101 => 28,  98 => 27,  96 => 26,  90 => 23,  82 => 17,  72 => 13,  68 => 11,  63 => 10,  57 => 9,  48 => 6,  44 => 5,  41 => 4,  35 => 3,  11 => 1,);
     }
 }
 /* {% extends 'DsgagenciaBundle::layout.html.twig' %}*/
@@ -227,8 +226,7 @@ class __TwigTemplate_9305b52c17125a1c471b9805e085c47aef4958f893df1f53e681116f8a5
 /*             */
 /*                         <p class="how_to_apply">{{ entity.howtoapply }}</p>*/
 /*                         */
-/*                         <a href="{{ path('trabajos_edit', { 'id': entity.id }) }}">Editar*/
-/*                         </a>*/
+/*                         <a href="{{ path('trabajos_edit', { 'token': entity.token }) }}">Editar</a>*/
 /*                     </div>*/
 /*                     */
 /*                     <!-- Siempre podemos agregar y personalizar otros elementos dentro de un*/

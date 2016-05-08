@@ -56,7 +56,7 @@ class TrabajosController extends Controller
     {
         $entity = new Trabajos();
         $entity->setTipo('Tiempo Completo');
-        $form   = $this->createCreateForm($entity);
+        $form   = $this->createForm(new TrabajosType(), $entity);
 
         return $this->render('DsgagenciaBundle:Trabajos:new.html.twig', array(
             'entity' => $entity,
@@ -93,7 +93,7 @@ class TrabajosController extends Controller
     public function createAction(Request $request)
     {
         $entity = new Trabajos();
-        $form = $this->createCreateForm($entity);
+        $form = $this->createForm(new TrabajosType(), $entity);
         $form->bind($request);
 
         if ($form->isValid()) {
@@ -151,18 +151,18 @@ class TrabajosController extends Controller
      * Displays a form to edit an existing Trabajos entity.
      *
      */
-    public function editAction($id)
+    public function editAction($token)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('DsgagenciaBundle:Trabajos')->find($id);
+        $entity = $em->getRepository('DsgagenciaBundle:Trabajos')->findOneByToken($token);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Trabajos entity.');
+            throw $this->createNotFoundException('No se ha encontrado ningun valor asociado en la entidad.');
         }
 
-        $editForm = $this->createEditForm($entity);
-        $deleteForm = $this->createDeleteForm($id);
+        $editForm = $this->createForm(new TrabajosType(), $entity);
+        $deleteForm = $this->createDeleteForm($token);
 
         return $this->render('DsgagenciaBundle:Trabajos:edit.html.twig', array(
             'entity'      => $entity,
@@ -185,32 +185,35 @@ class TrabajosController extends Controller
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', 'submit', array('label' => 'Actualizar'));
 
         return $form;
     }
+    
+    
     /**
      * Edits an existing Trabajos entity.
      *
      */
-    public function updateAction(Request $request, $id)
+    public function updateAction(Request $request, $token)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('DsgagenciaBundle:Trabajos')->find($id);
+        $entity = $em->getRepository('DsgagenciaBundle:Trabajos')->findOneByToken($token);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Trabajos entity.');
+            throw $this->createNotFoundException('No se han encontrado datos asociados a esta oferta.');
         }
 
-        $deleteForm = $this->createDeleteForm($id);
+        $deleteForm = $this->createDeleteForm($token);
         $editForm = $this->createEditForm($entity);
-        $editForm->handleRequest($request);
+        $editForm->bind($request);
 
         if ($editForm->isValid()) {
+            $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('trabajos_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('trabajos_edit', array('token' => $token)));
         }
 
         return $this->render('DsgagenciaBundle:Trabajos:edit.html.twig', array(
@@ -223,17 +226,17 @@ class TrabajosController extends Controller
      * Deletes a Trabajos entity.
      *
      */
-    public function deleteAction(Request $request, $id)
+    public function deleteAction(Request $request, $token)
     {
-        $form = $this->createDeleteForm($id);
-        $form->handleRequest($request);
+        $form = $this->createDeleteForm($token);
+        $form->bind($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('DsgagenciaBundle:Trabajos')->find($id);
+            $entity = $em->getRepository('DsgagenciaBundle:Trabajos')->find($token);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Trabajos entity.');
+                throw $this->createNotFoundException('Trabajo no borrado, no se encuentra en la entidad.');
             }
 
             $em->remove($entity);
@@ -250,12 +253,15 @@ class TrabajosController extends Controller
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createDeleteForm($id)
+    private function createDeleteForm($token)
     {
-        return $this->createFormBuilder()
+        /*return $this->createFormBuilder()
             ->setAction($this->generateUrl('trabajos_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->add('submit', 'submit', array('label' => 'Borrar'))
+            ->getForm()*/
+        return $this->createFormBuilder(array('token' => $token))
+            ->add('token', 'hidden')
             ->getForm()
         ;
     }

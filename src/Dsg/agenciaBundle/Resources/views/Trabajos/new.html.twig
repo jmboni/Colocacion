@@ -75,11 +75,6 @@
                         {{ form_widget(form.how_to_apply, {'attr' : {'class' : 'form-control', 'placeholder' : 'Como apuntarse'}}) }}
                         <span class="text-danger">{{ form_errors(form.how_to_apply)}}</span>
                     </div>
-                    <div class="form-group">
-                        {{ form_label(form.token)}}
-                        {{ form_widget(form.token, {'attr' : {'class' : 'form-control'}}) }}
-                        <span class="text-danger">{{ form_errors(form.token)}}</span>
-                    </div>
                     <div class="checkbox">
                         <label>
                             {{ form_widget(form.publico)}}
@@ -94,7 +89,7 @@
                     </div>
                     
                     <p>
-                        {{ form_widget( form.submit, {'label' : 'Crear' , 'attr' : {'class' : 'btn btn-info'}}) }}
+                        <button type="submit" class="btn btn-info">Crear</button>
                         <a href="{{ path('trabajos') }}" class="btn btn-info" role="button">Volver a la lista</a>
                     </p>
                         
