@@ -2,59 +2,59 @@
 
 {% block stylesheets %}
     <!-- CSS carousel-->
-    <!--<link rel="stylesheet" href="{{ asset('bundles/dsgagencia/css/job.css') }}" type="text/css" media="all" />-->
+    <link rel="stylesheet" href="{{ asset('public/csspaginas/show.css') }}" type="text/css" media="all" />
     {{ parent() }}
 {% endblock %}
 
 {% block content %}
-{% for flashMessage in app.session.flashbag.get('Mensaje') %}
-    <div class="alert alert-sucess" role="alert">
-        <div class="container">
-            {{ flashMessage }}
+    {% for flashMessage in app.session.flashbag.get('Mensaje') %}
+        <div class="alert alert-sucess" role="alert">
+            <div class="container">
+                {{ flashMessage }}
+            </div>
         </div>
-    </div>
-{% endfor %}
-<div class="container">
-    <div class="col-md-9 col-xs-offset-1">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <!-- Podemos utilizar la clase "panel-title" para dar estilo de título
-                al encabezado del panel -->
-                <h1 class="panel-title">{{ entity.compania }}</h1>
-                </div>
-                <div class="panel-body">
-                    {% if entity.logo %}
-                    <div class="logo">
-                        <a href="{{ entity.url }}">
-                            <img src="{{ asset('public/upload/') }}{{ entity.logo }}"
-                                 alt="{{ entity.compania }} logo" />
+    {% endfor %}
+    <div class="container trabajoshow">
+        <div class="col-md-9 col-xs-offset-1">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <!-- Podemos utilizar la clase "panel-title" para dar estilo de título
+                    al encabezado del panel -->
+                    <h1 class="panel-title">{{ entity.compania }}</h1>
+                    </div>
+                    <div class="panel-body">
+                        {% if entity.logo %}
+                        <div class="logo">
+                            <a href="{{ entity.url }}">
+                                <img src="{{ asset('public/upload/') }}{{ entity.logo }}"
+                                     alt="{{ entity.compania }} logo" />
+                            </a>
+                        </div>
+                        <h3>
+                            {{ entity.posicion }}
+                            <small> - {{ entity.tipo }}</small>
+                        </h3>
+                        <h3>
+                            {{ entity.localidad }}
+                        </h3>
+                    {% endif %}
+                        {{ entity.descripcion|nl2br }}
+                        
+                         <h4>How to apply?</h4>
+            
+                        <p class="how_to_apply">{{ entity.howtoapply }}</p>
+                        
+                        <a href="{{ path('trabajos_edit', { 'id': entity.id }) }}">Editar
                         </a>
                     </div>
-                    <h3>
-                        {{ entity.posicion }}
-                        <small> - {{ entity.tipo }}</small>
-                    </h3>
-                    <h3>
-                        {{ entity.localidad }}
-                    </h3>
-                {% endif %}
-                    {{ entity.descripcion|nl2br }}
                     
-                     <h4>How to apply?</h4>
-        
-                    <p class="how_to_apply">{{ entity.howtoapply }}</p>
-                    
-                    <a href="{{ path('trabajos_edit', { 'id': entity.id }) }}">Editar
-                    </a>
+                    <!-- Siempre podemos agregar y personalizar otros elementos dentro de un
+                    panel, con estilos compatibles de manera predeterminada. Aquí agregamos
+                    un pie para el panel (alineado a la derecha) con un botón predeterminado -->
+                    <div class="panel-footer text-right">
+                        <small>Creado el {{ entity.creado|date('m/d/Y') }}</small>
                 </div>
-                
-                <!-- Siempre podemos agregar y personalizar otros elementos dentro de un
-                panel, con estilos compatibles de manera predeterminada. Aquí agregamos
-                un pie para el panel (alineado a la derecha) con un botón predeterminado -->
-                <div class="panel-footer text-right">
-                    <small>Creado el {{ entity.creado|date('m/d/Y') }}</small>
             </div>
         </div>
     </div>
-</div>
 {% endblock %}

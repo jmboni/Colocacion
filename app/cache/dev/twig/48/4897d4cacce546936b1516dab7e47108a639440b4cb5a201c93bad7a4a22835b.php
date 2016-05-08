@@ -23,20 +23,20 @@ class __TwigTemplate_cfda2040fb0afe729eea2a927078dce114ac3a6d8674a228e19f6f894de
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_2d382dd56f2b0eab6c93ca34732aa8d90207c1baedf26359d5075d77f5293b4c = $this->env->getExtension("native_profiler");
-        $__internal_2d382dd56f2b0eab6c93ca34732aa8d90207c1baedf26359d5075d77f5293b4c->enter($__internal_2d382dd56f2b0eab6c93ca34732aa8d90207c1baedf26359d5075d77f5293b4c_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "DsgagenciaBundle:Categoria:show.html.twig"));
+        $__internal_6fa526d6507638f742136fed9335e625af2a26bd3c13f1f69e4372e1e015c1ec = $this->env->getExtension("native_profiler");
+        $__internal_6fa526d6507638f742136fed9335e625af2a26bd3c13f1f69e4372e1e015c1ec->enter($__internal_6fa526d6507638f742136fed9335e625af2a26bd3c13f1f69e4372e1e015c1ec_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "DsgagenciaBundle:Categoria:show.html.twig"));
 
         $this->parent->display($context, array_merge($this->blocks, $blocks));
         
-        $__internal_2d382dd56f2b0eab6c93ca34732aa8d90207c1baedf26359d5075d77f5293b4c->leave($__internal_2d382dd56f2b0eab6c93ca34732aa8d90207c1baedf26359d5075d77f5293b4c_prof);
+        $__internal_6fa526d6507638f742136fed9335e625af2a26bd3c13f1f69e4372e1e015c1ec->leave($__internal_6fa526d6507638f742136fed9335e625af2a26bd3c13f1f69e4372e1e015c1ec_prof);
 
     }
 
     // line 3
     public function block_title($context, array $blocks = array())
     {
-        $__internal_64abb47d7c48c8ef058746e36f62cbe79c88f5f147672affed664e4837cee27d = $this->env->getExtension("native_profiler");
-        $__internal_64abb47d7c48c8ef058746e36f62cbe79c88f5f147672affed664e4837cee27d->enter($__internal_64abb47d7c48c8ef058746e36f62cbe79c88f5f147672affed664e4837cee27d_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "title"));
+        $__internal_0e1afcbcac73c91466e24d91a50e0318f1f0204b921833f0ec0e465a16ea9744 = $this->env->getExtension("native_profiler");
+        $__internal_0e1afcbcac73c91466e24d91a50e0318f1f0204b921833f0ec0e465a16ea9744->enter($__internal_0e1afcbcac73c91466e24d91a50e0318f1f0204b921833f0ec0e465a16ea9744_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "title"));
 
         // line 4
         echo "    Trabajos en la categoría ";
@@ -44,15 +44,15 @@ class __TwigTemplate_cfda2040fb0afe729eea2a927078dce114ac3a6d8674a228e19f6f894de
         echo " categoria
 ";
         
-        $__internal_64abb47d7c48c8ef058746e36f62cbe79c88f5f147672affed664e4837cee27d->leave($__internal_64abb47d7c48c8ef058746e36f62cbe79c88f5f147672affed664e4837cee27d_prof);
+        $__internal_0e1afcbcac73c91466e24d91a50e0318f1f0204b921833f0ec0e465a16ea9744->leave($__internal_0e1afcbcac73c91466e24d91a50e0318f1f0204b921833f0ec0e465a16ea9744_prof);
 
     }
 
     // line 7
     public function block_stylesheets($context, array $blocks = array())
     {
-        $__internal_bcfeb618d092dff4ebabb7b68b908b46d9ca7d9ef576113421cf3853795e5e0c = $this->env->getExtension("native_profiler");
-        $__internal_bcfeb618d092dff4ebabb7b68b908b46d9ca7d9ef576113421cf3853795e5e0c->enter($__internal_bcfeb618d092dff4ebabb7b68b908b46d9ca7d9ef576113421cf3853795e5e0c_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "stylesheets"));
+        $__internal_4c6e06ff8edcce0d4b404b66fe41deb361fb7925049ae6f8cfdc71a308d6ebfb = $this->env->getExtension("native_profiler");
+        $__internal_4c6e06ff8edcce0d4b404b66fe41deb361fb7925049ae6f8cfdc71a308d6ebfb->enter($__internal_4c6e06ff8edcce0d4b404b66fe41deb361fb7925049ae6f8cfdc71a308d6ebfb_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "stylesheets"));
 
         // line 8
         echo "    ";
@@ -65,15 +65,15 @@ class __TwigTemplate_cfda2040fb0afe729eea2a927078dce114ac3a6d8674a228e19f6f894de
         echo "\" type=\"text/css\" media=\"all\" />
 ";
         
-        $__internal_bcfeb618d092dff4ebabb7b68b908b46d9ca7d9ef576113421cf3853795e5e0c->leave($__internal_bcfeb618d092dff4ebabb7b68b908b46d9ca7d9ef576113421cf3853795e5e0c_prof);
+        $__internal_4c6e06ff8edcce0d4b404b66fe41deb361fb7925049ae6f8cfdc71a308d6ebfb->leave($__internal_4c6e06ff8edcce0d4b404b66fe41deb361fb7925049ae6f8cfdc71a308d6ebfb_prof);
 
     }
 
     // line 13
     public function block_content($context, array $blocks = array())
     {
-        $__internal_30a47984a0b26a72189a10e94788801439ccc9421fb74e14a3f1fa851b3bb17c = $this->env->getExtension("native_profiler");
-        $__internal_30a47984a0b26a72189a10e94788801439ccc9421fb74e14a3f1fa851b3bb17c->enter($__internal_30a47984a0b26a72189a10e94788801439ccc9421fb74e14a3f1fa851b3bb17c_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "content"));
+        $__internal_95d5946954ac0245455c70cccacd4d4af25d6bdc21d440a2d73955e68afabc97 = $this->env->getExtension("native_profiler");
+        $__internal_95d5946954ac0245455c70cccacd4d4af25d6bdc21d440a2d73955e68afabc97->enter($__internal_95d5946954ac0245455c70cccacd4d4af25d6bdc21d440a2d73955e68afabc97_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "content"));
 
         // line 14
         echo "        <!-- Three columns of text below the carousel -->
@@ -94,89 +94,69 @@ class __TwigTemplate_cfda2040fb0afe729eea2a927078dce114ac3a6d8674a228e19f6f894de
         // line 22
         if (((isset($context["last_page"]) ? $context["last_page"] : $this->getContext($context, "last_page")) > 1)) {
             // line 23
-            echo "                <div class=\"pagination\">
-                    <a href=";
-            // line 24
-            echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("dsgagencia_categoria", array("slug" => $this->getAttribute((isset($context["categoria"]) ? $context["categoria"] : $this->getContext($context, "categoria")), "slug", array()), "page" => 1)), "html", null, true);
-            echo ">
-                        <img src=";
+            echo "                <div class=\"container\">
+                   <ul class=\"pagination\">
+                        <li><a href=";
             // line 25
-            echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("bundles/dsgagencia/images/first.png"), "html", null, true);
-            echo " alt=\"First page\" title=\"First page\" />
-                    </a>
-                    <a href=";
-            // line 27
+            echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("dsgagencia_categoria", array("slug" => $this->getAttribute((isset($context["categoria"]) ? $context["categoria"] : $this->getContext($context, "categoria")), "slug", array()), "page" => 1)), "html", null, true);
+            echo ">|&laquo;</a></li>
+                        <li><a href=";
+            // line 26
             echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("dsgagencia_categoria", array("slug" => $this->getAttribute((isset($context["categoria"]) ? $context["categoria"] : $this->getContext($context, "categoria")), "slug", array()), "page" => (isset($context["previous_page"]) ? $context["previous_page"] : $this->getContext($context, "previous_page")))), "html", null, true);
-            echo ">
-                        <img src=";
+            echo ">&laquo;</a></li>
+                        
+                        ";
             // line 28
-            echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("bundles/dsgagencia/images/previous.png"), "html", null, true);
-            echo " alt=\"Previous page\" title=\"Previous page\" />
-                    </a>
-                    
-                    ";
-            // line 31
             $context['_parent'] = $context;
             $context['_seq'] = twig_ensure_traversable(range(1, (isset($context["last_page"]) ? $context["last_page"] : $this->getContext($context, "last_page"))));
             foreach ($context['_seq'] as $context["_key"] => $context["page"]) {
-                // line 32
-                echo "                        ";
+                // line 29
+                echo "                            ";
                 if (($context["page"] == (isset($context["current_page"]) ? $context["current_page"] : $this->getContext($context, "current_page")))) {
-                    // line 33
-                    echo "                            ";
+                    // line 30
+                    echo "                               <li class=\"active\"><a href=\"#\">";
                     echo twig_escape_filter($this->env, $context["page"], "html", null, true);
-                    echo "
-                        ";
+                    echo "</a></li>
+                            ";
                 } else {
-                    // line 35
-                    echo "                            <a href=";
+                    // line 32
+                    echo "                                <li><a href=";
                     echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("dsgagencia_categoria", array("slug" => $this->getAttribute((isset($context["categoria"]) ? $context["categoria"] : $this->getContext($context, "categoria")), "slug", array()), "page" => $context["page"])), "html", null, true);
                     echo ">";
                     echo twig_escape_filter($this->env, $context["page"], "html", null, true);
-                    echo "</a>
-                        ";
+                    echo "</a><li>
+                            ";
                 }
-                // line 37
-                echo "                    ";
+                // line 34
+                echo "                        ";
             }
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['page'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 38
-            echo "                    
-                    <a href=";
-            // line 39
+            // line 35
+            echo "                        <li><a href=";
             echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("dsgagencia_categoria", array("slug" => $this->getAttribute((isset($context["categoria"]) ? $context["categoria"] : $this->getContext($context, "categoria")), "slug", array()), "page" => (isset($context["next_page"]) ? $context["next_page"] : $this->getContext($context, "next_page")))), "html", null, true);
-            echo ">
-                        <img src=";
-            // line 40
-            echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("bundles/dsgagencia/images/next.png"), "html", null, true);
-            echo " alt=\"Next page\" title=\"Next page\" />
-                    </a>
-                    <a href=";
-            // line 42
+            echo ">&raquo;</a></li>
+                        <li><a href=";
+            // line 36
             echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("dsgagencia_categoria", array("slug" => $this->getAttribute((isset($context["categoria"]) ? $context["categoria"] : $this->getContext($context, "categoria")), "slug", array()), "page" => (isset($context["last_page"]) ? $context["last_page"] : $this->getContext($context, "last_page")))), "html", null, true);
-            echo ">
-                        <img src=";
-            // line 43
-            echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("bundles/dsgagencia/images/last.png"), "html", null, true);
-            echo " alt=\"Last page\" title=\"Last page\" />
-                    </a>
+            echo ">&raquo;|</li>
+                    </ul>
                 </div>
             ";
         }
-        // line 47
+        // line 40
         echo " 
             <div class=\"pagination_desc\">
                 <strong>";
-        // line 49
+        // line 42
         echo twig_escape_filter($this->env, (isset($context["total_trabajos"]) ? $context["total_trabajos"] : $this->getContext($context, "total_trabajos")), "html", null, true);
         echo "</strong> jobs in this categoria
          
                 ";
-        // line 51
+        // line 44
         if (((isset($context["last_page"]) ? $context["last_page"] : $this->getContext($context, "last_page")) > 1)) {
-            // line 52
+            // line 45
             echo "                    - page <strong>";
             echo twig_escape_filter($this->env, (isset($context["current_page"]) ? $context["current_page"] : $this->getContext($context, "current_page")), "html", null, true);
             echo "/";
@@ -184,12 +164,12 @@ class __TwigTemplate_cfda2040fb0afe729eea2a927078dce114ac3a6d8674a228e19f6f894de
             echo "</strong>
                 ";
         }
-        // line 54
+        // line 47
         echo "            </div>
         </div>
 ";
         
-        $__internal_30a47984a0b26a72189a10e94788801439ccc9421fb74e14a3f1fa851b3bb17c->leave($__internal_30a47984a0b26a72189a10e94788801439ccc9421fb74e14a3f1fa851b3bb17c_prof);
+        $__internal_95d5946954ac0245455c70cccacd4d4af25d6bdc21d440a2d73955e68afabc97->leave($__internal_95d5946954ac0245455c70cccacd4d4af25d6bdc21d440a2d73955e68afabc97_prof);
 
     }
 
@@ -205,7 +185,7 @@ class __TwigTemplate_cfda2040fb0afe729eea2a927078dce114ac3a6d8674a228e19f6f894de
 
     public function getDebugInfo()
     {
-        return array (  188 => 54,  180 => 52,  178 => 51,  173 => 49,  169 => 47,  162 => 43,  158 => 42,  153 => 40,  149 => 39,  146 => 38,  140 => 37,  132 => 35,  126 => 33,  123 => 32,  119 => 31,  113 => 28,  109 => 27,  104 => 25,  100 => 24,  97 => 23,  95 => 22,  90 => 20,  84 => 17,  79 => 14,  73 => 13,  64 => 10,  58 => 8,  52 => 7,  42 => 4,  36 => 3,  11 => 1,);
+        return array (  168 => 47,  160 => 45,  158 => 44,  153 => 42,  149 => 40,  142 => 36,  137 => 35,  131 => 34,  123 => 32,  117 => 30,  114 => 29,  110 => 28,  105 => 26,  101 => 25,  97 => 23,  95 => 22,  90 => 20,  84 => 17,  79 => 14,  73 => 13,  64 => 10,  58 => 8,  52 => 7,  42 => 4,  36 => 3,  11 => 1,);
     }
 }
 /* {% extends 'DsgagenciaBundle::layout.html.twig' %}*/
@@ -230,28 +210,21 @@ class __TwigTemplate_cfda2040fb0afe729eea2a927078dce114ac3a6d8674a228e19f6f894de
 /*             {{ include ('DsgagenciaBundle::listar.html.twig', {'trabajos': categoria.trabajosactivos}) }}*/
 /*             */
 /*             {% if last_page > 1 %}*/
-/*                 <div class="pagination">*/
-/*                     <a href={{ path('dsgagencia_categoria', { 'slug': categoria.slug, 'page': 1 }) }}>*/
-/*                         <img src={{ asset('bundles/dsgagencia/images/first.png') }} alt="First page" title="First page" />*/
-/*                     </a>*/
-/*                     <a href={{ path('dsgagencia_categoria', { 'slug': categoria.slug, 'page': previous_page }) }}>*/
-/*                         <img src={{ asset('bundles/dsgagencia/images/previous.png') }} alt="Previous page" title="Previous page" />*/
-/*                     </a>*/
-/*                     */
-/*                     {% for page in 1..last_page %}*/
-/*                         {% if page == current_page %}*/
-/*                             {{ page }}*/
-/*                         {% else %}*/
-/*                             <a href={{ path('dsgagencia_categoria', { 'slug': categoria.slug, 'page': page }) }}>{{ page }}</a>*/
-/*                         {% endif %}*/
-/*                     {% endfor %}*/
-/*                     */
-/*                     <a href={{ path('dsgagencia_categoria', { 'slug': categoria.slug, 'page': next_page }) }}>*/
-/*                         <img src={{ asset('bundles/dsgagencia/images/next.png') }} alt="Next page" title="Next page" />*/
-/*                     </a>*/
-/*                     <a href={{ path('dsgagencia_categoria', { 'slug': categoria.slug, 'page': last_page }) }}>*/
-/*                         <img src={{ asset('bundles/dsgagencia/images/last.png') }} alt="Last page" title="Last page" />*/
-/*                     </a>*/
+/*                 <div class="container">*/
+/*                    <ul class="pagination">*/
+/*                         <li><a href={{ path('dsgagencia_categoria', { 'slug': categoria.slug, 'page': 1 }) }}>|&laquo;</a></li>*/
+/*                         <li><a href={{ path('dsgagencia_categoria', { 'slug': categoria.slug, 'page': previous_page }) }}>&laquo;</a></li>*/
+/*                         */
+/*                         {% for page in 1..last_page %}*/
+/*                             {% if page == current_page %}*/
+/*                                <li class="active"><a href="#">{{ page }}</a></li>*/
+/*                             {% else %}*/
+/*                                 <li><a href={{ path('dsgagencia_categoria', { 'slug': categoria.slug, 'page': page }) }}>{{ page }}</a><li>*/
+/*                             {% endif %}*/
+/*                         {% endfor %}*/
+/*                         <li><a href={{ path('dsgagencia_categoria', { 'slug': categoria.slug, 'page': next_page }) }}>&raquo;</a></li>*/
+/*                         <li><a href={{ path('dsgagencia_categoria', { 'slug': categoria.slug, 'page': last_page }) }}>&raquo;|</li>*/
+/*                     </ul>*/
 /*                 </div>*/
 /*             {% endif %}*/
 /*  */

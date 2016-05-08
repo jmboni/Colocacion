@@ -4,6 +4,7 @@ namespace Dsg\agenciaBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Dsg\agenciaBundle\Funciones\Amigable;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * Trabajos
@@ -550,15 +551,15 @@ class Trabajos
     }
     
     
-    
+    //Subir imagenes
      protected function getUploadDir()
     {
-        return 'public/upload';
+        return 'upload';
     }
  
     protected function getUploadRootDir()
     {
-        return __DIR__.'/../../../../web/'.$this->getUploadDir();
+        return __DIR__.'/../../../../web/public/'.$this->getUploadDir();
     }
  
     public function getWebPath()
@@ -578,9 +579,9 @@ class Trabajos
      */
     public function preUpload()
     {
-        if (null !== $this->file) {
+        //if (null !== $this->file) {
              $this->logo = uniqid().'.'.$this->file->guessExtension();
-         }
+         //}
     }
 
     /**

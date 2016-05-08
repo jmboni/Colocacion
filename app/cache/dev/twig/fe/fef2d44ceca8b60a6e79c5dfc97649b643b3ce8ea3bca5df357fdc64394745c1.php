@@ -15,8 +15,8 @@ class __TwigTemplate_bc2e3362d47044baf50c1de0bd210f0bfbf54eeb1723a57f4428ee144d0
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_1462d7fb1a82f9a2068b1afdc922b0d2f868cd0f8c4499774f9ada84fdac5194 = $this->env->getExtension("native_profiler");
-        $__internal_1462d7fb1a82f9a2068b1afdc922b0d2f868cd0f8c4499774f9ada84fdac5194->enter($__internal_1462d7fb1a82f9a2068b1afdc922b0d2f868cd0f8c4499774f9ada84fdac5194_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "DsgagenciaBundle::menu.html.twig"));
+        $__internal_d2407863f57194aaff82f6e93c0edbce4c84f4a72e4876ace73165e0a9bb050a = $this->env->getExtension("native_profiler");
+        $__internal_d2407863f57194aaff82f6e93c0edbce4c84f4a72e4876ace73165e0a9bb050a->enter($__internal_d2407863f57194aaff82f6e93c0edbce4c84f4a72e4876ace73165e0a9bb050a_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "DsgagenciaBundle::menu.html.twig"));
 
         // line 1
         echo " <!-- Fixed navbar -->
@@ -40,18 +40,22 @@ class __TwigTemplate_bc2e3362d47044baf50c1de0bd210f0bfbf54eeb1723a57f4428ee144d0
         // line 15
         echo $this->env->getExtension('routing')->getPath("dsgagencia_index");
         echo "\">Inicio</a></li>
-\t\t\t\t\t\t\t</ul>
-\t\t\t\t\t\t\t<form class=\"navbar-form navbar-right\">
-\t\t\t\t\t\t\t\t <a class=\"btn btn-primary\" href=\"";
-        // line 18
+\t\t\t\t\t\t\t\t<li><a class=\"btn btn-primary\" href=\"";
+        // line 16
         echo $this->env->getExtension('routing')->getPath("trabajos_new");
-        echo "\" role=\"button\">Nueva Oferta</a>
-\t\t\t\t\t\t\t</form>
+        echo "\" role=\"button\">Nueva Oferta</a><li>
+\t\t\t\t\t\t\t</ul>
+\t\t\t\t\t\t\t<form class=\"navbar-form navbar-right\" role=\"search\">
+\t\t\t\t\t\t        <div class=\"form-group\">
+\t\t\t\t\t\t        \t<input type=\"text\" class=\"form-control\" placeholder=\"Search\">
+\t\t\t\t\t\t        </div>
+\t\t\t\t\t\t        <button type=\"submit\" class=\"btn btn-default\">Buscar</button>
+\t\t\t\t\t    \t</form>
 \t\t\t\t\t\t</div><!--/.nav-collapse -->
 \t\t\t\t\t</div>
 \t\t\t\t</nav>";
         
-        $__internal_1462d7fb1a82f9a2068b1afdc922b0d2f868cd0f8c4499774f9ada84fdac5194->leave($__internal_1462d7fb1a82f9a2068b1afdc922b0d2f868cd0f8c4499774f9ada84fdac5194_prof);
+        $__internal_d2407863f57194aaff82f6e93c0edbce4c84f4a72e4876ace73165e0a9bb050a->leave($__internal_d2407863f57194aaff82f6e93c0edbce4c84f4a72e4876ace73165e0a9bb050a_prof);
 
     }
 
@@ -67,7 +71,7 @@ class __TwigTemplate_bc2e3362d47044baf50c1de0bd210f0bfbf54eeb1723a57f4428ee144d0
 
     public function getDebugInfo()
     {
-        return array (  47 => 18,  41 => 15,  34 => 11,  22 => 1,);
+        return array (  45 => 16,  41 => 15,  34 => 11,  22 => 1,);
     }
 }
 /*  <!-- Fixed navbar -->*/
@@ -85,10 +89,14 @@ class __TwigTemplate_bc2e3362d47044baf50c1de0bd210f0bfbf54eeb1723a57f4428ee144d0
 /* 						<div id="navbar" class="navbar-collapse collapse">*/
 /* 							<ul class="nav navbar-nav ">*/
 /* 								<li class="active"><a href="{{ path('dsgagencia_index') }}">Inicio</a></li>*/
+/* 								<li><a class="btn btn-primary" href="{{ path('trabajos_new')}}" role="button">Nueva Oferta</a><li>*/
 /* 							</ul>*/
-/* 							<form class="navbar-form navbar-right">*/
-/* 								 <a class="btn btn-primary" href="{{ path('trabajos_new')}}" role="button">Nueva Oferta</a>*/
-/* 							</form>*/
+/* 							<form class="navbar-form navbar-right" role="search">*/
+/* 						        <div class="form-group">*/
+/* 						        	<input type="text" class="form-control" placeholder="Search">*/
+/* 						        </div>*/
+/* 						        <button type="submit" class="btn btn-default">Buscar</button>*/
+/* 					    	</form>*/
 /* 						</div><!--/.nav-collapse -->*/
 /* 					</div>*/
 /* 				</nav>*/

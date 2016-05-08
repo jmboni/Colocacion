@@ -12,8 +12,8 @@
 {% endblock %}
    {% block content %}
         <!-- Three columns of text below the carousel -->
-        <div class="panel panel-default">
         {% for categoria in categorias %}
+            <div class="panel panel-primary">
                 <div class="panel-heading">
                     <h2 class="panel-title"><a href={{ path('dsgagencia_categoria', { 'slug': categoria.slug }) }}>{{ categoria.nombre }}</a></h2>
                 </div>
@@ -28,6 +28,6 @@
                 {% endif %}
                 <div class="clearfix"></div>
                 <br/>
+            </div>
         {% endfor %}
-        </div>
     {% endblock %}

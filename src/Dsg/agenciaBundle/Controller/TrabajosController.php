@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Dsg\agenciaBundle\Entity\Trabajos;
 use Dsg\agenciaBundle\Form\TrabajosType;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 use Doctrine\ORM\Query;
 
@@ -92,17 +93,18 @@ class TrabajosController extends Controller
     {
         $entity = new Trabajos();
         $form = $this->createCreateForm($entity);
-        $form->handleRequest($request);
+        $form->bind($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            
             
             $em->persist($entity);
             $em->flush();
             
             $this->addFlash('Mensaje', 'La oferta ha sido creada con exito');
 
-            return $this->redirectToRoute($this->generateUrl('trabajos_show', array(
+            return $this->redirect($this->generateUrl('trabajos_show', array(
                 'compania' => $entity->getCompaniaSlug(),
                 'localidad' => $entity->getLocalidadSlug(),
                 'id' => $entity->getId(),

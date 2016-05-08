@@ -13,7 +13,7 @@ trabajos_new:
 trabajos_create:
     path:     /create
     defaults: { _controller: "DsgagenciaBundle:Trabajos:create" }
-    methods:  POST
+    requirements: { _method: post }
 
 trabajos_edit:
     path:     /{id}/edit

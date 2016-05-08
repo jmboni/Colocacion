@@ -64,10 +64,10 @@ class Trabajos extends \Dsg\agenciaBundle\Entity\Trabajos implements \Doctrine\O
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'Dsg\\agenciaBundle\\Entity\\Trabajos' . "\0" . 'id', '' . "\0" . 'Dsg\\agenciaBundle\\Entity\\Trabajos' . "\0" . 'tipo', '' . "\0" . 'Dsg\\agenciaBundle\\Entity\\Trabajos' . "\0" . 'compania', '' . "\0" . 'Dsg\\agenciaBundle\\Entity\\Trabajos' . "\0" . 'logo', '' . "\0" . 'Dsg\\agenciaBundle\\Entity\\Trabajos' . "\0" . 'url', '' . "\0" . 'Dsg\\agenciaBundle\\Entity\\Trabajos' . "\0" . 'posicion', '' . "\0" . 'Dsg\\agenciaBundle\\Entity\\Trabajos' . "\0" . 'localidad', '' . "\0" . 'Dsg\\agenciaBundle\\Entity\\Trabajos' . "\0" . 'descripcion', '' . "\0" . 'Dsg\\agenciaBundle\\Entity\\Trabajos' . "\0" . 'how_to_apply', '' . "\0" . 'Dsg\\agenciaBundle\\Entity\\Trabajos' . "\0" . 'token', '' . "\0" . 'Dsg\\agenciaBundle\\Entity\\Trabajos' . "\0" . 'publico', '' . "\0" . 'Dsg\\agenciaBundle\\Entity\\Trabajos' . "\0" . 'activado', '' . "\0" . 'Dsg\\agenciaBundle\\Entity\\Trabajos' . "\0" . 'email', '' . "\0" . 'Dsg\\agenciaBundle\\Entity\\Trabajos' . "\0" . 'finaliza', '' . "\0" . 'Dsg\\agenciaBundle\\Entity\\Trabajos' . "\0" . 'creado', '' . "\0" . 'Dsg\\agenciaBundle\\Entity\\Trabajos' . "\0" . 'actualizado', '' . "\0" . 'Dsg\\agenciaBundle\\Entity\\Trabajos' . "\0" . 'categoria'];
+            return ['__isInitialized__', '' . "\0" . 'Dsg\\agenciaBundle\\Entity\\Trabajos' . "\0" . 'id', '' . "\0" . 'Dsg\\agenciaBundle\\Entity\\Trabajos' . "\0" . 'tipo', '' . "\0" . 'Dsg\\agenciaBundle\\Entity\\Trabajos' . "\0" . 'compania', '' . "\0" . 'Dsg\\agenciaBundle\\Entity\\Trabajos' . "\0" . 'logo', '' . "\0" . 'Dsg\\agenciaBundle\\Entity\\Trabajos' . "\0" . 'url', '' . "\0" . 'Dsg\\agenciaBundle\\Entity\\Trabajos' . "\0" . 'posicion', '' . "\0" . 'Dsg\\agenciaBundle\\Entity\\Trabajos' . "\0" . 'localidad', '' . "\0" . 'Dsg\\agenciaBundle\\Entity\\Trabajos' . "\0" . 'descripcion', '' . "\0" . 'Dsg\\agenciaBundle\\Entity\\Trabajos' . "\0" . 'how_to_apply', '' . "\0" . 'Dsg\\agenciaBundle\\Entity\\Trabajos' . "\0" . 'token', '' . "\0" . 'Dsg\\agenciaBundle\\Entity\\Trabajos' . "\0" . 'publico', '' . "\0" . 'Dsg\\agenciaBundle\\Entity\\Trabajos' . "\0" . 'activado', '' . "\0" . 'Dsg\\agenciaBundle\\Entity\\Trabajos' . "\0" . 'email', '' . "\0" . 'Dsg\\agenciaBundle\\Entity\\Trabajos' . "\0" . 'finaliza', '' . "\0" . 'Dsg\\agenciaBundle\\Entity\\Trabajos' . "\0" . 'creado', '' . "\0" . 'Dsg\\agenciaBundle\\Entity\\Trabajos' . "\0" . 'actualizado', '' . "\0" . 'Dsg\\agenciaBundle\\Entity\\Trabajos' . "\0" . 'categoria', 'file'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'Dsg\\agenciaBundle\\Entity\\Trabajos' . "\0" . 'id', '' . "\0" . 'Dsg\\agenciaBundle\\Entity\\Trabajos' . "\0" . 'tipo', '' . "\0" . 'Dsg\\agenciaBundle\\Entity\\Trabajos' . "\0" . 'compania', '' . "\0" . 'Dsg\\agenciaBundle\\Entity\\Trabajos' . "\0" . 'logo', '' . "\0" . 'Dsg\\agenciaBundle\\Entity\\Trabajos' . "\0" . 'url', '' . "\0" . 'Dsg\\agenciaBundle\\Entity\\Trabajos' . "\0" . 'posicion', '' . "\0" . 'Dsg\\agenciaBundle\\Entity\\Trabajos' . "\0" . 'localidad', '' . "\0" . 'Dsg\\agenciaBundle\\Entity\\Trabajos' . "\0" . 'descripcion', '' . "\0" . 'Dsg\\agenciaBundle\\Entity\\Trabajos' . "\0" . 'how_to_apply', '' . "\0" . 'Dsg\\agenciaBundle\\Entity\\Trabajos' . "\0" . 'token', '' . "\0" . 'Dsg\\agenciaBundle\\Entity\\Trabajos' . "\0" . 'publico', '' . "\0" . 'Dsg\\agenciaBundle\\Entity\\Trabajos' . "\0" . 'activado', '' . "\0" . 'Dsg\\agenciaBundle\\Entity\\Trabajos' . "\0" . 'email', '' . "\0" . 'Dsg\\agenciaBundle\\Entity\\Trabajos' . "\0" . 'finaliza', '' . "\0" . 'Dsg\\agenciaBundle\\Entity\\Trabajos' . "\0" . 'creado', '' . "\0" . 'Dsg\\agenciaBundle\\Entity\\Trabajos' . "\0" . 'actualizado', '' . "\0" . 'Dsg\\agenciaBundle\\Entity\\Trabajos' . "\0" . 'categoria'];
+        return ['__isInitialized__', '' . "\0" . 'Dsg\\agenciaBundle\\Entity\\Trabajos' . "\0" . 'id', '' . "\0" . 'Dsg\\agenciaBundle\\Entity\\Trabajos' . "\0" . 'tipo', '' . "\0" . 'Dsg\\agenciaBundle\\Entity\\Trabajos' . "\0" . 'compania', '' . "\0" . 'Dsg\\agenciaBundle\\Entity\\Trabajos' . "\0" . 'logo', '' . "\0" . 'Dsg\\agenciaBundle\\Entity\\Trabajos' . "\0" . 'url', '' . "\0" . 'Dsg\\agenciaBundle\\Entity\\Trabajos' . "\0" . 'posicion', '' . "\0" . 'Dsg\\agenciaBundle\\Entity\\Trabajos' . "\0" . 'localidad', '' . "\0" . 'Dsg\\agenciaBundle\\Entity\\Trabajos' . "\0" . 'descripcion', '' . "\0" . 'Dsg\\agenciaBundle\\Entity\\Trabajos' . "\0" . 'how_to_apply', '' . "\0" . 'Dsg\\agenciaBundle\\Entity\\Trabajos' . "\0" . 'token', '' . "\0" . 'Dsg\\agenciaBundle\\Entity\\Trabajos' . "\0" . 'publico', '' . "\0" . 'Dsg\\agenciaBundle\\Entity\\Trabajos' . "\0" . 'activado', '' . "\0" . 'Dsg\\agenciaBundle\\Entity\\Trabajos' . "\0" . 'email', '' . "\0" . 'Dsg\\agenciaBundle\\Entity\\Trabajos' . "\0" . 'finaliza', '' . "\0" . 'Dsg\\agenciaBundle\\Entity\\Trabajos' . "\0" . 'creado', '' . "\0" . 'Dsg\\agenciaBundle\\Entity\\Trabajos' . "\0" . 'actualizado', '' . "\0" . 'Dsg\\agenciaBundle\\Entity\\Trabajos' . "\0" . 'categoria', 'file'];
     }
 
     /**
@@ -197,6 +197,17 @@ class Trabajos extends \Dsg\agenciaBundle\Entity\Trabajos implements \Doctrine\O
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setTipo', [$tipo]);
 
         return parent::setTipo($tipo);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getTipo()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getTipo', []);
+
+        return parent::getTipo();
     }
 
     /**
@@ -576,6 +587,17 @@ class Trabajos extends \Dsg\agenciaBundle\Entity\Trabajos implements \Doctrine\O
     /**
      * {@inheritDoc}
      */
+    public function __toString()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, '__toString', []);
+
+        return parent::__toString();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function setFinalizaValue()
     {
 
@@ -598,12 +620,56 @@ class Trabajos extends \Dsg\agenciaBundle\Entity\Trabajos implements \Doctrine\O
     /**
      * {@inheritDoc}
      */
-    public function __toString()
+    public function getWebPath()
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, '__toString', []);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getWebPath', []);
 
-        return parent::__toString();
+        return parent::getWebPath();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getAbsolutePath()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getAbsolutePath', []);
+
+        return parent::getAbsolutePath();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function preUpload()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'preUpload', []);
+
+        return parent::preUpload();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function upload()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'upload', []);
+
+        return parent::upload();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function removeUpload()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeUpload', []);
+
+        return parent::removeUpload();
     }
 
 }

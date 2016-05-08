@@ -1,20 +1,35 @@
 {% extends 'DsgagenciaBundle::layout.html.twig' %}
 
+{% form_theme form _self %}
+ 
+{% block form_errors %}
+{% spaceless %}
+    {% if errors|length > 0 %}
+        <ul class="error_list">
+            {% for error in errors %}
+                <li>{{ error.messageTemplate|trans(error.messageParameters, 'validators') }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endspaceless %}
+{% endblock form_errors %}
+
+
 {% block stylesheets %}
     {{ parent() }}
-    <link rel="stylesheet" href="{{ asset('bundles/dsgagencia/css/admin.css') }}" type="text/css" media="all" />
+    <link rel="stylesheet" href="{{ asset('public/csspaginas/show.css') }}" type="text/css" media="all" />
 {% endblock %}
 
 {% block formulario %}
     {{ parent() }}
-    <div class="main container">
+    <div class="container editshow">
         <div class="row well">
             <div class="col-xs-4>
                 <div class="page-header">
                     <h2>Insertar oferta nueva</h2>
                 </div>
-                {{ form_start(form,{ 'attr':{'role': 'form'} }) }}
-    
+                
+                <form action={{ path('trabajos_create') }} method="post" {{ form_enctype(form) }}>
                     <div class="form-group">
                         {{ form_label(form.categoria)}}
                         {{ form_widget(form.categoria, {'attr' : {'class' : 'form-control', 'placeholder' : 'Categoria'}}) }}
