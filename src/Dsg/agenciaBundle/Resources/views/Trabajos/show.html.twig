@@ -7,15 +7,20 @@
 {% endblock %}
 
 {% block content %}
-    {% for flashMessage in app.session.flashbag.get('Mensaje') %}
-        <div class="alert alert-sucess" role="alert">
-            <div class="container">
-                {{ flashMessage }}
-            </div>
-        </div>
-    {% endfor %}
+    
     <div class="container trabajoshow">
         <div class="col-md-9 col-xs-offset-1">
+            
+            {% if app.request.get('token') %}
+                {{ include('DsgagenciaBundle::Trabajos/admin.html.twig', { 'trabajos': entity }) }}
+            {% endif %}
+            {% for flashMessage in app.session.flashbag.get('Mensaje') %}
+                <div class="alert alert-sucess" role="alert">
+                    <div class="container">
+                        {{ flashMessage }}
+                    </div>
+                </div>
+            {% endfor %}
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <!-- Podemos utilizar la clase "panel-title" para dar estilo de título
@@ -43,8 +48,6 @@
                          <h4>How to apply?</h4>
             
                         <p class="how_to_apply">{{ entity.howtoapply }}</p>
-                        
-                        <a href="{{ path('trabajos_edit', { 'token': entity.token }) }}">Editar</a>
                     </div>
                     
                     <!-- Siempre podemos agregar y personalizar otros elementos dentro de un

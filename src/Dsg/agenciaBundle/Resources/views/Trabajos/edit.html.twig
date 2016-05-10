@@ -90,11 +90,11 @@
                     
                     <p>
                         <a href="{{ path('trabajos') }}" class="btn btn-info" role="button">Volver a la lista</a>
-                        <a href="" class="btn btn-info" role="button">Vista previa</a>
+                        <a href="{{ url('trabajos_preview', {'token': entity.token, 'compania': entity.companiaSlug, 'localidad': entity.localidadSlug, 'posicion': entity.posicionSlug }) }}" class="btn btn-info" role="button">Vista previa</a>
                         <button type="submit" class="btn btn-info">Actualizar</button>
                     </p>
                         
-                {{ form_end(edit_form)}}
+                {{ form_rest(edit_form)}}
             </div>
         </div>
     </div>

@@ -389,6 +389,17 @@ class Trabajos extends \Dsg\agenciaBundle\Entity\Trabajos implements \Doctrine\O
     /**
      * {@inheritDoc}
      */
+    public function setTokenValue()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setTokenValue', []);
+
+        return parent::setTokenValue();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function setPublico($publico)
     {
 
@@ -670,6 +681,61 @@ class Trabajos extends \Dsg\agenciaBundle\Entity\Trabajos implements \Doctrine\O
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeUpload', []);
 
         return parent::removeUpload();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function finalizadoYa()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'finalizadoYa', []);
+
+        return parent::finalizadoYa();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function finalizanPronto()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'finalizanPronto', []);
+
+        return parent::finalizanPronto();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getDaysBeforeFinaliza()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getDaysBeforeFinaliza', []);
+
+        return parent::getDaysBeforeFinaliza();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function publish()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'publish', []);
+
+        return parent::publish();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function ampliar()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'ampliar', []);
+
+        return parent::ampliar();
     }
 
 }

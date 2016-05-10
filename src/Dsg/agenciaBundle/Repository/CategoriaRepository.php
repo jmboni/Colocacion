@@ -15,8 +15,9 @@ class CategoriaRepository extends EntityRepository
     public function getTrabajosCategorias()
     {
         $query = $this->getEntityManager()->createQuery(
-            'SELECT c FROM DsgagenciaBundle:Categoria c LEFT JOIN c.trabajos j WHERE j.finaliza > :date'
-        )->setParameter('date', date('Y-m-d H:i:s', time()));
+            'SELECT c FROM DsgagenciaBundle:Categoria c LEFT JOIN c.trabajos j WHERE j.finaliza > :date AND j.activado = :activado'
+        )   ->setParameter('date', date('Y-m-d H:i:s', time()))
+            ->setParameter('activado', 1);
  
         return $query->getResult();
     }   

@@ -1,0 +1,37 @@
+<div id="job_actions">
+    <h3>Administrar</h3>
+    <div class="form-group">
+        
+        {% if not trabajos.activado %}
+        
+            <button class="btn btn-primary" type="button" onclick="location.href='{{ path('trabajos_edit', { 'token': trabajos.token }) }}'">Editar</button>
+            <form action={{ path('trabajos_publish', { 'token': trabajos.token }) }} method="post">
+                {{ form_widget(publish_form) }}
+                <button type="submit">Publicar</button>
+            </form>
+            
+        {% endif %}
+        <form class="form-horizontal" action={{ path('trabajos_delete', { 'token': trabajos.token }) }} method="post">
+            {{ form_widget(delete_form) }}
+            <button class="btn btn-primary" type="submit" onclick="if(!confirm('Are you sure?')) { return false; }">Borrar</button>
+        </form>
+        {% if trabajos.activado %}
+            <p{% if trabajos.finalizanPronto %} class="expires_soon" {% endif %}>
+                {% if trabajos.finalizadoYa %}
+                    Finalizado
+                {% else %}
+                    Finaliza en <strong>{{ trabajos.getDaysBeforeFinaliza }}</strong> días
+                {% endif %}
+ 
+                {% if trabajos.finalizanPronto %}
+                    <form action={{ path('trabajos_extend', { 'token': trabajos.token }) }} method="post">
+                        {{ form_widget(extend_form) }}
+                        - <button type="submit">Ampliar</button> por 30 días más.
+                    </form>
+                {% endif %}
+            </p>
+        {% else %}
+                [Pincha sobre el siguiente <a href={{ url('trabajos_preview', {'token': trabajos.token, 'compania': trabajos.companiaSlug, 'localidad': trabajos.localidadSlug, 'posicion': trabajos.posicionSlug }) }}>Link</a> para poder gestionar esta oferta en el futuro.]
+        {% endif %}
+    </div>
+</div>

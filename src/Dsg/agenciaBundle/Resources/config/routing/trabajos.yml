@@ -5,6 +5,8 @@ trabajos:
 trabajos_show:
     path:     /{compania}/{localidad}/{id}/{posicion}
     defaults: { _controller: "DsgagenciaBundle:Trabajos:show" }
+    requirements:
+        id:  \d+
 
 trabajos_new:
     path:     /new
@@ -24,7 +26,23 @@ trabajos_update:
     defaults: { _controller: "DsgagenciaBundle:Trabajos:update" }
     requirements: { _method: post|put }
 
+trabajos_preview:
+    pattern:  /{compania}/{localidad}/{token}/{posicion}
+    defaults: { _controller: "DsgagenciaBundle:Trabajos:preview" }
+    requirements:
+        token:  \w+
+
 trabajos_delete:
     path:     /{token}/delete
     defaults: { _controller: "DsgagenciaBundle:Trabajos:delete" }
     requirements: { _method: post|delete }
+
+trabajos_publish:
+    pattern:  /{token}/publish
+    defaults: { _controller: "DsgagenciaBundle:Trabajos:publish" }
+    requirements: { _method: post }
+    
+trabajos_extend:
+    pattern:  /{token}/extend
+    defaults: { _controller: "DsgagenciaBundle:trabajos:extend" }
+    requirements: { _method: post }

@@ -3,14 +3,11 @@
 namespace Dsg\agenciaBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Dsg\agenciaBundle\Entity\Trabajos;
 use Dsg\agenciaBundle\Form\TrabajosType;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-use Doctrine\ORM\Query;
 
 /**
  * Trabajos controller.
@@ -26,7 +23,6 @@ class TrabajosController extends Controller
 
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
         
         $em = $this->getDoctrine()->getEntityManager();
         
@@ -105,10 +101,10 @@ class TrabajosController extends Controller
             
             $this->addFlash('Mensaje', 'La oferta ha sido creada con exito');
 
-            return $this->redirect($this->generateUrl('trabajos_show', array(
+            return $this->redirect($this->generateUrl('trabajos_preview', array(
                 'compania' => $entity->getCompaniaSlug(),
                 'localidad' => $entity->getLocalidadSlug(),
-                'id' => $entity->getId(),
+                'token' => $entity->getToken(),
                 'posicion' => $entity->getPosicionSlug()
             )));
         }
@@ -160,6 +156,10 @@ class TrabajosController extends Controller
         if (!$entity) {
             throw $this->createNotFoundException('No se ha encontrado ningun valor asociado en la entidad.');
         }
+        
+        if ($entity->getActivado()) {
+            throw $this->createNotFoundException('El trabajo está activado NO puede ser editado');
+        }
 
         $editForm = $this->createForm(new TrabajosType(), $entity);
         $deleteForm = $this->createDeleteForm($token);
@@ -206,14 +206,20 @@ class TrabajosController extends Controller
         }
 
         $deleteForm = $this->createDeleteForm($token);
-        $editForm = $this->createEditForm($entity);
+        $entity->setActualizadoValue();
+        $editForm = $this->createForm(new TrabajosType(), $entity);
         $editForm->bind($request);
 
         if ($editForm->isValid()) {
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('trabajos_edit', array('token' => $token)));
+            return $this->redirect($this->generateUrl('trabajos_preview', array(
+                'compania' => $entity->getCompaniaSlug(),
+                'localidad' => $entity->getLocalidadSlug(),
+                'token' => $entity->getToken(), 
+                'posicion' => $entity->getPosicionSlug()
+            )));
         }
 
         return $this->render('DsgagenciaBundle:Trabajos:edit.html.twig', array(
@@ -233,7 +239,7 @@ class TrabajosController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('DsgagenciaBundle:Trabajos')->find($token);
+            $entity = $em->getRepository('DsgagenciaBundle:Trabajos')->findOneByToken($token);
 
             if (!$entity) {
                 throw $this->createNotFoundException('Trabajo no borrado, no se encuentra en la entidad.');
@@ -255,14 +261,108 @@ class TrabajosController extends Controller
      */
     private function createDeleteForm($token)
     {
-        /*return $this->createFormBuilder()
-            ->setAction($this->generateUrl('trabajos_delete', array('id' => $id)))
-            ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Borrar'))
-            ->getForm()*/
         return $this->createFormBuilder(array('token' => $token))
             ->add('token', 'hidden')
             ->getForm()
         ;
+    }
+    
+    public function previewAction($token)
+    {
+        $em = $this->getDoctrine()->getManager();
+ 
+        $entity = $em->getRepository('DsgagenciaBundle:Trabajos')->findOneByToken($token);
+ 
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Job entity.');
+        }
+ 
+        $deleteForm = $this->createDeleteForm($entity->getId());
+        $publishForm = $this->createPublishForm($entity->getToken());
+        $extendForm = $this->createExtendForm($entity->getToken());
+ 
+        return $this->render('DsgagenciaBundle:Trabajos:show.html.twig', array(
+            'entity'      => $entity,
+            'delete_form' => $deleteForm->createView(),
+            'publish_form' => $publishForm->createView(),
+            'extend_form' => $extendForm->createView(),
+        ));
+    }
+    
+    public function publishAction(Request $request, $token)
+    {
+        $form = $this->createPublishForm($token);
+        $form->bind($request);
+     
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $entity = $em->getRepository('DsgagenciaBundle:Trabajos')->findOneByToken($token);
+     
+            if (!$entity) {
+                throw $this->createNotFoundException('Unable to find Job entity.');
+            }
+     
+            $entity->publish();
+            $em->persist($entity);
+            $em->flush();
+     
+            $this->get('session')->getFlashBag('notice', 'Your job is now online for 30 days.');
+        }
+     
+        return $this->redirect($this->generateUrl('trabajos_preview', array(
+            'compania' => $entity->getCompaniaSlug(),
+            'localidad' => $entity->getLocalidadSlug(),
+            'token' => $entity->getToken(),
+            'posicion' => $entity->getPosicionSlug()
+        )));
+    }
+     
+    private function createPublishForm($token)
+    {
+        return $this->createFormBuilder(array('token' => $token))
+            ->add('token', 'hidden')
+            ->getForm()
+        ;
+    }
+    
+    
+    public function extendAction(Request $request, $token)
+    {
+        $form = $this->createExtendForm($token);
+        $request = $this->getRequest();
+     
+        $form->bind($request);
+     
+        if($form->isValid()) {
+            $em=$this->getDoctrine()->getManager();
+            $entity = $em->getRepository('DsgagenciaBundle:Trabajos')->findOneByToken($token);
+     
+            if(!$entity){
+                throw $this->createNotFoundException('No se ha podido encontrar la entidad Trabajos.');
+            }
+     
+            if(!$entity->extend()){
+                throw $this->createNodFoundException('No se ha podido ampliar la oferta.');
+            }
+     
+            $em->persist($entity);
+            $em->flush();
+     
+            $this->get('session')->getFlashBag()->add('notice', sprintf('Su oferta ha sido ampliada hasta %s', $entity->getExpiresAt()->format('m/d/Y')));
+        }
+     
+        return $this->redirect($this->generateUrl('trabajos_preview', array(
+            'compania' => $entity->getCompaniaSlug(),
+            'localidad' => $entity->getLocalidadSlug(),
+            'token' => $entity->getToken(),
+            'posicion' => $entity->getPosicioSlug()
+        )));
+    }
+     
+    private function createExtendForm($token)
+    {
+        return $this->createFormBuilder(array('token' => $token))
+            ->add('token', 'hidden')
+            ->getForm();
     }
 }

@@ -15,9 +15,11 @@ class TrabajosRepository extends EntityRepository
     public function getTrabajosActivos($categoria_id = null, $max = null, $offset = null)
   {
     $qb = $this->createQueryBuilder('j')
-               ->where('j.finaliza > :date')
-               ->setParameter('date', date('Y-m-d H:i:s', time()))
-               ->orderBy('j.finaliza', 'DESC');
+                ->where('j.finaliza > :date')
+                ->setParameter('date', date('Y-m-d H:i:s', time()))
+                ->andWhere('j.activado = :activado')
+                ->setParameter('activado', 1)
+                ->orderBy('j.finaliza', 'DESC');
  
     if($max) {
         $qb->setMaxResults($max);
@@ -44,9 +46,12 @@ class TrabajosRepository extends EntityRepository
   public function countTrabajosActivos($categoria_id = null)
     {
         $qb = $this->createQueryBuilder('j')
-                   ->select('count(j.id)')
-                   ->where('j.finaliza > :date')
-                   ->setParameter('date', date('Y-m-d H:i:s', time()));
+                    ->select('count(j.id)')
+                    ->where('j.finaliza > :date')
+                    ->setParameter('date', date('Y-m-d H:i:s', time()))
+                    ->andWhere('j.activado = :activado')
+                    ->setParameter('activado', 1);
+                   ;
 
         if ($categoria_id) {
             $qb->andWhere('j.categoria = :categoria_id')
@@ -69,6 +74,8 @@ class TrabajosRepository extends EntityRepository
             ->setParameter('id', $id)
             ->andWhere('j.finaliza > :date')
             ->setParameter('date', date('Y-m-d H:i:s', time()))
+            ->andWhere('j.activado = :activado')
+            ->setParameter('activado', 1)
             ->setMaxResults(1)
             ->getQuery();
  
@@ -79,5 +86,17 @@ class TrabajosRepository extends EntityRepository
         }
  
         return $trabajo;
+    }
+    
+    public function limpieza($days)
+    {
+        $query = $this->createQueryBuilder('j')
+            ->delete()
+            ->where('j.activado IS NULL')
+            ->andWhere('j.creado < :creado')    
+            ->setParameter('creado',  date('Y-m-d', time() - 86400 * $days))
+            ->getQuery();
+     
+        return $query->execute();
     }
 }

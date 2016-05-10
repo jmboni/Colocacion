@@ -12,4 +12,5 @@ return array(
     '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => $vendorDir . '/symfony/polyfill-mbstring/bootstrap.php',
     'ce89ac35a6c330c55f4710717db9ff78' => $vendorDir . '/kriswallsmith/assetic/src/functions.php',
     '3fad0ebbff9928a94a9d8941fb314bd8' => $vendorDir . '/symfony/symfony/src/Symfony/Component/Intl/Resources/stubs/functions.php',
+    '8ac9dba77d5c65db2811440ee8265f5d' => $vendorDir . '/sonata-project/block-bundle/Resources/stubs/symfony2.php',
 );

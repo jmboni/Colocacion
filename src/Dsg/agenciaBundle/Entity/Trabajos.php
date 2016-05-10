@@ -561,12 +561,12 @@ class Trabajos
     //Subir imagenes
      protected function getUploadDir()
     {
-        return 'upload';
+        return 'public/upload';
     }
  
     protected function getUploadRootDir()
     {
-        return __DIR__.'/../../../../web/public/'.$this->getUploadDir();
+        return __DIR__.'/../../../../web/'.$this->getUploadDir();
     }
  
     public function getWebPath()
@@ -586,9 +586,14 @@ class Trabajos
      */
     public function preUpload()
     {
-        //if (null !== $this->file) {
+        if (null !== $this->file) {
+            
+            if ($logo = $this->getAbsolutePath()) {
+                unlink($logo);
+            }
+             
              $this->logo = uniqid().'.'.$this->file->guessExtension();
-         //}
+        }
     }
 
     /**
@@ -613,10 +618,42 @@ class Trabajos
      */
     public function removeUpload()
     {
-        if(file_exists($file)) {
-            if ($file = $this->getAbsolutePath()) {
-                unlink($file);
-            }
-        }    
+        
+        if ($file = $this->getAbsolutePath()) {
+             unlink($file);
+         }
     }
+    
+    public function finalizadoYa()
+    {
+        return $this->getDaysBeforeFinaliza() < 0;
+    }
+     
+    public function finalizanPronto()
+    {
+        return $this->getDaysBeforeFinaliza() < 5;    
+    }
+     
+    public function getDaysBeforeFinaliza()
+    {
+        return ceil(($this->getFinaliza()->format('U') - time()) / 86400);
+    }
+    
+    public function publish()
+    {
+        $this->setActivado(true);
+    }
+    
+    public function ampliar()
+    {
+        if (!$this->finalizanPronto())
+        {
+            return false;
+        }
+     
+        $this->finaliza = new \DateTime(date('Y-m-d H:i:s', time() + 86400 * 30));
+     
+        return true;
+    }    
+    
 }
