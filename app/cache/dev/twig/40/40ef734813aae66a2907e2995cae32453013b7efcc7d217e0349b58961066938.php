@@ -1,6 +1,6 @@
 <?php
 
-/* DsgagenciaBundle:Trabajos:carousel.html.twig */
+/* DsgagenciaBundle::/Trabajos/carousel.html.twig */
 class __TwigTemplate_c7372eb4b6a124e70f4e27a2e65e06ac7063e905928424468add7cc11f987154 extends Twig_Template
 {
     public function __construct(Twig_Environment $env)
@@ -15,8 +15,8 @@ class __TwigTemplate_c7372eb4b6a124e70f4e27a2e65e06ac7063e905928424468add7cc11f9
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_8e152eee0ad793ed22287802c76f588a1e8fb784a4bba288c2755b5c136e78bb = $this->env->getExtension("native_profiler");
-        $__internal_8e152eee0ad793ed22287802c76f588a1e8fb784a4bba288c2755b5c136e78bb->enter($__internal_8e152eee0ad793ed22287802c76f588a1e8fb784a4bba288c2755b5c136e78bb_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "DsgagenciaBundle:Trabajos:carousel.html.twig"));
+        $__internal_4152e9a53ad3fc5f25a729df9bc44c6a04b67bd2376305247b1e041cf7633111 = $this->env->getExtension("native_profiler");
+        $__internal_4152e9a53ad3fc5f25a729df9bc44c6a04b67bd2376305247b1e041cf7633111->enter($__internal_4152e9a53ad3fc5f25a729df9bc44c6a04b67bd2376305247b1e041cf7633111_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "DsgagenciaBundle::/Trabajos/carousel.html.twig"));
 
         // line 1
         echo "<!-- Carousel
@@ -63,13 +63,13 @@ class __TwigTemplate_c7372eb4b6a124e70f4e27a2e65e06ac7063e905928424468add7cc11f9
             </a>
           </div><!-- /.carousel -->";
         
-        $__internal_8e152eee0ad793ed22287802c76f588a1e8fb784a4bba288c2755b5c136e78bb->leave($__internal_8e152eee0ad793ed22287802c76f588a1e8fb784a4bba288c2755b5c136e78bb_prof);
+        $__internal_4152e9a53ad3fc5f25a729df9bc44c6a04b67bd2376305247b1e041cf7633111->leave($__internal_4152e9a53ad3fc5f25a729df9bc44c6a04b67bd2376305247b1e041cf7633111_prof);
 
     }
 
     public function getTemplateName()
     {
-        return "DsgagenciaBundle:Trabajos:carousel.html.twig";
+        return "DsgagenciaBundle::/Trabajos/carousel.html.twig";
     }
 
     public function getDebugInfo()

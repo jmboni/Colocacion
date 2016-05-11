@@ -84,7 +84,7 @@ swiftmailer:
     
 # ...
 sonata_admin:
-    title: Dsg Admin
+    title: Administración
  
 
 # app/config/config.yml
