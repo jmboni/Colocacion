@@ -15,8 +15,8 @@ class __TwigTemplate_a1b9eae39a4c32d944717e98a2a50c649dd485249a2355450af36feffb3
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_0bcb615259d57f5a141cce51b9411a60e332f420b816574a1a59dc6e87e34cce = $this->env->getExtension("native_profiler");
-        $__internal_0bcb615259d57f5a141cce51b9411a60e332f420b816574a1a59dc6e87e34cce->enter($__internal_0bcb615259d57f5a141cce51b9411a60e332f420b816574a1a59dc6e87e34cce_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "DsgagenciaBundle:Api:trabajos.yaml.twig"));
+        $__internal_a16c11ad4e54cc32e833c830e71e7e2c9fb3bf918f850338cd3a4ae28c57b158 = $this->env->getExtension("native_profiler");
+        $__internal_a16c11ad4e54cc32e833c830e71e7e2c9fb3bf918f850338cd3a4ae28c57b158->enter($__internal_a16c11ad4e54cc32e833c830e71e7e2c9fb3bf918f850338cd3a4ae28c57b158_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "DsgagenciaBundle:Api:trabajos.yaml.twig"));
 
         // line 1
         $context['_parent'] = $context;
@@ -47,7 +47,7 @@ class __TwigTemplate_a1b9eae39a4c32d944717e98a2a50c649dd485249a2355450af36feffb3
         unset($context['_seq'], $context['_iterated'], $context['url'], $context['oferta'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
         
-        $__internal_0bcb615259d57f5a141cce51b9411a60e332f420b816574a1a59dc6e87e34cce->leave($__internal_0bcb615259d57f5a141cce51b9411a60e332f420b816574a1a59dc6e87e34cce_prof);
+        $__internal_a16c11ad4e54cc32e833c830e71e7e2c9fb3bf918f850338cd3a4ae28c57b158->leave($__internal_a16c11ad4e54cc32e833c830e71e7e2c9fb3bf918f850338cd3a4ae28c57b158_prof);
 
     }
 

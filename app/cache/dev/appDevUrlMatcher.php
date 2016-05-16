@@ -254,9 +254,36 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
         }
 
-        // DsgagenciaBundle_api
-        if (0 === strpos($pathinfo, '/api') && preg_match('#^/api/(?P<token>[^/]++)/trabajos\\.(?P<_format>xml|json|yaml)$#s', $pathinfo, $matches)) {
-            return $this->mergeDefaults(array_replace($matches, array('_route' => 'DsgagenciaBundle_api')), array (  '_controller' => 'Dsg\\agenciaBundle\\Controller\\ApiController::listAction',));
+        if (0 === strpos($pathinfo, '/a')) {
+            // DsgagenciaBundle_api
+            if (0 === strpos($pathinfo, '/api') && preg_match('#^/api/(?P<token>[^/]++)/trabajos\\.(?P<_format>xml|json|yaml)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'DsgagenciaBundle_api')), array (  '_controller' => 'Dsg\\agenciaBundle\\Controller\\ApiController::listAction',));
+            }
+
+            if (0 === strpos($pathinfo, '/afiliados')) {
+                // afiliados_new
+                if ($pathinfo === '/afiliados/new') {
+                    return array (  '_controller' => 'Dsg\\agenciaBundle\\Controller\\AfiliadosController::newAction',  '_route' => 'afiliados_new',);
+                }
+
+                // afiliados_create
+                if ($pathinfo === '/afiliados/create') {
+                    if ($this->context->getMethod() != 'POST') {
+                        $allow[] = 'POST';
+                        goto not_afiliados_create;
+                    }
+
+                    return array (  '_controller' => 'Dsg\\agenciaBundle\\Controller\\AfiliadosController::createAction',  '_route' => 'afiliados_create',);
+                }
+                not_afiliados_create:
+
+                // afiliados_wait
+                if ($pathinfo === '/afiliados/wait') {
+                    return array (  '_controller' => 'Dsg\\agenciaBundle\\Controller\\AfiliadosController::waitAction',  '_route' => 'afiliados_wait',);
+                }
+
+            }
+
         }
 
         // homepage

@@ -15,8 +15,8 @@ class __TwigTemplate_c506b30bbb7fa593a466a1bf88a83409e2157e8ba7a4a91d1a4642b8259
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_f4e562566fcdd8cd29b307a4fda7ac17076831f0de64a8aa22906498b8dbfee1 = $this->env->getExtension("native_profiler");
-        $__internal_f4e562566fcdd8cd29b307a4fda7ac17076831f0de64a8aa22906498b8dbfee1->enter($__internal_f4e562566fcdd8cd29b307a4fda7ac17076831f0de64a8aa22906498b8dbfee1_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "DsgagenciaBundle::menu.html.twig"));
+        $__internal_b39b94543f8699fd9ebfd61401084dee9eed3c9572fb035fc4b7ff3439c099ef = $this->env->getExtension("native_profiler");
+        $__internal_b39b94543f8699fd9ebfd61401084dee9eed3c9572fb035fc4b7ff3439c099ef->enter($__internal_b39b94543f8699fd9ebfd61401084dee9eed3c9572fb035fc4b7ff3439c099ef_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "DsgagenciaBundle::menu.html.twig"));
 
         // line 1
         echo " <!-- Fixed navbar -->
@@ -44,6 +44,10 @@ class __TwigTemplate_c506b30bbb7fa593a466a1bf88a83409e2157e8ba7a4a91d1a4642b8259
         // line 16
         echo $this->env->getExtension('routing')->getPath("trabajos_new");
         echo "\" role=\"button\">Nueva Oferta</a><li>
+\t\t\t\t\t\t\t\t<li><a class=\"btn btn-primary\" href=\"";
+        // line 17
+        echo $this->env->getExtension('routing')->getPath("afiliados_new");
+        echo "\" role=\"button\">Registro</a><li>
 \t\t\t\t\t\t\t</ul>
 \t\t\t\t\t\t\t<form class=\"navbar-form navbar-right\" role=\"search\">
 \t\t\t\t\t\t        <div class=\"form-group\">
@@ -55,7 +59,7 @@ class __TwigTemplate_c506b30bbb7fa593a466a1bf88a83409e2157e8ba7a4a91d1a4642b8259
 \t\t\t\t\t</div>
 \t\t\t\t</nav>";
         
-        $__internal_f4e562566fcdd8cd29b307a4fda7ac17076831f0de64a8aa22906498b8dbfee1->leave($__internal_f4e562566fcdd8cd29b307a4fda7ac17076831f0de64a8aa22906498b8dbfee1_prof);
+        $__internal_b39b94543f8699fd9ebfd61401084dee9eed3c9572fb035fc4b7ff3439c099ef->leave($__internal_b39b94543f8699fd9ebfd61401084dee9eed3c9572fb035fc4b7ff3439c099ef_prof);
 
     }
 
@@ -71,7 +75,7 @@ class __TwigTemplate_c506b30bbb7fa593a466a1bf88a83409e2157e8ba7a4a91d1a4642b8259
 
     public function getDebugInfo()
     {
-        return array (  45 => 16,  41 => 15,  34 => 11,  22 => 1,);
+        return array (  49 => 17,  45 => 16,  41 => 15,  34 => 11,  22 => 1,);
     }
 }
 /*  <!-- Fixed navbar -->*/
@@ -90,6 +94,7 @@ class __TwigTemplate_c506b30bbb7fa593a466a1bf88a83409e2157e8ba7a4a91d1a4642b8259
 /* 							<ul class="nav navbar-nav ">*/
 /* 								<li class="active"><a href="{{ path('dsgagencia_index') }}">Inicio</a></li>*/
 /* 								<li><a class="btn btn-primary" href="{{ path('trabajos_new')}}" role="button">Nueva Oferta</a><li>*/
+/* 								<li><a class="btn btn-primary" href="{{ path('afiliados_new')}}" role="button">Registro</a><li>*/
 /* 							</ul>*/
 /* 							<form class="navbar-form navbar-right" role="search">*/
 /* 						        <div class="form-group">*/

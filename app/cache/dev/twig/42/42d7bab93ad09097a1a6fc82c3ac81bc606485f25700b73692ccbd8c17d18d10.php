@@ -15,8 +15,8 @@ class __TwigTemplate_0d9a4e962d6e038be4cf523c5f208bd4b22e3f1a8f23f61f0f834fd7091
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_746557e4dc88224401e78e257003cabf01d5c2642248d595cd41c400107defcb = $this->env->getExtension("native_profiler");
-        $__internal_746557e4dc88224401e78e257003cabf01d5c2642248d595cd41c400107defcb->enter($__internal_746557e4dc88224401e78e257003cabf01d5c2642248d595cd41c400107defcb_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "DsgagenciaBundle:Trabajos:admin.html.twig"));
+        $__internal_4df5ee905e2e5ef6e3bd1c321a3dd835da58058da2f5c1f8c63f4a1a908ada91 = $this->env->getExtension("native_profiler");
+        $__internal_4df5ee905e2e5ef6e3bd1c321a3dd835da58058da2f5c1f8c63f4a1a908ada91->enter($__internal_4df5ee905e2e5ef6e3bd1c321a3dd835da58058da2f5c1f8c63f4a1a908ada91_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "DsgagenciaBundle:Trabajos:admin.html.twig"));
 
         // line 1
         echo "<div id=\"job_actions\">
@@ -108,7 +108,7 @@ class __TwigTemplate_0d9a4e962d6e038be4cf523c5f208bd4b22e3f1a8f23f61f0f834fd7091
         echo "    </div>
 </div>";
         
-        $__internal_746557e4dc88224401e78e257003cabf01d5c2642248d595cd41c400107defcb->leave($__internal_746557e4dc88224401e78e257003cabf01d5c2642248d595cd41c400107defcb_prof);
+        $__internal_4df5ee905e2e5ef6e3bd1c321a3dd835da58058da2f5c1f8c63f4a1a908ada91->leave($__internal_4df5ee905e2e5ef6e3bd1c321a3dd835da58058da2f5c1f8c63f4a1a908ada91_prof);
 
     }
 

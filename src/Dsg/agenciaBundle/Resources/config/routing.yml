@@ -30,3 +30,7 @@ DsgagenciaBundle_api:
     defaults: {_controller: "DsgagenciaBundle:Api:list"}
     requirements:
         _format: xml|json|yaml
+        
+dsgagencia__afiliados:
+    resource: "@DsgagenciaBundle/Resources/config/routing/Afiliados.yml"
+    prefix:   /afiliados

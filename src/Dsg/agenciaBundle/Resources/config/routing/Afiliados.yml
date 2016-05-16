@@ -1,0 +1,12 @@
+afiliados_new:
+    pattern:  /new
+    defaults: { _controller: "DsgagenciaBundle:Afiliados:new" }
+    
+afiliados_create:
+    pattern: /create
+    defaults: { _controller: "DsgagenciaBundle:Afiliados:create" }
+    requirements: { _method: post }
+    
+afiliados_wait:
+    pattern: /wait
+    defaults: { _controller: "DsgagenciaBundle:Afiliados:wait" }

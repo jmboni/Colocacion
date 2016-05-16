@@ -22,3 +22,13 @@ Dsg\agenciaBundle\Entity\Trabajos:
             - Url: ~
         file:
             - Image: ~
+            
+Dsg\agenciaBundle\Entity\Afiliados:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: email
+    properties:
+        url:
+            - Url: ~
+        email:
+            - NotBlank: ~
+            - Email: ~

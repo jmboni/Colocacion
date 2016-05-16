@@ -738,4 +738,15 @@ class Trabajos extends \Dsg\agenciaBundle\Entity\Trabajos implements \Doctrine\O
         return parent::ampliar();
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    public function asArray($host)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'asArray', [$host]);
+
+        return parent::asArray($host);
+    }
+
 }

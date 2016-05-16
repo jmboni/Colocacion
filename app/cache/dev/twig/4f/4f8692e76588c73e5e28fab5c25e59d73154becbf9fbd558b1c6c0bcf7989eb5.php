@@ -15,8 +15,8 @@ class __TwigTemplate_a337a74e52aedf13b5347d7d565cbfd8efa9f9a2d8fafefcaae8f99bec8
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_6e3e682446af82eb042ed5952cad85a988af4525f738ddd019bd060a33944b4f = $this->env->getExtension("native_profiler");
-        $__internal_6e3e682446af82eb042ed5952cad85a988af4525f738ddd019bd060a33944b4f->enter($__internal_6e3e682446af82eb042ed5952cad85a988af4525f738ddd019bd060a33944b4f_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "SonataAdminBundle:CRUD:action_buttons.html.twig"));
+        $__internal_878af3f0c4979be1d8724041b0a699896fded19d973cd18ad279e6b7b5b4d03f = $this->env->getExtension("native_profiler");
+        $__internal_878af3f0c4979be1d8724041b0a699896fded19d973cd18ad279e6b7b5b4d03f->enter($__internal_878af3f0c4979be1d8724041b0a699896fded19d973cd18ad279e6b7b5b4d03f_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "SonataAdminBundle:CRUD:action_buttons.html.twig"));
 
         // line 11
         ob_start();
@@ -63,7 +63,7 @@ class __TwigTemplate_a337a74e52aedf13b5347d7d565cbfd8efa9f9a2d8fafefcaae8f99bec8
         $context = array_intersect_key($context, $_parent) + $_parent;
         echo trim(preg_replace('/>\s+</', '><', ob_get_clean()));
         
-        $__internal_6e3e682446af82eb042ed5952cad85a988af4525f738ddd019bd060a33944b4f->leave($__internal_6e3e682446af82eb042ed5952cad85a988af4525f738ddd019bd060a33944b4f_prof);
+        $__internal_878af3f0c4979be1d8724041b0a699896fded19d973cd18ad279e6b7b5b4d03f->leave($__internal_878af3f0c4979be1d8724041b0a699896fded19d973cd18ad279e6b7b5b4d03f_prof);
 
     }
 
