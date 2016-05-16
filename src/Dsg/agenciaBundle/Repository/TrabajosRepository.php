@@ -12,7 +12,7 @@ use Doctrine\ORM\EntityRepository;
  */
 class TrabajosRepository extends EntityRepository
 {
-    public function getTrabajosActivos($categoria_id = null, $max = null, $offset = null)
+    public function getTrabajosActivos($categoria_id = null, $max = null, $offset = null, $afiliado_id = null)
   {
     $qb = $this->createQueryBuilder('j')
                 ->where('j.finaliza > :date')
@@ -35,7 +35,14 @@ class TrabajosRepository extends EntityRepository
       $qb->andWhere('j.categoria = :categoria_id')
          ->setParameter('categoria_id', $categoria_id);
     }
- 
+    
+    if($afiliado_id) {
+        $qb->leftJoin('j.categoria', 'c')
+            ->leftJoin('c.afiliados', 'a')
+            ->andWhere('a.id = :afiliado_id')
+            ->setParameter('afiliado_id', $afiliado_id);
+   }
+    
     $query = $qb->getQuery();
  
     return $query->getResult();

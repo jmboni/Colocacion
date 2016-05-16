@@ -183,7 +183,7 @@ class Afiliados
      * @param \Dsg\agenciaBundle\Entity\Categoria $categoria
      * @return Afiliados
      */
-    public function addCategorium(\Dsg\agenciaBundle\Entity\Categoria $categoria)
+    public function addCategoria(\Dsg\agenciaBundle\Entity\Categoria $categoria)
     {
         $this->categoria[] = $categoria;
 
@@ -195,7 +195,7 @@ class Afiliados
      *
      * @param \Dsg\agenciaBundle\Entity\Categoria $categoria
      */
-    public function removeCategorium(\Dsg\agenciaBundle\Entity\Categoria $categoria)
+    public function removeCategoria(\Dsg\agenciaBundle\Entity\Categoria $categoria)
     {
         $this->categoria->removeElement($categoria);
     }
@@ -219,5 +219,41 @@ class Afiliados
     
     public function __toString() {
         return $this->getUrl();
+    }
+
+    /**
+     * Add categoria
+     *
+     * @param \Dsg\agenciaBundle\Entity\Categoria $categoria
+     * @return Afiliados
+     */
+    public function addCategorium(\Dsg\agenciaBundle\Entity\Categoria $categoria)
+    {
+        $this->categoria[] = $categoria;
+
+        return $this;
+    }
+
+    /**
+     * Remove categoria
+     *
+     * @param \Dsg\agenciaBundle\Entity\Categoria $categoria
+     */
+    public function removeCategorium(\Dsg\agenciaBundle\Entity\Categoria $categoria)
+    {
+        $this->categoria->removeElement($categoria);
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function setTokenValue()
+    {
+        if(!$this->getToken()) {
+        $token = sha1($this->getEmail().rand(11111, 99999));
+        $this->token = $token;
+    }
+ 
+        return $this;
     }
 }

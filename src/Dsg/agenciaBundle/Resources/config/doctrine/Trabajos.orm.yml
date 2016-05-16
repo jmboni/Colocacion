@@ -55,7 +55,7 @@ Dsg\agenciaBundle\Entity\Trabajos:
     manyToOne:
         categoria:
             targetEntity: Categoria
-            inversedBy: trabajo
+            inversedBy: trabajos
             joinColumn:
                 name: categoria_id
                 referencedColumnName: id

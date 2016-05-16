@@ -1,6 +1,7 @@
 Dsg\agenciaBundle\Entity\Afiliados:
     type: entity
     table: afiliados
+    repositoryClass: Dsg\agenciaBundle\Repository\AfiliadosRepository
     id:
         id:
             type: integer
@@ -34,4 +35,4 @@ Dsg\agenciaBundle\Entity\Afiliados:
                     categoria_id:
                         referencedColumnName: id
     lifecycleCallbacks:
-        prePersist: [ setCreadoValue ]
+        prePersist: [ setCreadoValue, setTokenValue ]

@@ -22,4 +22,4 @@ Dsg\agenciaBundle\Entity\Categoria:
     manyToMany:
         afiliados:
             targetEntity: Afiliados
-            mappedBy: categorias
+            mappedBy: categoria

@@ -147,7 +147,7 @@ class __TwigTemplate_079f4594f91d9fb4bc610bfdf7678c257e4469236efcd03fdaae2a54f9e
         // line 57
         echo twig_escape_filter($this->env, twig_date_format_filter($this->env, $this->getAttribute((isset($context["entity"]) ? $context["entity"] : null), "creado", array()), "m/d/Y"), "html", null, true);
         echo "</small>
-                </div>
+                    </div>
             </div>
         </div>
     </div>
@@ -226,7 +226,7 @@ class __TwigTemplate_079f4594f91d9fb4bc610bfdf7678c257e4469236efcd03fdaae2a54f9e
 /*                     un pie para el panel (alineado a la derecha) con un botón predeterminado -->*/
 /*                     <div class="panel-footer text-right">*/
 /*                         <small>Creado el {{ entity.creado|date('m/d/Y') }}</small>*/
-/*                 </div>*/
+/*                     </div>*/
 /*             </div>*/
 /*         </div>*/
 /*     </div>*/

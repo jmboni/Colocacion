@@ -133,6 +133,32 @@ class appProdUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirecta
             return $this->mergeDefaults(array_replace($matches, array('_route' => 'dsgagencia_categoria')), array (  '_controller' => 'Dsg\\agenciaBundle\\Controller\\CategoriaController::showAction',  'page' => 1,));
         }
 
+        if (0 === strpos($pathinfo, '/log')) {
+            if (0 === strpos($pathinfo, '/login')) {
+                // login
+                if ($pathinfo === '/login') {
+                    return array (  '_controller' => 'Dsg\\agenciaBundle\\Controller\\DefaultController::loginAction',  '_route' => 'login',);
+                }
+
+                // login_check
+                if ($pathinfo === '/login_check') {
+                    return array('_route' => 'login_check');
+                }
+
+            }
+
+            // logout
+            if ($pathinfo === '/logout') {
+                return array('_route' => 'logout');
+            }
+
+        }
+
+        // DsgagenciaBundle_api
+        if (0 === strpos($pathinfo, '/api') && preg_match('#^/api/(?P<token>[^/]++)/trabajos\\.(?P<_format>xml|json|yaml)$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'DsgagenciaBundle_api')), array (  '_controller' => 'DsgagenciaBundle:Api:list',));
+        }
+
         // homepage
         if (rtrim($pathinfo, '/') === '') {
             if (substr($pathinfo, -1) !== '/') {
@@ -188,6 +214,85 @@ class appProdUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirecta
             // sonata_admin_retrieve_autocomplete_items
             if ($pathinfo === '/admin/core/get-autocomplete-items') {
                 return array (  '_controller' => 'sonata.admin.controller.admin:retrieveAutocompleteItemsAction',  '_route' => 'sonata_admin_retrieve_autocomplete_items',);
+            }
+
+            if (0 === strpos($pathinfo, '/admin/dsg/agencia')) {
+                if (0 === strpos($pathinfo, '/admin/dsg/agencia/categoria')) {
+                    // admin_dsg_agencia_categoria_list
+                    if ($pathinfo === '/admin/dsg/agencia/categoria/list') {
+                        return array (  '_controller' => 'Dsg\\agenciaBundle\\Controller\\CategoriaAdminController::listAction',  '_sonata_admin' => 'dsg.agencia.admin.categoria',  '_sonata_name' => 'admin_dsg_agencia_categoria_list',  '_route' => 'admin_dsg_agencia_categoria_list',);
+                    }
+
+                    // admin_dsg_agencia_categoria_create
+                    if ($pathinfo === '/admin/dsg/agencia/categoria/create') {
+                        return array (  '_controller' => 'Dsg\\agenciaBundle\\Controller\\CategoriaAdminController::createAction',  '_sonata_admin' => 'dsg.agencia.admin.categoria',  '_sonata_name' => 'admin_dsg_agencia_categoria_create',  '_route' => 'admin_dsg_agencia_categoria_create',);
+                    }
+
+                    // admin_dsg_agencia_categoria_batch
+                    if ($pathinfo === '/admin/dsg/agencia/categoria/batch') {
+                        return array (  '_controller' => 'Dsg\\agenciaBundle\\Controller\\CategoriaAdminController::batchAction',  '_sonata_admin' => 'dsg.agencia.admin.categoria',  '_sonata_name' => 'admin_dsg_agencia_categoria_batch',  '_route' => 'admin_dsg_agencia_categoria_batch',);
+                    }
+
+                    // admin_dsg_agencia_categoria_edit
+                    if (preg_match('#^/admin/dsg/agencia/categoria/(?P<id>[^/]++)/edit$#s', $pathinfo, $matches)) {
+                        return $this->mergeDefaults(array_replace($matches, array('_route' => 'admin_dsg_agencia_categoria_edit')), array (  '_controller' => 'Dsg\\agenciaBundle\\Controller\\CategoriaAdminController::editAction',  '_sonata_admin' => 'dsg.agencia.admin.categoria',  '_sonata_name' => 'admin_dsg_agencia_categoria_edit',));
+                    }
+
+                    // admin_dsg_agencia_categoria_delete
+                    if (preg_match('#^/admin/dsg/agencia/categoria/(?P<id>[^/]++)/delete$#s', $pathinfo, $matches)) {
+                        return $this->mergeDefaults(array_replace($matches, array('_route' => 'admin_dsg_agencia_categoria_delete')), array (  '_controller' => 'Dsg\\agenciaBundle\\Controller\\CategoriaAdminController::deleteAction',  '_sonata_admin' => 'dsg.agencia.admin.categoria',  '_sonata_name' => 'admin_dsg_agencia_categoria_delete',));
+                    }
+
+                    // admin_dsg_agencia_categoria_show
+                    if (preg_match('#^/admin/dsg/agencia/categoria/(?P<id>[^/]++)/show$#s', $pathinfo, $matches)) {
+                        return $this->mergeDefaults(array_replace($matches, array('_route' => 'admin_dsg_agencia_categoria_show')), array (  '_controller' => 'Dsg\\agenciaBundle\\Controller\\CategoriaAdminController::showAction',  '_sonata_admin' => 'dsg.agencia.admin.categoria',  '_sonata_name' => 'admin_dsg_agencia_categoria_show',));
+                    }
+
+                    // admin_dsg_agencia_categoria_export
+                    if ($pathinfo === '/admin/dsg/agencia/categoria/export') {
+                        return array (  '_controller' => 'Dsg\\agenciaBundle\\Controller\\CategoriaAdminController::exportAction',  '_sonata_admin' => 'dsg.agencia.admin.categoria',  '_sonata_name' => 'admin_dsg_agencia_categoria_export',  '_route' => 'admin_dsg_agencia_categoria_export',);
+                    }
+
+                }
+
+                if (0 === strpos($pathinfo, '/admin/dsg/agencia/trabajos')) {
+                    // admin_dsg_agencia_trabajos_list
+                    if ($pathinfo === '/admin/dsg/agencia/trabajos/list') {
+                        return array (  '_controller' => 'Dsg\\agenciaBundle\\Controller\\TrabajosAdminController::listAction',  '_sonata_admin' => 'dsg.agencia.admin.trabajos',  '_sonata_name' => 'admin_dsg_agencia_trabajos_list',  '_route' => 'admin_dsg_agencia_trabajos_list',);
+                    }
+
+                    // admin_dsg_agencia_trabajos_create
+                    if ($pathinfo === '/admin/dsg/agencia/trabajos/create') {
+                        return array (  '_controller' => 'Dsg\\agenciaBundle\\Controller\\TrabajosAdminController::createAction',  '_sonata_admin' => 'dsg.agencia.admin.trabajos',  '_sonata_name' => 'admin_dsg_agencia_trabajos_create',  '_route' => 'admin_dsg_agencia_trabajos_create',);
+                    }
+
+                    // admin_dsg_agencia_trabajos_batch
+                    if ($pathinfo === '/admin/dsg/agencia/trabajos/batch') {
+                        return array (  '_controller' => 'Dsg\\agenciaBundle\\Controller\\TrabajosAdminController::batchAction',  '_sonata_admin' => 'dsg.agencia.admin.trabajos',  '_sonata_name' => 'admin_dsg_agencia_trabajos_batch',  '_route' => 'admin_dsg_agencia_trabajos_batch',);
+                    }
+
+                    // admin_dsg_agencia_trabajos_edit
+                    if (preg_match('#^/admin/dsg/agencia/trabajos/(?P<id>[^/]++)/edit$#s', $pathinfo, $matches)) {
+                        return $this->mergeDefaults(array_replace($matches, array('_route' => 'admin_dsg_agencia_trabajos_edit')), array (  '_controller' => 'Dsg\\agenciaBundle\\Controller\\TrabajosAdminController::editAction',  '_sonata_admin' => 'dsg.agencia.admin.trabajos',  '_sonata_name' => 'admin_dsg_agencia_trabajos_edit',));
+                    }
+
+                    // admin_dsg_agencia_trabajos_delete
+                    if (preg_match('#^/admin/dsg/agencia/trabajos/(?P<id>[^/]++)/delete$#s', $pathinfo, $matches)) {
+                        return $this->mergeDefaults(array_replace($matches, array('_route' => 'admin_dsg_agencia_trabajos_delete')), array (  '_controller' => 'Dsg\\agenciaBundle\\Controller\\TrabajosAdminController::deleteAction',  '_sonata_admin' => 'dsg.agencia.admin.trabajos',  '_sonata_name' => 'admin_dsg_agencia_trabajos_delete',));
+                    }
+
+                    // admin_dsg_agencia_trabajos_show
+                    if (preg_match('#^/admin/dsg/agencia/trabajos/(?P<id>[^/]++)/show$#s', $pathinfo, $matches)) {
+                        return $this->mergeDefaults(array_replace($matches, array('_route' => 'admin_dsg_agencia_trabajos_show')), array (  '_controller' => 'Dsg\\agenciaBundle\\Controller\\TrabajosAdminController::showAction',  '_sonata_admin' => 'dsg.agencia.admin.trabajos',  '_sonata_name' => 'admin_dsg_agencia_trabajos_show',));
+                    }
+
+                    // admin_dsg_agencia_trabajos_export
+                    if ($pathinfo === '/admin/dsg/agencia/trabajos/export') {
+                        return array (  '_controller' => 'Dsg\\agenciaBundle\\Controller\\TrabajosAdminController::exportAction',  '_sonata_admin' => 'dsg.agencia.admin.trabajos',  '_sonata_name' => 'admin_dsg_agencia_trabajos_export',  '_route' => 'admin_dsg_agencia_trabajos_export',);
+                    }
+
+                }
+
             }
 
         }

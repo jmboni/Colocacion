@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <title>DSG ({{ categoria.nombre }})</title>
+    <subtitle>Últimos Trabajos</subtitle>
+    <link href={{ url('DsgagenciaBundle_categoria', { 'slug': categoria.slug, '_format': 'atom' }) }} rel="self" />
+    <updated>{{ lastUpdated }}</updated>
+    <author><name>DSG</name></author>
+    <id>{{ feedId }}</id>
+ 
+    {% for entity in categoria.trabajosactivos %}
+        <entry>
+            <title>{{ entity.posicion }} ({{ entity.localidad }})</title>
+            <link href={{ url('trabajos_show', { 'id': entity.id, 'compania': entity.companiaslug, 'localidad': entity.localidadslug, 'posicion': entity.posicionslug }) }} />
+            <id>{{ entity.id }}</id>
+            <updated>{{ entity.creado.format(constant('DATE_ATOM')) }}</updated>
+            <summary type="xhtml">
+                <div xmlns="http://www.w3.org/1999/xhtml">
+                    {% if entity.logo %}
+                        <div>
+                            <a href={{ entity.url }}>
+                                <img src="http://{{ app.request.host }}/uploads/jobs/{{ entity.logo }} alt={{ entity.compania }} logo" />
+                            </a>
+                        </div>
+                    {% endif %}
+                    <div>
+                        {{ entity.descripcion|nl2br }}
+                    </div>
+                    <h4>Como acceder a la oferta</h4>
+                    <p>{{ entity.how_to_apply }}</p>
+                </div>
+            </summary>
+            <author><name>{{ entity.compania }}</name></author>
+        </entry>
+    {% endfor %}
+</feed>

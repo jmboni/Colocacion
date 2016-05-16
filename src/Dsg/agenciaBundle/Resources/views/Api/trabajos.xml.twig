@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trabajos>
+{% for url, trabajo in trabajos %}
+    <oferta url="{{ url }}">
+        {% for key,value in trabajo %}
+                <{{ key }}>{{ value }}</{{ key }}>
+        {% endfor %}
+    </oferta>
+{% endfor %}
+</trabajos>

@@ -20,20 +20,20 @@ class __TwigTemplate_e2ea982a7eac7deec270f888458001ee03650c01277f258b4740c9e336e
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_3c8d97e49f1feb2faf54778864e4eee86f6946bf8732b9f7f3229a7b21d01ea0 = $this->env->getExtension("native_profiler");
-        $__internal_3c8d97e49f1feb2faf54778864e4eee86f6946bf8732b9f7f3229a7b21d01ea0->enter($__internal_3c8d97e49f1feb2faf54778864e4eee86f6946bf8732b9f7f3229a7b21d01ea0_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "SonataAdminBundle:CRUD:list__batch.html.twig"));
+        $__internal_849ae2463ca8fe678734cf2c796ba3e9abd12585194e7a4372fb80d9eed01167 = $this->env->getExtension("native_profiler");
+        $__internal_849ae2463ca8fe678734cf2c796ba3e9abd12585194e7a4372fb80d9eed01167->enter($__internal_849ae2463ca8fe678734cf2c796ba3e9abd12585194e7a4372fb80d9eed01167_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "SonataAdminBundle:CRUD:list__batch.html.twig"));
 
         $this->getParent($context)->display($context, array_merge($this->blocks, $blocks));
         
-        $__internal_3c8d97e49f1feb2faf54778864e4eee86f6946bf8732b9f7f3229a7b21d01ea0->leave($__internal_3c8d97e49f1feb2faf54778864e4eee86f6946bf8732b9f7f3229a7b21d01ea0_prof);
+        $__internal_849ae2463ca8fe678734cf2c796ba3e9abd12585194e7a4372fb80d9eed01167->leave($__internal_849ae2463ca8fe678734cf2c796ba3e9abd12585194e7a4372fb80d9eed01167_prof);
 
     }
 
     // line 14
     public function block_field($context, array $blocks = array())
     {
-        $__internal_bdc0040ad1837434c546920aafed935a971296c4d649fdacc060fb1895b2b75c = $this->env->getExtension("native_profiler");
-        $__internal_bdc0040ad1837434c546920aafed935a971296c4d649fdacc060fb1895b2b75c->enter($__internal_bdc0040ad1837434c546920aafed935a971296c4d649fdacc060fb1895b2b75c_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "field"));
+        $__internal_9495985d8f0e75a0e685fbd87282a544d66c46cd3d4af7e146d0a379240ceaf1 = $this->env->getExtension("native_profiler");
+        $__internal_9495985d8f0e75a0e685fbd87282a544d66c46cd3d4af7e146d0a379240ceaf1->enter($__internal_9495985d8f0e75a0e685fbd87282a544d66c46cd3d4af7e146d0a379240ceaf1_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "field"));
 
         // line 15
         echo "    <input type=\"checkbox\" name=\"idx[]\" value=\"";
@@ -41,7 +41,7 @@ class __TwigTemplate_e2ea982a7eac7deec270f888458001ee03650c01277f258b4740c9e336e
         echo "\">
 ";
         
-        $__internal_bdc0040ad1837434c546920aafed935a971296c4d649fdacc060fb1895b2b75c->leave($__internal_bdc0040ad1837434c546920aafed935a971296c4d649fdacc060fb1895b2b75c_prof);
+        $__internal_9495985d8f0e75a0e685fbd87282a544d66c46cd3d4af7e146d0a379240ceaf1->leave($__internal_9495985d8f0e75a0e685fbd87282a544d66c46cd3d4af7e146d0a379240ceaf1_prof);
 
     }
 

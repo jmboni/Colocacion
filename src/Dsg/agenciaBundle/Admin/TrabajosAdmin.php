@@ -20,6 +20,7 @@ class TrabajosAdmin extends Admin
  
     protected function configureFormFields(FormMapper $formMapper)
     {
+        
         $formMapper
             ->add('categoria')
             ->add('tipo', 'choice', array('choices' => Trabajos::getTipos(), 'expanded' => true))
@@ -53,6 +54,7 @@ class TrabajosAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
+            ->add('logo', null, array('template' => 'DsgagenciaBundle:TrabajosAdmin:imagen.html.twig'))
             ->addIdentifier('compania')
             ->add('posicion')
             ->add('localidad')
@@ -71,13 +73,15 @@ class TrabajosAdmin extends Admin
         ;
     }
  
-    protected function configureShowField(ShowMapper $showMapper)
+    protected function configureShowFields(ShowMapper $showMapper)
     {
+        
         $showMapper
             ->add('categoria')
             ->add('tipo')
+            ->add('logo', null, array('template' => 'DsgagenciaBundle:TrabajosAdmin:imagen.html.twig'))
+            ->add('webPath')
             ->add('compania')
-            ->add('webPath', 'string', array('template' => 'DsgagenciaBundle:TrabajosAdmin:lista_logo.html.twig'))
             ->add('url')
             ->add('posicion')
             ->add('localidad')
@@ -90,6 +94,7 @@ class TrabajosAdmin extends Admin
             ->add('finaliza')
         ;
     }
+    
     
     public function getBatchActions()
 {

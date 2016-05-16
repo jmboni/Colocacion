@@ -22,20 +22,20 @@ class __TwigTemplate_e8b43b03cd9ccf0f48ff1dd271e66b0a1f305cd11e510500b4696496507
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_0f98fff3c47ce9ae45e984f3dce37bc6bec4aac32d45026899ecc8d76fddb6a3 = $this->env->getExtension("native_profiler");
-        $__internal_0f98fff3c47ce9ae45e984f3dce37bc6bec4aac32d45026899ecc8d76fddb6a3->enter($__internal_0f98fff3c47ce9ae45e984f3dce37bc6bec4aac32d45026899ecc8d76fddb6a3_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "DsgagenciaBundle:Trabajos:show.html.twig"));
+        $__internal_c15de66f5025e008f8705a2f92ff1ac3aed4eef39fd99f357b25b6d19df97f69 = $this->env->getExtension("native_profiler");
+        $__internal_c15de66f5025e008f8705a2f92ff1ac3aed4eef39fd99f357b25b6d19df97f69->enter($__internal_c15de66f5025e008f8705a2f92ff1ac3aed4eef39fd99f357b25b6d19df97f69_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "DsgagenciaBundle:Trabajos:show.html.twig"));
 
         $this->parent->display($context, array_merge($this->blocks, $blocks));
         
-        $__internal_0f98fff3c47ce9ae45e984f3dce37bc6bec4aac32d45026899ecc8d76fddb6a3->leave($__internal_0f98fff3c47ce9ae45e984f3dce37bc6bec4aac32d45026899ecc8d76fddb6a3_prof);
+        $__internal_c15de66f5025e008f8705a2f92ff1ac3aed4eef39fd99f357b25b6d19df97f69->leave($__internal_c15de66f5025e008f8705a2f92ff1ac3aed4eef39fd99f357b25b6d19df97f69_prof);
 
     }
 
     // line 3
     public function block_stylesheets($context, array $blocks = array())
     {
-        $__internal_4191fc5dd2ac9189ff20558927bddc13406159f66a77ed4d59e4bc55e682e98a = $this->env->getExtension("native_profiler");
-        $__internal_4191fc5dd2ac9189ff20558927bddc13406159f66a77ed4d59e4bc55e682e98a->enter($__internal_4191fc5dd2ac9189ff20558927bddc13406159f66a77ed4d59e4bc55e682e98a_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "stylesheets"));
+        $__internal_6e8e28aa0989c5c5e70fd4af9a2e133250571a42018ca129bf3e1b0577330eba = $this->env->getExtension("native_profiler");
+        $__internal_6e8e28aa0989c5c5e70fd4af9a2e133250571a42018ca129bf3e1b0577330eba->enter($__internal_6e8e28aa0989c5c5e70fd4af9a2e133250571a42018ca129bf3e1b0577330eba_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "stylesheets"));
 
         // line 4
         echo "    <!-- CSS carousel-->
@@ -49,15 +49,15 @@ class __TwigTemplate_e8b43b03cd9ccf0f48ff1dd271e66b0a1f305cd11e510500b4696496507
         echo "
 ";
         
-        $__internal_4191fc5dd2ac9189ff20558927bddc13406159f66a77ed4d59e4bc55e682e98a->leave($__internal_4191fc5dd2ac9189ff20558927bddc13406159f66a77ed4d59e4bc55e682e98a_prof);
+        $__internal_6e8e28aa0989c5c5e70fd4af9a2e133250571a42018ca129bf3e1b0577330eba->leave($__internal_6e8e28aa0989c5c5e70fd4af9a2e133250571a42018ca129bf3e1b0577330eba_prof);
 
     }
 
     // line 9
     public function block_content($context, array $blocks = array())
     {
-        $__internal_5046d15756ff2de2b5cbe95407325c94f716e5a5107b82844579a678ece310a0 = $this->env->getExtension("native_profiler");
-        $__internal_5046d15756ff2de2b5cbe95407325c94f716e5a5107b82844579a678ece310a0->enter($__internal_5046d15756ff2de2b5cbe95407325c94f716e5a5107b82844579a678ece310a0_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "content"));
+        $__internal_8a66827cc44ddadf1b425bfff4ade082770f0e955aebc856774cc8e007564abc = $this->env->getExtension("native_profiler");
+        $__internal_8a66827cc44ddadf1b425bfff4ade082770f0e955aebc856774cc8e007564abc->enter($__internal_8a66827cc44ddadf1b425bfff4ade082770f0e955aebc856774cc8e007564abc_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "content"));
 
         // line 10
         echo "    
@@ -162,13 +162,13 @@ class __TwigTemplate_e8b43b03cd9ccf0f48ff1dd271e66b0a1f305cd11e510500b4696496507
         // line 57
         echo twig_escape_filter($this->env, twig_date_format_filter($this->env, $this->getAttribute((isset($context["entity"]) ? $context["entity"] : $this->getContext($context, "entity")), "creado", array()), "m/d/Y"), "html", null, true);
         echo "</small>
-                </div>
+                    </div>
             </div>
         </div>
     </div>
 ";
         
-        $__internal_5046d15756ff2de2b5cbe95407325c94f716e5a5107b82844579a678ece310a0->leave($__internal_5046d15756ff2de2b5cbe95407325c94f716e5a5107b82844579a678ece310a0_prof);
+        $__internal_8a66827cc44ddadf1b425bfff4ade082770f0e955aebc856774cc8e007564abc->leave($__internal_8a66827cc44ddadf1b425bfff4ade082770f0e955aebc856774cc8e007564abc_prof);
 
     }
 
@@ -244,7 +244,7 @@ class __TwigTemplate_e8b43b03cd9ccf0f48ff1dd271e66b0a1f305cd11e510500b4696496507
 /*                     un pie para el panel (alineado a la derecha) con un botón predeterminado -->*/
 /*                     <div class="panel-footer text-right">*/
 /*                         <small>Creado el {{ entity.creado|date('m/d/Y') }}</small>*/
-/*                 </div>*/
+/*                     </div>*/
 /*             </div>*/
 /*         </div>*/
 /*     </div>*/

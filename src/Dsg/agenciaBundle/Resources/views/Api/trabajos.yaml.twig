@@ -1,0 +1,6 @@
+{% for url,oferta in trabajos %}
+    Url: {{ url }}
+{% for key, value in oferta %}
+        {{ key }}: {{ value }}
+{% endfor %}
+{% endfor %}

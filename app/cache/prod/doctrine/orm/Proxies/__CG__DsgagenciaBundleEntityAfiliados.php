@@ -301,23 +301,23 @@ class Afiliados extends \Dsg\agenciaBundle\Entity\Afiliados implements \Doctrine
     /**
      * {@inheritDoc}
      */
-    public function addCategorium(\Dsg\agenciaBundle\Entity\Categoria $categoria)
+    public function addCategoria(\Dsg\agenciaBundle\Entity\Categoria $categoria)
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'addCategorium', [$categoria]);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'addCategoria', [$categoria]);
 
-        return parent::addCategorium($categoria);
+        return parent::addCategoria($categoria);
     }
 
     /**
      * {@inheritDoc}
      */
-    public function removeCategorium(\Dsg\agenciaBundle\Entity\Categoria $categoria)
+    public function removeCategoria(\Dsg\agenciaBundle\Entity\Categoria $categoria)
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeCategorium', [$categoria]);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeCategoria', [$categoria]);
 
-        return parent::removeCategorium($categoria);
+        return parent::removeCategoria($categoria);
     }
 
     /**
@@ -351,6 +351,39 @@ class Afiliados extends \Dsg\agenciaBundle\Entity\Afiliados implements \Doctrine
         $this->__initializer__ && $this->__initializer__->__invoke($this, '__toString', []);
 
         return parent::__toString();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function addCategorium(\Dsg\agenciaBundle\Entity\Categoria $categoria)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'addCategorium', [$categoria]);
+
+        return parent::addCategorium($categoria);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function removeCategorium(\Dsg\agenciaBundle\Entity\Categoria $categoria)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeCategorium', [$categoria]);
+
+        return parent::removeCategorium($categoria);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setTokenValue()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setTokenValue', []);
+
+        return parent::setTokenValue();
     }
 
 }

@@ -19,7 +19,7 @@
             <link rel="stylesheet" href="{{ asset('public/css/bootstrap.min.css') }}" type="text/css" media="all" />
             
             <!--BUscador-->
-            <link rel="stylesheet" href="{{ asset('public/css/buscador.css') }}" type="text/css" media="all" />
+            <link rel="stylesheet" href="{{ asset('public/css/general.css') }}" type="text/css" media="all" />
             
             <!--Pie de página fijo-->
             <link rel="stylesheet" href="{{ asset('public/css/sticky-footer-navbar.css') }}" type="text/css" media="all" />
@@ -50,33 +50,49 @@
       {% endblock %}
       <!--Incluimos el buscador-->
       {% block formulario %}{% endblock %}
-      <!--Cargamos el contenido de la página-->
-      <div class="container marketing">
-        <div id="content">
-          {% for flashMessage in app.session.flashbag.get('notice') %}
-            <div class="flash_notice">
-              {{ flashMessage }}
-            </div>
-          {% endfor %}
-          {% for flashMessage in app.session.flashbag.get('error') %}
-            <div class="flash_error">
-              {{ flashMessage }}
-            </div>
-          {% endfor %}
-          
-          <!--Añadimos el contenido-->
-          <div class="content">
-            {% block content %}
-            {% endblock %}
+      <div id="principal">
+        <!--Cargamos el contenido de la página-->
+        <div class="container marketing">
+          <div id="job_history">
+            Últimas ofertas visitadas:
+              <ul>
+                  {% for trabajo in app.session.get('historial_trabajos') %}
+                      <li>
+                          <a href={{ path('trabajos_show', { 'id': trabajo.id, 'compania': trabajo.companiaslug, 'localidad': trabajo.localidadslug, 'posicion': trabajo.posicionslug }) }}>{{ trabajo.posicion }} - {{ trabajo.compania }}</a>
+                      </li>
+                  {% endfor %}
+              </ul>
           </div>
+          {% for flashMessage in app.session.flashbag.get('notice') %}
+            <div>
+              {{ flassMessage }}
+            </div>
+          {% endfor %}
+          <div id="content">
+            {% for flashMessage in app.session.flashbag.get('notice') %}
+              <div class="flash_notice">
+                {{ flashMessage }}
+              </div>
+            {% endfor %}
+            {% for flashMessage in app.session.flashbag.get('error') %}
+              <div class="flash_error">
+                {{ flashMessage }}
+              </div>
+            {% endfor %}
+            
+            <!--Añadimos el contenido-->
+            <div class="content">
+              {% block content %}
+              {% endblock %}
+            </div>
+          </div>
+          </div><!-- /.container -->
         </div>
-        </div><!-- /.container -->
-        
         
         <!-- FOOTER -->
         <footer class="clase-general">
-          <p class="footer"><a class="pull-right" href="#">Back to top</a>
-            &copy; 2015 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a>
+          <p class="footer"><a class="pull-right" href="#">Subir</a>
+            &copy; 2016 Compañia, Inc. &middot; <a href="#">Privacidad</a> &middot; <a href="#">Terms</a>
           </p>
         </footer>
        

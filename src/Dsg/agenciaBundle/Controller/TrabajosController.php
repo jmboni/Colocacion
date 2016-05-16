@@ -24,7 +24,7 @@ class TrabajosController extends Controller
     public function indexAction()
     {
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         
         $categorias = $em->getRepository('DsgagenciaBundle:Categoria')->getTrabajosCategorias();
         
@@ -36,10 +36,14 @@ class TrabajosController extends Controller
                    ->countTrabajosActivos($categoria->getId()) -  $this->container->getParameter('max_trabajos_indexpag')
             );
         }
-
-        return $this->render('DsgagenciaBundle:Trabajos:index.html.twig', array(
+        
+        
+        $format = $this->getRequest()->getRequestFormat();
+        
+        return $this->render('DsgagenciaBundle:Trabajos:index.'.$format.'.twig', array(
             'categorias' => $categorias,
         ));
+
     }
    
     
@@ -132,6 +136,24 @@ class TrabajosController extends Controller
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Trabajos entity.');
         }
+        
+        
+        $session = $this->getRequest()->getSession();
+ 
+        // fetch jobs already stored in the job history
+        $trabajos = $session->get('historial_trabajos', array());
+     
+        // store the job as an array so we can put it in the session and avoid entity serialize errors
+        $trabajo = array('id' => $entity->getId(), 'posicion' =>$entity->getPosicion(), 'compania' => $entity->getCompania(), 'companiaslug' => $entity->getCompaniaSlug(), 'localidadslug' => $entity->getLocalidadSlug(), 'posicionslug' => $entity->getPosicionSlug());
+     
+        if (!in_array($trabajo, $trabajos)) {
+            // add the current job at the beginning of the array
+            array_unshift($trabajos, $trabajo);
+     
+            // store the new job history back into the session
+            $session->set('historial_trabajos', array_slice($trabajos, 0, 3));
+        }
+
 
         $deleteForm = $this->createDeleteForm($id);
 

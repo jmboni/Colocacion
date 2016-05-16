@@ -64,19 +64,46 @@ class __TwigTemplate_4efc65b0b79bf751173f2d6117f65bc26658cf42a0cb50b3cb8d91203a8
         // line 52
         $this->displayBlock('formulario', $context, $blocks);
         // line 53
-        echo "      <!--Cargamos el contenido de la página-->
-      <div class=\"container marketing\">
-        <div id=\"content\">
+        echo "      <div id=\"principal\">
+        <!--Cargamos el contenido de la página-->
+        <div class=\"container marketing\">
+          <div id=\"job_history\">
+            Últimas ofertas visitadas:
+              <ul>
+                  ";
+        // line 59
+        $context['_parent'] = $context;
+        $context['_seq'] = twig_ensure_traversable($this->getAttribute($this->getAttribute((isset($context["app"]) ? $context["app"] : null), "session", array()), "get", array(0 => "historial_trabajos"), "method"));
+        foreach ($context['_seq'] as $context["_key"] => $context["trabajo"]) {
+            // line 60
+            echo "                      <li>
+                          <a href=";
+            // line 61
+            echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("trabajos_show", array("id" => $this->getAttribute($context["trabajo"], "id", array()), "compania" => $this->getAttribute($context["trabajo"], "companiaslug", array()), "localidad" => $this->getAttribute($context["trabajo"], "localidadslug", array()), "posicion" => $this->getAttribute($context["trabajo"], "posicionslug", array()))), "html", null, true);
+            echo ">";
+            echo twig_escape_filter($this->env, $this->getAttribute($context["trabajo"], "posicion", array()), "html", null, true);
+            echo " - ";
+            echo twig_escape_filter($this->env, $this->getAttribute($context["trabajo"], "compania", array()), "html", null, true);
+            echo "</a>
+                      </li>
+                  ";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['trabajo'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 64
+        echo "              </ul>
+          </div>
           ";
-        // line 56
+        // line 66
         $context['_parent'] = $context;
         $context['_seq'] = twig_ensure_traversable($this->getAttribute($this->getAttribute($this->getAttribute((isset($context["app"]) ? $context["app"] : null), "session", array()), "flashbag", array()), "get", array(0 => "notice"), "method"));
         foreach ($context['_seq'] as $context["_key"] => $context["flashMessage"]) {
-            // line 57
-            echo "            <div class=\"flash_notice\">
+            // line 67
+            echo "            <div>
               ";
-            // line 58
-            echo twig_escape_filter($this->env, $context["flashMessage"], "html", null, true);
+            // line 68
+            echo twig_escape_filter($this->env, (isset($context["flassMessage"]) ? $context["flassMessage"] : null), "html", null, true);
             echo "
             </div>
           ";
@@ -84,47 +111,66 @@ class __TwigTemplate_4efc65b0b79bf751173f2d6117f65bc26658cf42a0cb50b3cb8d91203a8
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['flashMessage'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 61
-        echo "          ";
+        // line 71
+        echo "          <div id=\"content\">
+            ";
+        // line 72
+        $context['_parent'] = $context;
+        $context['_seq'] = twig_ensure_traversable($this->getAttribute($this->getAttribute($this->getAttribute((isset($context["app"]) ? $context["app"] : null), "session", array()), "flashbag", array()), "get", array(0 => "notice"), "method"));
+        foreach ($context['_seq'] as $context["_key"] => $context["flashMessage"]) {
+            // line 73
+            echo "              <div class=\"flash_notice\">
+                ";
+            // line 74
+            echo twig_escape_filter($this->env, $context["flashMessage"], "html", null, true);
+            echo "
+              </div>
+            ";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['flashMessage'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 77
+        echo "            ";
         $context['_parent'] = $context;
         $context['_seq'] = twig_ensure_traversable($this->getAttribute($this->getAttribute($this->getAttribute((isset($context["app"]) ? $context["app"] : null), "session", array()), "flashbag", array()), "get", array(0 => "error"), "method"));
         foreach ($context['_seq'] as $context["_key"] => $context["flashMessage"]) {
-            // line 62
-            echo "            <div class=\"flash_error\">
-              ";
-            // line 63
+            // line 78
+            echo "              <div class=\"flash_error\">
+                ";
+            // line 79
             echo twig_escape_filter($this->env, $context["flashMessage"], "html", null, true);
             echo "
-            </div>
-          ";
+              </div>
+            ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['flashMessage'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 66
-        echo "          
-          <!--Añadimos el contenido-->
-          <div class=\"content\">
-            ";
-        // line 69
+        // line 82
+        echo "            
+            <!--Añadimos el contenido-->
+            <div class=\"content\">
+              ";
+        // line 85
         $this->displayBlock('content', $context, $blocks);
-        // line 71
-        echo "          </div>
+        // line 87
+        echo "            </div>
+          </div>
+          </div><!-- /.container -->
         </div>
-        </div><!-- /.container -->
-        
         
         <!-- FOOTER -->
         <footer class=\"clase-general\">
-          <p class=\"footer\"><a class=\"pull-right\" href=\"#\">Back to top</a>
-            &copy; 2015 Company, Inc. &middot; <a href=\"#\">Privacy</a> &middot; <a href=\"#\">Terms</a>
+          <p class=\"footer\"><a class=\"pull-right\" href=\"#\">Subir</a>
+            &copy; 2016 Compañia, Inc. &middot; <a href=\"#\">Privacidad</a> &middot; <a href=\"#\">Terms</a>
           </p>
         </footer>
        
       ";
-        // line 83
+        // line 99
         $this->displayBlock('javascripts', $context, $blocks);
-        // line 95
+        // line 111
         echo "   </body>
 </html>";
     }
@@ -148,7 +194,7 @@ class __TwigTemplate_4efc65b0b79bf751173f2d6117f65bc26658cf42a0cb50b3cb8d91203a8
             <!--BUscador-->
             <link rel=\"stylesheet\" href=\"";
         // line 22
-        echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("public/css/buscador.css"), "html", null, true);
+        echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("public/css/general.css"), "html", null, true);
         echo "\" type=\"text/css\" media=\"all\" />
             
             <!--Pie de página fijo-->
@@ -197,40 +243,40 @@ class __TwigTemplate_4efc65b0b79bf751173f2d6117f65bc26658cf42a0cb50b3cb8d91203a8
     {
     }
 
-    // line 69
+    // line 85
     public function block_content($context, array $blocks = array())
     {
-        // line 70
-        echo "            ";
+        // line 86
+        echo "              ";
     }
 
-    // line 83
+    // line 99
     public function block_javascripts($context, array $blocks = array())
     {
-        // line 84
+        // line 100
         echo "          <!-- Bootstrap core JavaScript
           ================================================== -->
           <!-- Placed at the end of the document so the pages load faster -->
           <script src=\"";
-        // line 87
+        // line 103
         echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("public/js/jquery-1.12.3.min.js"), "html", null, true);
         echo "\"></script>
           <script>window.jQuery || document.write('<script src=\"";
-        // line 88
+        // line 104
         echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("public/js/jquery-1.12.3.min.js"), "html", null, true);
         echo "\"><\\/script>')</script>
           <script src=\"";
-        // line 89
+        // line 105
         echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("public/js/bootstrap.min.js"), "html", null, true);
         echo "\"></script>
           <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
           <script src=\"";
-        // line 91
+        // line 107
         echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("public/js/holder.min.js"), "html", null, true);
         echo "\"></script>
           <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
           <script src=\"";
-        // line 93
+        // line 109
         echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("public/js/ie10-viewport-bug-workaround.js"), "html", null, true);
         echo "\"></script>
       ";
@@ -248,7 +294,7 @@ class __TwigTemplate_4efc65b0b79bf751173f2d6117f65bc26658cf42a0cb50b3cb8d91203a8
 
     public function getDebugInfo()
     {
-        return array (  234 => 93,  229 => 91,  224 => 89,  220 => 88,  216 => 87,  211 => 84,  208 => 83,  204 => 70,  201 => 69,  196 => 52,  189 => 49,  186 => 48,  172 => 32,  169 => 31,  163 => 28,  157 => 25,  151 => 22,  144 => 19,  141 => 18,  136 => 14,  133 => 13,  128 => 95,  126 => 83,  112 => 71,  110 => 69,  105 => 66,  96 => 63,  93 => 62,  88 => 61,  79 => 58,  76 => 57,  72 => 56,  67 => 53,  65 => 52,  62 => 51,  60 => 48,  53 => 43,  51 => 31,  48 => 30,  46 => 18,  42 => 16,  40 => 13,  26 => 1,);
+        return array (  280 => 109,  275 => 107,  270 => 105,  266 => 104,  262 => 103,  257 => 100,  254 => 99,  250 => 86,  247 => 85,  242 => 52,  235 => 49,  232 => 48,  218 => 32,  215 => 31,  209 => 28,  203 => 25,  197 => 22,  190 => 19,  187 => 18,  182 => 14,  179 => 13,  174 => 111,  172 => 99,  158 => 87,  156 => 85,  151 => 82,  142 => 79,  139 => 78,  134 => 77,  125 => 74,  122 => 73,  118 => 72,  115 => 71,  106 => 68,  103 => 67,  99 => 66,  95 => 64,  82 => 61,  79 => 60,  75 => 59,  67 => 53,  65 => 52,  62 => 51,  60 => 48,  53 => 43,  51 => 31,  48 => 30,  46 => 18,  42 => 16,  40 => 13,  26 => 1,);
     }
 }
 /* <!DOCTYPE html>*/
@@ -272,7 +318,7 @@ class __TwigTemplate_4efc65b0b79bf751173f2d6117f65bc26658cf42a0cb50b3cb8d91203a8
 /*             <link rel="stylesheet" href="{{ asset('public/css/bootstrap.min.css') }}" type="text/css" media="all" />*/
 /*             */
 /*             <!--BUscador-->*/
-/*             <link rel="stylesheet" href="{{ asset('public/css/buscador.css') }}" type="text/css" media="all" />*/
+/*             <link rel="stylesheet" href="{{ asset('public/css/general.css') }}" type="text/css" media="all" />*/
 /*             */
 /*             <!--Pie de página fijo-->*/
 /*             <link rel="stylesheet" href="{{ asset('public/css/sticky-footer-navbar.css') }}" type="text/css" media="all" />*/
@@ -303,33 +349,49 @@ class __TwigTemplate_4efc65b0b79bf751173f2d6117f65bc26658cf42a0cb50b3cb8d91203a8
 /*       {% endblock %}*/
 /*       <!--Incluimos el buscador-->*/
 /*       {% block formulario %}{% endblock %}*/
-/*       <!--Cargamos el contenido de la página-->*/
-/*       <div class="container marketing">*/
-/*         <div id="content">*/
-/*           {% for flashMessage in app.session.flashbag.get('notice') %}*/
-/*             <div class="flash_notice">*/
-/*               {{ flashMessage }}*/
-/*             </div>*/
-/*           {% endfor %}*/
-/*           {% for flashMessage in app.session.flashbag.get('error') %}*/
-/*             <div class="flash_error">*/
-/*               {{ flashMessage }}*/
-/*             </div>*/
-/*           {% endfor %}*/
-/*           */
-/*           <!--Añadimos el contenido-->*/
-/*           <div class="content">*/
-/*             {% block content %}*/
-/*             {% endblock %}*/
+/*       <div id="principal">*/
+/*         <!--Cargamos el contenido de la página-->*/
+/*         <div class="container marketing">*/
+/*           <div id="job_history">*/
+/*             Últimas ofertas visitadas:*/
+/*               <ul>*/
+/*                   {% for trabajo in app.session.get('historial_trabajos') %}*/
+/*                       <li>*/
+/*                           <a href={{ path('trabajos_show', { 'id': trabajo.id, 'compania': trabajo.companiaslug, 'localidad': trabajo.localidadslug, 'posicion': trabajo.posicionslug }) }}>{{ trabajo.posicion }} - {{ trabajo.compania }}</a>*/
+/*                       </li>*/
+/*                   {% endfor %}*/
+/*               </ul>*/
 /*           </div>*/
+/*           {% for flashMessage in app.session.flashbag.get('notice') %}*/
+/*             <div>*/
+/*               {{ flassMessage }}*/
+/*             </div>*/
+/*           {% endfor %}*/
+/*           <div id="content">*/
+/*             {% for flashMessage in app.session.flashbag.get('notice') %}*/
+/*               <div class="flash_notice">*/
+/*                 {{ flashMessage }}*/
+/*               </div>*/
+/*             {% endfor %}*/
+/*             {% for flashMessage in app.session.flashbag.get('error') %}*/
+/*               <div class="flash_error">*/
+/*                 {{ flashMessage }}*/
+/*               </div>*/
+/*             {% endfor %}*/
+/*             */
+/*             <!--Añadimos el contenido-->*/
+/*             <div class="content">*/
+/*               {% block content %}*/
+/*               {% endblock %}*/
+/*             </div>*/
+/*           </div>*/
+/*           </div><!-- /.container -->*/
 /*         </div>*/
-/*         </div><!-- /.container -->*/
-/*         */
 /*         */
 /*         <!-- FOOTER -->*/
 /*         <footer class="clase-general">*/
-/*           <p class="footer"><a class="pull-right" href="#">Back to top</a>*/
-/*             &copy; 2015 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a>*/
+/*           <p class="footer"><a class="pull-right" href="#">Subir</a>*/
+/*             &copy; 2016 Compañia, Inc. &middot; <a href="#">Privacidad</a> &middot; <a href="#">Terms</a>*/
 /*           </p>*/
 /*         </footer>*/
 /*        */

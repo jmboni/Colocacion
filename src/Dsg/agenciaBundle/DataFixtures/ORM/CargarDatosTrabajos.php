@@ -74,6 +74,6 @@ class CargarDatosTrabajos extends AbstractFixture implements OrderedFixtureInter
 
     public function getOrder()
     {
-        return 20; // the order in which fixtures will be loaded
+        return 2; // the order in which fixtures will be loaded
     }
 }

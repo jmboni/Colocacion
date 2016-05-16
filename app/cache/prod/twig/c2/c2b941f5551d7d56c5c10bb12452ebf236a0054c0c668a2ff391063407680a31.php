@@ -18,10 +18,17 @@ class __TwigTemplate_bbe3b4b6e5147b65d4adc5920d6b378b97761950ec0be046a4a612cd152
     {
         // line 1
         $this->displayBlock('user_block', $context, $blocks);
+        // line 2
+        echo "
+";
     }
 
+    // line 1
     public function block_user_block($context, array $blocks = array())
     {
+        echo "<div class=\"modal-footer\"><a ";
+        echo $this->env->getExtension('routing')->getPath("logout");
+        echo " class=\"btn btn-primary btn-block\">Logout</a></div>";
     }
 
     public function getTemplateName()
@@ -31,8 +38,9 @@ class __TwigTemplate_bbe3b4b6e5147b65d4adc5920d6b378b97761950ec0be046a4a612cd152
 
     public function getDebugInfo()
     {
-        return array (  20 => 1,);
+        return array (  27 => 1,  22 => 2,  20 => 1,);
     }
 }
-/* {% block user_block %}{# Customize this value #}{% endblock %}*/
+/* {% block user_block %}<div class="modal-footer"><a {{ path('logout') }} class="btn btn-primary btn-block">Logout</a></div>{% endblock %}*/
+/* */
 /* */

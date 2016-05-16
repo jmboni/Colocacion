@@ -1,0 +1,14 @@
+Dsg\agenciaBundle\Entity\Usuarios:
+    type: entity
+    table: usuarios
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        username:
+            type: string
+            length: 255
+        password:
+            type: string
+            length: 255

@@ -14,3 +14,19 @@ dsgagencia_index:
 dsgagencia_categoria:
     pattern:  /categoria/{slug}/{page}
     defaults: { _controller: DsgagenciaBundle:Categoria:show, page: 1 }
+    
+login:
+    pattern:   /login
+    defaults:  { _controller: DsgagenciaBundle:Default:login }
+    
+login_check:
+    pattern:   /login_check
+    
+logout:
+    pattern: /logout
+    
+DsgagenciaBundle_api:
+    pattern: /api/{token}/trabajos.{_format}
+    defaults: {_controller: "DsgagenciaBundle:Api:list"}
+    requirements:
+        _format: xml|json|yaml

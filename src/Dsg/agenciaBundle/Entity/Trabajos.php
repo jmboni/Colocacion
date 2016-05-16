@@ -656,4 +656,20 @@ class Trabajos
         return true;
     }    
     
+    public function asArray($host)
+    {
+        return array(
+            'categoria'     => $this->getCategoria()->getNombre(),
+            'tipo'         => $this->getTipo(),
+            'compania'      => $this->getCompania(),
+            'logo'         => $this->getLogo() ? 'http://' . $host . '/public/upload/' . $this->getLogo() : null,
+            'url'          => $this->getUrl(),
+            'posicion'     => $this->getPosicion(),
+            'localidad'     => $this->getLocalidad(),
+            'descripcion'  => $this->getDescripcion(),
+            'how_to_apply' => $this->getHowToApply(),
+            'finaliza'   => $this->getCreado()->format('Y-m-d H:i:s'),
+        );
+    }
+    
 }

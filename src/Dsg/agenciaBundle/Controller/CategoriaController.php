@@ -22,6 +22,7 @@ class CategoriaController extends Controller
             throw $this->createNotFoundException('No se puede encontrar la categoria solicitada.');
         }
         
+ 
         $total_trabajos = $em->getRepository('DsgagenciaBundle:Trabajos')->countTrabajosActivos($categoria->getId());
         $trabajos_por_pagina = $this->container->getParameter('max_trabajos_categoriapag');
         $last_page = ceil($total_trabajos / $trabajos_por_pagina);
@@ -35,7 +36,7 @@ class CategoriaController extends Controller
         'previous_page' => $previous_page,
         'current_page' => $page,
         'next_page' => $next_page,
-        'total_trabajos' => $total_trabajos
+        'total_trabajos' => $total_trabajos,
         ));
     }
 }

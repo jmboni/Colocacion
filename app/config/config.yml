@@ -85,6 +85,9 @@ swiftmailer:
 # ...
 sonata_admin:
     title: Administración
+    templates:
+        
+        layout: DsgagenciaBundle::standard_layout.html.twig
  
 
 # app/config/config.yml

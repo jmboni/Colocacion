@@ -1,0 +1,4 @@
+{% extends 'SonataAdminBundle:CRUD:base_list_field.html.twig' %}
+{% block field%}
+    <img height="42" class="img-responsive" src="{{ asset(object.getWebPath) }}" />
+{% endblock %}
