@@ -12,7 +12,7 @@ class __TwigTemplate_253431f10cabe0a3ac6a5a6b591c1d1956290c44ca0da24c218a4b6b7e8
         $this->blocks = array(
             'form_errors' => array($this, 'block_form_errors'),
             'stylesheets' => array($this, 'block_stylesheets'),
-            'content' => array($this, 'block_content'),
+            'formulario' => array($this, 'block_formulario'),
         );
     }
 
@@ -23,23 +23,23 @@ class __TwigTemplate_253431f10cabe0a3ac6a5a6b591c1d1956290c44ca0da24c218a4b6b7e8
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_2998ece17fc43aa91ac369e1b54b053efe1a1ed073dae1e88fde2345e8eb0f5c = $this->env->getExtension("native_profiler");
-        $__internal_2998ece17fc43aa91ac369e1b54b053efe1a1ed073dae1e88fde2345e8eb0f5c->enter($__internal_2998ece17fc43aa91ac369e1b54b053efe1a1ed073dae1e88fde2345e8eb0f5c_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "DsgagenciaBundle:Afiliados:afiliados_new.html.twig"));
+        $__internal_a2a7422b859ffaa40e8da7c6aa964feb983589852c473308111de3aa8c3b5177 = $this->env->getExtension("native_profiler");
+        $__internal_a2a7422b859ffaa40e8da7c6aa964feb983589852c473308111de3aa8c3b5177->enter($__internal_a2a7422b859ffaa40e8da7c6aa964feb983589852c473308111de3aa8c3b5177_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "DsgagenciaBundle:Afiliados:afiliados_new.html.twig"));
 
         // line 3
         $context["form_themes"] = $this;
         // line 1
         $this->parent->display($context, array_merge($this->blocks, $blocks));
         
-        $__internal_2998ece17fc43aa91ac369e1b54b053efe1a1ed073dae1e88fde2345e8eb0f5c->leave($__internal_2998ece17fc43aa91ac369e1b54b053efe1a1ed073dae1e88fde2345e8eb0f5c_prof);
+        $__internal_a2a7422b859ffaa40e8da7c6aa964feb983589852c473308111de3aa8c3b5177->leave($__internal_a2a7422b859ffaa40e8da7c6aa964feb983589852c473308111de3aa8c3b5177_prof);
 
     }
 
     // line 5
     public function block_form_errors($context, array $blocks = array())
     {
-        $__internal_90b958bb5c2ca77657a991d3c1a5256b3c68734016aab29a8dcd396241d9623e = $this->env->getExtension("native_profiler");
-        $__internal_90b958bb5c2ca77657a991d3c1a5256b3c68734016aab29a8dcd396241d9623e->enter($__internal_90b958bb5c2ca77657a991d3c1a5256b3c68734016aab29a8dcd396241d9623e_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "form_errors"));
+        $__internal_f37c4a988c7bc111326e99e031f965e89e01884760ece97b7740af138bb18d42 = $this->env->getExtension("native_profiler");
+        $__internal_f37c4a988c7bc111326e99e031f965e89e01884760ece97b7740af138bb18d42->enter($__internal_f37c4a988c7bc111326e99e031f965e89e01884760ece97b7740af138bb18d42_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "form_errors"));
 
         // line 6
         ob_start();
@@ -68,110 +68,112 @@ class __TwigTemplate_253431f10cabe0a3ac6a5a6b591c1d1956290c44ca0da24c218a4b6b7e8
         }
         echo trim(preg_replace('/>\s+</', '><', ob_get_clean()));
         
-        $__internal_90b958bb5c2ca77657a991d3c1a5256b3c68734016aab29a8dcd396241d9623e->leave($__internal_90b958bb5c2ca77657a991d3c1a5256b3c68734016aab29a8dcd396241d9623e_prof);
+        $__internal_f37c4a988c7bc111326e99e031f965e89e01884760ece97b7740af138bb18d42->leave($__internal_f37c4a988c7bc111326e99e031f965e89e01884760ece97b7740af138bb18d42_prof);
 
     }
 
     // line 17
     public function block_stylesheets($context, array $blocks = array())
     {
-        $__internal_f702e9918a33f5112955e7b4f6617c2a70a2f49181c8c51496fda9a2a4d6ad9d = $this->env->getExtension("native_profiler");
-        $__internal_f702e9918a33f5112955e7b4f6617c2a70a2f49181c8c51496fda9a2a4d6ad9d->enter($__internal_f702e9918a33f5112955e7b4f6617c2a70a2f49181c8c51496fda9a2a4d6ad9d_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "stylesheets"));
+        $__internal_fd4268a39f7393543b817a4231634d048f6c9cfa7bb6f6b057911792825c0770 = $this->env->getExtension("native_profiler");
+        $__internal_fd4268a39f7393543b817a4231634d048f6c9cfa7bb6f6b057911792825c0770->enter($__internal_fd4268a39f7393543b817a4231634d048f6c9cfa7bb6f6b057911792825c0770_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "stylesheets"));
 
         // line 18
         echo "    ";
         $this->displayParentBlock("stylesheets", $context, $blocks);
         echo "
-    <link rel=\"stylesheet\" href=";
+    <link rel=\"stylesheet\" href=\"";
         // line 19
-        echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("bundles/erlemjobeet/css/job.css"), "html", null, true);
-        echo " type=\"text/css\" media=\"all\" />
+        echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("public/csspaginas/show.css"), "html", null, true);
+        echo "\" type=\"text/css\" media=\"all\" />
 ";
         
-        $__internal_f702e9918a33f5112955e7b4f6617c2a70a2f49181c8c51496fda9a2a4d6ad9d->leave($__internal_f702e9918a33f5112955e7b4f6617c2a70a2f49181c8c51496fda9a2a4d6ad9d_prof);
+        $__internal_fd4268a39f7393543b817a4231634d048f6c9cfa7bb6f6b057911792825c0770->leave($__internal_fd4268a39f7393543b817a4231634d048f6c9cfa7bb6f6b057911792825c0770_prof);
 
     }
 
     // line 22
-    public function block_content($context, array $blocks = array())
+    public function block_formulario($context, array $blocks = array())
     {
-        $__internal_865c00f9ae9db6ff348005d4e13420c37b246b4b50b685395e6edd3d22676f9e = $this->env->getExtension("native_profiler");
-        $__internal_865c00f9ae9db6ff348005d4e13420c37b246b4b50b685395e6edd3d22676f9e->enter($__internal_865c00f9ae9db6ff348005d4e13420c37b246b4b50b685395e6edd3d22676f9e_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "content"));
+        $__internal_ab6eb7b701c1dde9b6bdd7fe5a1292e032be334620de3aca1e44ea248f336dcd = $this->env->getExtension("native_profiler");
+        $__internal_ab6eb7b701c1dde9b6bdd7fe5a1292e032be334620de3aca1e44ea248f336dcd->enter($__internal_ab6eb7b701c1dde9b6bdd7fe5a1292e032be334620de3aca1e44ea248f336dcd_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "formulario"));
 
         // line 23
-        echo "    <h1>Become an affiliate</h1>
-        <form action=";
-        // line 24
+        echo "    ";
+        $this->displayParentBlock("formulario", $context, $blocks);
+        echo "
+    <div class=\"container editshow\">
+        <div class=\"row well\">
+            <div class=\"col-xs-4\">
+                <div class=\"page-header\">
+                    <h2>Nuevo Usuario</h2>
+                </div>
+                    
+                <form action=";
+        // line 31
         echo $this->env->getExtension('routing')->getPath("afiliados_create");
         echo " method=\"post\" ";
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), 'enctype');
         echo ">
-            <table id=\"job_form\">
-                <tfoot>
-                    <tr>
-                        <td colspan=\"2\">
-                            <input type=\"submit\" value=\"Submit\" />
-                        </td>
-                    </tr>
-                </tfoot>
-                <tbody>
-                    <tr>
-                        <th>";
-        // line 35
+                    <div class=\"form-group\">
+                        ";
+        // line 33
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "url", array()), 'label');
-        echo "</th>
-                        <td>
-                            ";
-        // line 37
+        echo "
+                        ";
+        // line 34
+        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "url", array()), 'widget', array("attr" => array("class" => "form-control", "placeholder" => "Url")));
+        echo "
+                        <span class=\"text-danger\">";
+        // line 35
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "url", array()), 'errors');
-        echo "
-                            ";
-        // line 38
-        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "url", array()), 'widget');
-        echo "
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>";
-        // line 42
+        echo "</span>
+                    </div>    
+                    
+                    <div class=\"form-group\">    
+                        ";
+        // line 39
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "email", array()), 'label');
-        echo "</th>
-                        <td>
-                            ";
-        // line 44
+        echo "
+                        ";
+        // line 40
+        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "email", array()), 'widget', array("attr" => array("class" => "form-control", "placeholder" => "Email")));
+        echo "
+                        <span class=\"text-danger\">";
+        // line 41
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "email", array()), 'errors');
-        echo "
-                            ";
+        echo "</span>
+                    </div>
+                    
+                    <div class=\"form-group\">
+                        ";
         // line 45
-        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "email", array()), 'widget');
-        echo "
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>";
-        // line 49
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "categoria", array()), 'label');
-        echo "</th>
-                        <td>
-                            ";
-        // line 51
+        echo "
+                        ";
+        // line 46
+        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "categoria", array()), 'widget', array("attr" => array("class" => "form-control", "placeholder" => "Categoria")));
+        echo "
+                        <span class=\"text-danger\">";
+        // line 47
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "categoria", array()), 'errors');
-        echo "
-                            ";
-        // line 52
-        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "categoria", array()), 'widget');
-        echo "
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        ";
-        // line 57
+        echo "</span>
+                    </div>
+                    <p>
+                        <input type=\"submit\" value=\"Submit\" />
+                        <!--<button type=\"submit\" value=\"Submit\" class=\"btn btn-info\">Aceptar</button>-->
+                    </p>
+                ";
+        // line 53
         echo         $this->env->getExtension('form')->renderer->renderBlock((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), 'form_end');
         echo "
+            
+            </div>
+        </div>
+    </div>
 ";
         
-        $__internal_865c00f9ae9db6ff348005d4e13420c37b246b4b50b685395e6edd3d22676f9e->leave($__internal_865c00f9ae9db6ff348005d4e13420c37b246b4b50b685395e6edd3d22676f9e_prof);
+        $__internal_ab6eb7b701c1dde9b6bdd7fe5a1292e032be334620de3aca1e44ea248f336dcd->leave($__internal_ab6eb7b701c1dde9b6bdd7fe5a1292e032be334620de3aca1e44ea248f336dcd_prof);
 
     }
 
@@ -187,7 +189,7 @@ class __TwigTemplate_253431f10cabe0a3ac6a5a6b591c1d1956290c44ca0da24c218a4b6b7e8
 
     public function getDebugInfo()
     {
-        return array (  170 => 57,  162 => 52,  158 => 51,  153 => 49,  146 => 45,  142 => 44,  137 => 42,  130 => 38,  126 => 37,  121 => 35,  105 => 24,  102 => 23,  96 => 22,  87 => 19,  82 => 18,  76 => 17,  66 => 12,  57 => 10,  53 => 9,  50 => 8,  47 => 7,  45 => 6,  39 => 5,  32 => 1,  30 => 3,  11 => 1,);
+        return array (  168 => 53,  159 => 47,  155 => 46,  151 => 45,  144 => 41,  140 => 40,  136 => 39,  129 => 35,  125 => 34,  121 => 33,  114 => 31,  102 => 23,  96 => 22,  87 => 19,  82 => 18,  76 => 17,  66 => 12,  57 => 10,  53 => 9,  50 => 8,  47 => 7,  45 => 6,  39 => 5,  32 => 1,  30 => 3,  11 => 1,);
     }
 }
 /* {% extends 'DsgagenciaBundle::layout.html.twig' %}*/
@@ -208,43 +210,44 @@ class __TwigTemplate_253431f10cabe0a3ac6a5a6b591c1d1956290c44ca0da24c218a4b6b7e8
 /*  */
 /* {% block stylesheets %}*/
 /*     {{ parent() }}*/
-/*     <link rel="stylesheet" href={{ asset('bundles/erlemjobeet/css/job.css') }} type="text/css" media="all" />*/
+/*     <link rel="stylesheet" href="{{ asset('public/csspaginas/show.css') }}" type="text/css" media="all" />*/
 /* {% endblock %}*/
 /*  */
-/* {% block content %}*/
-/*     <h1>Become an affiliate</h1>*/
-/*         <form action={{ path('afiliados_create') }} method="post" {{ form_enctype(form) }}>*/
-/*             <table id="job_form">*/
-/*                 <tfoot>*/
-/*                     <tr>*/
-/*                         <td colspan="2">*/
-/*                             <input type="submit" value="Submit" />*/
-/*                         </td>*/
-/*                     </tr>*/
-/*                 </tfoot>*/
-/*                 <tbody>*/
-/*                     <tr>*/
-/*                         <th>{{ form_label(form.url) }}</th>*/
-/*                         <td>*/
-/*                             {{ form_errors(form.url) }}*/
-/*                             {{ form_widget(form.url) }}*/
-/*                         </td>*/
-/*                     </tr>*/
-/*                     <tr>*/
-/*                         <th>{{ form_label(form.email) }}</th>*/
-/*                         <td>*/
-/*                             {{ form_errors(form.email) }}*/
-/*                             {{ form_widget(form.email) }}*/
-/*                         </td>*/
-/*                     </tr>*/
-/*                     <tr>*/
-/*                         <th>{{ form_label(form.categoria) }}</th>*/
-/*                         <td>*/
-/*                             {{ form_errors(form.categoria) }}*/
-/*                             {{ form_widget(form.categoria) }}*/
-/*                         </td>*/
-/*                     </tr>*/
-/*                 </tbody>*/
-/*             </table>*/
-/*         {{ form_end(form) }}*/
+/* {% block formulario %}*/
+/*     {{ parent() }}*/
+/*     <div class="container editshow">*/
+/*         <div class="row well">*/
+/*             <div class="col-xs-4">*/
+/*                 <div class="page-header">*/
+/*                     <h2>Nuevo Usuario</h2>*/
+/*                 </div>*/
+/*                     */
+/*                 <form action={{ path('afiliados_create') }} method="post" {{ form_enctype(form) }}>*/
+/*                     <div class="form-group">*/
+/*                         {{ form_label(form.url) }}*/
+/*                         {{ form_widget(form.url, {'attr' : {'class' : 'form-control', 'placeholder' : 'Url'}}) }}*/
+/*                         <span class="text-danger">{{ form_errors(form.url) }}</span>*/
+/*                     </div>    */
+/*                     */
+/*                     <div class="form-group">    */
+/*                         {{ form_label(form.email) }}*/
+/*                         {{ form_widget(form.email, {'attr' : {'class' : 'form-control', 'placeholder' : 'Email'}}) }}*/
+/*                         <span class="text-danger">{{ form_errors(form.email) }}</span>*/
+/*                     </div>*/
+/*                     */
+/*                     <div class="form-group">*/
+/*                         {{ form_label(form.categoria)}}*/
+/*                         {{ form_widget(form.categoria, {'attr' : {'class' : 'form-control', 'placeholder' : 'Categoria'}}) }}*/
+/*                         <span class="text-danger">{{ form_errors(form.categoria)}}</span>*/
+/*                     </div>*/
+/*                     <p>*/
+/*                         <input type="submit" value="Submit" />*/
+/*                         <!--<button type="submit" value="Submit" class="btn btn-info">Aceptar</button>-->*/
+/*                     </p>*/
+/*                 {{ form_end(form) }}*/
+/*             */
+/*             </div>*/
+/*         </div>*/
+/*     </div>*/
 /* {% endblock %}*/
+/*                     */

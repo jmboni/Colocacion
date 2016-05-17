@@ -20,24 +20,26 @@ class AfiliadosController extends Controller
         ));
     }
     
+    
     public function createAction(Request $request)
     {
         $afiliado = new Afiliados();
         $form = $this->createForm(new AfiliadosType(), $afiliado);
         $form->bind($request);
         $em = $this->getDoctrine()->getManager();
- 
+        
+        
         if ($form->isValid()) {
  
-            $formData = $request->get('afiliado');
+            $formData = $request->get('afiliados');
             $afiliado->setUrl($formData['url']);
             $afiliado->setEmail($formData['email']);
-            $afiliado->setIsActive(false);
+            $afiliado->setActivado(false);
  
             $em->persist($afiliado);
             $em->flush();
  
-            return $this->redirect($this->generateUrl('afiliado_sinActivar'));
+            return $this->redirect($this->generateUrl('afiliados_sinActivar'));
         }
  
         return $this->render('DsgagenciaBundle:Afiliados:afiliados_new.html.twig', array(

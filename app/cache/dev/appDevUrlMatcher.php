@@ -277,9 +277,9 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                 }
                 not_afiliados_create:
 
-                // afiliados_wait
-                if ($pathinfo === '/afiliados/wait') {
-                    return array (  '_controller' => 'Dsg\\agenciaBundle\\Controller\\AfiliadosController::waitAction',  '_route' => 'afiliados_wait',);
+                // afiliados_sinActivar
+                if ($pathinfo === '/afiliados/sinActivar') {
+                    return array (  '_controller' => 'Dsg\\agenciaBundle\\Controller\\AfiliadosController::sinActivarAction',  '_route' => 'afiliados_sinActivar',);
                 }
 
             }

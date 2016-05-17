@@ -23,23 +23,23 @@ class __TwigTemplate_087038675ec2cd3c2373794f569e6c28122b38aceb47d1484f8571d4d05
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_6834c67d0d10a7e10d09221eb653b1de4586f493f677d9785bbc688989af9722 = $this->env->getExtension("native_profiler");
-        $__internal_6834c67d0d10a7e10d09221eb653b1de4586f493f677d9785bbc688989af9722->enter($__internal_6834c67d0d10a7e10d09221eb653b1de4586f493f677d9785bbc688989af9722_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "DsgagenciaBundle:Trabajos:new.html.twig"));
+        $__internal_2df7df0f2fcbb9fa9b160b63e7644f7d20f5bc8f4b092088d15f4b9d62a15333 = $this->env->getExtension("native_profiler");
+        $__internal_2df7df0f2fcbb9fa9b160b63e7644f7d20f5bc8f4b092088d15f4b9d62a15333->enter($__internal_2df7df0f2fcbb9fa9b160b63e7644f7d20f5bc8f4b092088d15f4b9d62a15333_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "DsgagenciaBundle:Trabajos:new.html.twig"));
 
         // line 3
         $this->env->getExtension('form')->renderer->setTheme((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), array(0 => $this));
         // line 1
         $this->parent->display($context, array_merge($this->blocks, $blocks));
         
-        $__internal_6834c67d0d10a7e10d09221eb653b1de4586f493f677d9785bbc688989af9722->leave($__internal_6834c67d0d10a7e10d09221eb653b1de4586f493f677d9785bbc688989af9722_prof);
+        $__internal_2df7df0f2fcbb9fa9b160b63e7644f7d20f5bc8f4b092088d15f4b9d62a15333->leave($__internal_2df7df0f2fcbb9fa9b160b63e7644f7d20f5bc8f4b092088d15f4b9d62a15333_prof);
 
     }
 
     // line 5
     public function block_form_errors($context, array $blocks = array())
     {
-        $__internal_57b70fc8b1a2e5d62a06e359328a903af6f2f11a5d01276a50c75bf58b9ed82d = $this->env->getExtension("native_profiler");
-        $__internal_57b70fc8b1a2e5d62a06e359328a903af6f2f11a5d01276a50c75bf58b9ed82d->enter($__internal_57b70fc8b1a2e5d62a06e359328a903af6f2f11a5d01276a50c75bf58b9ed82d_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "form_errors"));
+        $__internal_404590b41fdfe325dabed87c195e9529d7ac1d4770d4bfb10ccd98053b0bd151 = $this->env->getExtension("native_profiler");
+        $__internal_404590b41fdfe325dabed87c195e9529d7ac1d4770d4bfb10ccd98053b0bd151->enter($__internal_404590b41fdfe325dabed87c195e9529d7ac1d4770d4bfb10ccd98053b0bd151_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "form_errors"));
 
         // line 6
         ob_start();
@@ -68,15 +68,15 @@ class __TwigTemplate_087038675ec2cd3c2373794f569e6c28122b38aceb47d1484f8571d4d05
         }
         echo trim(preg_replace('/>\s+</', '><', ob_get_clean()));
         
-        $__internal_57b70fc8b1a2e5d62a06e359328a903af6f2f11a5d01276a50c75bf58b9ed82d->leave($__internal_57b70fc8b1a2e5d62a06e359328a903af6f2f11a5d01276a50c75bf58b9ed82d_prof);
+        $__internal_404590b41fdfe325dabed87c195e9529d7ac1d4770d4bfb10ccd98053b0bd151->leave($__internal_404590b41fdfe325dabed87c195e9529d7ac1d4770d4bfb10ccd98053b0bd151_prof);
 
     }
 
     // line 18
     public function block_stylesheets($context, array $blocks = array())
     {
-        $__internal_8a56c91ef1abcd3ff462b364bbba6c28fc1afc9e032530ed11f8a15948985abc = $this->env->getExtension("native_profiler");
-        $__internal_8a56c91ef1abcd3ff462b364bbba6c28fc1afc9e032530ed11f8a15948985abc->enter($__internal_8a56c91ef1abcd3ff462b364bbba6c28fc1afc9e032530ed11f8a15948985abc_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "stylesheets"));
+        $__internal_40792cb56b5461f1850d5d97b351d776c0b8fd5100d7d871ac6afb25a9adc836 = $this->env->getExtension("native_profiler");
+        $__internal_40792cb56b5461f1850d5d97b351d776c0b8fd5100d7d871ac6afb25a9adc836->enter($__internal_40792cb56b5461f1850d5d97b351d776c0b8fd5100d7d871ac6afb25a9adc836_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "stylesheets"));
 
         // line 19
         echo "    ";
@@ -88,15 +88,15 @@ class __TwigTemplate_087038675ec2cd3c2373794f569e6c28122b38aceb47d1484f8571d4d05
         echo "\" type=\"text/css\" media=\"all\" />
 ";
         
-        $__internal_8a56c91ef1abcd3ff462b364bbba6c28fc1afc9e032530ed11f8a15948985abc->leave($__internal_8a56c91ef1abcd3ff462b364bbba6c28fc1afc9e032530ed11f8a15948985abc_prof);
+        $__internal_40792cb56b5461f1850d5d97b351d776c0b8fd5100d7d871ac6afb25a9adc836->leave($__internal_40792cb56b5461f1850d5d97b351d776c0b8fd5100d7d871ac6afb25a9adc836_prof);
 
     }
 
     // line 23
     public function block_formulario($context, array $blocks = array())
     {
-        $__internal_04e98f3aae147560d58aab129db548317b3249cccd9566e7002c6ed5919bba21 = $this->env->getExtension("native_profiler");
-        $__internal_04e98f3aae147560d58aab129db548317b3249cccd9566e7002c6ed5919bba21->enter($__internal_04e98f3aae147560d58aab129db548317b3249cccd9566e7002c6ed5919bba21_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "formulario"));
+        $__internal_eee290666cb13f8991ad06b36f9405627aec9cb6866ce8d3df83d974281cfbb8 = $this->env->getExtension("native_profiler");
+        $__internal_eee290666cb13f8991ad06b36f9405627aec9cb6866ce8d3df83d974281cfbb8->enter($__internal_eee290666cb13f8991ad06b36f9405627aec9cb6866ce8d3df83d974281cfbb8_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "formulario"));
 
         // line 24
         echo "    ";
@@ -104,7 +104,7 @@ class __TwigTemplate_087038675ec2cd3c2373794f569e6c28122b38aceb47d1484f8571d4d05
         echo "
     <div class=\"container editshow\">
         <div class=\"row well\">
-            <div class=\"col-xs-4>
+            <div class=\"col-xs-4\">
                 <div class=\"page-header\">
                     <h2>Insertar oferta nueva</h2>
                 </div>
@@ -289,7 +289,7 @@ class __TwigTemplate_087038675ec2cd3c2373794f569e6c28122b38aceb47d1484f8571d4d05
     </div>
 ";
         
-        $__internal_04e98f3aae147560d58aab129db548317b3249cccd9566e7002c6ed5919bba21->leave($__internal_04e98f3aae147560d58aab129db548317b3249cccd9566e7002c6ed5919bba21_prof);
+        $__internal_eee290666cb13f8991ad06b36f9405627aec9cb6866ce8d3df83d974281cfbb8->leave($__internal_eee290666cb13f8991ad06b36f9405627aec9cb6866ce8d3df83d974281cfbb8_prof);
 
     }
 
@@ -334,7 +334,7 @@ class __TwigTemplate_087038675ec2cd3c2373794f569e6c28122b38aceb47d1484f8571d4d05
 /*     {{ parent() }}*/
 /*     <div class="container editshow">*/
 /*         <div class="row well">*/
-/*             <div class="col-xs-4>*/
+/*             <div class="col-xs-4">*/
 /*                 <div class="page-header">*/
 /*                     <h2>Insertar oferta nueva</h2>*/
 /*                 </div>*/

@@ -7,6 +7,6 @@ afiliados_create:
     defaults: { _controller: "DsgagenciaBundle:Afiliados:create" }
     requirements: { _method: post }
     
-afiliados_wait:
-    pattern: /wait
-    defaults: { _controller: "DsgagenciaBundle:Afiliados:wait" }
+afiliados_sinActivar:
+    pattern: /sinActivar
+    defaults: { _controller: "DsgagenciaBundle:Afiliados:sinActivar" }

@@ -15,7 +15,7 @@ class AfiliadosType extends AbstractType
         $builder
             ->add('url')
             ->add('email')
-            ->add('categoria', null, array('expanded'=>true))
+            ->add('categoria', null,  array('placeholder'=> 'Selecciona una categoría', 'expanded'=>true))
         ;
     }
  

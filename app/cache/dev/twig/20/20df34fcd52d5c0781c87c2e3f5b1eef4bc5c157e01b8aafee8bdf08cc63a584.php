@@ -1,6 +1,6 @@
 <?php
 
-/* WebProfilerBundle:Profiler:header.html.twig */
+/* @WebProfiler/Profiler/header.html.twig */
 class __TwigTemplate_b1171b834b33d8ac7e7cc9f75d59660e444c5fb95c33be57143c3fd404c060f5 extends Twig_Template
 {
     public function __construct(Twig_Environment $env)
@@ -15,8 +15,8 @@ class __TwigTemplate_b1171b834b33d8ac7e7cc9f75d59660e444c5fb95c33be57143c3fd404c
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_b486698bb5fe3d536b95cfcfc93a7560b1d808d477cc4caf20d11bce24e15585 = $this->env->getExtension("native_profiler");
-        $__internal_b486698bb5fe3d536b95cfcfc93a7560b1d808d477cc4caf20d11bce24e15585->enter($__internal_b486698bb5fe3d536b95cfcfc93a7560b1d808d477cc4caf20d11bce24e15585_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "WebProfilerBundle:Profiler:header.html.twig"));
+        $__internal_a919fd47615a4b1c1d51971356bb8abea0de23fa9859b9128acdedb53d81eedd = $this->env->getExtension("native_profiler");
+        $__internal_a919fd47615a4b1c1d51971356bb8abea0de23fa9859b9128acdedb53d81eedd->enter($__internal_a919fd47615a4b1c1d51971356bb8abea0de23fa9859b9128acdedb53d81eedd_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "@WebProfiler/Profiler/header.html.twig"));
 
         // line 1
         echo "<div id=\"header\" class=\"clear-fix\">
@@ -46,13 +46,13 @@ class __TwigTemplate_b1171b834b33d8ac7e7cc9f75d59660e444c5fb95c33be57143c3fd404c
 </div>
 ";
         
-        $__internal_b486698bb5fe3d536b95cfcfc93a7560b1d808d477cc4caf20d11bce24e15585->leave($__internal_b486698bb5fe3d536b95cfcfc93a7560b1d808d477cc4caf20d11bce24e15585_prof);
+        $__internal_a919fd47615a4b1c1d51971356bb8abea0de23fa9859b9128acdedb53d81eedd->leave($__internal_a919fd47615a4b1c1d51971356bb8abea0de23fa9859b9128acdedb53d81eedd_prof);
 
     }
 
     public function getTemplateName()
     {
-        return "WebProfilerBundle:Profiler:header.html.twig";
+        return "@WebProfiler/Profiler/header.html.twig";
     }
 
     public function getDebugInfo()

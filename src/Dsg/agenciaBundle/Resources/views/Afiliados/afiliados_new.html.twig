@@ -16,43 +16,44 @@
  
 {% block stylesheets %}
     {{ parent() }}
-    <link rel="stylesheet" href={{ asset('bundles/erlemjobeet/css/job.css') }} type="text/css" media="all" />
+    <link rel="stylesheet" href="{{ asset('public/csspaginas/show.css') }}" type="text/css" media="all" />
 {% endblock %}
  
-{% block content %}
-    <h1>Become an affiliate</h1>
-        <form action={{ path('afiliados_create') }} method="post" {{ form_enctype(form) }}>
-            <table id="job_form">
-                <tfoot>
-                    <tr>
-                        <td colspan="2">
-                            <input type="submit" value="Submit" />
-                        </td>
-                    </tr>
-                </tfoot>
-                <tbody>
-                    <tr>
-                        <th>{{ form_label(form.url) }}</th>
-                        <td>
-                            {{ form_errors(form.url) }}
-                            {{ form_widget(form.url) }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>{{ form_label(form.email) }}</th>
-                        <td>
-                            {{ form_errors(form.email) }}
-                            {{ form_widget(form.email) }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>{{ form_label(form.categoria) }}</th>
-                        <td>
-                            {{ form_errors(form.categoria) }}
-                            {{ form_widget(form.categoria) }}
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        {{ form_end(form) }}
+{% block formulario %}
+    {{ parent() }}
+    <div class="container editshow">
+        <div class="row well">
+            <div class="col-xs-4">
+                <div class="page-header">
+                    <h2>Nuevo Usuario</h2>
+                </div>
+                    
+                <form action={{ path('afiliados_create') }} method="post" {{ form_enctype(form) }}>
+                    <div class="form-group">
+                        {{ form_label(form.url) }}
+                        {{ form_widget(form.url, {'attr' : {'class' : 'form-control', 'placeholder' : 'Url'}}) }}
+                        <span class="text-danger">{{ form_errors(form.url) }}</span>
+                    </div>    
+                    
+                    <div class="form-group">    
+                        {{ form_label(form.email) }}
+                        {{ form_widget(form.email, {'attr' : {'class' : 'form-control', 'placeholder' : 'Email'}}) }}
+                        <span class="text-danger">{{ form_errors(form.email) }}</span>
+                    </div>
+                    
+                    <div class="form-group">
+                        {{ form_label(form.categoria)}}
+                        {{ form_widget(form.categoria, {'attr' : {'class' : 'form-control', 'placeholder' : 'Categoria'}}) }}
+                        <span class="text-danger">{{ form_errors(form.categoria)}}</span>
+                    </div>
+                    <p>
+                        <input type="submit" value="Submit" />
+                        <!--<button type="submit" value="Submit" class="btn btn-info">Aceptar</button>-->
+                    </p>
+                {{ form_end(form) }}
+            
+            </div>
+        </div>
+    </div>
 {% endblock %}
+                    
