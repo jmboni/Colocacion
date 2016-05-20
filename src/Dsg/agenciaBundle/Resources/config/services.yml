@@ -16,3 +16,11 @@ services:
             - ~
             - Dsg\agenciaBundle\Entity\Trabajos
             - 'DsgagenciaBundle:TrabajosAdmin'
+    Dsg.agencia.admin.afiliados:
+        class: Dsg\agenciaBundle\Admin\AfiliadosAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: dsg, label: Afiliados }
+        arguments:
+            - ~
+            - Dsg\agenciaBundle\Entity\Afiliados
+            - 'DsgagenciaBundle:AfiliadosAdmin'

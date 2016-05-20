@@ -29,7 +29,7 @@ class __TwigTemplate_fa5d206d242baf7b7d7e1a8e761be3f7c16b46e4592079ddfdb711c08b6
     {
         // line 4
         echo "    <div class=\"content\">
-        <h1>Su registro cuenta de usuario ha sido creada</h1>
+        <h1>Su cuenta de usuario ha sido creada</h1>
         <div style=\"padding: 20px\">
             Muchas gracias.
             Usted recibirá un mail con su clave tan pronto como su cuenta se haya activado.
@@ -57,7 +57,7 @@ class __TwigTemplate_fa5d206d242baf7b7d7e1a8e761be3f7c16b46e4592079ddfdb711c08b6
 /*  */
 /* {% block content %}*/
 /*     <div class="content">*/
-/*         <h1>Su registro cuenta de usuario ha sido creada</h1>*/
+/*         <h1>Su cuenta de usuario ha sido creada</h1>*/
 /*         <div style="padding: 20px">*/
 /*             Muchas gracias.*/
 /*             Usted recibirá un mail con su clave tan pronto como su cuenta se haya activado.*/

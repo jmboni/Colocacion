@@ -12,7 +12,7 @@ class __TwigTemplate_855885c04a721e4df38d324727773e66a298081940320f42d1fa2621197
         $this->blocks = array(
             'form_errors' => array($this, 'block_form_errors'),
             'stylesheets' => array($this, 'block_stylesheets'),
-            'content' => array($this, 'block_content'),
+            'formulario' => array($this, 'block_formulario'),
         );
     }
 
@@ -67,87 +67,89 @@ class __TwigTemplate_855885c04a721e4df38d324727773e66a298081940320f42d1fa2621197
         echo "    ";
         $this->displayParentBlock("stylesheets", $context, $blocks);
         echo "
-    <link rel=\"stylesheet\" href=";
+    <link rel=\"stylesheet\" href=\"";
         // line 19
-        echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("bundles/erlemjobeet/css/job.css"), "html", null, true);
-        echo " type=\"text/css\" media=\"all\" />
+        echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("public/csspaginas/show.css"), "html", null, true);
+        echo "\" type=\"text/css\" media=\"all\" />
 ";
     }
 
     // line 22
-    public function block_content($context, array $blocks = array())
+    public function block_formulario($context, array $blocks = array())
     {
         // line 23
-        echo "    <h1>Become an affiliate</h1>
-        <form action=";
-        // line 24
-        echo $this->env->getExtension('routing')->getPath("afiliado_create");
+        echo "    ";
+        $this->displayParentBlock("formulario", $context, $blocks);
+        echo "
+    <div class=\"container editshow\">
+        <div class=\"row well\">
+            <div class=\"col-xs-6\">
+                <div class=\"page-header\">
+                    <h2>Nuevo Usuario</h2>
+                </div>
+                    
+                <form action=";
+        // line 31
+        echo $this->env->getExtension('routing')->getPath("afiliados_create");
         echo " method=\"post\" ";
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock((isset($context["form"]) ? $context["form"] : null), 'enctype');
         echo ">
-            <table id=\"job_form\">
-                <tfoot>
-                    <tr>
-                        <td colspan=\"2\">
-                            <input type=\"submit\" value=\"Submit\" />
-                        </td>
-                    </tr>
-                </tfoot>
-                <tbody>
-                    <tr>
-                        <th>";
-        // line 35
+                    <div class=\"form-group\">
+                        ";
+        // line 33
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : null), "url", array()), 'label');
-        echo "</th>
-                        <td>
-                            ";
-        // line 37
+        echo "
+                        ";
+        // line 34
+        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : null), "url", array()), 'widget', array("attr" => array("class" => "form-control", "placeholder" => "Url")));
+        echo "
+                        <span class=\"text-danger\">";
+        // line 35
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : null), "url", array()), 'errors');
-        echo "
-                            ";
-        // line 38
-        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : null), "url", array()), 'widget');
-        echo "
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>";
-        // line 42
+        echo "</span>
+                    </div>    
+                    
+                    <div class=\"form-group\">    
+                        ";
+        // line 39
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : null), "email", array()), 'label');
-        echo "</th>
-                        <td>
+        echo "
+                        ";
+        // line 40
+        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : null), "email", array()), 'widget', array("attr" => array("class" => "form-control", "placeholder" => "Email")));
+        echo "
+                        <span class=\"text-danger\">";
+        // line 41
+        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : null), "email", array()), 'errors');
+        echo "</span>
+                    </div>
+                    <div class=\"form-group\">
                             ";
         // line 44
-        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : null), "email", array()), 'errors');
+        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : null), "categoria", array()), 'label');
         echo "
+                            <br/>
                             ";
-        // line 45
-        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : null), "email", array()), 'widget');
+        // line 46
+        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : null), "categoria", array()), 'widget');
         echo "
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>";
-        // line 49
-        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : null), "categorias", array()), 'label');
-        echo "</th>
-                        <td>
-                            ";
-        // line 51
-        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : null), "categorias", array()), 'errors');
-        echo "
-                            ";
-        // line 52
-        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : null), "categorias", array()), 'widget');
-        echo "
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        ";
-        // line 57
+                            <span class=\"text-danger\">";
+        // line 47
+        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : null), "categoria", array()), 'errors');
+        echo "</span>
+                    </div>
+                    <p>
+                        <!--<input type=\"submit\" value=\"Submit\" />-->
+                        <button type=\"submit\" value=\"Submit\" class=\"btn btn-info\">Aceptar</button>
+                    </p>
+                ";
+        // line 53
         echo         $this->env->getExtension('form')->renderer->renderBlock((isset($context["form"]) ? $context["form"] : null), 'form_end');
         echo "
+            
+            </div>
+        </div>
+    </div>
 ";
     }
 
@@ -163,7 +165,7 @@ class __TwigTemplate_855885c04a721e4df38d324727773e66a298081940320f42d1fa2621197
 
     public function getDebugInfo()
     {
-        return array (  149 => 57,  141 => 52,  137 => 51,  132 => 49,  125 => 45,  121 => 44,  116 => 42,  109 => 38,  105 => 37,  100 => 35,  84 => 24,  81 => 23,  78 => 22,  72 => 19,  67 => 18,  64 => 17,  57 => 12,  48 => 10,  44 => 9,  41 => 8,  38 => 7,  36 => 6,  33 => 5,  29 => 1,  27 => 3,  11 => 1,);
+        return array (  147 => 53,  138 => 47,  134 => 46,  129 => 44,  123 => 41,  119 => 40,  115 => 39,  108 => 35,  104 => 34,  100 => 33,  93 => 31,  81 => 23,  78 => 22,  72 => 19,  67 => 18,  64 => 17,  57 => 12,  48 => 10,  44 => 9,  41 => 8,  38 => 7,  36 => 6,  33 => 5,  29 => 1,  27 => 3,  11 => 1,);
     }
 }
 /* {% extends 'DsgagenciaBundle::layout.html.twig' %}*/
@@ -184,43 +186,44 @@ class __TwigTemplate_855885c04a721e4df38d324727773e66a298081940320f42d1fa2621197
 /*  */
 /* {% block stylesheets %}*/
 /*     {{ parent() }}*/
-/*     <link rel="stylesheet" href={{ asset('bundles/erlemjobeet/css/job.css') }} type="text/css" media="all" />*/
+/*     <link rel="stylesheet" href="{{ asset('public/csspaginas/show.css') }}" type="text/css" media="all" />*/
 /* {% endblock %}*/
 /*  */
-/* {% block content %}*/
-/*     <h1>Become an affiliate</h1>*/
-/*         <form action={{ path('afiliado_create') }} method="post" {{ form_enctype(form) }}>*/
-/*             <table id="job_form">*/
-/*                 <tfoot>*/
-/*                     <tr>*/
-/*                         <td colspan="2">*/
-/*                             <input type="submit" value="Submit" />*/
-/*                         </td>*/
-/*                     </tr>*/
-/*                 </tfoot>*/
-/*                 <tbody>*/
-/*                     <tr>*/
-/*                         <th>{{ form_label(form.url) }}</th>*/
-/*                         <td>*/
-/*                             {{ form_errors(form.url) }}*/
-/*                             {{ form_widget(form.url) }}*/
-/*                         </td>*/
-/*                     </tr>*/
-/*                     <tr>*/
-/*                         <th>{{ form_label(form.email) }}</th>*/
-/*                         <td>*/
-/*                             {{ form_errors(form.email) }}*/
-/*                             {{ form_widget(form.email) }}*/
-/*                         </td>*/
-/*                     </tr>*/
-/*                     <tr>*/
-/*                         <th>{{ form_label(form.categorias) }}</th>*/
-/*                         <td>*/
-/*                             {{ form_errors(form.categorias) }}*/
-/*                             {{ form_widget(form.categorias) }}*/
-/*                         </td>*/
-/*                     </tr>*/
-/*                 </tbody>*/
-/*             </table>*/
-/*         {{ form_end(form) }}*/
+/* {% block formulario %}*/
+/*     {{ parent() }}*/
+/*     <div class="container editshow">*/
+/*         <div class="row well">*/
+/*             <div class="col-xs-6">*/
+/*                 <div class="page-header">*/
+/*                     <h2>Nuevo Usuario</h2>*/
+/*                 </div>*/
+/*                     */
+/*                 <form action={{ path('afiliados_create') }} method="post" {{ form_enctype(form) }}>*/
+/*                     <div class="form-group">*/
+/*                         {{ form_label(form.url) }}*/
+/*                         {{ form_widget(form.url, {'attr' : {'class' : 'form-control', 'placeholder' : 'Url'}}) }}*/
+/*                         <span class="text-danger">{{ form_errors(form.url) }}</span>*/
+/*                     </div>    */
+/*                     */
+/*                     <div class="form-group">    */
+/*                         {{ form_label(form.email) }}*/
+/*                         {{ form_widget(form.email, {'attr' : {'class' : 'form-control', 'placeholder' : 'Email'}}) }}*/
+/*                         <span class="text-danger">{{ form_errors(form.email) }}</span>*/
+/*                     </div>*/
+/*                     <div class="form-group">*/
+/*                             {{ form_label(form.categoria) }}*/
+/*                             <br/>*/
+/*                             {{ form_widget(form.categoria) }}*/
+/*                             <span class="text-danger">{{ form_errors(form.categoria)}}</span>*/
+/*                     </div>*/
+/*                     <p>*/
+/*                         <!--<input type="submit" value="Submit" />-->*/
+/*                         <button type="submit" value="Submit" class="btn btn-info">Aceptar</button>*/
+/*                     </p>*/
+/*                 {{ form_end(form) }}*/
+/*             */
+/*             </div>*/
+/*         </div>*/
+/*     </div>*/
 /* {% endblock %}*/
+/*                     */

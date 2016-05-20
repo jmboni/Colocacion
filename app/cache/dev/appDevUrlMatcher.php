@@ -420,6 +420,54 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
                 }
 
+                if (0 === strpos($pathinfo, '/admin/dsg/agencia/afiliados')) {
+                    // admin_dsg_agencia_afiliados_list
+                    if ($pathinfo === '/admin/dsg/agencia/afiliados/list') {
+                        return array (  '_controller' => 'Dsg\\agenciaBundle\\Controller\\AfiliadosAdminController::listAction',  '_sonata_admin' => 'dsg.agencia.admin.afiliados',  '_sonata_name' => 'admin_dsg_agencia_afiliados_list',  '_route' => 'admin_dsg_agencia_afiliados_list',);
+                    }
+
+                    // admin_dsg_agencia_afiliados_create
+                    if ($pathinfo === '/admin/dsg/agencia/afiliados/create') {
+                        return array (  '_controller' => 'Dsg\\agenciaBundle\\Controller\\AfiliadosAdminController::createAction',  '_sonata_admin' => 'dsg.agencia.admin.afiliados',  '_sonata_name' => 'admin_dsg_agencia_afiliados_create',  '_route' => 'admin_dsg_agencia_afiliados_create',);
+                    }
+
+                    // admin_dsg_agencia_afiliados_batch
+                    if ($pathinfo === '/admin/dsg/agencia/afiliados/batch') {
+                        return array (  '_controller' => 'Dsg\\agenciaBundle\\Controller\\AfiliadosAdminController::batchAction',  '_sonata_admin' => 'dsg.agencia.admin.afiliados',  '_sonata_name' => 'admin_dsg_agencia_afiliados_batch',  '_route' => 'admin_dsg_agencia_afiliados_batch',);
+                    }
+
+                    // admin_dsg_agencia_afiliados_edit
+                    if (preg_match('#^/admin/dsg/agencia/afiliados/(?P<id>[^/]++)/edit$#s', $pathinfo, $matches)) {
+                        return $this->mergeDefaults(array_replace($matches, array('_route' => 'admin_dsg_agencia_afiliados_edit')), array (  '_controller' => 'Dsg\\agenciaBundle\\Controller\\AfiliadosAdminController::editAction',  '_sonata_admin' => 'dsg.agencia.admin.afiliados',  '_sonata_name' => 'admin_dsg_agencia_afiliados_edit',));
+                    }
+
+                    // admin_dsg_agencia_afiliados_delete
+                    if (preg_match('#^/admin/dsg/agencia/afiliados/(?P<id>[^/]++)/delete$#s', $pathinfo, $matches)) {
+                        return $this->mergeDefaults(array_replace($matches, array('_route' => 'admin_dsg_agencia_afiliados_delete')), array (  '_controller' => 'Dsg\\agenciaBundle\\Controller\\AfiliadosAdminController::deleteAction',  '_sonata_admin' => 'dsg.agencia.admin.afiliados',  '_sonata_name' => 'admin_dsg_agencia_afiliados_delete',));
+                    }
+
+                    // admin_dsg_agencia_afiliados_show
+                    if (preg_match('#^/admin/dsg/agencia/afiliados/(?P<id>[^/]++)/show$#s', $pathinfo, $matches)) {
+                        return $this->mergeDefaults(array_replace($matches, array('_route' => 'admin_dsg_agencia_afiliados_show')), array (  '_controller' => 'Dsg\\agenciaBundle\\Controller\\AfiliadosAdminController::showAction',  '_sonata_admin' => 'dsg.agencia.admin.afiliados',  '_sonata_name' => 'admin_dsg_agencia_afiliados_show',));
+                    }
+
+                    // admin_dsg_agencia_afiliados_export
+                    if ($pathinfo === '/admin/dsg/agencia/afiliados/export') {
+                        return array (  '_controller' => 'Dsg\\agenciaBundle\\Controller\\AfiliadosAdminController::exportAction',  '_sonata_admin' => 'dsg.agencia.admin.afiliados',  '_sonata_name' => 'admin_dsg_agencia_afiliados_export',  '_route' => 'admin_dsg_agencia_afiliados_export',);
+                    }
+
+                    // admin_dsg_agencia_afiliados_activate
+                    if (preg_match('#^/admin/dsg/agencia/afiliados/(?P<id>[^/]++)/activate$#s', $pathinfo, $matches)) {
+                        return $this->mergeDefaults(array_replace($matches, array('_route' => 'admin_dsg_agencia_afiliados_activate')), array (  '_controller' => 'Dsg\\agenciaBundle\\Controller\\AfiliadosAdminController::activateAction',  '_sonata_admin' => 'dsg.agencia.admin.afiliados',  '_sonata_name' => 'admin_dsg_agencia_afiliados_activate',));
+                    }
+
+                    // admin_dsg_agencia_afiliados_deactivate
+                    if (preg_match('#^/admin/dsg/agencia/afiliados/(?P<id>[^/]++)/deactivate$#s', $pathinfo, $matches)) {
+                        return $this->mergeDefaults(array_replace($matches, array('_route' => 'admin_dsg_agencia_afiliados_deactivate')), array (  '_controller' => 'Dsg\\agenciaBundle\\Controller\\AfiliadosAdminController::deactivateAction',  '_sonata_admin' => 'dsg.agencia.admin.afiliados',  '_sonata_name' => 'admin_dsg_agencia_afiliados_deactivate',));
+                    }
+
+                }
+
             }
 
         }

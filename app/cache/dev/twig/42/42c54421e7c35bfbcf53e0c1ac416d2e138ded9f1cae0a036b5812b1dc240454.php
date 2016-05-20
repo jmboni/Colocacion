@@ -1,6 +1,6 @@
 <?php
 
-/* @WebProfiler/Profiler/admin.html.twig */
+/* WebProfilerBundle:Profiler:admin.html.twig */
 class __TwigTemplate_292834e4cf1aeee707c46705258a3626b4ceebac7d0eb091c3667ad866eee4f0 extends Twig_Template
 {
     public function __construct(Twig_Environment $env)
@@ -15,8 +15,8 @@ class __TwigTemplate_292834e4cf1aeee707c46705258a3626b4ceebac7d0eb091c3667ad866e
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_31f1d7332ebfb07e1b16b8ad46da5c61c915b7c3ace2bdd860c204216f190333 = $this->env->getExtension("native_profiler");
-        $__internal_31f1d7332ebfb07e1b16b8ad46da5c61c915b7c3ace2bdd860c204216f190333->enter($__internal_31f1d7332ebfb07e1b16b8ad46da5c61c915b7c3ace2bdd860c204216f190333_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "@WebProfiler/Profiler/admin.html.twig"));
+        $__internal_ad7f876a8ceee45acb940fc06db24b2d71f369c8dec32b40b6cd39496496187f = $this->env->getExtension("native_profiler");
+        $__internal_ad7f876a8ceee45acb940fc06db24b2d71f369c8dec32b40b6cd39496496187f->enter($__internal_ad7f876a8ceee45acb940fc06db24b2d71f369c8dec32b40b6cd39496496187f_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "WebProfilerBundle:Profiler:admin.html.twig"));
 
         // line 1
         if ( !twig_test_empty((isset($context["token"]) ? $context["token"] : $this->getContext($context, "token")))) {
@@ -35,13 +35,13 @@ class __TwigTemplate_292834e4cf1aeee707c46705258a3626b4ceebac7d0eb091c3667ad866e
 ";
         }
         
-        $__internal_31f1d7332ebfb07e1b16b8ad46da5c61c915b7c3ace2bdd860c204216f190333->leave($__internal_31f1d7332ebfb07e1b16b8ad46da5c61c915b7c3ace2bdd860c204216f190333_prof);
+        $__internal_ad7f876a8ceee45acb940fc06db24b2d71f369c8dec32b40b6cd39496496187f->leave($__internal_ad7f876a8ceee45acb940fc06db24b2d71f369c8dec32b40b6cd39496496187f_prof);
 
     }
 
     public function getTemplateName()
     {
-        return "@WebProfiler/Profiler/admin.html.twig";
+        return "WebProfilerBundle:Profiler:admin.html.twig";
     }
 
     public function isTraitable()

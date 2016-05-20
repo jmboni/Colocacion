@@ -256,4 +256,22 @@ class Afiliados
  
         return $this;
     }
+    
+    public function activate()
+    {
+        if(!$this->getActivado()) {
+            $this->setActivado(true);
+        }
+ 
+        return $this->activado;
+    }
+ 
+    public function deactivate()
+    {
+        if($this->getActivado()) {
+            $this->setActivado(false);
+        }
+ 
+        return $this->activado;
+    }
 }

@@ -83,7 +83,7 @@ class __TwigTemplate_9a8e665e191283fa16d3d9b520cd087e9c95f0444ac3d337c65d1853faf
         echo "
     <div class=\"container editshow\">
         <div class=\"row well\">
-            <div class=\"col-xs-4>
+            <div class=\"col-xs-4\">
                 <div class=\"page-header\">
                     <h2>Insertar oferta nueva</h2>
                 </div>
@@ -310,7 +310,7 @@ class __TwigTemplate_9a8e665e191283fa16d3d9b520cd087e9c95f0444ac3d337c65d1853faf
 /*     {{ parent() }}*/
 /*     <div class="container editshow">*/
 /*         <div class="row well">*/
-/*             <div class="col-xs-4>*/
+/*             <div class="col-xs-4">*/
 /*                 <div class="page-header">*/
 /*                     <h2>Insertar oferta nueva</h2>*/
 /*                 </div>*/

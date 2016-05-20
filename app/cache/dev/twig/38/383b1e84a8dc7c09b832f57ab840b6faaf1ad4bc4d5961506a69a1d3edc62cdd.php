@@ -23,23 +23,23 @@ class __TwigTemplate_253431f10cabe0a3ac6a5a6b591c1d1956290c44ca0da24c218a4b6b7e8
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_a2a7422b859ffaa40e8da7c6aa964feb983589852c473308111de3aa8c3b5177 = $this->env->getExtension("native_profiler");
-        $__internal_a2a7422b859ffaa40e8da7c6aa964feb983589852c473308111de3aa8c3b5177->enter($__internal_a2a7422b859ffaa40e8da7c6aa964feb983589852c473308111de3aa8c3b5177_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "DsgagenciaBundle:Afiliados:afiliados_new.html.twig"));
+        $__internal_f42e1d7fa375d6222259dc01f73cabbbaef89ec91079609b60724d336993e0c4 = $this->env->getExtension("native_profiler");
+        $__internal_f42e1d7fa375d6222259dc01f73cabbbaef89ec91079609b60724d336993e0c4->enter($__internal_f42e1d7fa375d6222259dc01f73cabbbaef89ec91079609b60724d336993e0c4_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "DsgagenciaBundle:Afiliados:afiliados_new.html.twig"));
 
         // line 3
         $context["form_themes"] = $this;
         // line 1
         $this->parent->display($context, array_merge($this->blocks, $blocks));
         
-        $__internal_a2a7422b859ffaa40e8da7c6aa964feb983589852c473308111de3aa8c3b5177->leave($__internal_a2a7422b859ffaa40e8da7c6aa964feb983589852c473308111de3aa8c3b5177_prof);
+        $__internal_f42e1d7fa375d6222259dc01f73cabbbaef89ec91079609b60724d336993e0c4->leave($__internal_f42e1d7fa375d6222259dc01f73cabbbaef89ec91079609b60724d336993e0c4_prof);
 
     }
 
     // line 5
     public function block_form_errors($context, array $blocks = array())
     {
-        $__internal_f37c4a988c7bc111326e99e031f965e89e01884760ece97b7740af138bb18d42 = $this->env->getExtension("native_profiler");
-        $__internal_f37c4a988c7bc111326e99e031f965e89e01884760ece97b7740af138bb18d42->enter($__internal_f37c4a988c7bc111326e99e031f965e89e01884760ece97b7740af138bb18d42_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "form_errors"));
+        $__internal_6909bbdac0d8d5c2d1475be372428ecff50b5b9dc913e1e90b3ceeccd334b7ed = $this->env->getExtension("native_profiler");
+        $__internal_6909bbdac0d8d5c2d1475be372428ecff50b5b9dc913e1e90b3ceeccd334b7ed->enter($__internal_6909bbdac0d8d5c2d1475be372428ecff50b5b9dc913e1e90b3ceeccd334b7ed_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "form_errors"));
 
         // line 6
         ob_start();
@@ -68,15 +68,15 @@ class __TwigTemplate_253431f10cabe0a3ac6a5a6b591c1d1956290c44ca0da24c218a4b6b7e8
         }
         echo trim(preg_replace('/>\s+</', '><', ob_get_clean()));
         
-        $__internal_f37c4a988c7bc111326e99e031f965e89e01884760ece97b7740af138bb18d42->leave($__internal_f37c4a988c7bc111326e99e031f965e89e01884760ece97b7740af138bb18d42_prof);
+        $__internal_6909bbdac0d8d5c2d1475be372428ecff50b5b9dc913e1e90b3ceeccd334b7ed->leave($__internal_6909bbdac0d8d5c2d1475be372428ecff50b5b9dc913e1e90b3ceeccd334b7ed_prof);
 
     }
 
     // line 17
     public function block_stylesheets($context, array $blocks = array())
     {
-        $__internal_fd4268a39f7393543b817a4231634d048f6c9cfa7bb6f6b057911792825c0770 = $this->env->getExtension("native_profiler");
-        $__internal_fd4268a39f7393543b817a4231634d048f6c9cfa7bb6f6b057911792825c0770->enter($__internal_fd4268a39f7393543b817a4231634d048f6c9cfa7bb6f6b057911792825c0770_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "stylesheets"));
+        $__internal_e373cee6475d438426960394cb3fa91563d369151915420f595a2c8d9d348635 = $this->env->getExtension("native_profiler");
+        $__internal_e373cee6475d438426960394cb3fa91563d369151915420f595a2c8d9d348635->enter($__internal_e373cee6475d438426960394cb3fa91563d369151915420f595a2c8d9d348635_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "stylesheets"));
 
         // line 18
         echo "    ";
@@ -88,15 +88,15 @@ class __TwigTemplate_253431f10cabe0a3ac6a5a6b591c1d1956290c44ca0da24c218a4b6b7e8
         echo "\" type=\"text/css\" media=\"all\" />
 ";
         
-        $__internal_fd4268a39f7393543b817a4231634d048f6c9cfa7bb6f6b057911792825c0770->leave($__internal_fd4268a39f7393543b817a4231634d048f6c9cfa7bb6f6b057911792825c0770_prof);
+        $__internal_e373cee6475d438426960394cb3fa91563d369151915420f595a2c8d9d348635->leave($__internal_e373cee6475d438426960394cb3fa91563d369151915420f595a2c8d9d348635_prof);
 
     }
 
     // line 22
     public function block_formulario($context, array $blocks = array())
     {
-        $__internal_ab6eb7b701c1dde9b6bdd7fe5a1292e032be334620de3aca1e44ea248f336dcd = $this->env->getExtension("native_profiler");
-        $__internal_ab6eb7b701c1dde9b6bdd7fe5a1292e032be334620de3aca1e44ea248f336dcd->enter($__internal_ab6eb7b701c1dde9b6bdd7fe5a1292e032be334620de3aca1e44ea248f336dcd_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "formulario"));
+        $__internal_b634fe4e7d9936ec4d4591b1859ecbf99e6c31e141665e608ec63bb50e51984e = $this->env->getExtension("native_profiler");
+        $__internal_b634fe4e7d9936ec4d4591b1859ecbf99e6c31e141665e608ec63bb50e51984e->enter($__internal_b634fe4e7d9936ec4d4591b1859ecbf99e6c31e141665e608ec63bb50e51984e_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "formulario"));
 
         // line 23
         echo "    ";
@@ -104,7 +104,7 @@ class __TwigTemplate_253431f10cabe0a3ac6a5a6b591c1d1956290c44ca0da24c218a4b6b7e8
         echo "
     <div class=\"container editshow\">
         <div class=\"row well\">
-            <div class=\"col-xs-4\">
+            <div class=\"col-xs-6\">
                 <div class=\"page-header\">
                     <h2>Nuevo Usuario</h2>
                 </div>
@@ -144,24 +144,24 @@ class __TwigTemplate_253431f10cabe0a3ac6a5a6b591c1d1956290c44ca0da24c218a4b6b7e8
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "email", array()), 'errors');
         echo "</span>
                     </div>
-                    
                     <div class=\"form-group\">
-                        ";
-        // line 45
+                            ";
+        // line 44
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "categoria", array()), 'label');
         echo "
-                        ";
+                            <br/>
+                            ";
         // line 46
-        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "categoria", array()), 'widget', array("attr" => array("class" => "form-control", "placeholder" => "Categoria")));
+        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "categoria", array()), 'widget');
         echo "
-                        <span class=\"text-danger\">";
+                            <span class=\"text-danger\">";
         // line 47
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "categoria", array()), 'errors');
         echo "</span>
                     </div>
                     <p>
-                        <input type=\"submit\" value=\"Submit\" />
-                        <!--<button type=\"submit\" value=\"Submit\" class=\"btn btn-info\">Aceptar</button>-->
+                        <!--<input type=\"submit\" value=\"Submit\" />-->
+                        <button type=\"submit\" value=\"Submit\" class=\"btn btn-info\">Aceptar</button>
                     </p>
                 ";
         // line 53
@@ -173,7 +173,7 @@ class __TwigTemplate_253431f10cabe0a3ac6a5a6b591c1d1956290c44ca0da24c218a4b6b7e8
     </div>
 ";
         
-        $__internal_ab6eb7b701c1dde9b6bdd7fe5a1292e032be334620de3aca1e44ea248f336dcd->leave($__internal_ab6eb7b701c1dde9b6bdd7fe5a1292e032be334620de3aca1e44ea248f336dcd_prof);
+        $__internal_b634fe4e7d9936ec4d4591b1859ecbf99e6c31e141665e608ec63bb50e51984e->leave($__internal_b634fe4e7d9936ec4d4591b1859ecbf99e6c31e141665e608ec63bb50e51984e_prof);
 
     }
 
@@ -189,7 +189,7 @@ class __TwigTemplate_253431f10cabe0a3ac6a5a6b591c1d1956290c44ca0da24c218a4b6b7e8
 
     public function getDebugInfo()
     {
-        return array (  168 => 53,  159 => 47,  155 => 46,  151 => 45,  144 => 41,  140 => 40,  136 => 39,  129 => 35,  125 => 34,  121 => 33,  114 => 31,  102 => 23,  96 => 22,  87 => 19,  82 => 18,  76 => 17,  66 => 12,  57 => 10,  53 => 9,  50 => 8,  47 => 7,  45 => 6,  39 => 5,  32 => 1,  30 => 3,  11 => 1,);
+        return array (  168 => 53,  159 => 47,  155 => 46,  150 => 44,  144 => 41,  140 => 40,  136 => 39,  129 => 35,  125 => 34,  121 => 33,  114 => 31,  102 => 23,  96 => 22,  87 => 19,  82 => 18,  76 => 17,  66 => 12,  57 => 10,  53 => 9,  50 => 8,  47 => 7,  45 => 6,  39 => 5,  32 => 1,  30 => 3,  11 => 1,);
     }
 }
 /* {% extends 'DsgagenciaBundle::layout.html.twig' %}*/
@@ -217,7 +217,7 @@ class __TwigTemplate_253431f10cabe0a3ac6a5a6b591c1d1956290c44ca0da24c218a4b6b7e8
 /*     {{ parent() }}*/
 /*     <div class="container editshow">*/
 /*         <div class="row well">*/
-/*             <div class="col-xs-4">*/
+/*             <div class="col-xs-6">*/
 /*                 <div class="page-header">*/
 /*                     <h2>Nuevo Usuario</h2>*/
 /*                 </div>*/
@@ -234,15 +234,15 @@ class __TwigTemplate_253431f10cabe0a3ac6a5a6b591c1d1956290c44ca0da24c218a4b6b7e8
 /*                         {{ form_widget(form.email, {'attr' : {'class' : 'form-control', 'placeholder' : 'Email'}}) }}*/
 /*                         <span class="text-danger">{{ form_errors(form.email) }}</span>*/
 /*                     </div>*/
-/*                     */
 /*                     <div class="form-group">*/
-/*                         {{ form_label(form.categoria)}}*/
-/*                         {{ form_widget(form.categoria, {'attr' : {'class' : 'form-control', 'placeholder' : 'Categoria'}}) }}*/
-/*                         <span class="text-danger">{{ form_errors(form.categoria)}}</span>*/
+/*                             {{ form_label(form.categoria) }}*/
+/*                             <br/>*/
+/*                             {{ form_widget(form.categoria) }}*/
+/*                             <span class="text-danger">{{ form_errors(form.categoria)}}</span>*/
 /*                     </div>*/
 /*                     <p>*/
-/*                         <input type="submit" value="Submit" />*/
-/*                         <!--<button type="submit" value="Submit" class="btn btn-info">Aceptar</button>-->*/
+/*                         <!--<input type="submit" value="Submit" />-->*/
+/*                         <button type="submit" value="Submit" class="btn btn-info">Aceptar</button>*/
 /*                     </p>*/
 /*                 {{ form_end(form) }}*/
 /*             */

@@ -97,23 +97,23 @@ class TrabajosAdmin extends Admin
     
     
     public function getBatchActions()
-{
-    // retrieve the default (currently only the delete action) actions
-    $actions = parent::getBatchActions();
- 
-    // check user permissions
-    if($this->hasRoute('edit') && $this->isGranted('EDIT') && $this->hasRoute('delete') && $this->isGranted('DELETE')){
-        $actions['extend'] = array(
-            'label'            => 'Ampliar ofertas',
-            'ask_confirmation' => true // If true, a confirmation will be asked before performing the action
-        );
- 
-        $actions['deleteNeverActivated'] = array(
-            'label'            => 'Borrar ofertas nunca activadas',
-            'ask_confirmation' => true // If true, a confirmation will be asked before performing the action
-        );
+    {
+        // retrieve the default (currently only the delete action) actions
+        $actions = parent::getBatchActions();
+     
+        // check user permissions
+        if($this->hasRoute('edit') && $this->isGranted('EDIT') && $this->hasRoute('delete') && $this->isGranted('DELETE')){
+            $actions['extend'] = array(
+                'label'            => 'Ampliar ofertas',
+                'ask_confirmation' => true // If true, a confirmation will be asked before performing the action
+            );
+     
+            $actions['deleteNeverActivated'] = array(
+                'label'            => 'Borrar ofertas nunca activadas',
+                'ask_confirmation' => true // If true, a confirmation will be asked before performing the action
+            );
+        }
+     
+        return $actions;
     }
- 
-    return $actions;
-}
 }

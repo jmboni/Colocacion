@@ -386,4 +386,26 @@ class Afiliados extends \Dsg\agenciaBundle\Entity\Afiliados implements \Doctrine
         return parent::setTokenValue();
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    public function activate()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'activate', []);
+
+        return parent::activate();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function deactivate()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'deactivate', []);
+
+        return parent::deactivate();
+    }
+
 }
