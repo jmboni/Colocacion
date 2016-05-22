@@ -502,6 +502,7 @@ class Trabajos
     {
         return Amigable::urlAmigable($this->getLocalidad());
     }
+    
 
     /**
      * Get categoria
@@ -672,4 +673,66 @@ class Trabajos
         );
     }
     
+    static public function getLuceneIndex()
+    {
+        if (file_exists($index = self::getLuceneIndexFile())) {
+            return \Zend_Search_Lucene::open($index);
+        }
+ 
+        return \Zend_Search_Lucene::create($index);
+    }
+    
+ 
+    static public function getLuceneIndexFile()
+    {
+        return __DIR__.'/../../../../web/data/trabajos.index';
+    }
+    
+
+    /**
+     * @ORM\PostPersist
+     */
+    public function updateLuceneIndex()
+    {
+        $index = self::getLuceneIndex();
+ 
+        // remove existing entries
+        foreach ($index->find('pk:'.$this->getId()) as $hit)
+        {
+          $index->delete($hit->id);
+        }
+ 
+        // don't index expired and non-activated jobs
+        if ($this->finalizadoYa() || !$this->getActivado())
+        {
+          return;
+        }
+ 
+        $doc = new \Zend_Search_Lucene_Document();
+ 
+        // store job primary key to identify it in the search results
+        $doc->addField(\Zend_Search_Lucene_Field::Keyword('pk', $this->getId()));
+ 
+        // index job fields
+        $doc->addField(\Zend_Search_Lucene_Field::UnStored('posicion', $this->getPosicion(), 'utf-8'));
+        $doc->addField(\Zend_Search_Lucene_Field::UnStored('compania', $this->getCompania(), 'utf-8'));
+        $doc->addField(\Zend_Search_Lucene_Field::UnStored('localidad', $this->getLocalidad(), 'utf-8'));
+        $doc->addField(\Zend_Search_Lucene_Field::UnStored('descripcion', $this->getDescripcion(), 'utf-8'));
+ 
+        // add job to the index
+        $index->addDocument($doc);
+        $index->commit();
+    }
+
+    /**
+     * @ORM\PostRemove
+     */
+    public function deleteLuceneIndex()
+    {
+        $index = self::getLuceneIndex();
+ 
+        foreach ($index->find('pk:'.$this->getId()) as $hit) {
+            $index->delete($hit->id);
+        }
+    }
 }

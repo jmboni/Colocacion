@@ -15,8 +15,8 @@ class __TwigTemplate_ff5bc28b287cab1343501ceb07248bb3453252904870f1bc9d2210bd5f3
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_a5b7ace2f67a556f38b1d2378e7adda2512f8543b46b822e53b52ca9a2585e8e = $this->env->getExtension("native_profiler");
-        $__internal_a5b7ace2f67a556f38b1d2378e7adda2512f8543b46b822e53b52ca9a2585e8e->enter($__internal_a5b7ace2f67a556f38b1d2378e7adda2512f8543b46b822e53b52ca9a2585e8e_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "DsgagenciaBundle:AfiliadosAdmin:list_action_activar.html.twig"));
+        $__internal_673feafa50a97b582ef77fe1abb772a1195d287d1e333f58ab220abf968d8025 = $this->env->getExtension("native_profiler");
+        $__internal_673feafa50a97b582ef77fe1abb772a1195d287d1e333f58ab220abf968d8025->enter($__internal_673feafa50a97b582ef77fe1abb772a1195d287d1e333f58ab220abf968d8025_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "DsgagenciaBundle:AfiliadosAdmin:list_action_activar.html.twig"));
 
         // line 1
         if (($this->getAttribute((isset($context["admin"]) ? $context["admin"] : $this->getContext($context, "admin")), "isGranted", array(0 => "EDIT", 1 => (isset($context["object"]) ? $context["object"] : $this->getContext($context, "object"))), "method") && $this->getAttribute((isset($context["admin"]) ? $context["admin"] : $this->getContext($context, "admin")), "hasRoute", array(0 => "activate"), "method"))) {
@@ -35,7 +35,7 @@ class __TwigTemplate_ff5bc28b287cab1343501ceb07248bb3453252904870f1bc9d2210bd5f3
 ";
         }
         
-        $__internal_a5b7ace2f67a556f38b1d2378e7adda2512f8543b46b822e53b52ca9a2585e8e->leave($__internal_a5b7ace2f67a556f38b1d2378e7adda2512f8543b46b822e53b52ca9a2585e8e_prof);
+        $__internal_673feafa50a97b582ef77fe1abb772a1195d287d1e333f58ab220abf968d8025->leave($__internal_673feafa50a97b582ef77fe1abb772a1195d287d1e333f58ab220abf968d8025_prof);
 
     }
 

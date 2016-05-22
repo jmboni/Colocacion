@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             new Dsg\agenciaBundle\DsgagenciaBundle(),
             //new Propel\Bundle\PropelBundle\PropelBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
+            new FOS\ElasticaBundle\FOSElasticaBundle(),
     
             // Add your dependencies
             new Sonata\CoreBundle\SonataCoreBundle(),

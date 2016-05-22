@@ -2,6 +2,7 @@
 
 namespace Dsg\agenciaBundle\Repository;
 
+use Dsg\agenciaBundle\Entity\Trabajos;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -105,5 +106,31 @@ class TrabajosRepository extends EntityRepository
             ->getQuery();
      
         return $query->execute();
+    }
+    
+    public function getForLuceneQuery($query)
+    {
+        $hits = Trabajos::getLuceneIndex()->find($query);
+ 
+        $pks = array();
+        foreach ($hits as $hit)
+        {
+          $pks[] = $hit->pk;
+        }
+ 
+        if (empty($pks))
+        {
+          return array();
+        }
+ 
+        $q = $this->createQueryBuilder('j')
+            ->where('j.id IN (:pks)')
+            ->setParameter('pks', $pks)
+            ->andWhere('j.activado = :activado')
+            ->setParameter('activado', 1)
+            ->setMaxResults(20)
+            ->getQuery();
+ 
+        return $q->getResult();
     }
 }

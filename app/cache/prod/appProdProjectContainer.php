@@ -107,6 +107,25 @@ class appProdProjectContainer extends Container
             'form.type_extension.submit.validator' => 'getForm_TypeExtension_Submit_ValidatorService',
             'form.type_guesser.doctrine' => 'getForm_TypeGuesser_DoctrineService',
             'form.type_guesser.validator' => 'getForm_TypeGuesser_ValidatorService',
+            'fos_elastica.alias_processor' => 'getFosElastica_AliasProcessorService',
+            'fos_elastica.client.default' => 'getFosElastica_Client_DefaultService',
+            'fos_elastica.config_manager' => 'getFosElastica_ConfigManagerService',
+            'fos_elastica.data_collector' => 'getFosElastica_DataCollectorService',
+            'fos_elastica.finder.app.trabajos' => 'getFosElastica_Finder_App_TrabajosService',
+            'fos_elastica.index.app' => 'getFosElastica_Index_AppService',
+            'fos_elastica.index.app.trabajos' => 'getFosElastica_Index_App_TrabajosService',
+            'fos_elastica.index_manager' => 'getFosElastica_IndexManagerService',
+            'fos_elastica.indexable' => 'getFosElastica_IndexableService',
+            'fos_elastica.logger' => 'getFosElastica_LoggerService',
+            'fos_elastica.manager.orm' => 'getFosElastica_Manager_OrmService',
+            'fos_elastica.mapping_builder' => 'getFosElastica_MappingBuilderService',
+            'fos_elastica.object_persister.app.trabajos' => 'getFosElastica_ObjectPersister_App_TrabajosService',
+            'fos_elastica.paginator.subscriber' => 'getFosElastica_Paginator_SubscriberService',
+            'fos_elastica.property_accessor' => 'getFosElastica_PropertyAccessorService',
+            'fos_elastica.provider.app.trabajos' => 'getFosElastica_Provider_App_TrabajosService',
+            'fos_elastica.provider_registry' => 'getFosElastica_ProviderRegistryService',
+            'fos_elastica.resetter' => 'getFosElastica_ResetterService',
+            'fos_elastica.slice_fetcher.orm' => 'getFosElastica_SliceFetcher_OrmService',
             'fragment.handler' => 'getFragment_HandlerService',
             'fragment.listener' => 'getFragment_ListenerService',
             'fragment.renderer.esi' => 'getFragment_Renderer_EsiService',
@@ -130,6 +149,7 @@ class appProdProjectContainer extends Container
             'monolog.handler.nested' => 'getMonolog_Handler_NestedService',
             'monolog.logger.assetic' => 'getMonolog_Logger_AsseticService',
             'monolog.logger.doctrine' => 'getMonolog_Logger_DoctrineService',
+            'monolog.logger.elastica' => 'getMonolog_Logger_ElasticaService',
             'monolog.logger.php' => 'getMonolog_Logger_PhpService',
             'monolog.logger.request' => 'getMonolog_Logger_RequestService',
             'monolog.logger.router' => 'getMonolog_Logger_RouterService',
@@ -366,6 +386,9 @@ class appProdProjectContainer extends Container
             'doctrine.orm.default_query_cache' => 'doctrine_cache.providers.doctrine.orm.default_query_cache',
             'doctrine.orm.default_result_cache' => 'doctrine_cache.providers.doctrine.orm.default_result_cache',
             'doctrine.orm.entity_manager' => 'doctrine.orm.default_entity_manager',
+            'fos_elastica.client' => 'fos_elastica.client.default',
+            'fos_elastica.index' => 'fos_elastica.index.app',
+            'fos_elastica.manager' => 'fos_elastica.manager.orm',
             'mailer' => 'swiftmailer.mailer.default',
             'session.storage' => 'session.storage.native',
             'sonata.block.cache.handler' => 'sonata.block.cache.handler.default',
@@ -562,7 +585,10 @@ class appProdProjectContainer extends Container
      */
     protected function getDoctrine_Dbal_DefaultConnectionService()
     {
-        return $this->services['doctrine.dbal.default_connection'] = $this->get('doctrine.dbal.connection_factory')->createConnection(array('driver' => 'pdo_mysql', 'host' => '127.0.0.1', 'port' => NULL, 'dbname' => 'agencia', 'user' => 'jmboni', 'password' => NULL, 'charset' => 'UTF8', 'driverOptions' => array(), 'defaultTableOptions' => array()), new \Doctrine\DBAL\Configuration(), new \Symfony\Bridge\Doctrine\ContainerAwareEventManager($this), array());
+        $a = new \Symfony\Bridge\Doctrine\ContainerAwareEventManager($this);
+        $a->addEventListener(array(0 => 'postPersist', 1 => 'postUpdate', 2 => 'preRemove', 3 => 'postFlush'), new \FOS\ElasticaBundle\Doctrine\Listener($this->get('fos_elastica.object_persister.app.trabajos'), $this->get('fos_elastica.indexable'), array('identifier' => 'id', 'indexName' => 'app', 'typeName' => 'trabajos'), NULL));
+
+        return $this->services['doctrine.dbal.default_connection'] = $this->get('doctrine.dbal.connection_factory')->createConnection(array('driver' => 'pdo_mysql', 'host' => '127.0.0.1', 'port' => NULL, 'dbname' => 'agencia', 'user' => 'jmboni', 'password' => NULL, 'charset' => 'UTF8', 'driverOptions' => array(), 'defaultTableOptions' => array()), new \Doctrine\DBAL\Configuration(), $a, array());
     }
 
     /*
@@ -1424,6 +1450,278 @@ class appProdProjectContainer extends Container
     }
 
     /*
+     * Gets the 'fos_elastica.alias_processor' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \FOS\ElasticaBundle\Index\AliasProcessor A FOS\ElasticaBundle\Index\AliasProcessor instance.
+     */
+    protected function getFosElastica_AliasProcessorService()
+    {
+        return $this->services['fos_elastica.alias_processor'] = new \FOS\ElasticaBundle\Index\AliasProcessor();
+    }
+
+    /*
+     * Gets the 'fos_elastica.client.default' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \FOS\ElasticaBundle\Elastica\Client A FOS\ElasticaBundle\Elastica\Client instance.
+     */
+    protected function getFosElastica_Client_DefaultService()
+    {
+        $this->services['fos_elastica.client.default'] = $instance = new \FOS\ElasticaBundle\Elastica\Client(array('connections' => array(0 => array('host' => 'localhost', 'port' => 9200, 'logger' => false, 'headers' => array())), 'connectionStrategy' => 'Simple'), '');
+
+        $instance->setStopwatch($this->get('debug.stopwatch', ContainerInterface::NULL_ON_INVALID_REFERENCE));
+
+        return $instance;
+    }
+
+    /*
+     * Gets the 'fos_elastica.config_manager' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \FOS\ElasticaBundle\Configuration\ConfigManager A FOS\ElasticaBundle\Configuration\ConfigManager instance.
+     */
+    protected function getFosElastica_ConfigManagerService()
+    {
+        return $this->services['fos_elastica.config_manager'] = new \FOS\ElasticaBundle\Configuration\ConfigManager(array(0 => new \FOS\ElasticaBundle\Configuration\Source\ContainerSource(array('app' => array('elasticsearch_name' => 'app', 'reference' => $this->get('fos_elastica.index.app'), 'name' => 'app', 'settings' => array(), 'type_prototype' => array(), 'use_alias' => false, 'types' => array('trabajos' => array('name' => 'trabajos', 'mapping' => array('dynamic_templates' => array(), 'properties' => array('categoria' => array(), 'compania' => array(), 'localidad' => array(), 'posicion' => array())), 'config' => array('persistence' => array('driver' => 'orm', 'model' => 'Dsg\\agenciaBundle\\Entity\\Trabajos', 'provider' => array('batch_size' => 100, 'clear_object_manager' => true, 'debug_logging' => false, 'query_builder_method' => 'createQueryBuilder'), 'listener' => array('insert' => true, 'update' => true, 'delete' => true, 'flush' => true, 'immediate' => false, 'logger' => false), 'finder' => array(), 'identifier' => 'id', 'elastica_to_model_transformer' => array('hydrate' => true, 'ignore_missing' => false, 'query_builder_method' => 'createQueryBuilder'), 'model_to_elastica_transformer' => array()), 'serializer' => array('groups' => array()), 'index_analyzer' => NULL, 'search_analyzer' => NULL, 'date_detection' => NULL, 'dynamic_date_formats' => array(), 'numeric_detection' => NULL))))))));
+    }
+
+    /*
+     * Gets the 'fos_elastica.data_collector' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \FOS\ElasticaBundle\DataCollector\ElasticaDataCollector A FOS\ElasticaBundle\DataCollector\ElasticaDataCollector instance.
+     */
+    protected function getFosElastica_DataCollectorService()
+    {
+        return $this->services['fos_elastica.data_collector'] = new \FOS\ElasticaBundle\DataCollector\ElasticaDataCollector($this->get('fos_elastica.logger'));
+    }
+
+    /*
+     * Gets the 'fos_elastica.finder.app.trabajos' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \FOS\ElasticaBundle\Finder\TransformedFinder A FOS\ElasticaBundle\Finder\TransformedFinder instance.
+     */
+    protected function getFosElastica_Finder_App_TrabajosService()
+    {
+        $a = new \FOS\ElasticaBundle\Doctrine\ORM\ElasticaToModelTransformer($this->get('doctrine'), 'Dsg\\agenciaBundle\\Entity\\Trabajos', array('hydrate' => true, 'ignore_missing' => false, 'query_builder_method' => 'createQueryBuilder', 'identifier' => 'id'));
+        $a->setPropertyAccessor($this->get('fos_elastica.property_accessor'));
+
+        return $this->services['fos_elastica.finder.app.trabajos'] = new \FOS\ElasticaBundle\Finder\TransformedFinder($this->get('fos_elastica.index.app.trabajos'), $a);
+    }
+
+    /*
+     * Gets the 'fos_elastica.index.app' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \FOS\ElasticaBundle\Elastica\Index A FOS\ElasticaBundle\Elastica\Index instance.
+     */
+    protected function getFosElastica_Index_AppService()
+    {
+        return $this->services['fos_elastica.index.app'] = $this->get('fos_elastica.client.default')->getIndex('app');
+    }
+
+    /*
+     * Gets the 'fos_elastica.index.app.trabajos' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \Elastica\Type A Elastica\Type instance.
+     */
+    protected function getFosElastica_Index_App_TrabajosService()
+    {
+        return $this->services['fos_elastica.index.app.trabajos'] = $this->get('fos_elastica.index.app')->getType('trabajos');
+    }
+
+    /*
+     * Gets the 'fos_elastica.index_manager' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \FOS\ElasticaBundle\Index\IndexManager A FOS\ElasticaBundle\Index\IndexManager instance.
+     */
+    protected function getFosElastica_IndexManagerService()
+    {
+        $a = $this->get('fos_elastica.index.app');
+
+        return $this->services['fos_elastica.index_manager'] = new \FOS\ElasticaBundle\Index\IndexManager(array('app' => $a), $a);
+    }
+
+    /*
+     * Gets the 'fos_elastica.indexable' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \FOS\ElasticaBundle\Provider\Indexable A FOS\ElasticaBundle\Provider\Indexable instance.
+     */
+    protected function getFosElastica_IndexableService()
+    {
+        return $this->services['fos_elastica.indexable'] = new \FOS\ElasticaBundle\Provider\Indexable(array(), $this);
+    }
+
+    /*
+     * Gets the 'fos_elastica.logger' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \FOS\ElasticaBundle\Logger\ElasticaLogger A FOS\ElasticaBundle\Logger\ElasticaLogger instance.
+     */
+    protected function getFosElastica_LoggerService()
+    {
+        return $this->services['fos_elastica.logger'] = new \FOS\ElasticaBundle\Logger\ElasticaLogger($this->get('monolog.logger.elastica', ContainerInterface::NULL_ON_INVALID_REFERENCE), false);
+    }
+
+    /*
+     * Gets the 'fos_elastica.manager.orm' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \FOS\ElasticaBundle\Doctrine\RepositoryManager A FOS\ElasticaBundle\Doctrine\RepositoryManager instance.
+     */
+    protected function getFosElastica_Manager_OrmService()
+    {
+        $this->services['fos_elastica.manager.orm'] = $instance = new \FOS\ElasticaBundle\Doctrine\RepositoryManager($this->get('doctrine'), $this->get('annotation_reader'));
+
+        $instance->addEntity('Dsg\\agenciaBundle\\Entity\\Trabajos', $this->get('fos_elastica.finder.app.trabajos'));
+
+        return $instance;
+    }
+
+    /*
+     * Gets the 'fos_elastica.mapping_builder' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \FOS\ElasticaBundle\Index\MappingBuilder A FOS\ElasticaBundle\Index\MappingBuilder instance.
+     */
+    protected function getFosElastica_MappingBuilderService()
+    {
+        return $this->services['fos_elastica.mapping_builder'] = new \FOS\ElasticaBundle\Index\MappingBuilder();
+    }
+
+    /*
+     * Gets the 'fos_elastica.object_persister.app.trabajos' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \FOS\ElasticaBundle\Persister\ObjectPersister A FOS\ElasticaBundle\Persister\ObjectPersister instance.
+     */
+    protected function getFosElastica_ObjectPersister_App_TrabajosService()
+    {
+        $a = new \FOS\ElasticaBundle\Transformer\ModelToElasticaAutoTransformer(array('identifier' => 'id'), $this->get('event_dispatcher'));
+        $a->setPropertyAccessor($this->get('fos_elastica.property_accessor'));
+
+        return $this->services['fos_elastica.object_persister.app.trabajos'] = new \FOS\ElasticaBundle\Persister\ObjectPersister($this->get('fos_elastica.index.app.trabajos'), $a, 'Dsg\\agenciaBundle\\Entity\\Trabajos', array('categoria' => array(), 'compania' => array(), 'localidad' => array(), 'posicion' => array()));
+    }
+
+    /*
+     * Gets the 'fos_elastica.paginator.subscriber' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \FOS\ElasticaBundle\Subscriber\PaginateElasticaQuerySubscriber A FOS\ElasticaBundle\Subscriber\PaginateElasticaQuerySubscriber instance.
+     */
+    protected function getFosElastica_Paginator_SubscriberService()
+    {
+        $this->services['fos_elastica.paginator.subscriber'] = $instance = new \FOS\ElasticaBundle\Subscriber\PaginateElasticaQuerySubscriber();
+
+        $instance->setRequest($this->get('request', ContainerInterface::NULL_ON_INVALID_REFERENCE));
+
+        return $instance;
+    }
+
+    /*
+     * Gets the 'fos_elastica.property_accessor' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \Symfony\Component\PropertyAccess\PropertyAccessor A Symfony\Component\PropertyAccess\PropertyAccessor instance.
+     */
+    protected function getFosElastica_PropertyAccessorService()
+    {
+        return $this->services['fos_elastica.property_accessor'] = new \Symfony\Component\PropertyAccess\PropertyAccessor();
+    }
+
+    /*
+     * Gets the 'fos_elastica.provider.app.trabajos' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \FOS\ElasticaBundle\Doctrine\ORM\Provider A FOS\ElasticaBundle\Doctrine\ORM\Provider instance.
+     */
+    protected function getFosElastica_Provider_App_TrabajosService()
+    {
+        return $this->services['fos_elastica.provider.app.trabajos'] = new \FOS\ElasticaBundle\Doctrine\ORM\Provider($this->get('fos_elastica.object_persister.app.trabajos'), $this->get('fos_elastica.indexable'), 'Dsg\\agenciaBundle\\Entity\\Trabajos', array('batch_size' => 100, 'clear_object_manager' => true, 'debug_logging' => false, 'query_builder_method' => 'createQueryBuilder', 'indexName' => 'app', 'typeName' => 'trabajos'), $this->get('doctrine'), $this->get('fos_elastica.slice_fetcher.orm'));
+    }
+
+    /*
+     * Gets the 'fos_elastica.provider_registry' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \FOS\ElasticaBundle\Provider\ProviderRegistry A FOS\ElasticaBundle\Provider\ProviderRegistry instance.
+     */
+    protected function getFosElastica_ProviderRegistryService()
+    {
+        $this->services['fos_elastica.provider_registry'] = $instance = new \FOS\ElasticaBundle\Provider\ProviderRegistry();
+
+        $instance->setContainer($this);
+        $instance->addProvider('app', 'trabajos', 'fos_elastica.provider.app.trabajos');
+
+        return $instance;
+    }
+
+    /*
+     * Gets the 'fos_elastica.resetter' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \FOS\ElasticaBundle\Index\Resetter A FOS\ElasticaBundle\Index\Resetter instance.
+     */
+    protected function getFosElastica_ResetterService()
+    {
+        return $this->services['fos_elastica.resetter'] = new \FOS\ElasticaBundle\Index\Resetter($this->get('fos_elastica.config_manager'), $this->get('fos_elastica.index_manager'), $this->get('fos_elastica.alias_processor'), $this->get('fos_elastica.mapping_builder'), $this->get('event_dispatcher'));
+    }
+
+    /*
+     * Gets the 'fos_elastica.slice_fetcher.orm' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \FOS\ElasticaBundle\Doctrine\ORM\SliceFetcher A FOS\ElasticaBundle\Doctrine\ORM\SliceFetcher instance.
+     */
+    protected function getFosElastica_SliceFetcher_OrmService()
+    {
+        return $this->services['fos_elastica.slice_fetcher.orm'] = new \FOS\ElasticaBundle\Doctrine\ORM\SliceFetcher();
+    }
+
+    /*
      * Gets the 'fragment.handler' service.
      *
      * This service is shared.
@@ -1781,6 +2079,24 @@ class appProdProjectContainer extends Container
     }
 
     /*
+     * Gets the 'monolog.logger.elastica' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \Symfony\Bridge\Monolog\Logger A Symfony\Bridge\Monolog\Logger instance.
+     */
+    protected function getMonolog_Logger_ElasticaService()
+    {
+        $this->services['monolog.logger.elastica'] = $instance = new \Symfony\Bridge\Monolog\Logger('elastica');
+
+        $instance->pushHandler($this->get('monolog.handler.console'));
+        $instance->pushHandler($this->get('monolog.handler.main'));
+
+        return $instance;
+    }
+
+    /*
      * Gets the 'monolog.logger.php' service.
      *
      * This service is shared.
@@ -2105,7 +2421,7 @@ class appProdProjectContainer extends Container
         $l = new \Symfony\Component\Security\Http\Authentication\DefaultAuthenticationFailureHandler($e, $i, array(), $a);
         $l->setOptions(array('login_path' => '/login', 'failure_path' => NULL, 'failure_forward' => false, 'failure_path_parameter' => '_failure_path'));
 
-        return $this->services['security.firewall.map.context.secured_area'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => new \Symfony\Component\Security\Http\Firewall\ChannelListener($h, new \Symfony\Component\Security\Http\EntryPoint\RetryAuthenticationEntryPoint(80, 443), $a), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($b, array(0 => $this->get('security.user.provider.concrete.main')), 'secured_area', $a, $c), 2 => $j, 3 => new \Symfony\Component\Security\Http\Firewall\UsernamePasswordFormAuthenticationListener($b, $f, new \Symfony\Component\Security\Http\Session\SessionAuthenticationStrategy('migrate'), $i, 'secured_area', $k, $l, array('check_path' => '/login_check', 'use_forward' => false, 'require_previous_session' => true, 'username_parameter' => '_username', 'password_parameter' => '_password', 'csrf_parameter' => '_csrf_token', 'intention' => 'authenticate', 'post_only' => true), $a, $c, NULL), 4 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($b, '573cd4f5535100.39845686', $a, $f), 5 => new \Symfony\Component\Security\Http\Firewall\AccessListener($b, $this->get('security.access.decision_manager'), $h, $f)), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($b, $this->get('security.authentication.trust_resolver'), $i, 'secured_area', new \Symfony\Component\Security\Http\EntryPoint\FormAuthenticationEntryPoint($e, $i, '/login', false), NULL, NULL, $a, false));
+        return $this->services['security.firewall.map.context.secured_area'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => new \Symfony\Component\Security\Http\Firewall\ChannelListener($h, new \Symfony\Component\Security\Http\EntryPoint\RetryAuthenticationEntryPoint(80, 443), $a), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($b, array(0 => $this->get('security.user.provider.concrete.main')), 'secured_area', $a, $c), 2 => $j, 3 => new \Symfony\Component\Security\Http\Firewall\UsernamePasswordFormAuthenticationListener($b, $f, new \Symfony\Component\Security\Http\Session\SessionAuthenticationStrategy('migrate'), $i, 'secured_area', $k, $l, array('check_path' => '/login_check', 'use_forward' => false, 'require_previous_session' => true, 'username_parameter' => '_username', 'password_parameter' => '_password', 'csrf_parameter' => '_csrf_token', 'intention' => 'authenticate', 'post_only' => true), $a, $c, NULL), 4 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($b, '573f5a22002130.52246995', $a, $f), 5 => new \Symfony\Component\Security\Http\Firewall\AccessListener($b, $this->get('security.access.decision_manager'), $h, $f)), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($b, $this->get('security.authentication.trust_resolver'), $i, 'secured_area', new \Symfony\Component\Security\Http\EntryPoint\FormAuthenticationEntryPoint($e, $i, '/login', false), NULL, NULL, $a, false));
     }
 
     /*
@@ -4046,15 +4362,15 @@ class appProdProjectContainer extends Container
     protected function getSwiftmailer_Mailer_Default_Transport_RealService()
     {
         $a = new \Swift_Transport_Esmtp_AuthHandler(array(0 => new \Swift_Transport_Esmtp_Auth_CramMd5Authenticator(), 1 => new \Swift_Transport_Esmtp_Auth_LoginAuthenticator(), 2 => new \Swift_Transport_Esmtp_Auth_PlainAuthenticator()));
-        $a->setUsername('soporte@estudiosalmerienses.com');
-        $a->setPassword('Administrador@e@2016');
-        $a->setAuthMode('login');
+        $a->setUsername('soporte@proyectocolocacion.hol.es');
+        $a->setPassword('boni1111');
+        $a->setAuthMode(NULL);
 
         $this->services['swiftmailer.mailer.default.transport.real'] = $instance = new \Swift_Transport_EsmtpTransport(new \Swift_Transport_StreamBuffer(new \Swift_StreamFilters_StringReplacementFilterFactory()), array(0 => $a), $this->get('swiftmailer.mailer.default.transport.eventdispatcher'));
 
-        $instance->setHost('smtp.1and1.es');
-        $instance->setPort(587);
-        $instance->setEncryption('tls');
+        $instance->setHost('mx1.hostinger.es');
+        $instance->setPort(25);
+        $instance->setEncryption(NULL);
         $instance->setTimeout(30);
         $instance->setSourceIp(NULL);
 
@@ -4674,6 +4990,7 @@ class appProdProjectContainer extends Container
         $instance->addPath(($this->targetDirs[3].'/vendor/symfony/swiftmailer-bundle/Resources/views'), 'Swiftmailer');
         $instance->addPath(($this->targetDirs[3].'/vendor/doctrine/doctrine-bundle/Resources/views'), 'Doctrine');
         $instance->addPath(($this->targetDirs[3].'/src/Dsg/agenciaBundle/Resources/views'), 'Dsgagencia');
+        $instance->addPath(($this->targetDirs[3].'/vendor/friendsofsymfony/elastica-bundle/Resources/views'), 'FOSElastica');
         $instance->addPath(($this->targetDirs[3].'/vendor/sonata-project/core-bundle/Resources/views'), 'SonataCore');
         $instance->addPath(($this->targetDirs[3].'/vendor/sonata-project/block-bundle/Resources/views'), 'SonataBlock');
         $instance->addPath(($this->targetDirs[3].'/vendor/sonata-project/doctrine-orm-admin-bundle/Resources/views'), 'SonataDoctrineORMAdmin');
@@ -4787,6 +5104,16 @@ class appProdProjectContainer extends Container
     }
 
     /*
+     * Updates the 'request' service.
+     */
+    protected function synchronizeRequestService()
+    {
+        if ($this->initialized('fos_elastica.paginator.subscriber')) {
+            $this->get('fos_elastica.paginator.subscriber')->setRequest($this->get('request', ContainerInterface::NULL_ON_INVALID_REFERENCE));
+        }
+    }
+
+    /*
      * Gets the 'assetic.asset_factory' service.
      *
      * This service is shared.
@@ -4871,7 +5198,7 @@ class appProdProjectContainer extends Container
      */
     protected function getSecurity_Authentication_ManagerService()
     {
-        $this->services['security.authentication.manager'] = $instance = new \Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager(array(0 => new \Symfony\Component\Security\Core\Authentication\Provider\DaoAuthenticationProvider($this->get('security.user.provider.concrete.main'), new \Symfony\Component\Security\Core\User\UserChecker(), 'secured_area', $this->get('security.encoder_factory'), true), 1 => new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('573cd4f5535100.39845686')), true);
+        $this->services['security.authentication.manager'] = $instance = new \Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager(array(0 => new \Symfony\Component\Security\Core\Authentication\Provider\DaoAuthenticationProvider($this->get('security.user.provider.concrete.main'), new \Symfony\Component\Security\Core\User\UserChecker(), 'secured_area', $this->get('security.encoder_factory'), true), 1 => new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('573f5a22002130.52246995')), true);
 
         $instance->setEventDispatcher($this->get('event_dispatcher'));
 
@@ -5117,6 +5444,7 @@ class appProdProjectContainer extends Container
                 'AppBundle' => 'AppBundle\\AppBundle',
                 'DsgagenciaBundle' => 'Dsg\\agenciaBundle\\DsgagenciaBundle',
                 'DoctrineFixturesBundle' => 'Doctrine\\Bundle\\FixturesBundle\\DoctrineFixturesBundle',
+                'FOSElasticaBundle' => 'FOS\\ElasticaBundle\\FOSElasticaBundle',
                 'SonataCoreBundle' => 'Sonata\\CoreBundle\\SonataCoreBundle',
                 'SonataBlockBundle' => 'Sonata\\BlockBundle\\SonataBlockBundle',
                 'KnpMenuBundle' => 'Knp\\Bundle\\MenuBundle\\KnpMenuBundle',
@@ -5131,12 +5459,9 @@ class appProdProjectContainer extends Container
             'database_user' => 'jmboni',
             'database_password' => NULL,
             'mailer_transport' => 'smtp',
-            'mailer_host' => 'smtp.1and1.es',
-            'mailer_encryption' => 'tls',
-            'mailer_auth_mode' => 'login',
-            'mailer_port' => 587,
-            'mailer_user' => 'soporte@estudiosalmerienses.com',
-            'mailer_password' => 'Administrador@e@2016',
+            'mailer_host' => 'mx1.hostinger.es',
+            'mailer_user' => 'soporte@proyectocolocacion.hol.es',
+            'mailer_password' => 'boni1111',
             'secret' => '524f87812088e3b0c156f6e057e9dd105e5ff1c1',
             'locale' => 'es',
             'max_trabajos_indexpag' => 10,
@@ -5460,12 +5785,12 @@ class appProdProjectContainer extends Container
             'swiftmailer.data_collector.class' => 'Symfony\\Bundle\\SwiftmailerBundle\\DataCollector\\MessageDataCollector',
             'swiftmailer.mailer.default.transport.name' => 'smtp',
             'swiftmailer.mailer.default.delivery.enabled' => true,
-            'swiftmailer.mailer.default.transport.smtp.encryption' => 'tls',
-            'swiftmailer.mailer.default.transport.smtp.port' => 587,
-            'swiftmailer.mailer.default.transport.smtp.host' => 'smtp.1and1.es',
-            'swiftmailer.mailer.default.transport.smtp.username' => 'soporte@estudiosalmerienses.com',
-            'swiftmailer.mailer.default.transport.smtp.password' => 'Administrador@e@2016',
-            'swiftmailer.mailer.default.transport.smtp.auth_mode' => 'login',
+            'swiftmailer.mailer.default.transport.smtp.encryption' => NULL,
+            'swiftmailer.mailer.default.transport.smtp.port' => 25,
+            'swiftmailer.mailer.default.transport.smtp.host' => 'mx1.hostinger.es',
+            'swiftmailer.mailer.default.transport.smtp.username' => 'soporte@proyectocolocacion.hol.es',
+            'swiftmailer.mailer.default.transport.smtp.password' => 'boni1111',
+            'swiftmailer.mailer.default.transport.smtp.auth_mode' => NULL,
             'swiftmailer.mailer.default.transport.smtp.timeout' => 30,
             'swiftmailer.mailer.default.transport.smtp.source_ip' => NULL,
             'swiftmailer.spool.default.memory.path' => (__DIR__.'/swiftmailer/spool/default'),
@@ -5642,6 +5967,29 @@ class appProdProjectContainer extends Container
             'sensio_framework_extra.converter.doctrine.class' => 'Sensio\\Bundle\\FrameworkExtraBundle\\Request\\ParamConverter\\DoctrineParamConverter',
             'sensio_framework_extra.converter.datetime.class' => 'Sensio\\Bundle\\FrameworkExtraBundle\\Request\\ParamConverter\\DateTimeParamConverter',
             'sensio_framework_extra.view.listener.class' => 'Sensio\\Bundle\\FrameworkExtraBundle\\EventListener\\TemplateListener',
+            'fos_elastica.client.class' => 'FOS\\ElasticaBundle\\Elastica\\Client',
+            'fos_elastica.logger.class' => 'FOS\\ElasticaBundle\\Logger\\ElasticaLogger',
+            'fos_elastica.data_collector.class' => 'FOS\\ElasticaBundle\\DataCollector\\ElasticaDataCollector',
+            'fos_elastica.mapping_builder.class' => 'FOS\\ElasticaBundle\\Index\\MappingBuilder',
+            'fos_elastica.property_accessor.class' => 'Symfony\\Component\\PropertyAccess\\PropertyAccessor',
+            'fos_elastica.alias_processor.class' => 'FOS\\ElasticaBundle\\Index\\AliasProcessor',
+            'fos_elastica.finder.class' => 'FOS\\ElasticaBundle\\Finder\\TransformedFinder',
+            'fos_elastica.index.class' => 'FOS\\ElasticaBundle\\Elastica\\Index',
+            'fos_elastica.indexable.class' => 'FOS\\ElasticaBundle\\Provider\\Indexable',
+            'fos_elastica.index_manager.class' => 'FOS\\ElasticaBundle\\Index\\IndexManager',
+            'fos_elastica.resetter.class' => 'FOS\\ElasticaBundle\\Index\\Resetter',
+            'fos_elastica.type.class' => 'Elastica\\Type',
+            'fos_elastica.object_persister.class' => 'FOS\\ElasticaBundle\\Persister\\ObjectPersister',
+            'fos_elastica.object_serializer_persister.class' => 'FOS\\ElasticaBundle\\Persister\\ObjectSerializerPersister',
+            'fos_elastica.provider_registry.class' => 'FOS\\ElasticaBundle\\Provider\\ProviderRegistry',
+            'fos_elastica.elastica_to_model_transformer.collection.class' => 'FOS\\ElasticaBundle\\Transformer\\ElasticaToModelTransformerCollection',
+            'fos_elastica.model_to_elastica_transformer.class' => 'FOS\\ElasticaBundle\\Transformer\\ModelToElasticaAutoTransformer',
+            'fos_elastica.model_to_elastica_identifier_transformer.class' => 'FOS\\ElasticaBundle\\Transformer\\ModelToElasticaIdentifierTransformer',
+            'fos_elastica.slice_fetcher.orm.class' => 'FOS\\ElasticaBundle\\Doctrine\\ORM\\SliceFetcher',
+            'fos_elastica.provider.prototype.orm.class' => 'FOS\\ElasticaBundle\\Doctrine\\ORM\\Provider',
+            'fos_elastica.listener.prototype.orm.class' => 'FOS\\ElasticaBundle\\Doctrine\\Listener',
+            'fos_elastica.elastica_to_model_transformer.prototype.orm.class' => 'FOS\\ElasticaBundle\\Doctrine\\ORM\\ElasticaToModelTransformer',
+            'fos_elastica.manager.orm.class' => 'FOS\\ElasticaBundle\\Doctrine\\RepositoryManager',
             'sonata.core.flashmessage.manager.class' => 'Sonata\\CoreBundle\\FlashMessage\\FlashManager',
             'sonata.core.twig.extension.flashmessage.class' => 'Sonata\\CoreBundle\\Twig\\Extension\\FlashMessageExtension',
             'sonata.core.form_type' => 'standard',

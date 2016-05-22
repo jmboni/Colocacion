@@ -129,11 +129,7 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
         if (0 === strpos($pathinfo, '/trabajos')) {
             // trabajos
-            if (rtrim($pathinfo, '/') === '/trabajos') {
-                if (substr($pathinfo, -1) !== '/') {
-                    return $this->redirect($pathinfo.'/', 'trabajos');
-                }
-
+            if ($pathinfo === '/trabajos/{}') {
                 return array (  '_controller' => 'Dsg\\agenciaBundle\\Controller\\TrabajosController::indexAction',  '_route' => 'trabajos',);
             }
 
@@ -208,9 +204,14 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                     goto not_trabajos_extend;
                 }
 
-                return $this->mergeDefaults(array_replace($matches, array('_route' => 'trabajos_extend')), array (  '_controller' => 'Dsg\\agenciaBundle\\Controller\\trabajosController::extendAction',));
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'trabajos_extend')), array (  '_controller' => 'Dsg\\agenciaBundle\\Controller\\TrabajosController::extendAction',));
             }
             not_trabajos_extend:
+
+            // trabajos_buscar
+            if ($pathinfo === '/trabajos/buscar') {
+                return array (  '_controller' => 'Dsg\\agenciaBundle\\Controller\\TrabajosController::buscarAction',  '_route' => 'trabajos_buscar',);
+            }
 
         }
 

@@ -243,4 +243,35 @@ class Afiliados
     {
         $this->categoria->removeElement($categoria);
     }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function setTokenValue()
+    {
+        if(!$this->getToken()) {
+        $token = sha1($this->getEmail().rand(11111, 99999));
+        $this->token = $token;
+    }
+ 
+        return $this;
+    }
+    
+    public function activate()
+    {
+        if(!$this->getActivado()) {
+            $this->setActivado(true);
+        }
+ 
+        return $this->activado;
+    }
+ 
+    public function deactivate()
+    {
+        if($this->getActivado()) {
+            $this->setActivado(false);
+        }
+ 
+        return $this->activado;
+    }
 }

@@ -7,8 +7,8 @@ imports:
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: es
-    max_trabajos_indexpag: 10
-    max_trabajos_categoriapag: 10
+    max_trabajos_indexpag: 8
+    max_trabajos_categoriapag: 5
 
 framework:
     #esi:             ~
@@ -102,4 +102,3 @@ sonata_block:
         sonata.block.service.text:
         sonata.block.service.action:
         sonata.block.service.rss:
-        

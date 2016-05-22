@@ -1,0 +1,33 @@
+#app/config/config.yml
+fos_elastica:
+    clients:
+        default: { host: localhost, port: 9200 }
+    indexes:
+        buscar_ofertas:
+            client: default
+            types:
+                trabajos:
+                    mappings:
+                        compania:
+                            type: string
+                            leng: 255
+                        localidad:
+                            type: string
+                            leng: 255
+                        posicion:
+                            type: string
+                            leng: 255
+                        email:
+                            type: string
+                            leng: 255
+                        descripcion:
+                            type: string
+                    persistence:
+                        # the driver can be orm, mongodb, phpcr or propel
+                        # listener and finder are not supported by
+                        # propel and should be removed
+                        driver: orm
+                        model: Dsg\agenciaBundle\Entity\Trabajos
+                        provider: ~
+                        listener: ~
+                        finder: ~

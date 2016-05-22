@@ -1,3 +1,7 @@
-.editshow,.trabajoshow{
+.editshow{
   margin-top:110px;
+}
+
+.panel-primary{
+    border: 1px solid #dd4814;
 }

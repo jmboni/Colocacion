@@ -4,8 +4,12 @@ namespace Dsg\agenciaBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
+use FOS\ElasticaBundle\Finder\TransformedFinder;
+use Symfony\Component\Templating\EngineInterface;
 
 use Dsg\agenciaBundle\Entity\Trabajos;
+use Dsg\agenciaBundle\Entity\Categoria;
 use Dsg\agenciaBundle\Form\TrabajosType;
 
 
@@ -21,14 +25,14 @@ class TrabajosController extends Controller
      *
      */
 
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         
-        $em = $this->getDoctrine()->getManager();
         
-        $categorias = $em->getRepository('DsgagenciaBundle:Categoria')->getTrabajosCategorias();
-        
-        foreach($categorias as $categoria) {
+       $em = $this->getDoctrine()->getManager();
+       $categorias = $em->getRepository('DsgagenciaBundle:Categoria')->getTrabajosCategorias();
+         
+       foreach($categorias as $categoria) {
             $categoria->setTrabajosActivos($em->getRepository('DsgagenciaBundle:Trabajos')->getTrabajosActivos($categoria->getId(),$this->container->getParameter('max_trabajos_indexpag')));
             
             $categoria->setMasTrabajos(
@@ -47,11 +51,34 @@ class TrabajosController extends Controller
     }
    
     
+    public function buscarAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $query = $this->getRequest()->get('query');
+ 
+        if(!$query) {
+            if(!$request->isXmlHttpRequest()) {
+                return $this->redirect($this->generateUrl('trabajos'));
+            } else {
+                return new Response('No hay resultados para su búsqueda');
+            }
+        }
+ 
+        $trabajos = $em->getRepository('DsgagenciaBundle:Trabajos')->getForLuceneQuery($query);
+        
+        if($request->isXmlHttpRequest()) {
+            return $this->render('DsgagenciaBundle::listar.html.twig', array('trabajos' => $trabajos));
+        }
+        
+        return $this->render('DsgagenciaBundle:Trabajos:buscar.html.twig', array('trabajos' => $trabajos));
+    }
     
+     
      /**
      * Displays a form to create a new Trabajos entity.
      *
      */
+     
     public function newAction()
     {
         $entity = new Trabajos();

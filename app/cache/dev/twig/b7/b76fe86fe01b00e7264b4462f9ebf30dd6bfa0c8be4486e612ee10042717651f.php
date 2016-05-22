@@ -1,6 +1,6 @@
 <?php
 
-/* WebProfilerBundle:Profiler:toolbar_js.html.twig */
+/* @WebProfiler/Profiler/toolbar_js.html.twig */
 class __TwigTemplate_b0831b37f8b8a0430da13f310d70764e943961b4355c671075bfd02bbc7e6f08 extends Twig_Template
 {
     public function __construct(Twig_Environment $env)
@@ -15,8 +15,8 @@ class __TwigTemplate_b0831b37f8b8a0430da13f310d70764e943961b4355c671075bfd02bbc7
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_53c3e017fd8991845e8babb83310db4854662faa346c323057d669b7f36792e5 = $this->env->getExtension("native_profiler");
-        $__internal_53c3e017fd8991845e8babb83310db4854662faa346c323057d669b7f36792e5->enter($__internal_53c3e017fd8991845e8babb83310db4854662faa346c323057d669b7f36792e5_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "WebProfilerBundle:Profiler:toolbar_js.html.twig"));
+        $__internal_8f44c048e684308cf11723264632a35093b41de2afec192617ab3de0e2e9258c = $this->env->getExtension("native_profiler");
+        $__internal_8f44c048e684308cf11723264632a35093b41de2afec192617ab3de0e2e9258c->enter($__internal_8f44c048e684308cf11723264632a35093b41de2afec192617ab3de0e2e9258c_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "@WebProfiler/Profiler/toolbar_js.html.twig"));
 
         // line 1
         echo "<div id=\"sfwdt";
@@ -24,7 +24,7 @@ class __TwigTemplate_b0831b37f8b8a0430da13f310d70764e943961b4355c671075bfd02bbc7
         echo "\" class=\"sf-toolbar\" style=\"display: none\"></div>
 ";
         // line 2
-        $this->loadTemplate("@WebProfiler/Profiler/base_js.html.twig", "WebProfilerBundle:Profiler:toolbar_js.html.twig", 2)->display($context);
+        $this->loadTemplate("@WebProfiler/Profiler/base_js.html.twig", "@WebProfiler/Profiler/toolbar_js.html.twig", 2)->display($context);
         // line 3
         echo "<script>/*<![CDATA[*/
     (function () {
@@ -127,13 +127,13 @@ class __TwigTemplate_b0831b37f8b8a0430da13f310d70764e943961b4355c671075bfd02bbc7
 /*]]>*/</script>
 ";
         
-        $__internal_53c3e017fd8991845e8babb83310db4854662faa346c323057d669b7f36792e5->leave($__internal_53c3e017fd8991845e8babb83310db4854662faa346c323057d669b7f36792e5_prof);
+        $__internal_8f44c048e684308cf11723264632a35093b41de2afec192617ab3de0e2e9258c->leave($__internal_8f44c048e684308cf11723264632a35093b41de2afec192617ab3de0e2e9258c_prof);
 
     }
 
     public function getTemplateName()
     {
-        return "WebProfilerBundle:Profiler:toolbar_js.html.twig";
+        return "@WebProfiler/Profiler/toolbar_js.html.twig";
     }
 
     public function isTraitable()

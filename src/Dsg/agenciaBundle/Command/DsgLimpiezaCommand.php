@@ -24,6 +24,30 @@ class DsgLimpiezaCommand extends ContainerAwareCommand {
       $dias = $input->getArgument('dias');
  
       $em = $this->getContainer()->get('doctrine')->getManager();
+      
+      // cleanup Lucene index
+        $index = Trabajos::getLuceneIndex();
+ 
+        $q = $em->getRepository('DsgagenciaBundle:Trabajos')->createQueryBuilder('j')
+          ->where('j.finaliza < :date')
+          ->setParameter('date',date('Y-m-d'))
+          ->getQuery();
+ 
+        $trabajos = $q->getResult();
+        foreach ($trabajos as $oferta)
+        {
+          if ($hit = $index->find('pk:'.$oferta->getId()))
+          {
+            $index->delete($hit->id);
+          }
+        }
+ 
+        $index->optimize();
+ 
+        $output->writeln('Optimizado el indice de las ofertas');
+ 
+        // Remove stale jobs
+      
       $nb = $em->getRepository('DsgagenciaBundle:Trabajos')->limpieza($dias);
  
       $output->writeln(sprintf('Borrados %d trabajos antiguos', $nb));

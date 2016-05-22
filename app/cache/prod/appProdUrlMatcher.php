@@ -112,6 +112,11 @@ class appProdUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirecta
             }
             not_trabajos_extend:
 
+            // trabajos_buscar
+            if ($pathinfo === '/trabajos/buscar') {
+                return array (  '_controller' => 'Dsg\\agenciaBundle\\Controller\\trabajosController::buscarAction',  '_route' => 'trabajos_buscar',);
+            }
+
         }
 
         // dsgagencia_homepage

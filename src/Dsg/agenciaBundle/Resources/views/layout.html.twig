@@ -53,16 +53,24 @@
       <div id="principal">
         <!--Cargamos el contenido de la página-->
         <div class="container marketing">
-          <div id="job_history">
-            Últimas ofertas visitadas:
-              <ul>
+          
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">Últimas ofertas visitadas:</h4>
+              </div>
+              <div class="modal-body">
+                <ul class="list-inline">
                   {% for trabajo in app.session.get('historial_trabajos') %}
-                      <li>
-                          <a href={{ path('trabajos_show', { 'id': trabajo.id, 'compania': trabajo.companiaslug, 'localidad': trabajo.localidadslug, 'posicion': trabajo.posicionslug }) }}>{{ trabajo.posicion }} - {{ trabajo.compania }}</a>
-                      </li>
+                  <li>
+                    <u><a href={{ path('trabajos_show', { 'id': trabajo.id, 'compania': trabajo.companiaslug, 'localidad': trabajo.localidadslug, 'posicion': trabajo.posicionslug }) }}>{{ trabajo.posicion }} - {{ trabajo.compania }} </a></u> 
+                  </li>
                   {% endfor %}
-              </ul>
+                </ul>
+              </div>
+            </div>
           </div>
+     
           {% for flashMessage in app.session.flashbag.get('notice') %}
             <div>
               {{ flassMessage }}
@@ -107,6 +115,24 @@
           <script src="{{ asset('public/js/holder.min.js') }}"></script>
           <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
           <script src="{{ asset('public/js/ie10-viewport-bug-workaround.js') }}"></script>
+          
+           <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+          <script src="{{ asset('public/js/buscar.js') }}"></script>
+          
+          <script type="text/javascript">
+            $(document).ready(function(){
+            var cambio = false;
+            $('.nav li a').each(function(index) {
+            if(this.href.trim() == window.location){
+                $(this).parent().addClass("active");
+                cambio = true;
+            }
+            });
+            if(!cambio){
+              $('.nav li:first').addClass("active");
+            }
+            });
+          </script>
       {% endblock %}
    </body>
 </html>

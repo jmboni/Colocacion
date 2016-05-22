@@ -15,8 +15,8 @@ class __TwigTemplate_c506b30bbb7fa593a466a1bf88a83409e2157e8ba7a4a91d1a4642b8259
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_6fe5f7e77b430d26b5f7f8d1d8c3dd54267f0d3d6c6bcaa8c6d584008f206bd4 = $this->env->getExtension("native_profiler");
-        $__internal_6fe5f7e77b430d26b5f7f8d1d8c3dd54267f0d3d6c6bcaa8c6d584008f206bd4->enter($__internal_6fe5f7e77b430d26b5f7f8d1d8c3dd54267f0d3d6c6bcaa8c6d584008f206bd4_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "DsgagenciaBundle::menu.html.twig"));
+        $__internal_0c82207dd8711ed8e836915c24556943bebed23af4b4512582c7ba1f189b0591 = $this->env->getExtension("native_profiler");
+        $__internal_0c82207dd8711ed8e836915c24556943bebed23af4b4512582c7ba1f189b0591->enter($__internal_0c82207dd8711ed8e836915c24556943bebed23af4b4512582c7ba1f189b0591_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "DsgagenciaBundle::menu.html.twig"));
 
         // line 1
         echo " <!-- Fixed navbar -->
@@ -36,7 +36,7 @@ class __TwigTemplate_c506b30bbb7fa593a466a1bf88a83409e2157e8ba7a4a91d1a4642b8259
 \t\t\t\t\t\t</div>
 \t\t\t\t\t\t<div id=\"navbar\" class=\"navbar-collapse collapse\">
 \t\t\t\t\t\t\t<ul class=\"nav navbar-nav \">
-\t\t\t\t\t\t\t\t<li class=\"active\"><a href=\"";
+\t\t\t\t\t\t\t\t<li><a class=\"btn btn-primary\" href=\"";
         // line 15
         echo $this->env->getExtension('routing')->getPath("dsgagencia_index");
         echo "\">Inicio</a></li>
@@ -45,23 +45,38 @@ class __TwigTemplate_c506b30bbb7fa593a466a1bf88a83409e2157e8ba7a4a91d1a4642b8259
         echo $this->env->getExtension('routing')->getPath("trabajos_new");
         echo "\" role=\"button\">Nueva Oferta</a><li>
 \t\t\t\t\t\t\t</ul>
-\t\t\t\t\t\t\t<form class=\"navbar-form navbar-right\" role=\"search\">
-\t\t\t\t\t\t        <div class=\"form-group\">
-\t\t\t\t\t\t        \t<input type=\"text\" class=\"form-control\" placeholder=\"Search\">
-\t\t\t\t\t\t        </div>
-\t\t\t\t\t\t        <button type=\"submit\" class=\"btn btn-default\">Buscar</button>
-\t\t\t\t\t    \t</form>
-\t\t\t\t\t    \t<ul class=\"nav navbar-nav navbar-right\">
+\t\t\t\t\t\t\t<ul class=\"nav navbar-nav navbar-right\">
         \t\t\t\t\t\t<li><a class=\"btn btn-primary\" href=\"";
-        // line 25
+        // line 19
         echo $this->env->getExtension('routing')->getPath("afiliados_new");
         echo "\" role=\"button\">Registro</a><li>
       \t\t\t\t\t\t</ul>
+\t\t\t\t\t\t\t<div class=\"buscador\">
+\t\t\t\t\t\t\t\t<form action=";
+        // line 22
+        echo $this->env->getExtension('routing')->getPath("trabajos_buscar");
+        echo " method=\"get\" class=\"navbar-form navbar-right\" role=\"search\">
+\t\t\t\t\t\t\t    \t<div class=\"form-group\">
+\t\t\t\t\t\t\t        \t<input type=\"text\" name=\"query\" value=\"";
+        // line 24
+        echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute((isset($context["app"]) ? $context["app"] : $this->getContext($context, "app")), "request", array()), "get", array(0 => "query"), "method"), "html", null, true);
+        echo "\" id=\"buscador\" class=\"form-control\" placeholder=\"Buscar\" required>
+\t\t\t\t\t\t\t        \t<!--<input type=\"submit\" value=\"search\" />-->
+            \t\t\t\t\t\t\t<img id=\"loader\" src=";
+        // line 26
+        echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("public/image/loader.gif"), "html", null, true);
+        echo " style=\"vertical-align: middle; display: none\" />
+            \t\t\t\t\t\t</div>
+            \t\t\t\t\t\t<input type=\"submit\" value=\"Buscar\" class=\"btn btn-default\"></button>
+\t\t\t\t\t\t\t\t</form>
+\t\t\t\t\t\t\t</div
+\t\t\t\t\t\t    </form>
+\t\t\t\t\t    \t</div>
 \t\t\t\t\t\t</div><!--/.nav-collapse -->
 \t\t\t\t\t</div>
 \t\t\t\t</nav>";
         
-        $__internal_6fe5f7e77b430d26b5f7f8d1d8c3dd54267f0d3d6c6bcaa8c6d584008f206bd4->leave($__internal_6fe5f7e77b430d26b5f7f8d1d8c3dd54267f0d3d6c6bcaa8c6d584008f206bd4_prof);
+        $__internal_0c82207dd8711ed8e836915c24556943bebed23af4b4512582c7ba1f189b0591->leave($__internal_0c82207dd8711ed8e836915c24556943bebed23af4b4512582c7ba1f189b0591_prof);
 
     }
 
@@ -77,7 +92,7 @@ class __TwigTemplate_c506b30bbb7fa593a466a1bf88a83409e2157e8ba7a4a91d1a4642b8259
 
     public function getDebugInfo()
     {
-        return array (  57 => 25,  45 => 16,  41 => 15,  34 => 11,  22 => 1,);
+        return array (  67 => 26,  62 => 24,  57 => 22,  51 => 19,  45 => 16,  41 => 15,  34 => 11,  22 => 1,);
     }
 }
 /*  <!-- Fixed navbar -->*/
@@ -94,18 +109,24 @@ class __TwigTemplate_c506b30bbb7fa593a466a1bf88a83409e2157e8ba7a4a91d1a4642b8259
 /* 						</div>*/
 /* 						<div id="navbar" class="navbar-collapse collapse">*/
 /* 							<ul class="nav navbar-nav ">*/
-/* 								<li class="active"><a href="{{ path('dsgagencia_index') }}">Inicio</a></li>*/
+/* 								<li><a class="btn btn-primary" href="{{ path('dsgagencia_index') }}">Inicio</a></li>*/
 /* 								<li><a class="btn btn-primary" href="{{ path('trabajos_new')}}" role="button">Nueva Oferta</a><li>*/
 /* 							</ul>*/
-/* 							<form class="navbar-form navbar-right" role="search">*/
-/* 						        <div class="form-group">*/
-/* 						        	<input type="text" class="form-control" placeholder="Search">*/
-/* 						        </div>*/
-/* 						        <button type="submit" class="btn btn-default">Buscar</button>*/
-/* 					    	</form>*/
-/* 					    	<ul class="nav navbar-nav navbar-right">*/
+/* 							<ul class="nav navbar-nav navbar-right">*/
 /*         						<li><a class="btn btn-primary" href="{{ path('afiliados_new')}}" role="button">Registro</a><li>*/
 /*       						</ul>*/
+/* 							<div class="buscador">*/
+/* 								<form action={{ path('trabajos_buscar') }} method="get" class="navbar-form navbar-right" role="search">*/
+/* 							    	<div class="form-group">*/
+/* 							        	<input type="text" name="query" value="{{ app.request.get('query') }}" id="buscador" class="form-control" placeholder="Buscar" required>*/
+/* 							        	<!--<input type="submit" value="search" />-->*/
+/*             							<img id="loader" src={{ asset('public/image/loader.gif') }} style="vertical-align: middle; display: none" />*/
+/*             						</div>*/
+/*             						<input type="submit" value="Buscar" class="btn btn-default"></button>*/
+/* 								</form>*/
+/* 							</div*/
+/* 						    </form>*/
+/* 					    	</div>*/
 /* 						</div><!--/.nav-collapse -->*/
 /* 					</div>*/
 /* 				</nav>*/

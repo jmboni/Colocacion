@@ -62,6 +62,6 @@ Dsg\agenciaBundle\Entity\Trabajos:
     lifecycleCallbacks:
         prePersist: [ setTokenValue, preUpload, setCreadoValue, setFinalizaValue ]
         preUpdate: [ preUpload, setActualizadoValue ]
-        postPersist: [ upload ]
-        postUpdate: [ upload ]
-        postRemove: [ removeUpload ]
+        postPersist: [ upload, updateLuceneIndex  ]
+        postUpdate: [ upload, updateLuceneIndex ]
+        postRemove: [ removeUpload, deleteLuceneIndex ]

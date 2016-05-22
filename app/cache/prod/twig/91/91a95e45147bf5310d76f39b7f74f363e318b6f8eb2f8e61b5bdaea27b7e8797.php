@@ -42,15 +42,23 @@ class __TwigTemplate_8f2bbc6b69545a6e79ae5ce337b58a1882991ff2d5053c908525645c211
         echo $this->env->getExtension('routing')->getPath("trabajos_new");
         echo "\" role=\"button\">Nueva Oferta</a><li>
 \t\t\t\t\t\t\t</ul>
-\t\t\t\t\t\t\t<form class=\"navbar-form navbar-right\" role=\"search\">
+\t\t\t\t\t\t\t
+\t\t\t\t\t\t\t<form action=";
+        // line 19
+        echo $this->env->getExtension('routing')->getPath("trabajos_buscar");
+        echo " method=\"get\" class=\"navbar-form navbar-right\" role=\"search\">
 \t\t\t\t\t\t        <div class=\"form-group\">
-\t\t\t\t\t\t        \t<input type=\"text\" class=\"form-control\" placeholder=\"Search\">
+\t\t\t\t\t\t        \t<input type=\"text\" name=\"query\" value=\"";
+        // line 21
+        echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute((isset($context["app"]) ? $context["app"] : null), "request", array()), "get", array(0 => "query"), "method"), "html", null, true);
+        echo "\" class=\"form-control\" placeholder=\"Search\" required>
 \t\t\t\t\t\t        </div>
-\t\t\t\t\t\t        <button type=\"submit\" class=\"btn btn-default\">Buscar</button>
+\t\t\t\t\t\t        <button type=\"submit\" value=\"Buscar\" class=\"btn btn-default\">Buscar</button>
 \t\t\t\t\t    \t</form>
+\t\t\t\t\t    \t
 \t\t\t\t\t    \t<ul class=\"nav navbar-nav navbar-right\">
         \t\t\t\t\t\t<li><a class=\"btn btn-primary\" href=\"";
-        // line 25
+        // line 27
         echo $this->env->getExtension('routing')->getPath("afiliados_new");
         echo "\" role=\"button\">Registro</a><li>
       \t\t\t\t\t\t</ul>
@@ -71,7 +79,7 @@ class __TwigTemplate_8f2bbc6b69545a6e79ae5ce337b58a1882991ff2d5053c908525645c211
 
     public function getDebugInfo()
     {
-        return array (  54 => 25,  42 => 16,  38 => 15,  31 => 11,  19 => 1,);
+        return array (  62 => 27,  53 => 21,  48 => 19,  42 => 16,  38 => 15,  31 => 11,  19 => 1,);
     }
 }
 /*  <!-- Fixed navbar -->*/
@@ -91,12 +99,14 @@ class __TwigTemplate_8f2bbc6b69545a6e79ae5ce337b58a1882991ff2d5053c908525645c211
 /* 								<li class="active"><a href="{{ path('dsgagencia_index') }}">Inicio</a></li>*/
 /* 								<li><a class="btn btn-primary" href="{{ path('trabajos_new')}}" role="button">Nueva Oferta</a><li>*/
 /* 							</ul>*/
-/* 							<form class="navbar-form navbar-right" role="search">*/
+/* 							*/
+/* 							<form action={{ path('trabajos_buscar') }} method="get" class="navbar-form navbar-right" role="search">*/
 /* 						        <div class="form-group">*/
-/* 						        	<input type="text" class="form-control" placeholder="Search">*/
+/* 						        	<input type="text" name="query" value="{{ app.request.get('query') }}" class="form-control" placeholder="Search" required>*/
 /* 						        </div>*/
-/* 						        <button type="submit" class="btn btn-default">Buscar</button>*/
+/* 						        <button type="submit" value="Buscar" class="btn btn-default">Buscar</button>*/
 /* 					    	</form>*/
+/* 					    	*/
 /* 					    	<ul class="nav navbar-nav navbar-right">*/
 /*         						<li><a class="btn btn-primary" href="{{ path('afiliados_new')}}" role="button">Registro</a><li>*/
 /*       						</ul>*/

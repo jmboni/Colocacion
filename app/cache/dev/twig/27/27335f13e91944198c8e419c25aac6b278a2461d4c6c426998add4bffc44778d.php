@@ -15,11 +15,11 @@ class __TwigTemplate_646a1903f172eabe41d9fe470060be2c52098179248c25ef66d558e2032
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_49b3d502ad044ab20c535b296bc53e7b27c5a3fd4fac26342bc04b9e3e94156a = $this->env->getExtension("native_profiler");
-        $__internal_49b3d502ad044ab20c535b296bc53e7b27c5a3fd4fac26342bc04b9e3e94156a->enter($__internal_49b3d502ad044ab20c535b296bc53e7b27c5a3fd4fac26342bc04b9e3e94156a_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "DsgagenciaBundle:Afiliados:email.txt.twig"));
+        $__internal_41e53c95ff0781dedd5e186aa7cf90acf5ab2194d3ddf52a1fc04b15ff74a7ae = $this->env->getExtension("native_profiler");
+        $__internal_41e53c95ff0781dedd5e186aa7cf90acf5ab2194d3ddf52a1fc04b15ff74a7ae->enter($__internal_41e53c95ff0781dedd5e186aa7cf90acf5ab2194d3ddf52a1fc04b15ff74a7ae_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "DsgagenciaBundle:Afiliados:email.txt.twig"));
 
         // line 1
-        echo "Su cuenta de usuario ha sido creada.
+        echo "Su cuenta de usuario ha sido activada.
 Su número secreto de afiliado es ";
         // line 2
         echo (isset($context["afiliados"]) ? $context["afiliados"] : $this->getContext($context, "afiliados"));
@@ -39,7 +39,7 @@ or https://agencias-jmboni.c9users.io/web/app_dev.php/api/";
         echo (isset($context["afiliados"]) ? $context["afiliados"] : $this->getContext($context, "afiliados"));
         echo "/trabajos.yaml";
         
-        $__internal_49b3d502ad044ab20c535b296bc53e7b27c5a3fd4fac26342bc04b9e3e94156a->leave($__internal_49b3d502ad044ab20c535b296bc53e7b27c5a3fd4fac26342bc04b9e3e94156a_prof);
+        $__internal_41e53c95ff0781dedd5e186aa7cf90acf5ab2194d3ddf52a1fc04b15ff74a7ae->leave($__internal_41e53c95ff0781dedd5e186aa7cf90acf5ab2194d3ddf52a1fc04b15ff74a7ae_prof);
 
     }
 
@@ -58,7 +58,7 @@ or https://agencias-jmboni.c9users.io/web/app_dev.php/api/";
         return array (  39 => 7,  35 => 6,  31 => 5,  25 => 2,  22 => 1,);
     }
 }
-/* Su cuenta de usuario ha sido creada.*/
+/* Su cuenta de usuario ha sido activada.*/
 /* Su número secreto de afiliado es {{ afiliados }}.*/
 /* Usted podrá ver la lista de ofertas en las siguientes direcciones:*/
 /* */

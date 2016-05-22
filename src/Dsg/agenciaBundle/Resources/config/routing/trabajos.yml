@@ -1,5 +1,5 @@
 trabajos:
-    path:     /
+    path:     /{}
     defaults: { _controller: "DsgagenciaBundle:Trabajos:index" }
 
 trabajos_show:
@@ -44,5 +44,9 @@ trabajos_publish:
     
 trabajos_extend:
     pattern:  /{token}/extend
-    defaults: { _controller: "DsgagenciaBundle:trabajos:extend" }
+    defaults: { _controller: "DsgagenciaBundle:Trabajos:extend" }
     requirements: { _method: post }
+
+trabajos_buscar:
+    pattern: /buscar
+    defaults: { _controller: "DsgagenciaBundle:Trabajos:buscar" }

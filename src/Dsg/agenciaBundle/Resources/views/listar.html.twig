@@ -1,5 +1,16 @@
-{% for entity in categoria.trabajosactivos %}
-    <div class="panel-body">
-        <p><strong>{{ entity.posicion }}</strong> - {{ entity.compania}} - {{ entity.localidad }}<a class="btn btn-default pull-right" href="{{ path('trabajos_show', { 'id': entity.id,'compania': entity.companiaSlug,'localidad': entity.localidadSlug,'posicion': entity.posicionSlug}) }}" role="button">Ver más</a></p>
-    </div>
-{% endfor %}
+<div class="row">
+  {% for entity in trabajos %}
+      <div class="col-sm-6 col-md-3">
+        <div class="thumbnail">
+          <img src="{{ asset('public/upload/') }}{{ entity.logo }}" alt="{{ entity.compania }} logo" />
+          <div class="caption">
+            <h3>{{ entity.compania}}</h3>
+            <p>{{ entity.posicion }} - {{ entity.localidad }}</p>
+            <p>
+                <a href="{{ path('trabajos_show', { 'id': entity.id,'compania': entity.companiaSlug,'localidad': entity.localidadSlug,'posicion': entity.posicionSlug}) }}" class="btn btn-primary" role="button">Leer más</a> 
+            </p>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+</div>

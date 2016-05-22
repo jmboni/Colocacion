@@ -102,6 +102,7 @@
   'DsgagenciaBundle:Categoria:show.atom.twig' => '/home/ubuntu/workspace/src/Dsg/agenciaBundle/Resources/views/Categoria/show.atom.twig',
   'DsgagenciaBundle::buscador.html.twig' => '/home/ubuntu/workspace/src/Dsg/agenciaBundle/Resources/views/buscador.html.twig',
   'DsgagenciaBundle::layout.html.twig' => '/home/ubuntu/workspace/src/Dsg/agenciaBundle/Resources/views/layout.html.twig',
+  'FOSElasticaBundle:Collector:elastica.html.twig' => '/home/ubuntu/workspace/vendor/friendsofsymfony/elastica-bundle/Resources/views/Collector/elastica.html.twig',
   'SonataCoreBundle:Form:colorpicker.html.twig' => '/home/ubuntu/workspace/vendor/sonata-project/core-bundle/Resources/views/Form/colorpicker.html.twig',
   'SonataCoreBundle:Form:datepicker.html.twig' => '/home/ubuntu/workspace/vendor/sonata-project/core-bundle/Resources/views/Form/datepicker.html.twig',
   'SonataCoreBundle:FlashMessage:render.html.twig' => '/home/ubuntu/workspace/vendor/sonata-project/core-bundle/Resources/views/FlashMessage/render.html.twig',

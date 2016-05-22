@@ -2,8 +2,9 @@
 
 {% block stylesheets %}
     <!-- CSS carousel-->
-    <link rel="stylesheet" href="{{ asset('public/csspaginas/show.css') }}" type="text/css" media="all" />
     {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('public/csspaginas/show.css') }}" type="text/css" media="all" />
+
 {% endblock %}
 
 {% block content %}
@@ -14,6 +15,7 @@
             {% if app.request.get('token') %}
                 {{ include('DsgagenciaBundle::Trabajos/admin.html.twig', { 'trabajos': entity }) }}
             {% endif %}
+            
             {% for flashMessage in app.session.flashbag.get('Mensaje') %}
                 <div class="alert alert-sucess" role="alert">
                     <div class="container">
@@ -21,6 +23,7 @@
                     </div>
                 </div>
             {% endfor %}
+            <h2>Oferta de Empleo - {{ entity.compania }}</h2>
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <!-- Podemos utilizar la clase "panel-title" para dar estilo de título

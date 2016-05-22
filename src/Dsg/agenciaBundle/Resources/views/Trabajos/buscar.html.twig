@@ -1,0 +1,12 @@
+{% extends 'DsgagenciaBundle::layout.html.twig' %}
+ 
+{% block stylesheets %}
+    {{ parent() }}
+    <!--<link rel="stylesheet" href={{ asset('bundles/erlemjobeet/css/jobs.css') }} type="text/css" media="all" />-->
+{% endblock %}
+ 
+{% block content %}
+    <div id="jobs">
+        {% include 'DsgagenciaBundle::listar.html.twig' with {'trabajos': trabajos} %}
+    </div>
+{% endblock %}

@@ -56,6 +56,14 @@ class ComposerStaticInit4aef455723502cd0f33b7de5dd1be087
         array (
             'Incenteev\\ParameterHandler\\' => 27,
         ),
+        'F' => 
+        array (
+            'FOS\\ElasticaBundle\\' => 19,
+        ),
+        'E' => 
+        array (
+            'Elastica\\' => 9,
+        ),
         'D' => 
         array (
             'Doctrine\\Common\\Cache\\' => 22,
@@ -166,6 +174,14 @@ class ComposerStaticInit4aef455723502cd0f33b7de5dd1be087
         'Incenteev\\ParameterHandler\\' => 
         array (
             0 => __DIR__ . '/..' . '/incenteev/composer-parameter-handler',
+        ),
+        'FOS\\ElasticaBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/friendsofsymfony/elastica-bundle',
+        ),
+        'Elastica\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/ruflin/elastica/lib/Elastica',
         ),
         'Doctrine\\Common\\Cache\\' => 
         array (

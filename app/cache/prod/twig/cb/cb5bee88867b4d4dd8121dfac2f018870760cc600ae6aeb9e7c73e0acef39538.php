@@ -16,7 +16,7 @@ class __TwigTemplate_23fff3b5367a6070e24d16b3e099f42c3f0d94a4de33fd544d69d12a102
     protected function doDisplay(array $context, array $blocks = array())
     {
         // line 1
-        echo "Su cuenta de usuario ha sido creada.
+        echo "Su cuenta de usuario ha sido activada.
 Su número secreto de afiliado es ";
         // line 2
         echo (isset($context["afiliados"]) ? $context["afiliados"] : null);
@@ -52,7 +52,7 @@ or https://agencias-jmboni.c9users.io/web/app_dev.php/api/";
         return array (  36 => 7,  32 => 6,  28 => 5,  22 => 2,  19 => 1,);
     }
 }
-/* Su cuenta de usuario ha sido creada.*/
+/* Su cuenta de usuario ha sido activada.*/
 /* Su número secreto de afiliado es {{ afiliados }}.*/
 /* Usted podrá ver la lista de ofertas en las siguientes direcciones:*/
 /* */

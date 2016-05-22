@@ -15,8 +15,8 @@ class __TwigTemplate_292834e4cf1aeee707c46705258a3626b4ceebac7d0eb091c3667ad866e
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_ad7f876a8ceee45acb940fc06db24b2d71f369c8dec32b40b6cd39496496187f = $this->env->getExtension("native_profiler");
-        $__internal_ad7f876a8ceee45acb940fc06db24b2d71f369c8dec32b40b6cd39496496187f->enter($__internal_ad7f876a8ceee45acb940fc06db24b2d71f369c8dec32b40b6cd39496496187f_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "WebProfilerBundle:Profiler:admin.html.twig"));
+        $__internal_4d4da18bb883ea6a4a910c526e718a9b9550704fdaaec26d401c19c3f6769ce1 = $this->env->getExtension("native_profiler");
+        $__internal_4d4da18bb883ea6a4a910c526e718a9b9550704fdaaec26d401c19c3f6769ce1->enter($__internal_4d4da18bb883ea6a4a910c526e718a9b9550704fdaaec26d401c19c3f6769ce1_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "WebProfilerBundle:Profiler:admin.html.twig"));
 
         // line 1
         if ( !twig_test_empty((isset($context["token"]) ? $context["token"] : $this->getContext($context, "token")))) {
@@ -35,7 +35,7 @@ class __TwigTemplate_292834e4cf1aeee707c46705258a3626b4ceebac7d0eb091c3667ad866e
 ";
         }
         
-        $__internal_ad7f876a8ceee45acb940fc06db24b2d71f369c8dec32b40b6cd39496496187f->leave($__internal_ad7f876a8ceee45acb940fc06db24b2d71f369c8dec32b40b6cd39496496187f_prof);
+        $__internal_4d4da18bb883ea6a4a910c526e718a9b9550704fdaaec26d401c19c3f6769ce1->leave($__internal_4d4da18bb883ea6a4a910c526e718a9b9550704fdaaec26d401c19c3f6769ce1_prof);
 
     }
 
