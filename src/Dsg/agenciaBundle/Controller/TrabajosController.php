@@ -2,14 +2,14 @@
 
 namespace Dsg\agenciaBundle\Controller;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
-use FOS\ElasticaBundle\Finder\TransformedFinder;
-use Symfony\Component\Templating\EngineInterface;
+
 
 use Dsg\agenciaBundle\Entity\Trabajos;
-use Dsg\agenciaBundle\Entity\Categoria;
+use Dsg\agenciaBundle\Entity\Rutas;
 use Dsg\agenciaBundle\Form\TrabajosType;
 
 
@@ -25,13 +25,16 @@ class TrabajosController extends Controller
      *
      */
 
-    public function indexAction(Request $request)
+    public function indexAction()
     {
         
         
        $em = $this->getDoctrine()->getManager();
        $categorias = $em->getRepository('DsgagenciaBundle:Categoria')->getTrabajosCategorias();
-         
+       
+       $breadcrumbs = $this->get("white_october_breadcrumbs");
+       $breadcrumbs->addItem("Inicio", $this->get("router")->generate("dsgagencia_index"));
+       
        foreach($categorias as $categoria) {
             $categoria->setTrabajosActivos($em->getRepository('DsgagenciaBundle:Trabajos')->getTrabajosActivos($categoria->getId(),$this->container->getParameter('max_trabajos_indexpag')));
             
@@ -41,8 +44,9 @@ class TrabajosController extends Controller
             );
         }
         
-        
+
         $format = $this->getRequest()->getRequestFormat();
+        
         
         return $this->render('DsgagenciaBundle:Trabajos:index.'.$format.'.twig', array(
             'categorias' => $categorias,
@@ -55,19 +59,27 @@ class TrabajosController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $query = $this->getRequest()->get('query');
- 
+        
+        $breadcrumbs = $this->get("white_october_breadcrumbs");
+        $breadcrumbs->addItem("Inicio", $this->get("router")->generate("dsgagencia_index"));
+        $breadcrumbs->addItem("Buscar");
+        
+        
         if(!$query) {
-            if(!$request->isXmlHttpRequest()) {
+            if(!$request->isXMLHttpRequest()) {
                 return $this->redirect($this->generateUrl('trabajos'));
             } else {
                 return new Response('No hay resultados para su búsqueda');
             }
         }
  
-        $trabajos = $em->getRepository('DsgagenciaBundle:Trabajos')->getForLuceneQuery($query);
+        $trabajos = $em->getRepository('DsgagenciaBundle:Trabajos')->getForLuceneQuery($query.'*');
         
         if($request->isXmlHttpRequest()) {
-            return $this->render('DsgagenciaBundle::listar.html.twig', array('trabajos' => $trabajos));
+            if('*' == $query || !$trabajos || $query == ''){
+                return new Response('No hay resultados para su búsqueda');
+            }
+            return $this->render('DsgagenciaBundle:Trabajos:listar.html.twig', array('trabajos' => $trabajos));
         }
         
         return $this->render('DsgagenciaBundle:Trabajos:buscar.html.twig', array('trabajos' => $trabajos));
@@ -84,6 +96,11 @@ class TrabajosController extends Controller
         $entity = new Trabajos();
         $entity->setTipo('Tiempo Completo');
         $form   = $this->createForm(new TrabajosType(), $entity);
+        
+        $breadcrumbs = $this->get("white_october_breadcrumbs");
+        $breadcrumbs->addItem("Inicio", $this->get("router")->generate("trabajos"));
+        $breadcrumbs->addItem("Nueva Oferta", $this->get("router")->generate("dsgagencia_index"));
+    
 
         return $this->render('DsgagenciaBundle:Trabajos:new.html.twig', array(
             'entity' => $entity,
@@ -159,6 +176,10 @@ class TrabajosController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('DsgagenciaBundle:Trabajos')->getTrabajoActivo($id);
+        
+        $breadcrumbs = $this->get("white_october_breadcrumbs");
+        $breadcrumbs->addItem("Inicio", $this->get("router")->generate("dsgagencia_index"));
+        $breadcrumbs->addItem("Ver Oferta");
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Trabajos entity.');
@@ -201,6 +222,10 @@ class TrabajosController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('DsgagenciaBundle:Trabajos')->findOneByToken($token);
+        
+        $breadcrumbs = $this->get("white_october_breadcrumbs");
+        $breadcrumbs->addItem("Inicio", $this->get("router")->generate("dsgagencia_index"));
+        $breadcrumbs->addItem("Editar oferta");
 
         if (!$entity) {
             throw $this->createNotFoundException('No se ha encontrado ningun valor asociado en la entidad.');
@@ -249,6 +274,10 @@ class TrabajosController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('DsgagenciaBundle:Trabajos')->findOneByToken($token);
+        
+        $breadcrumbs = $this->get("white_october_breadcrumbs");
+        $breadcrumbs->addItem("Inicio", $this->get("router")->generate("dsgagencia_index"));
+        $breadcrumbs->addItem("Actualziar Oferta");
 
         if (!$entity) {
             throw $this->createNotFoundException('No se han encontrado datos asociados a esta oferta.');
@@ -321,6 +350,10 @@ class TrabajosController extends Controller
         $em = $this->getDoctrine()->getManager();
  
         $entity = $em->getRepository('DsgagenciaBundle:Trabajos')->findOneByToken($token);
+        
+        $breadcrumbs = $this->get("white_october_breadcrumbs");
+        $breadcrumbs->addItem("Inicio", $this->get("router")->generate("dsgagencia_index"));
+        $breadcrumbs->addItem("Previsualizar Oferta");
  
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Job entity.');
@@ -340,6 +373,10 @@ class TrabajosController extends Controller
     
     public function publishAction(Request $request, $token)
     {
+        $breadcrumbs = $this->get("white_october_breadcrumbs");
+        $breadcrumbs->addItem("Inicio", $this->get("router")->generate("dsgagencia_index"));
+        $breadcrumbs->addItem("Publicar Oferta");
+        
         $form = $this->createPublishForm($token);
         $form->bind($request);
      
@@ -377,6 +414,11 @@ class TrabajosController extends Controller
     
     public function extendAction(Request $request, $token)
     {
+        $breadcrumbs = $this->get("white_october_breadcrumbs");
+        $breadcrumbs->addItem("Inicio", $this->get("router")->generate("dsgagencia_index"));
+        $breadcrumbs->addItem("Ampliar Oferta");
+        
+        
         $form = $this->createExtendForm($token);
         $request = $this->getRequest();
      
@@ -390,21 +432,21 @@ class TrabajosController extends Controller
                 throw $this->createNotFoundException('No se ha podido encontrar la entidad Trabajos.');
             }
      
-            if(!$entity->extend()){
+            if(!$entity->ampliar()){
                 throw $this->createNodFoundException('No se ha podido ampliar la oferta.');
             }
      
             $em->persist($entity);
             $em->flush();
      
-            $this->get('session')->getFlashBag()->add('notice', sprintf('Su oferta ha sido ampliada hasta %s', $entity->getExpiresAt()->format('m/d/Y')));
+            $this->get('session')->getFlashBag()->add('notice', sprintf('Su oferta ha sido ampliada hasta %s', $entity->getFinaliza()->format('m/d/Y')));
         }
      
         return $this->redirect($this->generateUrl('trabajos_preview', array(
             'compania' => $entity->getCompaniaSlug(),
             'localidad' => $entity->getLocalidadSlug(),
             'token' => $entity->getToken(),
-            'posicion' => $entity->getPosicioSlug()
+            'posicion' => $entity->getPosicionSlug()
         )));
     }
      
@@ -414,4 +456,6 @@ class TrabajosController extends Controller
             ->add('token', 'hidden')
             ->getForm();
     }
+    
+    
 }

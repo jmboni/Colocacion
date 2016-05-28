@@ -53,10 +53,10 @@ class RouteCollection
      */
     public function __construct($baseCodeRoute, $baseRouteName, $baseRoutePattern, $baseControllerName)
     {
-        $this->baseCodeRoute        = $baseCodeRoute;
-        $this->baseRouteName        = $baseRouteName;
-        $this->baseRoutePattern     = $baseRoutePattern;
-        $this->baseControllerName   = $baseControllerName;
+        $this->baseCodeRoute = $baseCodeRoute;
+        $this->baseRouteName = $baseRouteName;
+        $this->baseRoutePattern = $baseRoutePattern;
+        $this->baseControllerName = $baseControllerName;
     }
 
     /**
@@ -76,9 +76,9 @@ class RouteCollection
      */
     public function add($name, $pattern = null, array $defaults = array(), array $requirements = array(), array $options = array(), $host = '', array $schemes = array(), array $methods = array(), $condition = '')
     {
-        $pattern    = $this->baseRoutePattern.'/'.($pattern ?: $name);
-        $code       = $this->getCode($name);
-        $routeName  = $this->baseRouteName.'_'.$name;
+        $pattern = $this->baseRoutePattern.'/'.($pattern ?: $name);
+        $code = $this->getCode($name);
+        $routeName = $this->baseRouteName.'_'.$name;
 
         if (!isset($defaults['_controller'])) {
             $defaults['_controller'] = $this->baseControllerName.':'.$this->actionify($code);
@@ -124,20 +124,6 @@ class RouteCollection
         }
 
         return $this;
-    }
-
-    /**
-     * @param $element
-     *
-     * @return Route
-     */
-    private function resolve($element)
-    {
-        if (is_callable($element)) {
-            return call_user_func($element);
-        }
-
-        return $element;
     }
 
     /**
@@ -197,12 +183,16 @@ class RouteCollection
     /**
      * Remove all routes except routes in $routeList.
      *
-     * @param array $routeList
+     * @param string[]|string $routeList
      *
      * @return RouteCollection
      */
-    public function clearExcept(array $routeList)
+    public function clearExcept($routeList)
     {
+        if (!is_array($routeList)) {
+            $routeList = array($routeList);
+        }
+
         $routeCodeList = array();
         foreach ($routeList as $name) {
             $routeCodeList[] = $this->getCode($name);
@@ -282,5 +272,19 @@ class RouteCollection
     public function getBaseRoutePattern()
     {
         return $this->baseRoutePattern;
+    }
+
+    /**
+     * @param $element
+     *
+     * @return Route
+     */
+    private function resolve($element)
+    {
+        if (is_callable($element)) {
+            return call_user_func($element);
+        }
+
+        return $element;
     }
 }

@@ -127,7 +127,7 @@
   126 => 'Sonata\\BlockBundle\\Model\\EmptyBlock',
   127 => 'Sonata\\BlockBundle\\Twig\\Extension\\BlockExtension',
   128 => 'Sonata\\BlockBundle\\Twig\\GlobalVariables',
-  129 => 'Sonata\\AdminBundle\\Admin\\Admin',
+  129 => 'Sonata\\AdminBundle\\Admin\\AbstractAdmin',
   130 => 'Sonata\\AdminBundle\\Admin\\AdminExtension',
   131 => 'Sonata\\AdminBundle\\Admin\\AdminExtensionInterface',
   132 => 'Sonata\\AdminBundle\\Admin\\AdminHelper',

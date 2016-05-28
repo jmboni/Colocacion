@@ -35,26 +35,6 @@ abstract class BaseGroupedMapper extends BaseMapper
     protected $apply;
 
     /**
-     * @return array
-     */
-    abstract protected function getGroups();
-
-    /**
-     * @return array
-     */
-    abstract protected function getTabs();
-
-    /**
-     * @param array $groups
-     */
-    abstract protected function setGroups(array $groups);
-
-    /**
-     * @param array $tabs
-     */
-    abstract protected function setTabs(array $tabs);
-
-    /**
      * Add new group or tab (if parameter "tab=true" is available in options).
      *
      * @param string $name
@@ -87,12 +67,12 @@ abstract class BaseGroupedMapper extends BaseMapper
          *
          */
         $defaultOptions = array(
-            'collapsed'          => false,
-            'class'              => false,
-            'description'        => false,
+            'collapsed' => false,
+            'class' => false,
+            'description' => false,
             'translation_domain' => null,
-            'name'               => $name,
-            'box_class'          => 'box box-primary',
+            'name' => $name,
+            'box_class' => 'box box-primary',
         );
 
         $code = $name;
@@ -116,8 +96,8 @@ abstract class BaseGroupedMapper extends BaseMapper
             }
 
             $tabs[$code] = array_merge($defaultOptions, array(
-                'auto_created'       => false,
-                'groups'             => array(),
+                'auto_created' => false,
+                'groups' => array(),
             ), $tabs[$code], $options);
 
             $this->currentTab = $code;
@@ -129,8 +109,8 @@ abstract class BaseGroupedMapper extends BaseMapper
             if (!$this->currentTab) {
                 // no tab define
                 $this->with('default', array(
-                    'tab'                => true,
-                    'auto_created'       => true,
+                    'tab' => true,
+                    'auto_created' => true,
                     'translation_domain' => isset($options['translation_domain']) ? $options['translation_domain'] : null,
                 )); // add new tab automatically
             }
@@ -255,6 +235,26 @@ abstract class BaseGroupedMapper extends BaseMapper
     {
         return null !== $this->currentTab;
     }
+
+    /**
+     * @return array
+     */
+    abstract protected function getGroups();
+
+    /**
+     * @return array
+     */
+    abstract protected function getTabs();
+
+    /**
+     * @param array $groups
+     */
+    abstract protected function setGroups(array $groups);
+
+    /**
+     * @param array $tabs
+     */
+    abstract protected function setTabs(array $tabs);
 
     /**
      * Add the field name to the current group.

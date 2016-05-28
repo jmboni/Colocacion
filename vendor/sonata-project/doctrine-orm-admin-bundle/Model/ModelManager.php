@@ -14,6 +14,7 @@ namespace Sonata\DoctrineORMAdminBundle\Model;
 use Doctrine\Common\Util\ClassUtils;
 use Doctrine\DBAL\DBALException;
 use Doctrine\DBAL\LockMode;
+use Doctrine\DBAL\Types\Type;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\OptimisticLockException;
@@ -33,6 +34,7 @@ use Symfony\Component\Form\Exception\PropertyAccessDeniedException;
 
 class ModelManager implements ModelManagerInterface, LockInterface
 {
+    const ID_SEPARATOR = '~';
     /**
      * @var RegistryInterface
      */
@@ -42,8 +44,6 @@ class ModelManager implements ModelManagerInterface, LockInterface
      * @var EntityManager[]
      */
     protected $cache = array();
-
-    const ID_SEPARATOR = '~';
 
     /**
      * @param RegistryInterface $registry
@@ -339,19 +339,28 @@ class ModelManager implements ModelManagerInterface, LockInterface
         //    throw new \RuntimeException('Entities passed to the choice field must be managed');
         //}
 
-        $class = $this->getMetadata(ClassUtils::getClass($entity));
+        $class = ClassUtils::getClass($entity);
+        $metadata = $this->getMetadata($class);
+        $platform = $this->getEntityManager($class)->getConnection()->getDatabasePlatform();
 
         $identifiers = array();
 
-        foreach ($class->getIdentifierValues($entity) as $value) {
+        foreach ($metadata->getIdentifierValues($entity) as $name => $value) {
             if (!is_object($value)) {
                 $identifiers[] = $value;
                 continue;
             }
 
-            $class = $this->getMetadata(ClassUtils::getClass($value));
+            $fieldType = $metadata->getTypeOfField($name);
+            $type = Type::getType($fieldType);
+            if ($type) {
+                $identifiers[] = $type->convertToDatabaseValue($value, $platform);
+                continue;
+            }
 
-            foreach ($class->getIdentifierValues($value) as $value) {
+            $metadata = $this->getMetadata(ClassUtils::getClass($value));
+
+            foreach ($metadata->getIdentifierValues($value) as $value) {
                 $identifiers[] = $value;
             }
         }
@@ -377,7 +386,7 @@ class ModelManager implements ModelManagerInterface, LockInterface
         }
 
         // the entities is not managed
-        if (!$entity /*|| !$this->getEntityManager($entity)->getUnitOfWork()->isInIdentityMap($entity) // commented for perfomance concern */) {
+        if (!$entity || !$this->getEntityManager($entity)->getUnitOfWork()->isInIdentityMap($entity)) {
             return;
         }
 
@@ -605,18 +614,6 @@ class ModelManager implements ModelManagerInterface, LockInterface
     }
 
     /**
-     * method taken from PropertyPath.
-     *
-     * @param string $property
-     *
-     * @return mixed
-     */
-    protected function camelize($property)
-    {
-        return preg_replace(array('/(^|_)+(.)/e', '/\.(.)/e'), array("strtoupper('\\2')", "'_'.strtoupper('\\1')"), $property);
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function getModelCollectionInstance($class)
@@ -654,5 +651,17 @@ class ModelManager implements ModelManagerInterface, LockInterface
     public function collectionRemoveElement(&$collection, &$element)
     {
         return $collection->removeElement($element);
+    }
+
+    /**
+     * method taken from PropertyPath.
+     *
+     * @param string $property
+     *
+     * @return mixed
+     */
+    protected function camelize($property)
+    {
+        return preg_replace(array('/(^|_)+(.)/e', '/\.(.)/e'), array("strtoupper('\\2')", "'_'.strtoupper('\\1')"), $property);
     }
 }

@@ -13,8 +13,12 @@ class DefaultController extends Controller
  
     public function loginAction(Request $request)
     {
-        #$request = $this->getRequest();
+
         $session = $request->getSession();
+        
+        $breadcrumbs = $this->get("white_october_breadcrumbs");
+        $breadcrumbs->addItem("Inicio", $this->get("router")->generate("dsgagencia_index"));
+        $breadcrumbs->addItem("Acceso Panel");
  
         // get the login error if there is one
         if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {

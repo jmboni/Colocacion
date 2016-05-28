@@ -141,7 +141,7 @@ abstract class Pager implements \Iterator, \Countable, \Serializable, PagerInter
             $nbLinks = $this->getMaxPageLinks();
         }
         $links = array();
-        $tmp   = $this->page - floor($nbLinks / 2);
+        $tmp = $this->page - floor($nbLinks / 2);
         $check = $this->lastPage - $nbLinks + 1;
         $limit = $check > 0 ? $check : 1;
         $begin = $tmp > 0 ? ($tmp > $limit ? $limit : $tmp) : 1;
@@ -289,16 +289,6 @@ abstract class Pager implements \Iterator, \Countable, \Serializable, PagerInter
     }
 
     /**
-     * Sets the number of results.
-     *
-     * @param int $nb
-     */
-    protected function setNbResults($nb)
-    {
-        $this->nbResults = $nb;
-    }
-
-    /**
      * Returns the first page number.
      *
      * @return int
@@ -316,20 +306,6 @@ abstract class Pager implements \Iterator, \Countable, \Serializable, PagerInter
     public function getLastPage()
     {
         return $this->lastPage;
-    }
-
-    /**
-     * Sets the last page number.
-     *
-     * @param int $page
-     */
-    protected function setLastPage($page)
-    {
-        $this->lastPage = $page;
-
-        if ($this->getPage() > $page) {
-            $this->setPage($page);
-        }
     }
 
     /**
@@ -396,7 +372,7 @@ abstract class Pager implements \Iterator, \Countable, \Serializable, PagerInter
         } else {
             if ($max == 0) {
                 $this->maxPerPage = 0;
-                $this->page       = 0;
+                $this->page = 0;
             } else {
                 $this->maxPerPage = 1;
                 if ($this->page == 0) {
@@ -486,34 +462,6 @@ abstract class Pager implements \Iterator, \Countable, \Serializable, PagerInter
     public function setParameter($name, $value)
     {
         $this->parameters[$name] = $value;
-    }
-
-    /**
-     * Returns true if the properties used for iteration have been initialized.
-     *
-     * @return bool
-     */
-    protected function isIteratorInitialized()
-    {
-        return null !== $this->results;
-    }
-
-    /**
-     * Loads data into properties used for iteration.
-     */
-    protected function initializeIterator()
-    {
-        $this->results        = $this->getResults();
-        $this->resultsCounter = count($this->results);
-    }
-
-    /**
-     * Empties properties used for iteration.
-     */
-    protected function resetIterator()
-    {
-        $this->results        = null;
-        $this->resultsCounter = 0;
     }
 
     /**
@@ -630,6 +578,74 @@ abstract class Pager implements \Iterator, \Countable, \Serializable, PagerInter
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function setQuery($query)
+    {
+        $this->query = $query;
+    }
+
+    /**
+     * @return ProxyQueryInterface
+     */
+    public function getQuery()
+    {
+        return $this->query;
+    }
+
+    /**
+     * Sets the number of results.
+     *
+     * @param int $nb
+     */
+    protected function setNbResults($nb)
+    {
+        $this->nbResults = $nb;
+    }
+
+    /**
+     * Sets the last page number.
+     *
+     * @param int $page
+     */
+    protected function setLastPage($page)
+    {
+        $this->lastPage = $page;
+
+        if ($this->getPage() > $page) {
+            $this->setPage($page);
+        }
+    }
+
+    /**
+     * Returns true if the properties used for iteration have been initialized.
+     *
+     * @return bool
+     */
+    protected function isIteratorInitialized()
+    {
+        return null !== $this->results;
+    }
+
+    /**
+     * Loads data into properties used for iteration.
+     */
+    protected function initializeIterator()
+    {
+        $this->results = $this->getResults();
+        $this->resultsCounter = count($this->results);
+    }
+
+    /**
+     * Empties properties used for iteration.
+     */
+    protected function resetIterator()
+    {
+        $this->results = null;
+        $this->resultsCounter = 0;
+    }
+
+    /**
      * Retrieve the object for a certain offset.
      *
      * @param int $offset
@@ -646,21 +662,5 @@ abstract class Pager implements \Iterator, \Countable, \Serializable, PagerInter
         $results = $queryForRetrieve->execute();
 
         return $results[0];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setQuery($query)
-    {
-        $this->query = $query;
-    }
-
-    /**
-     * @return ProxyQueryInterface
-     */
-    public function getQuery()
-    {
-        return $this->query;
     }
 }

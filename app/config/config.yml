@@ -2,13 +2,14 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
+    - { resource: @DsgagenciaBundle/Resources/config/config.yml }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: es
     max_trabajos_indexpag: 8
-    max_trabajos_categoriapag: 5
+    max_trabajos_categoriapag: 8
 
 framework:
     #esi:             ~
@@ -86,9 +87,7 @@ swiftmailer:
 sonata_admin:
     title: Administración
     templates:
-        
         layout: DsgagenciaBundle::standard_layout.html.twig
- 
 
 # app/config/config.yml
 sonata_block:
@@ -102,3 +101,29 @@ sonata_block:
         sonata.block.service.text:
         sonata.block.service.action:
         sonata.block.service.rss:
+
+# app/config/config.yml
+white_october_breadcrumbs:
+    separator:          '/'
+    separatorClass:     'separator'
+    listId:             'wo-breadcrumbs'
+    listClass:          'breadcrumb'
+    itemClass:          ''
+    linkRel:            ''
+    locale:             ~ # defaults to null, so the default locale is used
+    translation_domain: ~ # defaults to null, so the default domain is used
+    viewTemplate:       'WhiteOctoberBreadcrumbsBundle::breadcrumbs.html.twig'
+    
+# app/config/config.yml
+
+liip_imagine:
+    resolvers:
+       default:
+          web_path: ~
+
+    filter_sets:
+        cache: ~
+        my_thumb:
+            quality: 75
+            filters:
+                thumbnail: { size: [100, 100], mode: outbound }

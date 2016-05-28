@@ -16,6 +16,7 @@ services:
             - ~
             - Dsg\agenciaBundle\Entity\Trabajos
             - 'DsgagenciaBundle:TrabajosAdmin'
+            
     Dsg.agencia.admin.afiliados:
         class: Dsg\agenciaBundle\Admin\AfiliadosAdmin
         tags:

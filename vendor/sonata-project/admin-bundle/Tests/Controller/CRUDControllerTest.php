@@ -115,12 +115,12 @@ class CRUDControllerTest extends \PHPUnit_Framework_TestCase
         $this->container = $this->getMock('Symfony\Component\DependencyInjection\ContainerInterface');
 
         $this->request = new Request();
-        $this->pool    = new Pool($this->container, 'title', 'logo.png');
+        $this->pool = new Pool($this->container, 'title', 'logo.png');
         $this->pool->setAdminServiceIds(array('foo.admin'));
         $this->request->attributes->set('_sonata_admin', 'foo.admin');
-        $this->admin      = $this->getMock('Sonata\AdminBundle\Admin\AdminInterface');
+        $this->admin = $this->getMock('Sonata\AdminBundle\Admin\AdminInterface');
         $this->parameters = array();
-        $this->template   = '';
+        $this->template = '';
 
         // php 5.3 BC
         $params = &$this->parameters;
@@ -247,7 +247,7 @@ class CRUDControllerTest extends \PHPUnit_Framework_TestCase
         $csrfProvider = $this->csrfProvider;
 
         $this->logger = $this->getMock('Psr\Log\LoggerInterface');
-        $logger       = $this->logger; // php 5.3 BC
+        $logger = $this->logger; // php 5.3 BC
 
         $requestStack = null;
         if (class_exists('Symfony\Component\HttpFoundation\RequestStack')) {
@@ -744,28 +744,6 @@ class CRUDControllerTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Symfony\Component\HttpFoundation\RedirectResponse', $result);
         $this->assertSame(array('flash_batch_delete_success'), $this->session->getFlashBag()->get('sonata_flash_success'));
         $this->assertSame('list?filter%5Bfoo%5D=bar', $result->getTargetUrl());
-    }
-
-    private function assertLoggerLogsModelManagerException($subject, $method)
-    {
-        $exception = new ModelManagerException(
-            $message           = 'message',
-            1234,
-            new \Exception($previousExceptionMessage = 'very useful message')
-        );
-
-        $subject->expects($this->once())
-            ->method($method)
-            ->will($this->returnCallback(function () use ($exception) {
-                    throw $exception;
-                }));
-
-        $this->logger->expects($this->once())
-            ->method('error')
-            ->with($message, array(
-                'exception'                  => $exception,
-                'previous_exception_message' => $previousExceptionMessage,
-            ));
     }
 
     public function testBatchActionDeleteWithModelManagerException()
@@ -1633,7 +1611,7 @@ class CRUDControllerTest extends \PHPUnit_Framework_TestCase
         $response = $this->controller->editAction(null, $this->request);
 
         $this->assertInstanceOf('Symfony\Component\HttpFoundation\Response', $response);
-        $this->assertSame(json_encode(array('result' => 'ok', 'objectId'  => 'foo_normalized', 'objectName' => 'foo')), $response->getContent());
+        $this->assertSame(json_encode(array('result' => 'ok', 'objectId' => 'foo_normalized', 'objectName' => 'foo')), $response->getContent());
         $this->assertSame(array(), $this->session->getFlashBag()->all());
     }
 
@@ -1861,9 +1839,9 @@ class CRUDControllerTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue($formView));
 
         $this->expectTranslate('flash_lock_error', array(
-            '%name%'       => $class,
+            '%name%' => $class,
             '%link_start%' => '<a href="stdClass_edit">',
-            '%link_end%'   => '</a>',
+            '%link_end%' => '</a>',
         ), 'SonataAdminBundle');
 
         $this->assertInstanceOf('Symfony\Component\HttpFoundation\Response', $this->controller->editAction(null, $this->request));
@@ -2268,7 +2246,7 @@ class CRUDControllerTest extends \PHPUnit_Framework_TestCase
         $response = $this->controller->createAction($this->request);
 
         $this->assertInstanceOf('Symfony\Component\HttpFoundation\Response', $response);
-        $this->assertSame(json_encode(array('result' => 'ok', 'objectId'  => 'foo_normalized')), $response->getContent());
+        $this->assertSame(json_encode(array('result' => 'ok', 'objectId' => 'foo_normalized')), $response->getContent());
         $this->assertSame(array(), $this->session->getFlashBag()->all());
     }
 
@@ -3639,6 +3617,28 @@ class CRUDControllerTest extends \PHPUnit_Framework_TestCase
             array('&lt;a href=&quot;http://foo&quot;&gt;Bar&lt;/a&gt;', '<a href="http://foo">Bar</a>'),
             array('&lt;&gt;&amp;&quot;&#039;abcdefghijklmnopqrstuvwxyz*-+.,?_()[]\/', '<>&"\'abcdefghijklmnopqrstuvwxyz*-+.,?_()[]\/'),
         );
+    }
+
+    private function assertLoggerLogsModelManagerException($subject, $method)
+    {
+        $exception = new ModelManagerException(
+            $message = 'message',
+            1234,
+            new \Exception($previousExceptionMessage = 'very useful message')
+        );
+
+        $subject->expects($this->once())
+            ->method($method)
+            ->will($this->returnCallback(function () use ($exception) {
+                    throw $exception;
+                }));
+
+        $this->logger->expects($this->once())
+            ->method('error')
+            ->with($message, array(
+                'exception' => $exception,
+                'previous_exception_message' => $previousExceptionMessage,
+            ));
     }
 
     private function expectTranslate($id, array $parameters = array(), $domain = null, $locale = null)

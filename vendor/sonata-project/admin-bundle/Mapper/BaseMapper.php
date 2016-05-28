@@ -39,7 +39,7 @@ abstract class BaseMapper
     public function __construct(BuilderInterface $builder, AdminInterface $admin)
     {
         $this->builder = $builder;
-        $this->admin   = $admin;
+        $this->admin = $admin;
     }
 
     /**
@@ -70,6 +70,14 @@ abstract class BaseMapper
      * @return $this
      */
     abstract public function remove($key);
+
+    // To be uncommented on 4.0.
+    /**
+     * Returns configured keys.
+     *
+     * @return string[]
+     */
+    //abstract public function keys();
 
     /**
      * @param array $keys field names

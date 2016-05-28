@@ -81,9 +81,9 @@ class Pool
     public function __construct(ContainerInterface $container, $title, $logoTitle, $options = array(), PropertyAccessorInterface $propertyAccessor = null)
     {
         $this->container = $container;
-        $this->title     = $title;
+        $this->title = $title;
         $this->titleLogo = $logoTitle;
-        $this->options   = $options;
+        $this->options = $options;
         $this->propertyAccessor = $propertyAccessor;
     }
 
@@ -129,7 +129,7 @@ class Pool
                     if ('' != $item['admin']) {
                         $admin = $this->getInstance($item['admin']);
 
-                        if ($admin->showIn(Admin::CONTEXT_DASHBOARD)) {
+                        if ($admin->showIn(AbstractAdmin::CONTEXT_DASHBOARD)) {
                             $groups[$name]['items'][$key] = $admin;
                         } else {
                             unset($groups[$name]['items'][$key]);

@@ -30,6 +30,7 @@
         "sonata-project/core-bundle": "^3.0"
     },
     "require-dev": {
+        "knplabs/knp-menu-bundle": "^2.1.1",
         "simplethings/entity-audit-bundle": "~0.1",
         "symfony/phpunit-bridge": "^2.7 || ^3.0"
     },

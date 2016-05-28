@@ -316,11 +316,11 @@ You can add or override filter parameters to the Tab Menu:
     <?php
 
     use Knp\Menu\ItemInterface as MenuItemInterface;
-    use Sonata\AdminBundle\Admin\Admin;
+    use Sonata\AdminBundle\Admin\AbstractAdmin;
     use Sonata\AdminBundle\Admin\AdminInterface;
     use Sonata\CoreBundle\Form\Type\EqualType;
 
-    class DeliveryAdmin extends Admin
+    class DeliveryAdmin extends AbstractAdmin
     {
         protected function configureTabMenu(MenuItemInterface $menu, $action, AdminInterface $childAdmin = null)
         {
@@ -351,6 +351,35 @@ You can add or override filter parameters to the Tab Menu:
 The `Delivery` class is based on the `sonata_type_translatable_choice` example inside the Core's documentation:
 http://sonata-project.org/bundles/core/master/doc/reference/form_types.html#sonata-type-translatable-choice
 
+
+Actions Menu
+------------
+
+You can add custom items to the actions menu for a specific action by overriding the following method:
+
+.. code-block:: php
+
+    public function configureActionButtons($action, $object = null)
+    {
+        $list = parent::configureActionButtons($action, $object);
+
+        if (in_array($action, array('show', 'edit', 'acl')) && $object) {
+            $list['custom'] = array(
+                'template' => 'AppBundle:Button:custom_button.html.twig',
+            );
+        }
+
+        // Remove history action
+        unset($list['history']);
+
+        return $list;
+    }
+
+
+.. figure:: ../images/custom_action_buttons.png
+   :align: center
+   :alt: Custom action buttons
+
 Disable content stretching
 --------------------------
 
@@ -376,7 +405,7 @@ You can customize the access system inside the CRUDController by adding some ent
     <?php
     // src/AppBundle/Admin/PostAdmin.php
 
-    class CustomAdmin extends Admin
+    class CustomAdmin extends AbstractAdmin
     {
         protected $accessMapping = array(
             'myCustomFoo' => 'EDIT',
@@ -415,7 +444,7 @@ You can also fully customize how you want to handle your access management by si
     <?php
     // src/AppBundle/Admin/CustomAdmin.php
 
-    class CustomAdmin extends Admin
+    class CustomAdmin extends AbstractAdmin
     {
         public function checkAccess($action, $object = null)
         {

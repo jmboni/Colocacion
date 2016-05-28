@@ -38,7 +38,7 @@ class ListMapper extends BaseMapper
     public function __construct(ListBuilderInterface $listBuilder, FieldDescriptionCollection $list, AdminInterface $admin)
     {
         parent::__construct($listBuilder, $admin);
-        $this->list        = $list;
+        $this->list = $list;
     }
 
     /**
@@ -143,6 +143,14 @@ class ListMapper extends BaseMapper
         $this->list->remove($key);
 
         return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    final public function keys()
+    {
+        return array_keys($this->list->getElements());
     }
 
     /**

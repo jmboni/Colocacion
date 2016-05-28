@@ -11,6 +11,10 @@ class AfiliadosController extends Controller
 {
     public function newAction()
     {
+        $breadcrumbs = $this->get("white_october_breadcrumbs");
+        $breadcrumbs->addItem("Inicio", $this->get("router")->generate("dsgagencia_index"));
+        $breadcrumbs->addItem("Nuevo Usuario");
+        
         $entity = new Afiliados();
         $form = $this->createForm(new AfiliadosType(), $entity);
  

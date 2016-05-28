@@ -19,6 +19,7 @@ use Sonata\AdminBundle\Util\FormViewIterator;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\PropertyAccess\Exception\NoSuchPropertyException;
+use Symfony\Component\PropertyAccess\Exception\UnexpectedTypeException;
 use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 
 /**
@@ -198,13 +199,13 @@ class AdminHelper
         $instance = $fieldDescription->getAssociationAdmin()->getNewInstance();
         $mapping = $fieldDescription->getAssociationMapping();
 
-        $method = sprintf('add%s', $this->camelize($mapping['fieldName']));
+        $method = sprintf('add%s', Inflector::classify($mapping['fieldName']));
 
         if (!method_exists($object, $method)) {
             $method = rtrim($method, 's');
 
             if (!method_exists($object, $method)) {
-                $method = sprintf('add%s', $this->camelize(Inflector::singularize($mapping['fieldName'])));
+                $method = sprintf('add%s', Inflector::classify(Inflector::singularize($mapping['fieldName'])));
 
                 if (!method_exists($object, $method)) {
                     throw new \RuntimeException(sprintf('Please add a method %s in the %s class!', $method, ClassUtils::getClass($object)));
@@ -223,10 +224,59 @@ class AdminHelper
      * @param string $property
      *
      * @return string
+     *
+     * @deprecated Deprecated since version 3.1. Use \Doctrine\Common\Inflector\Inflector::classify() instead.
      */
     public function camelize($property)
     {
-        return BaseFieldDescription::camelize($property);
+        @trigger_error(
+            sprintf(
+                'The %s method is deprecated since 3.1 and will be removed in 4.0. '.
+                'Use \Doctrine\Common\Inflector\Inflector::classify() instead.',
+                __METHOD__
+            ),
+            E_USER_DEPRECATED
+        );
+
+        return Inflector::classify($property);
+    }
+
+    /**
+     * Get access path to element which works with PropertyAccessor.
+     *
+     * @param string $elementId expects string in format used in form id field. (uniqueIdentifier_model_sub_model or uniqueIdentifier_model_1_sub_model etc.)
+     * @param mixed  $entity
+     *
+     * @return string
+     *
+     * @throws \Exception
+     */
+    public function getElementAccessPath($elementId, $entity)
+    {
+        $propertyAccessor = $this->pool->getPropertyAccessor();
+
+        $idWithoutIdentifier = preg_replace('/^[^_]*_/', '', $elementId);
+        $initialPath = preg_replace('#(_(\d+)_)#', '[$2]_', $idWithoutIdentifier);
+
+        $parts = explode('_', $initialPath);
+        $totalPath = '';
+        $currentPath = '';
+
+        foreach ($parts as $part) {
+            $currentPath .= empty($currentPath) ? $part : '_'.$part;
+            $separator = empty($totalPath) ? '' : '.';
+
+            if ($this->pathExists($propertyAccessor, $entity, $totalPath.$separator.$currentPath)) {
+                $totalPath .= $separator.$currentPath;
+                $currentPath = '';
+            }
+        }
+
+        if (!empty($currentPath)) {
+            throw new \Exception(sprintf('Could not get element id from %s Failing part: %s', $elementId, $currentPath));
+        }
+
+        return $totalPath;
     }
 
     /**
@@ -246,69 +296,6 @@ class AdminHelper
         } else {
             return $this->getEntityClassName($associationAdmin, $elements);
         }
-    }
-
-    /**
-     * Get access path to element which works with PropertyAccessor.
-     *
-     * @param string $elementId expects string in format used in form id field. (uniqueIdentifier_model_sub_model or uniqueIdentifier_model_1_sub_model etc.)
-     * @param mixed  $entity
-     *
-     * @return string
-     *
-     * @throws \Exception
-     */
-    public function getElementAccessPath($elementId, $entity)
-    {
-        $propertyAccessor = $this->pool->getPropertyAccessor();
-
-        $idWithoutUniqueIdentifier = implode('_', explode('_', substr($elementId, strpos($elementId, '_') + 1)));
-
-        //array access of id converted to format which PropertyAccessor understands
-        $initialPath = preg_replace('#(_(\d+)_)#', '[$2]', $idWithoutUniqueIdentifier);
-
-        $parts = preg_split('#\[\d+\]#', $initialPath);
-
-        $partReturnValue = $returnValue = '';
-        $currentEntity = $entity;
-
-        foreach ($parts as $key => $value) {
-            $subParts = explode('_', $value);
-            $id = '';
-            $dot = '';
-
-            foreach ($subParts as $subValue) {
-                $id .= ($id) ? '_'.$subValue : $subValue;
-
-                if ($this->pathExists($propertyAccessor, $currentEntity, $partReturnValue.$dot.$id)) {
-                    $partReturnValue .= $dot.$id;
-                    $dot = '.';
-                    $id = '';
-                } else {
-                    $dot = '';
-                }
-            }
-
-            if ($dot !== '.') {
-                throw new \Exception(sprintf('Could not get element id from %s Failing part: %s', $elementId, $subValue));
-            }
-
-            //check if array access was in this location originally
-            preg_match("#$value\[(\d+)#", $initialPath, $matches);
-
-            if (isset($matches[1])) {
-                $partReturnValue .= '['.$matches[1].']';
-            }
-
-            $returnValue .= $returnValue ? '.'.$partReturnValue : $partReturnValue;
-            $partReturnValue = '';
-
-            if (isset($parts[$key + 1])) {
-                $currentEntity = $propertyAccessor->getValue($entity, $returnValue);
-            }
-        }
-
-        return $returnValue;
     }
 
     /**
@@ -334,6 +321,8 @@ class AdminHelper
 
             return true;
         } catch (NoSuchPropertyException $e) {
+            return false;
+        } catch (UnexpectedTypeException $e) {
             return false;
         }
     }

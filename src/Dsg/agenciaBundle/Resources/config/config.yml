@@ -1,0 +1,4 @@
+# src/Dsg/agenciaBundle/Resources/config/config.yml
+parameters:
+    # dirección de correo electrónico para contacto de DSG
+    dsg_agencia.emails.contact_email: soporte@estudiosalmerienses.com

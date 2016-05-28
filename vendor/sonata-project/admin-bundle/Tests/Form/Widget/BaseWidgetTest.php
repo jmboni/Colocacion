@@ -50,15 +50,15 @@ abstract class BaseWidgetTest extends TypeTestCase
      * @var array
      */
     protected $sonataAdmin = array(
-        'name'              => null,
-        'admin'             => null,
-        'value'             => null,
-        'edit'              => 'standard',
-        'inline'            => 'natural',
+        'name' => null,
+        'admin' => null,
+        'value' => null,
+        'edit' => 'standard',
+        'inline' => 'natural',
         'field_description' => null,
-        'block_name'        => false,
-        'options'           => array(
-            'form_type'  => 'vertical',
+        'block_name' => false,
+        'options' => array(
+            'form_type' => 'vertical',
             'use_icheck' => true,
         ),
     );
@@ -109,11 +109,6 @@ abstract class BaseWidgetTest extends TypeTestCase
         $this->extension->initRuntime($this->environment);
     }
 
-    protected function getSonataAdmin()
-    {
-        return $this->sonataAdmin;
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -122,6 +117,11 @@ abstract class BaseWidgetTest extends TypeTestCase
         parent::tearDown();
 
         $this->extension = null;
+    }
+
+    protected function getSonataAdmin()
+    {
+        return $this->sonataAdmin;
     }
 
     /**

@@ -503,7 +503,8 @@ class Trabajos
         return Amigable::urlAmigable($this->getLocalidad());
     }
     
-
+    
+    
     /**
      * Get categoria
      *
@@ -565,15 +566,18 @@ class Trabajos
         return 'public/upload';
     }
  
+ 
     protected function getUploadRootDir()
     {
         return __DIR__.'/../../../../web/'.$this->getUploadDir();
     }
  
+ 
     public function getWebPath()
     {
         return null === $this->logo ? null : $this->getUploadDir().'/'.$this->logo;
     }
+ 
  
     public function getAbsolutePath()
     {
@@ -624,6 +628,8 @@ class Trabajos
              unlink($file);
          }
     }
+    
+    
     
     public function finalizadoYa()
     {

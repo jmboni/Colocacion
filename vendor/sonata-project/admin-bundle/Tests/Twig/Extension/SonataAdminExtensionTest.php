@@ -93,20 +93,20 @@ class SonataAdminExtensionTest extends \PHPUnit_Framework_TestCase
 
         $this->logger = $this->getMock('Psr\Log\LoggerInterface');
         $this->xEditableTypeMapping = array(
-            'choice'     => 'select',
-            'boolean'    => 'select',
-            'text'       => 'text',
-            'textarea'   => 'textarea',
-            'html'       => 'textarea',
-            'email'      => 'email',
-            'string'     => 'text',
-            'smallint'   => 'text',
-            'bigint'     => 'text',
-            'integer'    => 'number',
-            'decimal'    => 'number',
-            'currency'   => 'number',
-            'percent'    => 'number',
-            'url'        => 'url',
+            'choice' => 'select',
+            'boolean' => 'select',
+            'text' => 'text',
+            'textarea' => 'textarea',
+            'html' => 'textarea',
+            'email' => 'email',
+            'string' => 'text',
+            'smallint' => 'text',
+            'bigint' => 'text',
+            'integer' => 'number',
+            'decimal' => 'number',
+            'currency' => 'number',
+            'percent' => 'number',
+            'url' => 'url',
         );
 
         $this->twigExtension = new SonataAdminExtension($this->pool, $this->logger);
@@ -118,9 +118,9 @@ class SonataAdminExtensionTest extends \PHPUnit_Framework_TestCase
 
         $this->environment = new \Twig_Environment($loader, array(
             'strict_variables' => true,
-            'cache'            => false,
-            'autoescape'       => 'html',
-            'optimizations'    => 0,
+            'cache' => false,
+            'autoescape' => 'html',
+            'optimizations' => 0,
         ));
         $this->environment->addExtension($this->twigExtension);
 
@@ -184,7 +184,7 @@ class SonataAdminExtensionTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue(12345));
 
         // for php5.3 BC
-        $admin    = $this->admin;
+        $admin = $this->admin;
         $adminBar = $this->adminBar;
 
         $container->expects($this->any())
@@ -293,13 +293,67 @@ class SonataAdminExtensionTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    private function removeExtraWhitespace($string)
+    /**
+     * @dataProvider getDeprecatedRenderListElementTests
+     * @group legacy
+     */
+    public function testDeprecatedRenderListElement($expected, $value, array $options)
     {
-        return trim(preg_replace(
-            '/\s+/',
-            ' ',
-            $string
-        ));
+        $this->admin->expects($this->any())
+            ->method('isGranted')
+            ->will($this->returnValue(true));
+
+        $this->admin->expects($this->any())
+            ->method('getTemplate')
+            ->with($this->equalTo('base_list_field'))
+            ->will($this->returnValue('SonataAdminBundle:CRUD:base_list_field.html.twig'));
+
+        $this->fieldDescription->expects($this->any())
+            ->method('getValue')
+            ->will($this->returnValue($value));
+
+        $this->fieldDescription->expects($this->any())
+            ->method('getType')
+            ->will($this->returnValue('nonexistent'));
+
+        $this->fieldDescription->expects($this->any())
+            ->method('getOptions')
+            ->will($this->returnValue($options));
+
+        $this->fieldDescription->expects($this->any())
+            ->method('getOption')
+            ->will($this->returnCallback(function ($name, $default = null) use ($options) {
+                return isset($options[$name]) ? $options[$name] : $default;
+            }));
+
+        $this->fieldDescription->expects($this->any())
+            ->method('getTemplate')
+            ->will($this->returnValue('SonataAdminBundle:CRUD:list_nonexistent_template.html.twig'));
+
+        $this->assertSame(
+            $this->removeExtraWhitespace($expected),
+            $this->removeExtraWhitespace($this->twigExtension->renderListElement(
+                $this->environment,
+                $this->object,
+                $this->fieldDescription
+            ))
+        );
+    }
+
+    public function getDeprecatedRenderListElementTests()
+    {
+        return array(
+            array(
+                '<td class="sonata-ba-list-field sonata-ba-list-field-nonexistent" objectId="12345"> Example </td>',
+                'Example',
+                array(),
+            ),
+            array(
+                '<td class="sonata-ba-list-field sonata-ba-list-field-nonexistent" objectId="12345"> </td>',
+                null,
+                array(),
+            ),
+        );
     }
 
     public function getRenderListElementTests()
@@ -314,18 +368,6 @@ class SonataAdminExtensionTest extends \PHPUnit_Framework_TestCase
             array(
                 '<td class="sonata-ba-list-field sonata-ba-list-field-string" objectId="12345"> </td>',
                 'string',
-                null,
-                array(),
-            ),
-            array(
-                '<td class="sonata-ba-list-field sonata-ba-list-field-nonexistent" objectId="12345"> Example </td>',
-                'nonexistent',
-                'Example',
-                array(),
-            ),
-            array(
-                '<td class="sonata-ba-list-field sonata-ba-list-field-nonexistent" objectId="12345"> </td>',
-                'nonexistent',
                 null,
                 array(),
             ),
@@ -667,9 +709,9 @@ EOT
                 'choice',
                 'Foo',
                 array('catalogue' => 'SonataAdminBundle', 'choices' => array(
-                    'Foo'         => 'action_delete',
-                    'Status2'     => 'Alias2',
-                    'Status3'     => 'Alias3',
+                    'Foo' => 'action_delete',
+                    'Status2' => 'Alias2',
+                    'Status3' => 'Alias3',
                 )),
             ),
             array(
@@ -729,9 +771,9 @@ EOT
                 'choice',
                 array('Foo', 'Status3'),
                 array('catalogue' => 'SonataAdminBundle', 'choices' => array(
-                    'Foo'         => 'action_delete',
-                    'Status2'     => 'Alias2',
-                    'Status3'     => 'Alias3',
+                    'Foo' => 'action_delete',
+                    'Status2' => 'Alias2',
+                    'Status3' => 'Alias3',
                 ), 'multiple' => true),
             ),
             array(
@@ -785,7 +827,7 @@ EOT
                 'Status1',
                 array(
                     'editable' => true,
-                    'choices'  => array(
+                    'choices' => array(
                         'Status1' => 'Alias1',
                         'Status2' => 'Alias2',
                         'Status3' => 'Alias3',
@@ -812,7 +854,7 @@ EOT
                 null,
                 array(
                     'editable' => true,
-                    'choices'  => array(
+                    'choices' => array(
                         'Status1' => 'Alias1',
                         'Status2' => 'Alias2',
                         'Status3' => 'Alias3',
@@ -838,7 +880,7 @@ EOT
                 'NoValidKeyInChoices',
                 array(
                     'editable' => true,
-                    'choices'  => array(
+                    'choices' => array(
                         'Status1' => 'Alias1',
                         'Status2' => 'Alias2',
                         'Status3' => 'Alias3',
@@ -864,10 +906,10 @@ EOT
                 'choice',
                 'Foo',
                 array(
-                    'editable'  => true,
+                    'editable' => true,
                     'catalogue' => 'SonataAdminBundle',
-                    'choices'   => array(
-                        'Foo'     => 'action_delete',
+                    'choices' => array(
+                        'Foo' => 'action_delete',
                         'Status2' => 'Alias2',
                         'Status3' => 'Alias3',
                     ),
@@ -977,7 +1019,7 @@ EOT
                 </td>',
                 'url',
                 'http://foo/bar?a=b&c=123456789',
-                array('route'   => array('name' => 'sonata_admin_foo'),
+                array('route' => array('name' => 'sonata_admin_foo'),
                 'hide_protocol' => true, ),
             ),
             array(
@@ -987,7 +1029,7 @@ EOT
                 'url',
                 'http://foo/bar?a=b&c=123456789',
                 array(
-                    'route'         => array('name' => 'sonata_admin_foo', 'absolute' => true),
+                    'route' => array('name' => 'sonata_admin_foo', 'absolute' => true),
                     'hide_protocol' => true,
                 ),
             ),
@@ -999,7 +1041,7 @@ EOT
                 'Foo',
                 array(
                     'route' => array('name' => 'sonata_admin_foo_param',
-                    'parameters'            => array('param1' => 'abcd', 'param2' => 'efgh', 'param3' => 'ijkl'), ),
+                    'parameters' => array('param1' => 'abcd', 'param2' => 'efgh', 'param3' => 'ijkl'), ),
                 ),
             ),
             array(
@@ -1010,8 +1052,8 @@ EOT
                 'Foo',
                 array(
                     'route' => array('name' => 'sonata_admin_foo_param',
-                    'absolute'              => true,
-                    'parameters'            => array('param1' => 'abcd', 'param2' => 'efgh', 'param3' => 'ijkl'), ),
+                    'absolute' => true,
+                    'parameters' => array('param1' => 'abcd', 'param2' => 'efgh', 'param3' => 'ijkl'), ),
                 ),
             ),
             array(
@@ -1021,8 +1063,8 @@ EOT
                 'url',
                 'Foo',
                 array(
-                    'route' => array('name'     => 'sonata_admin_foo_object',
-                    'parameters'                => array('param1' => 'abcd', 'param2' => 'efgh', 'param3' => 'ijkl'),
+                    'route' => array('name' => 'sonata_admin_foo_object',
+                    'parameters' => array('param1' => 'abcd', 'param2' => 'efgh', 'param3' => 'ijkl'),
                     'identifier_parameter_name' => 'barId', ),
                 ),
             ),
@@ -1033,9 +1075,9 @@ EOT
                 'url',
                 'Foo',
                 array(
-                    'route' => array('name'     => 'sonata_admin_foo_object',
-                    'absolute'                  => true,
-                    'parameters'                => array('param1' => 'abcd', 'param2' => 'efgh', 'param3' => 'ijkl'),
+                    'route' => array('name' => 'sonata_admin_foo_object',
+                    'absolute' => true,
+                    'parameters' => array('param1' => 'abcd', 'param2' => 'efgh', 'param3' => 'ijkl'),
                     'identifier_parameter_name' => 'barId', ),
                 ),
             ),
@@ -1093,8 +1135,8 @@ EOT
                 '<p><strong>Creating a Template for the Field</strong> and form</p>',
                 array(
                     'truncate' => array(
-                        'length'    => 20,
-                        'preserve'  => true,
+                        'length' => 20,
+                        'preserve' => true,
                         'separator' => '[...]',
                     ),
                 ),
@@ -1102,6 +1144,9 @@ EOT
         );
     }
 
+    /**
+     * @group legacy
+     */
     public function testRenderListElementNonExistentTemplate()
     {
         $this->admin->expects($this->once())
@@ -1141,6 +1186,7 @@ EOT
     /**
      * @expectedException        Twig_Error_Loader
      * @expectedExceptionMessage Unable to find template "base_list_nonexistent_field.html.twig"
+     * @group                    legacy
      */
     public function testRenderListElementErrorLoadingTemplate()
     {
@@ -1268,13 +1314,13 @@ EOT
             array(
                 '<th>Data</th> <td> [1 => First] <br> [2 => Second] </td>',
                 'array',
-                array(1      => 'First', 2 => 'Second'),
+                array(1 => 'First', 2 => 'Second'),
                 array('safe' => false),
             ),
             array(
                 '<th>Data</th> <td> [1 => First] [2 => Second] </td>',
                 'array',
-                array(1      => 'First', 2 => 'Second'),
+                array(1 => 'First', 2 => 'Second'),
                 array('safe' => false, 'inline' => true),
             ),
             array(
@@ -1295,7 +1341,7 @@ EOT
                 '<th>Data</th> <td>Alias1</td>',
                 'choice',
                 'Status1',
-                array('safe'  => false, 'choices' => array(
+                array('safe' => false, 'choices' => array(
                     'Status1' => 'Alias1',
                     'Status2' => 'Alias2',
                     'Status3' => 'Alias3',
@@ -1305,7 +1351,7 @@ EOT
                 '<th>Data</th> <td>NoValidKeyInChoices</td>',
                 'choice',
                 'NoValidKeyInChoices',
-                array('safe'  => false, 'choices' => array(
+                array('safe' => false, 'choices' => array(
                     'Status1' => 'Alias1',
                     'Status2' => 'Alias2',
                     'Status3' => 'Alias3',
@@ -1315,8 +1361,8 @@ EOT
                 '<th>Data</th> <td>Delete</td>',
                 'choice',
                 'Foo',
-                array('safe'  => false, 'catalogue' => 'SonataAdminBundle', 'choices' => array(
-                    'Foo'     => 'action_delete',
+                array('safe' => false, 'catalogue' => 'SonataAdminBundle', 'choices' => array(
+                    'Foo' => 'action_delete',
                     'Status2' => 'Alias2',
                     'Status3' => 'Alias3',
                 )),
@@ -1325,7 +1371,7 @@ EOT
                 '<th>Data</th> <td>NoValidKeyInChoices</td>',
                 'choice',
                 array('NoValidKeyInChoices'),
-                array('safe'  => false, 'choices' => array(
+                array('safe' => false, 'choices' => array(
                     'Status1' => 'Alias1',
                     'Status2' => 'Alias2',
                     'Status3' => 'Alias3',
@@ -1335,7 +1381,7 @@ EOT
                 '<th>Data</th> <td>NoValidKeyInChoices, Alias2</td>',
                 'choice',
                 array('NoValidKeyInChoices', 'Status2'),
-                array('safe'  => false, 'choices' => array(
+                array('safe' => false, 'choices' => array(
                     'Status1' => 'Alias1',
                     'Status2' => 'Alias2',
                     'Status3' => 'Alias3',
@@ -1345,7 +1391,7 @@ EOT
                 '<th>Data</th> <td>Alias1, Alias3</td>',
                 'choice',
                 array('Status1', 'Status3'),
-                array('safe'  => false, 'choices' => array(
+                array('safe' => false, 'choices' => array(
                     'Status1' => 'Alias1',
                     'Status2' => 'Alias2',
                     'Status3' => 'Alias3',
@@ -1364,8 +1410,8 @@ EOT
                 '<th>Data</th> <td>Delete, Alias3</td>',
                 'choice',
                 array('Foo', 'Status3'),
-                array('safe'  => false, 'catalogue' => 'SonataAdminBundle', 'choices' => array(
-                    'Foo'     => 'action_delete',
+                array('safe' => false, 'catalogue' => 'SonataAdminBundle', 'choices' => array(
+                    'Foo' => 'action_delete',
                     'Status2' => 'Alias2',
                     'Status3' => 'Alias3',
                 ), 'multiple' => true),
@@ -1374,7 +1420,7 @@ EOT
                 '<th>Data</th> <td><b>Alias1</b>, <b>Alias3</b></td>',
                 'choice',
                 array('Status1', 'Status3'),
-                array('safe'  => true, 'choices' => array(
+                array('safe' => true, 'choices' => array(
                     'Status1' => '<b>Alias1</b>',
                     'Status2' => '<b>Alias2</b>',
                     'Status3' => '<b>Alias3</b>',
@@ -1384,7 +1430,7 @@ EOT
                 '<th>Data</th> <td>&lt;b&gt;Alias1&lt;/b&gt;, &lt;b&gt;Alias3&lt;/b&gt;</td>',
                 'choice',
                 array('Status1', 'Status3'),
-                array('safe'  => false, 'choices' => array(
+                array('safe' => false, 'choices' => array(
                     'Status1' => '<b>Alias1</b>',
                     'Status2' => '<b>Alias2</b>',
                     'Status3' => '<b>Alias3</b>',
@@ -1424,7 +1470,7 @@ EOT
                 '<th>Data</th> <td><a href="https://example.com">https://example.com</a></td>',
                 'url',
                 'https://example.com',
-                array('safe'    => false,
+                array('safe' => false,
                 'hide_protocol' => false, ),
             ),
             array(
@@ -1455,8 +1501,8 @@ EOT
                 '<th>Data</th> <td><a href="http://localhost/foo">Foo</a></td>',
                 'url',
                 'Foo',
-                array('safe'   => false, 'route' => array(
-                    'name'     => 'sonata_admin_foo',
+                array('safe' => false, 'route' => array(
+                    'name' => 'sonata_admin_foo',
                     'absolute' => true,
                 )),
             ),
@@ -1465,8 +1511,8 @@ EOT
                 'url',
                 'http://foo/bar?a=b&c=123456789',
                 array(
-                    'safe'          => false,
-                    'route'         => array('name' => 'sonata_admin_foo'),
+                    'safe' => false,
+                    'route' => array('name' => 'sonata_admin_foo'),
                     'hide_protocol' => true,
                 ),
             ),
@@ -1474,8 +1520,8 @@ EOT
                 '<th>Data</th> <td><a href="http://localhost/foo">foo/bar?a=b&amp;c=123456789</a></td>',
                 'url',
                 'http://foo/bar?a=b&c=123456789',
-                array('safe'   => false, 'route' => array(
-                    'name'     => 'sonata_admin_foo',
+                array('safe' => false, 'route' => array(
+                    'name' => 'sonata_admin_foo',
                     'absolute' => true,
                 ), 'hide_protocol' => true),
             ),
@@ -1483,8 +1529,8 @@ EOT
                 '<th>Data</th> <td><a href="/foo/abcd/efgh?param3=ijkl">Foo</a></td>',
                 'url',
                 'Foo',
-                array('safe'     => false, 'route' => array(
-                    'name'       => 'sonata_admin_foo_param',
+                array('safe' => false, 'route' => array(
+                    'name' => 'sonata_admin_foo_param',
                     'parameters' => array('param1' => 'abcd', 'param2' => 'efgh', 'param3' => 'ijkl'),
                 )),
             ),
@@ -1492,9 +1538,9 @@ EOT
                 '<th>Data</th> <td><a href="http://localhost/foo/abcd/efgh?param3=ijkl">Foo</a></td>',
                 'url',
                 'Foo',
-                array('safe'     => false, 'route' => array(
-                    'name'       => 'sonata_admin_foo_param',
-                    'absolute'   => true,
+                array('safe' => false, 'route' => array(
+                    'name' => 'sonata_admin_foo_param',
+                    'absolute' => true,
                     'parameters' => array(
                         'param1' => 'abcd',
                         'param2' => 'efgh',
@@ -1506,9 +1552,9 @@ EOT
                 '<th>Data</th> <td><a href="/foo/obj/abcd/12345/efgh?param3=ijkl">Foo</a></td>',
                 'url',
                 'Foo',
-                array('safe'                    => false, 'route' => array(
-                    'name'                      => 'sonata_admin_foo_object',
-                    'parameters'                => array(
+                array('safe' => false, 'route' => array(
+                    'name' => 'sonata_admin_foo_object',
+                    'parameters' => array(
                         'param1' => 'abcd',
                         'param2' => 'efgh',
                         'param3' => 'ijkl',
@@ -1520,10 +1566,10 @@ EOT
                 '<th>Data</th> <td><a href="http://localhost/foo/obj/abcd/12345/efgh?param3=ijkl">Foo</a></td>',
                 'url',
                 'Foo',
-                array('safe'                    => false, 'route' => array(
-                    'name'                      => 'sonata_admin_foo_object',
-                    'absolute'                  => true,
-                    'parameters'                => array(
+                array('safe' => false, 'route' => array(
+                    'name' => 'sonata_admin_foo_object',
+                    'absolute' => true,
+                    'parameters' => array(
                         'param1' => 'abcd',
                         'param2' => 'efgh',
                         'param3' => 'ijkl',
@@ -1573,8 +1619,8 @@ EOT
                 '<p><strong>Creating a Template for the Field</strong> and form</p>',
                 array(
                     'truncate' => array(
-                        'length'    => 20,
-                        'preserve'  => true,
+                        'length' => 20,
+                        'preserve' => true,
                         'separator' => '[...]',
                     ),
                 ),
@@ -1654,7 +1700,7 @@ EOT
 
     public function testGetValueFromFieldDescriptionWithRemoveLoopException()
     {
-        $object =  $this->getMock('\ArrayAccess');
+        $object = $this->getMock('\ArrayAccess');
         $fieldDescription = $this->getMock('Sonata\AdminBundle\Admin\FieldDescriptionInterface');
 
         try {
@@ -1724,10 +1770,10 @@ EOT
         $this->environment->disableDebug();
 
         $parameters = array(
-            'admin'             => $this->admin,
-            'value'             => 'foo',
+            'admin' => $this->admin,
+            'value' => 'foo',
             'field_description' => $this->fieldDescription,
-            'object'            => $this->object,
+            'object' => $this->object,
         );
 
         $template = $this->environment->loadTemplate('SonataAdminBundle:CRUD:base_list_field.html.twig');
@@ -1773,16 +1819,35 @@ EOT
                 if ($value == 'associated_property') {
                     return $default;
                 }
-
-                if ($value == 'associated_tostring') {
-                    return '__toString';
-                }
             }));
 
         $element = new FooToString();
         $this->assertSame('salut', $this->twigExtension->renderRelationElement($element, $this->fieldDescription));
     }
 
+    /**
+     * @group legacy
+     */
+    public function testDeprecatedRelationElementToString()
+    {
+        $this->fieldDescription->expects($this->exactly(2))
+            ->method('getOption')
+            ->will($this->returnCallback(function ($value, $default = null) {
+                if ($value == 'associated_tostring') {
+                    return '__toString';
+                }
+            }));
+
+        $element = new FooToString();
+        $this->assertSame(
+            'salut',
+            $this->twigExtension->renderRelationElement($element, $this->fieldDescription)
+        );
+    }
+
+    /**
+     * @group legacy
+     */
     public function testRenderRelationElementCustomToString()
     {
         $this->fieldDescription->expects($this->exactly(2))
@@ -1805,6 +1870,9 @@ EOT
         $this->assertSame('fooBar', $this->twigExtension->renderRelationElement($element, $this->fieldDescription));
     }
 
+    /**
+     * @group legacy
+     */
     public function testRenderRelationElementMethodNotExist()
     {
         $this->fieldDescription->expects($this->exactly(2))
@@ -1932,5 +2000,14 @@ EOT
             ->will($this->returnValue(1234567));
 
         $this->assertSame(1234567, $this->twigExtension->getUrlsafeIdentifier($entity, $this->adminBar));
+    }
+
+    private function removeExtraWhitespace($string)
+    {
+        return trim(preg_replace(
+            '/\s+/',
+            ' ',
+            $string
+        ));
     }
 }

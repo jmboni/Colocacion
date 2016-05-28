@@ -8,9 +8,9 @@ class ComposerStaticInit4aef455723502cd0f33b7de5dd1be087
 {
     public static $files = array (
         '2c102faa651ef8ea5874edb585946bce' => __DIR__ . '/..' . '/swiftmailer/swiftmailer/lib/swift_required.php',
-        '32dcc8afd4335739640db7d200c1971d' => __DIR__ . '/..' . '/symfony/polyfill-apcu/bootstrap.php',
         '5255c38a0faeba867671b61dfda6d864' => __DIR__ . '/..' . '/paragonie/random_compat/lib/random.php',
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
+        '32dcc8afd4335739640db7d200c1971d' => __DIR__ . '/..' . '/symfony/polyfill-apcu/bootstrap.php',
         'ce89ac35a6c330c55f4710717db9ff78' => __DIR__ . '/..' . '/kriswallsmith/assetic/src/functions.php',
         '3fad0ebbff9928a94a9d8941fb314bd8' => __DIR__ . '/..' . '/symfony/symfony/src/Symfony/Component/Intl/Resources/stubs/functions.php',
         '8ac9dba77d5c65db2811440ee8265f5d' => __DIR__ . '/..' . '/sonata-project/block-bundle/Resources/stubs/symfony2.php',
@@ -46,6 +46,10 @@ class ComposerStaticInit4aef455723502cd0f33b7de5dd1be087
         'M' => 
         array (
             'Monolog\\' => 8,
+        ),
+        'L' => 
+        array (
+            'Liip\\ImagineBundle\\' => 19,
         ),
         'K' => 
         array (
@@ -163,6 +167,10 @@ class ComposerStaticInit4aef455723502cd0f33b7de5dd1be087
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
         ),
+        'Liip\\ImagineBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/liip/imagine-bundle',
+        ),
         'Knp\\Menu\\' => 
         array (
             0 => __DIR__ . '/..' . '/knplabs/knp-menu/src/Knp/Menu',
@@ -214,6 +222,13 @@ class ComposerStaticInit4aef455723502cd0f33b7de5dd1be087
     );
 
     public static $prefixesPsr0 = array (
+        'W' => 
+        array (
+            'WhiteOctober\\BreadcrumbsBundle' => 
+            array (
+                0 => __DIR__ . '/..' . '/whiteoctober/breadcrumbs-bundle',
+            ),
+        ),
         'T' => 
         array (
             'Twig_Extensions_' => 
@@ -249,6 +264,13 @@ class ComposerStaticInit4aef455723502cd0f33b7de5dd1be087
             'Propel' => 
             array (
                 0 => __DIR__ . '/..' . '/propel/propel/src',
+            ),
+        ),
+        'I' => 
+        array (
+            'Imagine' => 
+            array (
+                0 => __DIR__ . '/..' . '/imagine/imagine/lib',
             ),
         ),
         'E' => 

@@ -14,7 +14,7 @@ Example
     <?php
     // src/AppBundle/Admin/PostAdmin.php
 
-    class PostAdmin extends Admin
+    class PostAdmin extends AbstractAdmin
     {
         protected function configureFormFields(FormMapper $formMapper)
         {
@@ -41,7 +41,7 @@ All at once
     <?php
     // src/AppBundle/Admin/PostAdmin.php
 
-    class PostAdmin extends Admin
+    class PostAdmin extends AbstractAdmin
     {
         protected function configureFormFields(FormMapper $formMapper)
         {
@@ -65,7 +65,7 @@ or step by step.
     <?php
     // src/AppBundle/Admin/PostAdmin.php
 
-    class PostAdmin extends Admin
+    class PostAdmin extends AbstractAdmin
     {
         protected function configureFormFields(FormMapper $formMapper)
         {
@@ -89,12 +89,12 @@ This Extension for example adds a note field to some entities which use a custom
 
     namespace AppBundle\Admin\Extension;
 
-    use Sonata\AdminBundle\Admin\AdminExtension;
+    use Sonata\AdminBundle\Admin\AbstractAdminExtension;
     use Sonata\AdminBundle\Datagrid\DatagridMapper;
     use Sonata\AdminBundle\Form\FormMapper;
     use Sonata\AdminBundle\Show\ShowMapper;
 
-    class NoteAdminExtension extends AdminExtension
+    class NoteAdminExtension extends AbstractAdminExtension
     {
 
         // add this field to the datagrid every time its available
@@ -144,7 +144,7 @@ Help messages in a sub-field
     <?php
     // src/AppBundle/Admin/PostAdmin.php
 
-    class PostAdmin extends Admin
+    class PostAdmin extends AbstractAdmin
     {
         protected function configureFormFields(FormMapper $formMapper)
         {
@@ -181,7 +181,7 @@ Example
     <?php
     // src/AppBundle/Admin/PostAdmin.php
 
-    class PostAdmin extends Admin
+    class PostAdmin extends AbstractAdmin
     {
         protected function configureFormFields(FormMapper $formMapper)
         {

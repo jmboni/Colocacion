@@ -90,7 +90,7 @@ class AfiliadosAdminController extends Controller
             $em->flush();
             
             $message = \Swift_Message::newInstance()
-                ->setSubject('Código de afiliado de Agencia Colocación DSG')
+                ->setSubject('Código de afiliado de la Agencia de Colocación DSG')
                 ->setFrom('address@example.com')
                 ->setTo($afiliado->getEmail())
                 ->setBody(

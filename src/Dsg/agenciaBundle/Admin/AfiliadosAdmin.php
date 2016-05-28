@@ -44,8 +44,8 @@ class AfiliadosAdmin extends Admin
             ->add('url')
             ->add('creado')
             ->add('token')
-            ->add('_action', 'actions', array( 'actions' => array('activate' => array('template' => 'DsgagenciaBundle:AfiliadosAdmin:list_action_activar.html.twig'),
-                'deactivate' => array('template' => 'DsgagenciaBundle:AfiliadosAdmin:list_action_desactivar.html.twig'))))
+            ->add('_action', 'actions', array( 'actions' => array('activar' => array('template' => 'DsgagenciaBundle:AfiliadosAdmin:list_action_activar.html.twig'),
+                'desactivar' => array('template' => 'DsgagenciaBundle:AfiliadosAdmin:list_action_desactivar.html.twig'))))
         ;
     }
 
@@ -56,12 +56,12 @@ class AfiliadosAdmin extends Admin
  
         if($this->hasRoute('edit') && $this->isGranted('EDIT') && $this->hasRoute('delete') && $this->isGranted('DELETE')) {
             $actions['activate'] = array(
-                'label'            => 'activate',
+                'label'            => 'Activar',
                 'ask_confirmation' => true
             );
  
             $actions['deactivate'] = array(
-                'label'            => 'deactivate',
+                'label'            => 'Desactivar',
                 'ask_confirmation' => true
             );
         }

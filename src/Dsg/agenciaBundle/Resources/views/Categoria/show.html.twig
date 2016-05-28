@@ -17,7 +17,7 @@
                 <h2 class="panel-title">{{ categoria.nombre }}</h2>
             </div>
              <!--Incluimos la plantilla de listar trabajos-->
-            {{ include ('DsgagenciaBundle::listar.html.twig', {'trabajos': categoria.trabajosactivos}) }}
+            {{ include ('DsgagenciaBundle:Trabajos:listar.html.twig', {'trabajos': categoria.trabajosactivos}) }}
             
             {% if last_page > 1 %}
                 <div class="container">

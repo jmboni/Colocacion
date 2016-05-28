@@ -35,7 +35,7 @@ class ShowMapper extends BaseGroupedMapper
     public function __construct(ShowBuilderInterface $showBuilder, FieldDescriptionCollection $list, AdminInterface $admin)
     {
         parent::__construct($showBuilder, $admin);
-        $this->list        = $list;
+        $this->list = $list;
     }
 
     /**
@@ -111,6 +111,14 @@ class ShowMapper extends BaseGroupedMapper
         $this->list->remove($key);
 
         return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    final public function keys()
+    {
+        return array_keys($this->list->getElements());
     }
 
     /**

@@ -28,36 +28,6 @@ use Symfony\Component\HttpFoundation\Response;
 class CoreController extends Controller
 {
     /**
-     * @return Pool
-     */
-    protected function getAdminPool()
-    {
-        return $this->container->get('sonata.admin.pool');
-    }
-
-    /**
-     * @return SearchHandler
-     */
-    protected function getSearchHandler()
-    {
-        return $this->get('sonata.admin.search.handler');
-    }
-
-    /**
-     * @param Request $request
-     *
-     * @return string
-     */
-    protected function getBaseTemplate()
-    {
-        if ($this->getRequest()->isXmlHttpRequest()) {
-            return $this->getAdminPool()->getTemplate('ajax');
-        }
-
-        return $this->getAdminPool()->getTemplate('layout');
-    }
-
-    /**
      * @param Request $request
      *
      * @return Response
@@ -65,10 +35,10 @@ class CoreController extends Controller
     public function dashboardAction()
     {
         $blocks = array(
-            'top'    => array(),
-            'left'   => array(),
+            'top' => array(),
+            'left' => array(),
             'center' => array(),
-            'right'  => array(),
+            'right' => array(),
             'bottom' => array(),
         );
 
@@ -77,9 +47,9 @@ class CoreController extends Controller
         }
 
         return $this->render($this->getAdminPool()->getTemplate('dashboard'), array(
-            'base_template'   => $this->getBaseTemplate(),
-            'admin_pool'      => $this->container->get('sonata.admin.pool'),
-            'blocks'          => $blocks,
+            'base_template' => $this->getBaseTemplate(),
+            'admin_pool' => $this->container->get('sonata.admin.pool'),
+            'blocks' => $blocks,
         ));
     }
 
@@ -114,16 +84,16 @@ class CoreController extends Controller
                 foreach ($pager->getResults() as $result) {
                     $results[] = array(
                         'label' => $admin->toString($result),
-                        'link'  => $admin->generateObjectUrl('edit', $result),
-                        'id'    => $admin->id($result),
+                        'link' => $admin->generateObjectUrl('edit', $result),
+                        'id' => $admin->id($result),
                     );
                 }
             }
 
             $response = new JsonResponse(array(
                 'results' => $results,
-                'page'    => $pager ? (int) $pager->getPage() : false,
-                'total'   => $pager ? (int) $pager->getNbResults() : false,
+                'page' => $pager ? (int) $pager->getPage() : false,
+                'total' => $pager ? (int) $pager->getNbResults() : false,
             ));
             $response->setPrivate();
 
@@ -132,9 +102,9 @@ class CoreController extends Controller
 
         return $this->render($this->container->get('sonata.admin.pool')->getTemplate('search'), array(
             'base_template' => $this->getBaseTemplate(),
-            'admin_pool'    => $this->container->get('sonata.admin.pool'),
-            'query'         => $request->get('q'),
-            'groups'        => $this->getAdminPool()->getDashboardGroups(),
+            'admin_pool' => $this->container->get('sonata.admin.pool'),
+            'query' => $request->get('q'),
+            'groups' => $this->getAdminPool()->getDashboardGroups(),
         ));
     }
 
@@ -155,5 +125,35 @@ class CoreController extends Controller
         }
 
         return $this->container->get('request');
+    }
+
+    /**
+     * @return Pool
+     */
+    protected function getAdminPool()
+    {
+        return $this->container->get('sonata.admin.pool');
+    }
+
+    /**
+     * @return SearchHandler
+     */
+    protected function getSearchHandler()
+    {
+        return $this->get('sonata.admin.search.handler');
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return string
+     */
+    protected function getBaseTemplate()
+    {
+        if ($this->getRequest()->isXmlHttpRequest()) {
+            return $this->getAdminPool()->getTemplate('ajax');
+        }
+
+        return $this->getAdminPool()->getTemplate('layout');
     }
 }

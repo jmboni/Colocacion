@@ -13,7 +13,7 @@ namespace Sonata\AdminBundle\Annotation;
 
 use JMS\DiExtraBundle\Annotation\MetadataProcessorInterface;
 use JMS\DiExtraBundle\Metadata\ClassMetadata;
-use Sonata\AdminBundle\Admin\Admin as AdminClass;
+use Sonata\AdminBundle\Admin\AbstractAdmin as AdminClass;
 
 /**
  * Use annotations to define admin classes.
@@ -99,13 +99,13 @@ class Admin implements MetadataProcessorInterface
         $this->validate();
 
         $tag = array(
-            'manager_type'      => $this->managerType,
-            'group'             => $this->group,
-            'label'             => $this->label,
+            'manager_type' => $this->managerType,
+            'group' => $this->group,
+            'label' => $this->label,
             'show_in_dashboard' => $this->showInDashboard,
-            'icon'              => $this->icon,
-            'pager_type'        => $this->pagerType,
-            'persist_filters'   => $this->persistFilters,
+            'icon' => $this->icon,
+            'pager_type' => $this->pagerType,
+            'persist_filters' => $this->persistFilters,
         );
 
         $tag = array_filter($tag, function ($v) { return !is_null($v); });

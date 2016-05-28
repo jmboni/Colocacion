@@ -60,14 +60,14 @@ class AdminExtractor implements ExtractorInterface, TranslatorInterface, Securit
      */
     public function __construct(Pool $adminPool, LoggerInterface $logger = null)
     {
-        $this->logger    = $logger;
+        $this->logger = $logger;
         $this->adminPool = $adminPool;
 
         // state variable
-        $this->catalogue     = false;
-        $this->translator    = false;
+        $this->catalogue = false;
+        $this->translator = false;
         $this->labelStrategy = false;
-        $this->domain        = false;
+        $this->domain = false;
     }
 
     /**
@@ -96,9 +96,9 @@ class AdminExtractor implements ExtractorInterface, TranslatorInterface, Securit
         foreach ($this->adminPool->getAdminServiceIds() as $id) {
             $admin = $this->getAdmin($id);
 
-            $this->translator    = $admin->getTranslator();
+            $this->translator = $admin->getTranslator();
             $this->labelStrategy = $admin->getLabelTranslatorStrategy();
-            $this->domain        = $admin->getTranslationDomain();
+            $this->domain = $admin->getTranslationDomain();
 
             $admin->setTranslator($this);
             $admin->setSecurityHandler($this);
@@ -110,11 +110,11 @@ class AdminExtractor implements ExtractorInterface, TranslatorInterface, Securit
 
             // call the different public method
             $methods = array(
-                'getShow'         => array(array()),
-                'getDatagrid'     => array(array()),
-                'getList'         => array(array()),
-                'getForm'         => array(array()),
-                'getBreadcrumbs'  => array(
+                'getShow' => array(array()),
+                'getDatagrid' => array(array()),
+                'getList' => array(array()),
+                'getForm' => array(array()),
+                'getBreadcrumbs' => array(
                     array('list'),
                     array('edit'),
                     array('create'),
@@ -147,34 +147,6 @@ class AdminExtractor implements ExtractorInterface, TranslatorInterface, Securit
         $this->catalogue = false;
 
         return $catalogue;
-    }
-
-    /**
-     * @param string $id
-     *
-     * @return AdminInterface
-     */
-    private function getAdmin($id)
-    {
-        return $this->adminPool->getContainer()->get($id);
-    }
-
-    /**
-     * @param string $id
-     * @param string $domain
-     */
-    private function addMessage($id, $domain)
-    {
-        $message = new Message($id, $domain);
-
-        //        $this->logger->debug(sprintf('extract: %s - domain:%s', $id, $domain));
-
-        $trace = debug_backtrace(false);
-        if (isset($trace[1]['file'])) {
-            $message->addSource(new FileSource($trace[1]['file']));
-        }
-
-        $this->catalogue->add($message);
     }
 
     /**
@@ -259,5 +231,33 @@ class AdminExtractor implements ExtractorInterface, TranslatorInterface, Securit
         $this->addMessage($label, $this->domain);
 
         return $label;
+    }
+
+    /**
+     * @param string $id
+     *
+     * @return AdminInterface
+     */
+    private function getAdmin($id)
+    {
+        return $this->adminPool->getContainer()->get($id);
+    }
+
+    /**
+     * @param string $id
+     * @param string $domain
+     */
+    private function addMessage($id, $domain)
+    {
+        $message = new Message($id, $domain);
+
+        //        $this->logger->debug(sprintf('extract: %s - domain:%s', $id, $domain));
+
+        $trace = debug_backtrace(false);
+        if (isset($trace[1]['file'])) {
+            $message->addSource(new FileSource($trace[1]['file']));
+        }
+
+        $this->catalogue->add($message);
     }
 }

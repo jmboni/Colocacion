@@ -37,7 +37,7 @@ class DatagridMapper extends BaseMapper
     public function __construct(DatagridBuilderInterface $datagridBuilder, DatagridInterface $datagrid, AdminInterface $admin)
     {
         parent::__construct($datagridBuilder, $admin);
-        $this->datagrid        = $datagrid;
+        $this->datagrid = $datagrid;
     }
 
     /**
@@ -103,6 +103,14 @@ class DatagridMapper extends BaseMapper
     public function has($key)
     {
         return $this->datagrid->hasFilter($key);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    final public function keys()
+    {
+        return array_keys($this->datagrid->getFilters());
     }
 
     /**

@@ -53,7 +53,7 @@ class LockExtensionTest extends \PHPUnit_Framework_TestCase
 
         $this->modelManager = $this->getMock('Sonata\AdminBundle\Model\LockInterface');
 
-        $this->admin = $this->getMockBuilder('Sonata\AdminBundle\Admin\Admin')
+        $this->admin = $this->getMockBuilder('Sonata\AdminBundle\Admin\AbstractAdmin')
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -102,7 +102,7 @@ class LockExtensionTest extends \PHPUnit_Framework_TestCase
                 $this->equalTo('hidden'),
                 $this->equalTo(array(
                     'mapped' => false,
-                    'data'   => 1,
+                    'data' => 1,
                 ))
             );
 

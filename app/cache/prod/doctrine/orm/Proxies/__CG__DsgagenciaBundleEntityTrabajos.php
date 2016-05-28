@@ -749,4 +749,26 @@ class Trabajos extends \Dsg\agenciaBundle\Entity\Trabajos implements \Doctrine\O
         return parent::asArray($host);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    public function updateLuceneIndex()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'updateLuceneIndex', []);
+
+        return parent::updateLuceneIndex();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function deleteLuceneIndex()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'deleteLuceneIndex', []);
+
+        return parent::deleteLuceneIndex();
+    }
+
 }

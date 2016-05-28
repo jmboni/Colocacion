@@ -5,19 +5,23 @@ UPGRADE FROM 2.x to 3.0
 
 You will need to follow the dependencies upgrade instructions.
 
+## Deprecated BaseFieldDescription::camelize() and AdminHelper::camelize()
+
+If you were using this method, please use `Doctrine\Common\Inflector\Inflector::classify()` instead.
+
 ## Datagrid builders
 
 If you have implemented a custom datagrid builder, you must adapt the signature of its `addFilter` method to match the one in `DatagridBuilderInterface` again.
 
 ## sonata_type_model_autocomplete
-CSS class ``sonata-autocomplete-dropdown-item`` is not automatically added to dropdown autocomplete item in ``sonata_type_model_autocomplete``, use option ``dropdown_item_css_class`` to set the CSS class of dropdown item.
+CSS class `sonata-autocomplete-dropdown-item` is not automatically added to dropdown autocomplete item in `sonata_type_model_autocomplete`, use option `dropdown_item_css_class` to set the CSS class of dropdown item.
 
 ## Standard Layout
-``sonata_wrapper`` block was moved and is now inside the ``.wrapper`` div of admin lte theme.
+`sonata_wrapper` block was moved and is now inside the `.wrapper` div of admin lte theme.
 
 ## ErrorElement
 
-The inline validation has been migrating to CoreBundle. Just rename ``Sonata\AdminBundle\Validator\ErrorElement`` to ``Sonata\CoreBundle\Validator\ErrorElement``
+The inline validation has been migrating to CoreBundle. Just rename `Sonata\AdminBundle\Validator\ErrorElement` to `Sonata\CoreBundle\Validator\ErrorElement`
 
 ## AdminLTE 2
 
@@ -33,4 +37,4 @@ If you're using a custom implementation of `sonata.admin.route_loader` service, 
 
 ## LegacyModelsToArrayTransformer
 
-The ``ModelsToArrayTransformer`` has been renamed to ``LegacyModelsToArrayTransformer``. ``ModelsToArrayTransformer`` should be only be used with SF2.7+
+The `ModelsToArrayTransformer` has been renamed to `LegacyModelsToArrayTransformer`. `ModelsToArrayTransformer` should be only be used with SF2.7+

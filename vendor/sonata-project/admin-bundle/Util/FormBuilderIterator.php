@@ -52,20 +52,8 @@ class FormBuilderIterator extends \RecursiveArrayIterator
     public function __construct(FormBuilderInterface $formBuilder, $prefix = false)
     {
         $this->formBuilder = $formBuilder;
-        $this->prefix      = $prefix ? $prefix : $formBuilder->getName();
-        $this->iterator    = new \ArrayIterator(self::getKeys($formBuilder));
-    }
-
-    /**
-     * @static
-     *
-     * @param FormBuilderInterface $formBuilder
-     *
-     * @return array
-     */
-    private static function getKeys(FormBuilderInterface $formBuilder)
-    {
-        return array_keys($formBuilder->all());
+        $this->prefix = $prefix ? $prefix : $formBuilder->getName();
+        $this->iterator = new \ArrayIterator(self::getKeys($formBuilder));
     }
 
     /**
@@ -124,5 +112,17 @@ class FormBuilderIterator extends \RecursiveArrayIterator
     public function hasChildren()
     {
         return count(self::getKeys($this->current())) > 0;
+    }
+
+    /**
+     * @static
+     *
+     * @param FormBuilderInterface $formBuilder
+     *
+     * @return array
+     */
+    private static function getKeys(FormBuilderInterface $formBuilder)
+    {
+        return array_keys($formBuilder->all());
     }
 }

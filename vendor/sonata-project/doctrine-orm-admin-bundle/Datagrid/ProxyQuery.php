@@ -11,6 +11,7 @@
 
 namespace Sonata\DoctrineORMAdminBundle\Datagrid;
 
+use Doctrine\DBAL\Types\Type;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
@@ -58,105 +59,6 @@ class ProxyQuery implements ProxyQueryInterface
     /**
      * {@inheritdoc}
      */
-    public function execute(array $params = array(), $hydrationMode = null)
-    {
-        // always clone the original queryBuilder
-        $queryBuilder = clone $this->queryBuilder;
-
-        // todo : check how doctrine behave, potential SQL injection here ...
-        if ($this->getSortBy()) {
-            $sortBy = $this->getSortBy();
-            if (strpos($sortBy, '.') === false) { // add the current alias
-                $sortBy = $queryBuilder->getRootAlias().'.'.$sortBy;
-            }
-            $queryBuilder->addOrderBy($sortBy, $this->getSortOrder());
-        } else {
-            $queryBuilder->resetDQLPart('orderBy');
-        }
-
-        return $this->getFixedQueryBuilder($queryBuilder)->getQuery()->execute($params, $hydrationMode);
-    }
-
-    /**
-     * This method alters the query to return a clean set of object with a working
-     * set of Object.
-     *
-     * @param QueryBuilder $queryBuilder
-     *
-     * @return QueryBuilder
-     */
-    protected function getFixedQueryBuilder(QueryBuilder $queryBuilder)
-    {
-        $queryBuilderId = clone $queryBuilder;
-
-        // step 1 : retrieve the targeted class
-        $from = $queryBuilderId->getDQLPart('from');
-        $class = $from[0]->getFrom();
-        $metadata = $queryBuilderId->getEntityManager()->getMetadataFactory()->getMetadataFor($class);
-
-        // step 2 : retrieve identifier columns
-        $idNames = $metadata->getIdentifierFieldNames();
-
-        // step 3 : retrieve the different subjects ids
-        $selects = array();
-        $idxSelect = '';
-        foreach ($idNames as $idName) {
-            $select = sprintf('%s.%s', $queryBuilderId->getRootAlias(), $idName);
-            // Put the ID select on this array to use it on results QB
-            $selects[$idName] = $select;
-            // Use IDENTITY if id is a relation too. See: http://doctrine-orm.readthedocs.org/en/latest/reference/dql-doctrine-query-language.html
-            // Should work only with doctrine/orm: ~2.2
-            $idSelect = $select;
-            if ($metadata->hasAssociation($idName)) {
-                $idSelect = sprintf('IDENTITY(%s) as %s', $idSelect, $idName);
-            }
-            $idxSelect .= ($idxSelect !== '' ? ', ' : '').$idSelect;
-        }
-        $queryBuilderId->resetDQLPart('select');
-        $queryBuilderId->add('select', 'DISTINCT '.$idxSelect);
-
-        // for SELECT DISTINCT, ORDER BY expressions must appear in idxSelect list
-        /* Consider
-            SELECT DISTINCT x FROM tab ORDER BY y;
-        For any particular x-value in the table there might be many different y
-        values.  Which one will you use to sort that x-value in the output?
-        */
-        // todo : check how doctrine behave, potential SQL injection here ...
-        if ($this->getSortBy()) {
-            $sortBy = $this->getSortBy();
-            if (strpos($sortBy, '.') === false) { // add the current alias
-                $sortBy = $queryBuilderId->getRootAlias().'.'.$sortBy;
-            }
-            $sortBy .= ' AS __order_by';
-            $queryBuilderId->addSelect($sortBy);
-        }
-
-        $results = $queryBuilderId->getQuery()->execute(array(), Query::HYDRATE_ARRAY);
-        $idxMatrix = array();
-        foreach ($results as $id) {
-            foreach ($idNames as $idName) {
-                $idxMatrix[$idName][] = $id[$idName];
-            }
-        }
-
-        // step 4 : alter the query to match the targeted ids
-        foreach ($idxMatrix as $idName => $idx) {
-            if (count($idx) > 0) {
-                $idxParamName = sprintf('%s_idx', $idName);
-                $idxParamName = preg_replace('/[^\w]+/', '_', $idxParamName);
-                $queryBuilder->andWhere(sprintf('%s IN (:%s)', $selects[$idName], $idxParamName));
-                $queryBuilder->setParameter($idxParamName, $idx);
-                $queryBuilder->setMaxResults(null);
-                $queryBuilder->setFirstResult(null);
-            }
-        }
-
-        return $queryBuilder;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function __call($name, $args)
     {
         return call_user_func_array(array($this->queryBuilder, $name), $args);
@@ -168,6 +70,57 @@ class ProxyQuery implements ProxyQueryInterface
     public function __get($name)
     {
         return $this->queryBuilder->$name;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function __clone()
+    {
+        $this->queryBuilder = clone $this->queryBuilder;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function execute(array $params = array(), $hydrationMode = null)
+    {
+        // always clone the original queryBuilder
+        $queryBuilder = clone $this->queryBuilder;
+
+        $rootAlias = current($queryBuilder->getRootAliases());
+
+        // todo : check how doctrine behave, potential SQL injection here ...
+        if ($this->getSortBy()) {
+            $sortBy = $this->getSortBy();
+            if (strpos($sortBy, '.') === false) { // add the current alias
+                $sortBy = $rootAlias.'.'.$sortBy;
+            }
+            $queryBuilder->addOrderBy($sortBy, $this->getSortOrder());
+        } else {
+            $queryBuilder->resetDQLPart('orderBy');
+        }
+
+        /* By default, always add a sort on the identifier fields of the first
+         * used entity in the query, because RDBMS do not guarantee a
+         * particular order when no ORDER BY clause is specified, or when
+         * the field used for sorting is not unique.
+         */
+
+        $identifierFields = $queryBuilder
+            ->getEntityManager()
+            ->getMetadataFactory()
+            ->getMetadataFor(current($queryBuilder->getRootEntities()))
+            ->getIdentifierFieldNames();
+
+        foreach ($identifierFields as $identifierField) {
+            $queryBuilder->addOrderBy(
+                $rootAlias.'.'.$identifierField,
+                $this->getSortOrder() // reusing the sort order is the most natural way to go
+            );
+        }
+
+        return $this->getFixedQueryBuilder($queryBuilder)->getQuery()->execute($params, $hydrationMode);
     }
 
     /**
@@ -215,14 +168,6 @@ class ProxyQuery implements ProxyQueryInterface
         $query = $this->queryBuilder->getQuery();
 
         return $query->getSingleScalarResult();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function __clone()
-    {
-        $this->queryBuilder = clone $this->queryBuilder;
     }
 
     /**
@@ -314,5 +259,90 @@ class ProxyQuery implements ProxyQueryInterface
         }
 
         return $alias;
+    }
+
+    /**
+     * This method alters the query to return a clean set of object with a working
+     * set of Object.
+     *
+     * @param QueryBuilder $queryBuilder
+     *
+     * @return QueryBuilder
+     */
+    protected function getFixedQueryBuilder(QueryBuilder $queryBuilder)
+    {
+        $queryBuilderId = clone $queryBuilder;
+        $rootAlias = current($queryBuilderId->getRootAliases());
+
+        // step 1 : retrieve the targeted class
+        $from = $queryBuilderId->getDQLPart('from');
+        $class = $from[0]->getFrom();
+        $metadata = $queryBuilderId->getEntityManager()->getMetadataFactory()->getMetadataFor($class);
+
+        // step 2 : retrieve identifier columns
+        $idNames = $metadata->getIdentifierFieldNames();
+
+        // step 3 : retrieve the different subjects ids
+        $selects = array();
+        $idxSelect = '';
+        foreach ($idNames as $idName) {
+            $select = sprintf('%s.%s', $rootAlias, $idName);
+            // Put the ID select on this array to use it on results QB
+            $selects[$idName] = $select;
+            // Use IDENTITY if id is a relation too. See: http://doctrine-orm.readthedocs.org/en/latest/reference/dql-doctrine-query-language.html
+            // Should work only with doctrine/orm: ~2.2
+            $idSelect = $select;
+            if ($metadata->hasAssociation($idName)) {
+                $idSelect = sprintf('IDENTITY(%s) as %s', $idSelect, $idName);
+            }
+            $idxSelect .= ($idxSelect !== '' ? ', ' : '').$idSelect;
+        }
+        $queryBuilderId->resetDQLPart('select');
+        $queryBuilderId->add('select', 'DISTINCT '.$idxSelect);
+
+        // for SELECT DISTINCT, ORDER BY expressions must appear in idxSelect list
+        /* Consider
+            SELECT DISTINCT x FROM tab ORDER BY y;
+        For any particular x-value in the table there might be many different y
+        values.  Which one will you use to sort that x-value in the output?
+        */
+        // todo : check how doctrine behave, potential SQL injection here ...
+        if ($this->getSortBy()) {
+            $sortBy = $this->getSortBy();
+            if (strpos($sortBy, '.') === false) { // add the current alias
+                $sortBy = $rootAlias.'.'.$sortBy;
+            }
+            $sortBy .= ' AS __order_by';
+            $queryBuilderId->addSelect($sortBy);
+        }
+
+        $results = $queryBuilderId->getQuery()->execute(array(), Query::HYDRATE_ARRAY);
+        $platform = $queryBuilderId->getEntityManager()->getConnection()->getDatabasePlatform();
+        $idxMatrix = array();
+        foreach ($results as $id) {
+            foreach ($idNames as $idName) {
+                $phpValue = $id[$idName];
+                // Convert ids to database value in case of custom type
+                $fieldType = $metadata->getTypeOfField($idName);
+                $type = Type::getType($fieldType);
+                $dbValue = $type->convertToDatabaseValue($phpValue, $platform);
+
+                $idxMatrix[$idName][] = $dbValue;
+            }
+        }
+
+        // step 4 : alter the query to match the targeted ids
+        foreach ($idxMatrix as $idName => $idx) {
+            if (count($idx) > 0) {
+                $idxParamName = sprintf('%s_idx', $idName);
+                $idxParamName = preg_replace('/[^\w]+/', '_', $idxParamName);
+                $queryBuilder->andWhere(sprintf('%s IN (:%s)', $selects[$idName], $idxParamName));
+                $queryBuilder->setParameter($idxParamName, $idx);
+                $queryBuilder->setMaxResults(null);
+                $queryBuilder->setFirstResult(null);
+            }
+        }
+
+        return $queryBuilder;
     }
 }

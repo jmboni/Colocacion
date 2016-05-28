@@ -116,22 +116,40 @@ class AdminType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'delete'          => function (Options $options) {
+            'delete' => function (Options $options) {
                 return $options['btn_delete'] !== false;
             },
-            'delete_options'  => array(
-                'type'         => 'checkbox',
+            'delete_options' => array(
+                'type' => 'checkbox',
                 'type_options' => array(
                     'required' => false,
-                    'mapped'   => false,
+                    'mapped' => false,
                 ),
             ),
             'auto_initialize' => false,
-            'btn_add'         => 'link_add',
-            'btn_list'        => 'link_list',
-            'btn_delete'      => 'link_delete',
-            'btn_catalogue'   => 'SonataAdminBundle',
+            'btn_add' => 'link_add',
+            'btn_list' => 'link_list',
+            'btn_delete' => 'link_delete',
+            'btn_catalogue' => 'SonataAdminBundle',
         ));
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @todo Remove when dropping Symfony <2.8 support
+     */
+    public function getName()
+    {
+        return $this->getBlockPrefix();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'sonata_type_admin';
     }
 
     /**
@@ -158,23 +176,5 @@ class AdminType extends AbstractType
     protected function getAdmin(array $options)
     {
         return $this->getFieldDescription($options)->getAssociationAdmin();
-    }
-
-    /**
-     * {@inheritdoc}
-     *
-     * @todo Remove when dropping Symfony <2.8 support
-     */
-    public function getName()
-    {
-        return $this->getBlockPrefix();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getBlockPrefix()
-    {
-        return 'sonata_type_admin';
     }
 }

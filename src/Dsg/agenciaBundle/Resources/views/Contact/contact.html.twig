@@ -1,0 +1,94 @@
+{% extends 'DsgagenciaBundle::layout.html.twig' %}
+
+{% block formulario %}
+<div class="container">
+    <div class="row">  
+        <div class="col-xs-12 col-md-6">
+            <div class="jumbotron">
+                <header>
+                    <h2>Formulario de Contacto</h2>
+                </header>
+                
+                
+                    {% for flashMessage in app.session.flashbag.get('notificacion') %}
+                        <div class="alert alert-success" role="alert">
+                            {{ flashMessage }}
+                        </div>
+                    {% endfor %}
+            
+                <form class="form-horizontal" action="{{ path('dsgagencia_contacto') }}" method="post" {{ form_enctype(form)}}>
+                    <fieldset>
+                        <legend>Contacta con nosotros</legend>
+                        {{ form_errors(form) }}
+                        
+                        
+                        <div class="form-group">
+                            {{ form_label(form.name)}}
+                            {{ form_widget(form.name, {'attr' : {'class' : 'form-control', 'placeholder' : 'Nombre'}}) }}
+                            <span class="text-danger">{{ form_errors(form.name)}}</span>
+                        </div>
+                        
+                        <div class="form-group">
+                            {{ form_label(form.email)}}
+                            {{ form_widget(form.email, {'attr' : {'class' : 'form-control', 'placeholder' : 'Email de contacto'}}) }}
+                            <span class="text-danger">{{ form_errors(form.email)}}</span>
+                        </div>
+                        
+                        <div class="form-group">
+                            {{ form_label(form.subject)}}
+                            {{ form_widget(form.subject, {'attr' : {'class' : 'form-control', 'placeholder' : 'Asunto'}}) }}
+                            <span class="text-danger">{{ form_errors(form.subject)}}</span>
+                        </div>
+                        
+                        <div class="form-group">
+                            {{ form_label(form.body)}}
+                            {{ form_widget(form.body, {'attr' : {'class' : 'form-control', 'placeholder' : 'Mensaje'}}) }}
+                            <span class="text-danger">{{ form_errors(form.body)}}</span>
+                        </div>
+                        
+                        <p>
+                            <button type="submit" value="Submit" class="btn btn-info">Enviar</button>
+                            <button type="reset" class="btn btn-default">Borrar</button>
+                        </p>
+                        
+                        {{ form_rest(form) }}
+                    <fieldset>
+                </form>
+            </div>
+        </div>
+    <div class="col-xs-12 col-md-6">
+        <!-- 4:3 aspect ratio -->
+            <div class="embed-responsive embed-responsive-4by3">
+                <iframe class="embed-responsive-item" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1596.5203589159366!2d-2.460519458317484!3d36.84150087027884!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x1b56ca0ad92897ce!2sDSG+Consultores%2C+S.+L.!5e0!3m2!1ses!2ses!4v1464372019176" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+            </div>
+            <br/>
+            <div class="panel panel-default">
+              <!-- Default panel contents -->
+                  <!-- Table -->
+                  <table class="table table-condensed">
+                    <tr>
+                        <th><span class="glyphicon glyphicon-home" aria-hidden="true"> </span></th>
+                        <th>Calle San Leonardo, 23 1º A</th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <th><span class="glyphicon glyphicon-earphone" aria-hidden="true"> </span></th>
+                        <th>950 18 17 24</th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <th><span class="glyphicon glyphicon-time" aria-hidden="true"> </span></th>
+                        <th>Mañanas</th>
+                        <th>Tardes</th>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>De 9:00 a 14:00</td>
+                        <td>De 16:30 a 19:30</td>
+                    </tr>
+                  </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

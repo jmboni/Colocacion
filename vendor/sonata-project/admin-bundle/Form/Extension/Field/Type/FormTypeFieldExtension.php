@@ -53,14 +53,14 @@ class FormTypeFieldExtension extends AbstractTypeExtension
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $sonataAdmin = array(
-            'name'              => null,
-            'admin'             => null,
-            'value'             => null,
-            'edit'              => 'standard',
-            'inline'            => 'natural',
+            'name' => null,
+            'admin' => null,
+            'value' => null,
+            'edit' => 'standard',
+            'inline' => 'natural',
             'field_description' => null,
-            'block_name'        => false,
-            'options'           => $this->options,
+            'block_name' => false,
+            'options' => $this->options,
         );
 
         $builder->setAttribute('sonata_admin_enabled', false);
@@ -81,44 +81,6 @@ class FormTypeFieldExtension extends AbstractTypeExtension
         }
 
         $builder->setAttribute('sonata_admin', $sonataAdmin);
-    }
-
-    /**
-     * @param FormBuilderInterface $formBuilder
-     *
-     * @return string
-     */
-    protected function getClass(FormBuilderInterface $formBuilder)
-    {
-        foreach ($this->getTypes($formBuilder) as $type) {
-            if (!method_exists($type, 'getName')) { // SF3.0+
-                $name = get_class($type);
-            } else {
-                $name = $type->getName();
-            }
-
-            if (isset($this->defaultClasses[$name])) {
-                return $this->defaultClasses[$name];
-            }
-        }
-
-        return '';
-    }
-
-    /**
-     * @param FormBuilderInterface $formBuilder
-     *
-     * @return array
-     */
-    protected function getTypes(FormBuilderInterface $formBuilder)
-    {
-        $types = array();
-
-        for ($type = $formBuilder->getType(); null !== $type; $type = $type->getParent()) {
-            array_unshift($types, $type->getInnerType());
-        }
-
-        return $types;
     }
 
     /**
@@ -146,14 +108,14 @@ class FormTypeFieldExtension extends AbstractTypeExtension
             $view->vars['block_prefixes'] = $blockPrefixes;
             $view->vars['sonata_admin_enabled'] = true;
             $view->vars['sonata_admin'] = array(
-                'admin'             => false,
+                'admin' => false,
                 'field_description' => false,
-                'name'              => false,
-                'edit'              => 'standard',
-                'inline'            => 'natural',
-                'block_name'        => false,
-                'class'             => false,
-                'options'           => $this->options,
+                'name' => false,
+                'edit' => 'standard',
+                'inline' => 'natural',
+                'block_name' => false,
+                'class' => false,
+                'options' => $this->options,
             );
             $view->vars['sonata_admin_code'] = $view->parent->vars['sonata_admin_code'];
 
@@ -227,12 +189,12 @@ class FormTypeFieldExtension extends AbstractTypeExtension
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'sonata_admin'             => null,
+            'sonata_admin' => null,
             'sonata_field_description' => null,
 
             // be compatible with mopa if not installed, avoid generating an exception for invalid option
             'label_render' => true,
-            'sonata_help'  => null,
+            'sonata_help' => null,
         ));
     }
 
@@ -262,5 +224,43 @@ class FormTypeFieldExtension extends AbstractTypeExtension
         }
 
         return $value;
+    }
+
+    /**
+     * @param FormBuilderInterface $formBuilder
+     *
+     * @return string
+     */
+    protected function getClass(FormBuilderInterface $formBuilder)
+    {
+        foreach ($this->getTypes($formBuilder) as $type) {
+            if (!method_exists($type, 'getName')) { // SF3.0+
+                $name = get_class($type);
+            } else {
+                $name = $type->getName();
+            }
+
+            if (isset($this->defaultClasses[$name])) {
+                return $this->defaultClasses[$name];
+            }
+        }
+
+        return '';
+    }
+
+    /**
+     * @param FormBuilderInterface $formBuilder
+     *
+     * @return array
+     */
+    protected function getTypes(FormBuilderInterface $formBuilder)
+    {
+        $types = array();
+
+        for ($type = $formBuilder->getType(); null !== $type; $type = $type->getParent()) {
+            array_unshift($types, $type->getInnerType());
+        }
+
+        return $types;
     }
 }

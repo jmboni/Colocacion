@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
         <meta name="description" content="">
         <meta name="author" content="">
@@ -17,7 +18,6 @@
         
         {% block stylesheets %}
             <link rel="stylesheet" href="{{ asset('public/css/bootstrap.min.css') }}" type="text/css" media="all" />
-            
             <!--BUscador-->
             <link rel="stylesheet" href="{{ asset('public/css/general.css') }}" type="text/css" media="all" />
             
@@ -28,7 +28,9 @@
             <link rel="stylesheet" href="{{ asset('public/css/ie10-viewport-bug-workaround.css') }}" type="text/css" media="all" />
         {% endblock %}
 
-         {% block javascriptsie %}
+         {% block javascripts %}
+         <script src="{{ asset('bundles/dsgagencia/js/jquery-2.2.4.min.js') }}"></script>
+         <script src="{{ asset('public/js/buscar.js') }}"></script>
 
         <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
         <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -40,62 +42,68 @@
           <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
         {% endblock %}
-
-  </head>
     </head>
     <body>
       <!--Incluimos el menu-->
       {% block body %}
         {{ include('DsgagenciaBundle::menu.html.twig') }}
+        
       {% endblock %}
-      <!--Incluimos el buscador-->
-      {% block formulario %}{% endblock %}
-      <div id="principal">
-        <!--Cargamos el contenido de la página-->
-        <div class="container marketing">
+      
+        <div id="principal">
           
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h4 class="modal-title">Últimas ofertas visitadas:</h4>
-              </div>
-              <div class="modal-body">
-                <ul class="list-inline">
-                  {% for trabajo in app.session.get('historial_trabajos') %}
-                  <li>
-                    <u><a href={{ path('trabajos_show', { 'id': trabajo.id, 'compania': trabajo.companiaslug, 'localidad': trabajo.localidadslug, 'posicion': trabajo.posicionslug }) }}>{{ trabajo.posicion }} - {{ trabajo.compania }} </a></u> 
-                  </li>
-                  {% endfor %}
-                </ul>
+        <div class="container">
+            <p>{{wo_render_breadcrumbs() }}</p>
+        </div>
+        
+        
+        
+        <!--Cargamos el contenido de la página-->
+          <div class="container marketing">
+            
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title">Últimas ofertas visitadas:</h4>
+                </div>
+                <div class="modal-body">
+                  <ul class="list-inline">
+                    {% for trabajo in app.session.get('historial_trabajos') %}
+                    <li>
+                      <u><a href={{ path('trabajos_show', { 'id': trabajo.id, 'compania': trabajo.companiaslug, 'localidad': trabajo.localidadslug, 'posicion': trabajo.posicionslug }) }}>{{ trabajo.posicion }} - {{ trabajo.compania }} </a></u> 
+                    </li>
+                    {% endfor %}
+                  </ul>
+                </div>
               </div>
             </div>
-          </div>
-     
-          {% for flashMessage in app.session.flashbag.get('notice') %}
-            <div>
-              {{ flassMessage }}
-            </div>
-          {% endfor %}
-          <div id="content">
+            
+        {% block formulario %}
+        {% endblock %}
+        
+        <div id="content">
             {% for flashMessage in app.session.flashbag.get('notice') %}
-              <div class="flash_notice">
-                {{ flashMessage }}
-              </div>
-            {% endfor %}
-            {% for flashMessage in app.session.flashbag.get('error') %}
-              <div class="flash_error">
-                {{ flashMessage }}
-              </div>
+                <div class="flash_notice">
+                    {{ flashMessage }}
+                  </div>
             {% endfor %}
             
+            {% for flashMessage in app.session.flashbag.get('error') %}
+                <div class="flash_error">
+                    {{ flashMessage }}
+                </div>
+            {% endfor %}
+            
+            
             <!--Añadimos el contenido-->
-            <div class="content">
+            <div class="container">
               {% block content %}
               {% endblock %}
             </div>
+          
           </div>
           </div><!-- /.container -->
-        </div>
+    </div>
         
         <!-- FOOTER -->
         <footer class="clase-general">
@@ -104,12 +112,12 @@
           </p>
         </footer>
        
-      {% block javascripts %}
+      {% block javascripts2 %}
+      
           <!-- Bootstrap core JavaScript
           ================================================== -->
           <!-- Placed at the end of the document so the pages load faster -->
-          <script src="{{ asset('public/js/jquery-1.12.3.min.js') }}"></script>
-          <script>window.jQuery || document.write('<script src="{{ asset('public/js/jquery-1.12.3.min.js') }}"><\/script>')</script>
+          <script> window.jQuery || document.write('<script src="{{ asset('public/js/jquery-2.2.4.min.js') }}">')</script>
           <script src="{{ asset('public/js/bootstrap.min.js') }}"></script>
           <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
           <script src="{{ asset('public/js/holder.min.js') }}"></script>
@@ -117,22 +125,8 @@
           <script src="{{ asset('public/js/ie10-viewport-bug-workaround.js') }}"></script>
           
            <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-          <script src="{{ asset('public/js/buscar.js') }}"></script>
           
-          <script type="text/javascript">
-            $(document).ready(function(){
-            var cambio = false;
-            $('.nav li a').each(function(index) {
-            if(this.href.trim() == window.location){
-                $(this).parent().addClass("active");
-                cambio = true;
-            }
-            });
-            if(!cambio){
-              $('.nav li:first').addClass("active");
-            }
-            });
-          </script>
+          
       {% endblock %}
    </body>
 </html>

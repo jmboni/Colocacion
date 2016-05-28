@@ -11,6 +11,7 @@
     {{ include('DsgagenciaBundle::/Trabajos/carousel.html.twig') }}
 {% endblock %}
    {% block content %}
+    <div id="trabajos">    
         <!-- Three columns of text below the carousel -->
         {% for categoria in categorias %}
             <div class="panel panel-primary">
@@ -19,7 +20,7 @@
                 </div>
                 
                 <!--Incluimos la plantilla de listar trabajos-->
-                {{ include ('DsgagenciaBundle::listar.html.twig', {'trabajos': categoria.trabajosactivos}) }}
+                {{ include ('DsgagenciaBundle:Trabajos:listar.html.twig', {'trabajos': categoria.trabajosactivos}) }}
                 
                 {% if categoria.masTrabajos %}
                     <div class="mas center-block">
@@ -30,4 +31,5 @@
                 <br/>
             </div>
         {% endfor %}
+        </div>
     {% endblock %}

@@ -16,7 +16,6 @@
       <parameter key="AsseticBundle">Symfony\Bundle\AsseticBundle\AsseticBundle</parameter>
       <parameter key="DoctrineBundle">Doctrine\Bundle\DoctrineBundle\DoctrineBundle</parameter>
       <parameter key="SensioFrameworkExtraBundle">Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle</parameter>
-      <parameter key="AppBundle">AppBundle\AppBundle</parameter>
       <parameter key="DsgagenciaBundle">Dsg\agenciaBundle\DsgagenciaBundle</parameter>
       <parameter key="DoctrineFixturesBundle">Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle</parameter>
       <parameter key="FOSElasticaBundle">FOS\ElasticaBundle\FOSElasticaBundle</parameter>
@@ -25,7 +24,8 @@
       <parameter key="KnpMenuBundle">Knp\Bundle\MenuBundle\KnpMenuBundle</parameter>
       <parameter key="SonataDoctrineORMAdminBundle">Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle</parameter>
       <parameter key="SonataAdminBundle">Sonata\AdminBundle\SonataAdminBundle</parameter>
-      <parameter key="DebugBundle">Symfony\Bundle\DebugBundle\DebugBundle</parameter>
+      <parameter key="WhiteOctoberBreadcrumbsBundle">WhiteOctober\BreadcrumbsBundle\WhiteOctoberBreadcrumbsBundle</parameter>
+      <parameter key="LiipImagineBundle">Liip\ImagineBundle\LiipImagineBundle</parameter>
       <parameter key="WebProfilerBundle">Symfony\Bundle\WebProfilerBundle\WebProfilerBundle</parameter>
       <parameter key="SensioDistributionBundle">Sensio\Bundle\DistributionBundle\SensioDistributionBundle</parameter>
       <parameter key="SensioGeneratorBundle">Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle</parameter>
@@ -37,14 +37,15 @@
     <parameter key="database_name">agencia</parameter>
     <parameter key="database_user">jmboni</parameter>
     <parameter key="database_password">null</parameter>
-    <parameter key="mailer_transport">smtp</parameter>
-    <parameter key="mailer_host">mx1.hostinger.es</parameter>
-    <parameter key="mailer_user">soporte@proyectocolocacion.hol.es</parameter>
-    <parameter key="mailer_password">boni1111</parameter>
+    <parameter key="mailer_transport">gmail</parameter>
+    <parameter key="mailer_host">null</parameter>
+    <parameter key="mailer_user">estudiosalmerienses@gmail.com</parameter>
+    <parameter key="mailer_password">Bonill@1205</parameter>
     <parameter key="secret">524f87812088e3b0c156f6e057e9dd105e5ff1c1</parameter>
+    <parameter key="dsg_agencia.emails.contact_email">soporte@estudiosalmerienses.com</parameter>
     <parameter key="locale">es</parameter>
     <parameter key="max_trabajos_indexpag">8</parameter>
-    <parameter key="max_trabajos_categoriapag">5</parameter>
+    <parameter key="max_trabajos_categoriapag">8</parameter>
     <parameter key="controller_resolver.class">Symfony\Bundle\FrameworkBundle\Controller\ControllerResolver</parameter>
     <parameter key="controller_name_converter.class">Symfony\Bundle\FrameworkBundle\Controller\ControllerNameParser</parameter>
     <parameter key="response_listener.class">Symfony\Component\HttpKernel\EventListener\ResponseListener</parameter>
@@ -313,6 +314,7 @@
     <parameter key="twig.exception_listener.controller">twig.controller.exception:showAction</parameter>
     <parameter key="twig.form.resources" type="collection">
       <parameter>form_div_layout.html.twig</parameter>
+      <parameter>LiipImagineBundle:Form:form_div_layout.html.twig</parameter>
     </parameter>
     <parameter key="monolog.logger.class">Symfony\Bridge\Monolog\Logger</parameter>
     <parameter key="monolog.gelf.publisher.class">Gelf\MessagePublisher</parameter>
@@ -389,12 +391,12 @@
     <parameter key="swiftmailer.data_collector.class">Symfony\Bundle\SwiftmailerBundle\DataCollector\MessageDataCollector</parameter>
     <parameter key="swiftmailer.mailer.default.transport.name">smtp</parameter>
     <parameter key="swiftmailer.mailer.default.delivery.enabled">true</parameter>
-    <parameter key="swiftmailer.mailer.default.transport.smtp.encryption">null</parameter>
-    <parameter key="swiftmailer.mailer.default.transport.smtp.port">25</parameter>
-    <parameter key="swiftmailer.mailer.default.transport.smtp.host">mx1.hostinger.es</parameter>
-    <parameter key="swiftmailer.mailer.default.transport.smtp.username">soporte@proyectocolocacion.hol.es</parameter>
-    <parameter key="swiftmailer.mailer.default.transport.smtp.password">boni1111</parameter>
-    <parameter key="swiftmailer.mailer.default.transport.smtp.auth_mode">null</parameter>
+    <parameter key="swiftmailer.mailer.default.transport.smtp.encryption">ssl</parameter>
+    <parameter key="swiftmailer.mailer.default.transport.smtp.port">465</parameter>
+    <parameter key="swiftmailer.mailer.default.transport.smtp.host">smtp.gmail.com</parameter>
+    <parameter key="swiftmailer.mailer.default.transport.smtp.username">estudiosalmerienses@gmail.com</parameter>
+    <parameter key="swiftmailer.mailer.default.transport.smtp.password">Bonill@1205</parameter>
+    <parameter key="swiftmailer.mailer.default.transport.smtp.auth_mode">login</parameter>
     <parameter key="swiftmailer.mailer.default.transport.smtp.timeout">30</parameter>
     <parameter key="swiftmailer.mailer.default.transport.smtp.source_ip">null</parameter>
     <parameter key="swiftmailer.spool.default.memory.path">/home/ubuntu/workspace/app/cache/dev/swiftmailer/spool/default</parameter>
@@ -793,6 +795,101 @@
       <parameter key="uses" type="collection"/>
     </parameter>
     <parameter key="sonata.admin.configuration.filters.persist">false</parameter>
+    <parameter key="white_october_breadcrumbs.options" type="collection">
+      <parameter key="separator">/</parameter>
+      <parameter key="separatorClass">separator</parameter>
+      <parameter key="listId">wo-breadcrumbs</parameter>
+      <parameter key="listClass">breadcrumb</parameter>
+      <parameter key="itemClass"></parameter>
+      <parameter key="linkRel"></parameter>
+      <parameter key="locale">null</parameter>
+      <parameter key="translation_domain">null</parameter>
+      <parameter key="viewTemplate">WhiteOctoberBreadcrumbsBundle::breadcrumbs.html.twig</parameter>
+    </parameter>
+    <parameter key="liip_imagine.filter.configuration.class">Liip\ImagineBundle\Imagine\Filter\FilterConfiguration</parameter>
+    <parameter key="liip_imagine.filter.manager.class">Liip\ImagineBundle\Imagine\Filter\FilterManager</parameter>
+    <parameter key="liip_imagine.data.manager.class">Liip\ImagineBundle\Imagine\Data\DataManager</parameter>
+    <parameter key="liip_imagine.cache.manager.class">Liip\ImagineBundle\Imagine\Cache\CacheManager</parameter>
+    <parameter key="liip_imagine.cache.signer.class">Liip\ImagineBundle\Imagine\Cache\Signer</parameter>
+    <parameter key="liip_imagine.binary.mime_type_guesser.class">Liip\ImagineBundle\Binary\SimpleMimeTypeGuesser</parameter>
+    <parameter key="liip_imagine.controller.class">Liip\ImagineBundle\Controller\ImagineController</parameter>
+    <parameter key="liip_imagine.twig.extension.class">Liip\ImagineBundle\Templating\ImagineExtension</parameter>
+    <parameter key="liip_imagine.templating.helper.class">Liip\ImagineBundle\Templating\Helper\ImagineHelper</parameter>
+    <parameter key="liip_imagine.gd.class">Imagine\Gd\Imagine</parameter>
+    <parameter key="liip_imagine.imagick.class">Imagine\Imagick\Imagine</parameter>
+    <parameter key="liip_imagine.gmagick.class">Imagine\Gmagick\Imagine</parameter>
+    <parameter key="liip_imagine.filter.loader.relative_resize.class">Liip\ImagineBundle\Imagine\Filter\Loader\RelativeResizeFilterLoader</parameter>
+    <parameter key="liip_imagine.filter.loader.resize.class">Liip\ImagineBundle\Imagine\Filter\Loader\ResizeFilterLoader</parameter>
+    <parameter key="liip_imagine.filter.loader.thumbnail.class">Liip\ImagineBundle\Imagine\Filter\Loader\ThumbnailFilterLoader</parameter>
+    <parameter key="liip_imagine.filter.loader.crop.class">Liip\ImagineBundle\Imagine\Filter\Loader\CropFilterLoader</parameter>
+    <parameter key="liip_imagine.filter.loader.paste.class">Liip\ImagineBundle\Imagine\Filter\Loader\PasteFilterLoader</parameter>
+    <parameter key="liip_imagine.filter.loader.watermark.class">Liip\ImagineBundle\Imagine\Filter\Loader\WatermarkFilterLoader</parameter>
+    <parameter key="liip_imagine.filter.loader.strip.class">Liip\ImagineBundle\Imagine\Filter\Loader\StripFilterLoader</parameter>
+    <parameter key="liip_imagine.filter.loader.background.class">Liip\ImagineBundle\Imagine\Filter\Loader\BackgroundFilterLoader</parameter>
+    <parameter key="liip_imagine.filter.loader.upscale.class">Liip\ImagineBundle\Imagine\Filter\Loader\UpscaleFilterLoader</parameter>
+    <parameter key="liip_imagine.filter.loader.downscale.class">Liip\ImagineBundle\Imagine\Filter\Loader\DownscaleFilterLoader</parameter>
+    <parameter key="liip_imagine.filter.loader.auto_rotate.class">Liip\ImagineBundle\Imagine\Filter\Loader\AutoRotateFilterLoader</parameter>
+    <parameter key="liip_imagine.filter.loader.rotate.class">Liip\ImagineBundle\Imagine\Filter\Loader\RotateFilterLoader</parameter>
+    <parameter key="liip_imagine.filter.loader.interlace.class">Liip\ImagineBundle\Imagine\Filter\Loader\InterlaceFilterLoader</parameter>
+    <parameter key="liip_imagine.binary.loader.filesystem.class">Liip\ImagineBundle\Binary\Loader\FileSystemLoader</parameter>
+    <parameter key="liip_imagine.binary.loader.stream.class">Liip\ImagineBundle\Binary\Loader\StreamLoader</parameter>
+    <parameter key="liip_imagine.binary.loader.flysystem.class">Liip\ImagineBundle\Binary\Loader\FlysystemLoader</parameter>
+    <parameter key="liip_imagine.cache.resolver.web_path.class">Liip\ImagineBundle\Imagine\Cache\Resolver\WebPathResolver</parameter>
+    <parameter key="liip_imagine.cache.resolver.no_cache_web_path.class">Liip\ImagineBundle\Imagine\Cache\Resolver\NoCacheWebPathResolver</parameter>
+    <parameter key="liip_imagine.cache.resolver.aws_s3.class">Liip\ImagineBundle\Imagine\Cache\Resolver\AwsS3Resolver</parameter>
+    <parameter key="liip_imagine.cache.resolver.cache.class">Liip\ImagineBundle\Imagine\Cache\Resolver\CacheResolver</parameter>
+    <parameter key="liip_imagine.cache.resolver.proxy.class">Liip\ImagineBundle\Imagine\Cache\Resolver\ProxyResolver</parameter>
+    <parameter key="liip_imagine.form.type.image.class">Liip\ImagineBundle\Form\Type\ImageType</parameter>
+    <parameter key="liip_imagine.meta_data.reader.class">Imagine\Image\Metadata\ExifMetadataReader</parameter>
+    <parameter key="liip_imagine.filter.post_processor.jpegoptim.class">Liip\ImagineBundle\Imagine\Filter\PostProcessor\JpegOptimPostProcessor</parameter>
+    <parameter key="liip_imagine.jpegoptim.binary">/usr/bin/jpegoptim</parameter>
+    <parameter key="liip_imagine.filter.post_processor.optipng.class">Liip\ImagineBundle\Imagine\Filter\PostProcessor\OptiPngPostProcessor</parameter>
+    <parameter key="liip_imagine.optipng.binary">/usr/bin/optipng</parameter>
+    <parameter key="liip_imagine.filter.post_processor.pngquant.class">Liip\ImagineBundle\Imagine\Filter\PostProcessor\PngquantPostProcessor</parameter>
+    <parameter key="liip_imagine.pngquant.binary">/usr/bin/pngquant</parameter>
+    <parameter key="liip_imagine.filter.post_processor.mozjpeg.class">Liip\ImagineBundle\Imagine\Filter\PostProcessor\MozJpegPostProcessor</parameter>
+    <parameter key="liip_imagine.mozjpeg.binary">/opt/mozjpeg/bin/cjpeg</parameter>
+    <parameter key="liip_imagine.cache.resolver.default">default</parameter>
+    <parameter key="liip_imagine.default_image">null</parameter>
+    <parameter key="liip_imagine.filter_sets" type="collection">
+      <parameter key="cache" type="collection">
+        <parameter key="quality">100</parameter>
+        <parameter key="jpeg_quality">null</parameter>
+        <parameter key="png_compression_level">null</parameter>
+        <parameter key="png_compression_filter">null</parameter>
+        <parameter key="format">null</parameter>
+        <parameter key="animated">false</parameter>
+        <parameter key="cache">null</parameter>
+        <parameter key="data_loader">null</parameter>
+        <parameter key="default_image">null</parameter>
+        <parameter key="filters" type="collection"/>
+        <parameter key="post_processors" type="collection"/>
+      </parameter>
+      <parameter key="my_thumb" type="collection">
+        <parameter key="quality">75</parameter>
+        <parameter key="filters" type="collection">
+          <parameter key="thumbnail" type="collection">
+            <parameter key="size" type="collection">
+              <parameter>100</parameter>
+              <parameter>100</parameter>
+            </parameter>
+            <parameter key="mode">outbound</parameter>
+          </parameter>
+        </parameter>
+        <parameter key="jpeg_quality">null</parameter>
+        <parameter key="png_compression_level">null</parameter>
+        <parameter key="png_compression_filter">null</parameter>
+        <parameter key="format">null</parameter>
+        <parameter key="animated">false</parameter>
+        <parameter key="cache">null</parameter>
+        <parameter key="data_loader">null</parameter>
+        <parameter key="default_image">null</parameter>
+        <parameter key="post_processors" type="collection"/>
+      </parameter>
+    </parameter>
+    <parameter key="liip_imagine.binary.loader.default">default</parameter>
+    <parameter key="liip_imagine.controller.filter_action">liip_imagine.controller:filterAction</parameter>
+    <parameter key="liip_imagine.controller.filter_runtime_action">liip_imagine.controller:filterRuntimeAction</parameter>
     <parameter key="web_profiler.controller.profiler.class">Symfony\Bundle\WebProfilerBundle\Controller\ProfilerController</parameter>
     <parameter key="web_profiler.controller.router.class">Symfony\Bundle\WebProfilerBundle\Controller\RouterController</parameter>
     <parameter key="web_profiler.controller.exception.class">Symfony\Bundle\WebProfilerBundle\Controller\ExceptionController</parameter>
@@ -871,10 +968,6 @@
         <parameter>block</parameter>
         <parameter>SonataBlockBundle:Profiler:block.html.twig</parameter>
       </parameter>
-      <parameter key="data_collector.dump" type="collection">
-        <parameter>dump</parameter>
-        <parameter>@Debug/Profiler/dump.html.twig</parameter>
-      </parameter>
     </parameter>
     <parameter key="console.command.ids" type="collection">
       <parameter>sensio_distribution.security_checker.command</parameter>
@@ -940,6 +1033,7 @@
       <parameter>sonata.admin.form.filter.type.daterange</parameter>
       <parameter>sonata.admin.form.filter.type.datetime</parameter>
       <parameter>sonata.admin.form.filter.type.datetime_range</parameter>
+      <parameter>liip_imagine.form.type.image</parameter>
     </parameter>
     <parameter key="sonata.core.form.type_extensions" type="collection">
       <parameter>form.type_extension.form.http_foundation</parameter>
@@ -1735,6 +1829,7 @@
               <argument key="sonata_type_filter_date_range">sonata.admin.form.filter.type.daterange</argument>
               <argument key="sonata_type_filter_datetime">sonata.admin.form.filter.type.datetime</argument>
               <argument key="sonata_type_filter_datetime_range">sonata.admin.form.filter.type.datetime_range</argument>
+              <argument key="liip_imagine_image">liip_imagine.form.type.image</argument>
             </argument>
             <argument type="collection">
               <argument key="form" type="collection">
@@ -2143,9 +2238,6 @@
           </service>
         </argument>
       </call>
-      <call method="add">
-        <argument type="service" id="data_collector.dump"/>
-      </call>
     </service>
     <service id="profiler_listener" class="Symfony\Component\HttpKernel\EventListener\ProfilerListener">
       <tag name="kernel.event_subscriber"/>
@@ -2414,10 +2506,6 @@
         <argument>Sensio\Bundle\FrameworkExtraBundle\EventListener\SecurityListener</argument>
       </call>
       <call method="addSubscriberService">
-        <argument>debug.dump_listener</argument>
-        <argument>Symfony\Component\HttpKernel\EventListener\DumpListener</argument>
-      </call>
-      <call method="addSubscriberService">
         <argument>web_profiler.debug_toolbar</argument>
         <argument>Symfony\Bundle\WebProfilerBundle\EventListener\WebDebugToolbarListener</argument>
       </call>
@@ -2459,7 +2547,7 @@
         </argument>
         <argument type="service">
           <service class="Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider" public="false">
-            <argument>5741f679796752.06535135</argument>
+            <argument>5748dfd9a99787.35004806</argument>
           </service>
         </argument>
       </argument>
@@ -2676,7 +2764,7 @@
                 <call method="setOptions">
                   <argument type="collection">
                     <argument key="login_path">/login</argument>
-                    <argument key="default_target_path">dsgagencia_homepage</argument>
+                    <argument key="default_target_path">/admin/dashboard</argument>
                     <argument key="always_use_default_target_path">false</argument>
                     <argument key="target_path_parameter">_target_path</argument>
                     <argument key="use_referer">false</argument>
@@ -2726,7 +2814,7 @@
         <argument type="service">
           <service class="Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener" public="false">
             <argument type="service" id="security.token_storage"/>
-            <argument>5741f679796752.06535135</argument>
+            <argument>5748dfd9a99787.35004806</argument>
             <argument type="service" id="monolog.logger.security" on-invalid="null"/>
             <argument type="service" id="security.authentication.manager"/>
           </service>
@@ -2934,6 +3022,7 @@
                   <service class="Symfony\Bridge\Twig\Form\TwigRendererEngine" public="false">
                     <argument type="collection">
                       <argument>form_div_layout.html.twig</argument>
+                      <argument>LiipImagineBundle:Form:form_div_layout.html.twig</argument>
                     </argument>
                   </service>
                 </argument>
@@ -3022,10 +3111,13 @@
         <argument type="service" id="sonata.admin.twig.extension"/>
       </call>
       <call method="addExtension">
+        <argument type="service" id="white_october_breadcrumbs.twig"/>
+      </call>
+      <call method="addExtension">
         <argument type="service">
-          <service class="Symfony\Bridge\Twig\Extension\DumpExtension" public="false">
+          <service class="Liip\ImagineBundle\Templating\ImagineExtension" public="false">
             <tag name="twig.extension"/>
-            <argument type="service" id="var_dumper.cloner"/>
+            <argument type="service" id="liip_imagine.cache.manager"/>
           </service>
         </argument>
       </call>
@@ -4691,30 +4783,279 @@
       <argument type="service" id="form.factory"/>
       <argument>Sonata\AdminBundle\Security\Acl\Permission\MaskBuilder</argument>
     </service>
-    <service id="data_collector.dump" class="Symfony\Component\HttpKernel\DataCollector\DumpDataCollector">
-      <tag name="data_collector" id="dump" template="@Debug/Profiler/dump.html.twig"/>
-      <argument type="service" id="debug.stopwatch" on-invalid="ignore"/>
-      <argument>null</argument>
-      <argument>UTF-8</argument>
-      <argument type="service" id="request_stack"/>
-      <argument>null</argument>
-    </service>
-    <service id="debug.dump_listener" class="Symfony\Component\HttpKernel\EventListener\DumpListener">
-      <tag name="kernel.event_subscriber"/>
-      <argument type="service" id="var_dumper.cloner"/>
-      <argument type="service" id="data_collector.dump"/>
-    </service>
-    <service id="var_dumper.cloner" class="Symfony\Component\VarDumper\Cloner\VarCloner">
-      <call method="setMaxItems">
-        <argument>2500</argument>
-      </call>
-      <call method="setMaxString">
-        <argument>-1</argument>
+    <service id="white_october_breadcrumbs" class="WhiteOctober\BreadcrumbsBundle\Model\Breadcrumbs">
+      <call method="setRouter">
+        <argument type="service" id="router"/>
       </call>
     </service>
-    <service id="var_dumper.cli_dumper" class="Symfony\Component\VarDumper\Dumper\CliDumper">
+    <service id="white_october_breadcrumbs.helper" class="WhiteOctober\BreadcrumbsBundle\Templating\Helper\BreadcrumbsHelper">
+      <tag name="templating.helper" alias="breadcrumbs"/>
+      <argument type="service" id="templating"/>
+      <argument type="service" id="white_october_breadcrumbs"/>
+      <argument type="collection">
+        <argument key="separator">/</argument>
+        <argument key="separatorClass">separator</argument>
+        <argument key="listId">wo-breadcrumbs</argument>
+        <argument key="listClass">breadcrumb</argument>
+        <argument key="itemClass"></argument>
+        <argument key="linkRel"></argument>
+        <argument key="locale">null</argument>
+        <argument key="translation_domain">null</argument>
+        <argument key="viewTemplate">WhiteOctoberBreadcrumbsBundle::breadcrumbs.html.twig</argument>
+      </argument>
+    </service>
+    <service id="white_october_breadcrumbs.twig" class="WhiteOctober\BreadcrumbsBundle\Twig\Extension\BreadcrumbsExtension">
+      <tag name="twig.extension"/>
+      <argument type="service" id="service_container"/>
+    </service>
+    <service id="liip_imagine.cache.resolver.default" class="Liip\ImagineBundle\Imagine\Cache\Resolver\WebPathResolver">
+      <tag name="liip_imagine.cache.resolver" resolver="default"/>
+      <argument type="service" id="filesystem"/>
+      <argument type="service" id="router.request_context"/>
+      <argument>/home/ubuntu/workspace/app/../web</argument>
+      <argument>media/cache</argument>
+    </service>
+    <service id="liip_imagine.binary.loader.default" class="Liip\ImagineBundle\Binary\Loader\FileSystemLoader">
+      <tag name="liip_imagine.binary.loader" loader="default"/>
+      <argument type="service" id="liip_imagine.mime_type_guesser"/>
+      <argument type="service" id="liip_imagine.extension_guesser"/>
+      <argument>/home/ubuntu/workspace/app/../web</argument>
+    </service>
+    <service id="liip_imagine.filter.manager" class="Liip\ImagineBundle\Imagine\Filter\FilterManager">
+      <argument type="service" id="liip_imagine.filter.configuration"/>
+      <argument type="service" id="liip_imagine"/>
+      <argument type="service" id="liip_imagine.binary.mime_type_guesser"/>
+      <call method="addLoader">
+        <argument>relative_resize</argument>
+        <argument type="service" id="liip_imagine.filter.loader.relative_resize"/>
+      </call>
+      <call method="addLoader">
+        <argument>resize</argument>
+        <argument type="service" id="liip_imagine.filter.loader.resize"/>
+      </call>
+      <call method="addLoader">
+        <argument>thumbnail</argument>
+        <argument type="service" id="liip_imagine.filter.loader.thumbnail"/>
+      </call>
+      <call method="addLoader">
+        <argument>crop</argument>
+        <argument type="service" id="liip_imagine.filter.loader.crop"/>
+      </call>
+      <call method="addLoader">
+        <argument>paste</argument>
+        <argument type="service" id="liip_imagine.filter.loader.paste"/>
+      </call>
+      <call method="addLoader">
+        <argument>watermark</argument>
+        <argument type="service" id="liip_imagine.filter.loader.watermark"/>
+      </call>
+      <call method="addLoader">
+        <argument>background</argument>
+        <argument type="service" id="liip_imagine.filter.loader.background"/>
+      </call>
+      <call method="addLoader">
+        <argument>strip</argument>
+        <argument type="service" id="liip_imagine.filter.loader.strip"/>
+      </call>
+      <call method="addLoader">
+        <argument>upscale</argument>
+        <argument type="service" id="liip_imagine.filter.loader.upscale"/>
+      </call>
+      <call method="addLoader">
+        <argument>downscale</argument>
+        <argument type="service" id="liip_imagine.filter.loader.downscale"/>
+      </call>
+      <call method="addLoader">
+        <argument>auto_rotate</argument>
+        <argument type="service" id="liip_imagine.filter.loader.auto_rotate"/>
+      </call>
+      <call method="addLoader">
+        <argument>rotate</argument>
+        <argument type="service" id="liip_imagine.filter.loader.rotate"/>
+      </call>
+      <call method="addLoader">
+        <argument>interlace</argument>
+        <argument type="service" id="liip_imagine.filter.loader.interlace"/>
+      </call>
+      <call method="addPostProcessor">
+        <argument>jpegoptim</argument>
+        <argument type="service" id="liip_imagine.filter.post_processor.jpegoptim"/>
+      </call>
+      <call method="addPostProcessor">
+        <argument>optipng</argument>
+        <argument type="service" id="liip_imagine.filter.post_processor.optipng"/>
+      </call>
+      <call method="addPostProcessor">
+        <argument>pngquant</argument>
+        <argument type="service" id="liip_imagine.filter.post_processor.pngquant"/>
+      </call>
+      <call method="addPostProcessor">
+        <argument>mozjpeg</argument>
+        <argument type="service" id="liip_imagine.filter.post_processor.mozjpeg"/>
+      </call>
+    </service>
+    <service id="liip_imagine.data.manager" class="Liip\ImagineBundle\Imagine\Data\DataManager">
+      <argument type="service" id="liip_imagine.binary.mime_type_guesser"/>
+      <argument type="service" id="liip_imagine.extension_guesser"/>
+      <argument type="service" id="liip_imagine.filter.configuration"/>
+      <argument>default</argument>
       <argument>null</argument>
-      <argument>UTF-8</argument>
+      <call method="addLoader">
+        <argument>default</argument>
+        <argument type="service" id="liip_imagine.binary.loader.default"/>
+      </call>
+    </service>
+    <service id="liip_imagine.cache.manager" class="Liip\ImagineBundle\Imagine\Cache\CacheManager">
+      <argument type="service" id="liip_imagine.filter.configuration"/>
+      <argument type="service" id="router"/>
+      <argument type="service" id="liip_imagine.cache.signer"/>
+      <argument type="service" id="debug.event_dispatcher"/>
+      <argument>default</argument>
+      <call method="addResolver">
+        <argument>default</argument>
+        <argument type="service" id="liip_imagine.cache.resolver.default"/>
+      </call>
+      <call method="addResolver">
+        <argument>no_cache</argument>
+        <argument type="service" id="liip_imagine.cache.resolver.no_cache_web_path"/>
+      </call>
+    </service>
+    <service id="liip_imagine.filter.configuration" class="Liip\ImagineBundle\Imagine\Filter\FilterConfiguration">
+      <argument type="collection">
+        <argument key="cache" type="collection">
+          <argument key="quality">100</argument>
+          <argument key="jpeg_quality">null</argument>
+          <argument key="png_compression_level">null</argument>
+          <argument key="png_compression_filter">null</argument>
+          <argument key="format">null</argument>
+          <argument key="animated">false</argument>
+          <argument key="cache">null</argument>
+          <argument key="data_loader">null</argument>
+          <argument key="default_image">null</argument>
+          <argument key="filters" type="collection"/>
+          <argument key="post_processors" type="collection"/>
+        </argument>
+        <argument key="my_thumb" type="collection">
+          <argument key="quality">75</argument>
+          <argument key="filters" type="collection">
+            <argument key="thumbnail" type="collection">
+              <argument key="size" type="collection">
+                <argument>100</argument>
+                <argument>100</argument>
+              </argument>
+              <argument key="mode">outbound</argument>
+            </argument>
+          </argument>
+          <argument key="jpeg_quality">null</argument>
+          <argument key="png_compression_level">null</argument>
+          <argument key="png_compression_filter">null</argument>
+          <argument key="format">null</argument>
+          <argument key="animated">false</argument>
+          <argument key="cache">null</argument>
+          <argument key="data_loader">null</argument>
+          <argument key="default_image">null</argument>
+          <argument key="post_processors" type="collection"/>
+        </argument>
+      </argument>
+    </service>
+    <service id="liip_imagine.controller" class="Liip\ImagineBundle\Controller\ImagineController">
+      <argument type="service" id="liip_imagine.data.manager"/>
+      <argument type="service" id="liip_imagine.filter.manager"/>
+      <argument type="service" id="liip_imagine.cache.manager"/>
+      <argument type="service" id="liip_imagine.cache.signer"/>
+      <argument type="service" id="logger" on-invalid="ignore"/>
+    </service>
+    <service id="liip_imagine.templating.helper" class="Liip\ImagineBundle\Templating\Helper\ImagineHelper">
+      <tag name="templating.helper" alias="imagine"/>
+      <argument type="service" id="liip_imagine.cache.manager"/>
+    </service>
+    <service id="liip_imagine.filter.loader.relative_resize" class="Liip\ImagineBundle\Imagine\Filter\Loader\RelativeResizeFilterLoader">
+      <tag name="liip_imagine.filter.loader" loader="relative_resize"/>
+    </service>
+    <service id="liip_imagine.filter.loader.resize" class="Liip\ImagineBundle\Imagine\Filter\Loader\ResizeFilterLoader">
+      <tag name="liip_imagine.filter.loader" loader="resize"/>
+    </service>
+    <service id="liip_imagine.filter.loader.thumbnail" class="Liip\ImagineBundle\Imagine\Filter\Loader\ThumbnailFilterLoader">
+      <tag name="liip_imagine.filter.loader" loader="thumbnail"/>
+    </service>
+    <service id="liip_imagine.filter.loader.crop" class="Liip\ImagineBundle\Imagine\Filter\Loader\CropFilterLoader">
+      <tag name="liip_imagine.filter.loader" loader="crop"/>
+    </service>
+    <service id="liip_imagine.filter.loader.paste" class="Liip\ImagineBundle\Imagine\Filter\Loader\PasteFilterLoader">
+      <tag name="liip_imagine.filter.loader" loader="paste"/>
+      <argument type="service" id="liip_imagine"/>
+      <argument>/home/ubuntu/workspace/app</argument>
+    </service>
+    <service id="liip_imagine.filter.loader.watermark" class="Liip\ImagineBundle\Imagine\Filter\Loader\WatermarkFilterLoader">
+      <tag name="liip_imagine.filter.loader" loader="watermark"/>
+      <argument type="service" id="liip_imagine"/>
+      <argument>/home/ubuntu/workspace/app</argument>
+    </service>
+    <service id="liip_imagine.filter.loader.background" class="Liip\ImagineBundle\Imagine\Filter\Loader\BackgroundFilterLoader">
+      <tag name="liip_imagine.filter.loader" loader="background"/>
+      <argument type="service" id="liip_imagine"/>
+    </service>
+    <service id="liip_imagine.filter.loader.strip" class="Liip\ImagineBundle\Imagine\Filter\Loader\StripFilterLoader">
+      <tag name="liip_imagine.filter.loader" loader="strip"/>
+    </service>
+    <service id="liip_imagine.filter.loader.upscale" class="Liip\ImagineBundle\Imagine\Filter\Loader\UpscaleFilterLoader">
+      <tag name="liip_imagine.filter.loader" loader="upscale"/>
+    </service>
+    <service id="liip_imagine.filter.loader.downscale" class="Liip\ImagineBundle\Imagine\Filter\Loader\DownscaleFilterLoader">
+      <tag name="liip_imagine.filter.loader" loader="downscale"/>
+    </service>
+    <service id="liip_imagine.filter.loader.auto_rotate" class="Liip\ImagineBundle\Imagine\Filter\Loader\AutoRotateFilterLoader">
+      <tag name="liip_imagine.filter.loader" loader="auto_rotate"/>
+    </service>
+    <service id="liip_imagine.filter.loader.rotate" class="Liip\ImagineBundle\Imagine\Filter\Loader\RotateFilterLoader">
+      <tag name="liip_imagine.filter.loader" loader="rotate"/>
+    </service>
+    <service id="liip_imagine.filter.loader.interlace" class="Liip\ImagineBundle\Imagine\Filter\Loader\InterlaceFilterLoader">
+      <tag name="liip_imagine.filter.loader" loader="interlace"/>
+    </service>
+    <service id="liip_imagine.binary.loader.prototype.filesystem" class="Liip\ImagineBundle\Binary\Loader\FileSystemLoader">
+      <argument type="service" id="liip_imagine.mime_type_guesser"/>
+      <argument type="service" id="liip_imagine.extension_guesser"/>
+      <argument></argument>
+    </service>
+    <service id="liip_imagine.binary.loader.prototype.stream" class="Liip\ImagineBundle\Binary\Loader\StreamLoader">
+      <argument></argument>
+      <argument></argument>
+    </service>
+    <service id="liip_imagine.cache.resolver.no_cache_web_path" class="Liip\ImagineBundle\Imagine\Cache\Resolver\NoCacheWebPathResolver">
+      <tag name="liip_imagine.cache.resolver" resolver="no_cache"/>
+      <argument type="service" id="router.request_context"/>
+    </service>
+    <service id="liip_imagine.form.type.image" class="Liip\ImagineBundle\Form\Type\ImageType">
+      <tag name="form.type" alias="liip_imagine_image"/>
+    </service>
+    <service id="liip_imagine.mime_type_guesser" class="Symfony\Component\HttpFoundation\File\MimeType\MimeTypeGuesserInterface">
+      <factory class="Symfony\Component\HttpFoundation\File\MimeType\MimeTypeGuesser" method="getInstance"/>
+    </service>
+    <service id="liip_imagine.extension_guesser" class="Symfony\Component\HttpFoundation\File\MimeType\ExtensionGuesserInterface">
+      <factory class="Symfony\Component\HttpFoundation\File\MimeType\ExtensionGuesser" method="getInstance"/>
+    </service>
+    <service id="liip_imagine.binary.mime_type_guesser" class="Liip\ImagineBundle\Binary\SimpleMimeTypeGuesser">
+      <argument type="service" id="liip_imagine.mime_type_guesser"/>
+    </service>
+    <service id="liip_imagine.cache.signer" class="Liip\ImagineBundle\Imagine\Cache\Signer">
+      <argument>524f87812088e3b0c156f6e057e9dd105e5ff1c1</argument>
+    </service>
+    <service id="liip_imagine.filter.post_processor.jpegoptim" class="Liip\ImagineBundle\Imagine\Filter\PostProcessor\JpegOptimPostProcessor">
+      <tag name="liip_imagine.filter.post_processor" post_processor="jpegoptim"/>
+      <argument>/usr/bin/jpegoptim</argument>
+    </service>
+    <service id="liip_imagine.filter.post_processor.optipng" class="Liip\ImagineBundle\Imagine\Filter\PostProcessor\OptiPngPostProcessor">
+      <tag name="liip_imagine.filter.post_processor" post_processor="optipng"/>
+      <argument>/usr/bin/optipng</argument>
+    </service>
+    <service id="liip_imagine.filter.post_processor.pngquant" class="Liip\ImagineBundle\Imagine\Filter\PostProcessor\PngquantPostProcessor">
+      <tag name="liip_imagine.filter.post_processor" post_processor="pngquant"/>
+      <argument>/usr/bin/pngquant</argument>
+    </service>
+    <service id="liip_imagine.filter.post_processor.mozjpeg" class="Liip\ImagineBundle\Imagine\Filter\PostProcessor\MozJpegPostProcessor">
+      <tag name="liip_imagine.filter.post_processor" post_processor="mozjpeg"/>
+      <argument>/opt/mozjpeg/bin/cjpeg</argument>
     </service>
     <service id="web_profiler.controller.profiler" class="Symfony\Bundle\WebProfilerBundle\Controller\ProfilerController">
       <argument type="service" id="router" on-invalid="null"/>
@@ -4784,10 +5125,6 @@
         <argument key="sonata.block.data_collector" type="collection">
           <argument>block</argument>
           <argument>SonataBlockBundle:Profiler:block.html.twig</argument>
-        </argument>
-        <argument key="data_collector.dump" type="collection">
-          <argument>dump</argument>
-          <argument>@Debug/Profiler/dump.html.twig</argument>
         </argument>
       </argument>
       <argument>bottom</argument>
@@ -5069,12 +5406,20 @@
         <argument>SonataDoctrineORMAdmin</argument>
       </call>
       <call method="addPath">
+        <argument>/home/ubuntu/workspace/app/Resources/SonataAdminBundle/views</argument>
+        <argument>SonataAdmin</argument>
+      </call>
+      <call method="addPath">
         <argument>/home/ubuntu/workspace/vendor/sonata-project/admin-bundle/Resources/views</argument>
         <argument>SonataAdmin</argument>
       </call>
       <call method="addPath">
-        <argument>/home/ubuntu/workspace/vendor/symfony/symfony/src/Symfony/Bundle/DebugBundle/Resources/views</argument>
-        <argument>Debug</argument>
+        <argument>/home/ubuntu/workspace/vendor/whiteoctober/breadcrumbs-bundle/WhiteOctober/BreadcrumbsBundle/Resources/views</argument>
+        <argument>WhiteOctoberBreadcrumbs</argument>
+      </call>
+      <call method="addPath">
+        <argument>/home/ubuntu/workspace/vendor/liip/imagine-bundle/Resources/views</argument>
+        <argument>LiipImagine</argument>
       </call>
       <call method="addPath">
         <argument>/home/ubuntu/workspace/vendor/symfony/symfony/src/Symfony/Bundle/WebProfilerBundle/Resources/views</argument>
@@ -5140,26 +5485,26 @@
               </argument>
             </argument>
             <call method="setUsername">
-              <argument>soporte@proyectocolocacion.hol.es</argument>
+              <argument>estudiosalmerienses@gmail.com</argument>
             </call>
             <call method="setPassword">
-              <argument>boni1111</argument>
+              <argument>Bonill@1205</argument>
             </call>
             <call method="setAuthMode">
-              <argument>null</argument>
+              <argument>login</argument>
             </call>
           </service>
         </argument>
       </argument>
       <argument type="service" id="swiftmailer.mailer.default.transport.eventdispatcher"/>
       <call method="setHost">
-        <argument>mx1.hostinger.es</argument>
+        <argument>smtp.gmail.com</argument>
       </call>
       <call method="setPort">
-        <argument>25</argument>
+        <argument>465</argument>
       </call>
       <call method="setEncryption">
-        <argument>null</argument>
+        <argument>ssl</argument>
       </call>
       <call method="setTimeout">
         <argument>30</argument>
@@ -5169,6 +5514,13 @@
       </call>
     </service>
     <service id="sonata.admin.security.handler" class="Sonata\AdminBundle\Security\Handler\NoopSecurityHandler"/>
+    <service id="liip_imagine" class="Imagine\Gd\Imagine">
+      <call method="setMetadataReader">
+        <argument type="service">
+          <service class="Imagine\Image\Metadata\ExifMetadataReader" public="false"/>
+        </argument>
+      </call>
+    </service>
     <service id="knp_menu.menu_provider" class="Knp\Menu\Provider\ChainProvider">
       <argument type="collection">
         <argument type="service">

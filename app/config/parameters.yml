@@ -5,8 +5,8 @@ parameters:
     database_name: agencia
     database_user: jmboni
     database_password: null
-    mailer_transport: smtp
-    mailer_host: mx1.hostinger.es
-    mailer_user: soporte@proyectocolocacion.hol.es
-    mailer_password: boni1111
+    mailer_transport: gmail
+    mailer_host: null
+    mailer_user: estudiosalmerienses@gmail.com
+    mailer_password: Bonill@1205
     secret: 524f87812088e3b0c156f6e057e9dd105e5ff1c1

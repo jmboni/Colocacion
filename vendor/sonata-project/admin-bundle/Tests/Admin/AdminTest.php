@@ -11,7 +11,7 @@
 
 namespace Sonata\AdminBundle\Tests\Admin;
 
-use Sonata\AdminBundle\Admin\Admin;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Admin\AdminInterface;
 use Sonata\AdminBundle\Admin\Pool;
 use Sonata\AdminBundle\Route\DefaultRouteGenerator;
@@ -42,7 +42,7 @@ class AdminTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Sonata\AdminBundle\Admin\Admin::__construct
+     * @covers Sonata\AdminBundle\Admin\AbstractAdmin::__construct
      */
     public function testConstructor()
     {
@@ -50,7 +50,7 @@ class AdminTest extends \PHPUnit_Framework_TestCase
         $baseControllerName = 'SonataNewsBundle:PostAdmin';
 
         $admin = new PostAdmin('sonata.post.admin.post', $class, $baseControllerName);
-        $this->assertInstanceOf('Sonata\AdminBundle\Admin\Admin', $admin);
+        $this->assertInstanceOf('Sonata\AdminBundle\Admin\AbstractAdmin', $admin);
         $this->assertSame($class, $admin->getClass());
         $this->assertSame($baseControllerName, $admin->getBaseControllerName());
     }
@@ -121,7 +121,7 @@ class AdminTest extends \PHPUnit_Framework_TestCase
         $securityHandler->isGranted($admin, 'CUSTOM_ROLE', $admin)->willReturn(true);
         $securityHandler->isGranted($admin, 'EXTRA_CUSTOM_ROLE', $admin)->willReturn(false);
         $customExtension = $this->prophesize(
-            'Sonata\AdminBundle\Admin\AdminExtension'
+            'Sonata\AdminBundle\Admin\AbstractAdminExtension'
         );
         $customExtension->getAccessMapping($admin)->willReturn(
             array('custom_action' => array('CUSTOM_ROLE', 'EXTRA_CUSTOM_ROLE'))
@@ -159,7 +159,7 @@ class AdminTest extends \PHPUnit_Framework_TestCase
         $securityHandler->isGranted($admin, 'CUSTOM_ROLE', $admin)->willReturn(true);
         $securityHandler->isGranted($admin, 'EXTRA_CUSTOM_ROLE', $admin)->willReturn(false);
         $customExtension = $this->prophesize(
-            'Sonata\AdminBundle\Admin\AdminExtension'
+            'Sonata\AdminBundle\Admin\AbstractAdminExtension'
         );
         $customExtension->getAccessMapping($admin)->willReturn(
             array('custom_action' => array('CUSTOM_ROLE', 'EXTRA_CUSTOM_ROLE'))
@@ -183,7 +183,7 @@ class AdminTest extends \PHPUnit_Framework_TestCase
         $securityHandler->isGranted($admin, 'CUSTOM_ROLE', $admin)->willReturn(true);
         $securityHandler->isGranted($admin, 'EXTRA_CUSTOM_ROLE', $admin)->willReturn(true);
         $customExtension = $this->prophesize(
-            'Sonata\AdminBundle\Admin\AdminExtension'
+            'Sonata\AdminBundle\Admin\AbstractAdminExtension'
         );
         $customExtension->getAccessMapping($admin)->willReturn(
             array('custom_action' => array('CUSTOM_ROLE', 'EXTRA_CUSTOM_ROLE'))
@@ -206,7 +206,7 @@ class AdminTest extends \PHPUnit_Framework_TestCase
         );
         $securityHandler->isGranted($admin, 'EDIT_ROLE', $admin)->willReturn(true);
         $customExtension = $this->prophesize(
-            'Sonata\AdminBundle\Admin\AdminExtension'
+            'Sonata\AdminBundle\Admin\AbstractAdminExtension'
         );
         $customExtension->getAccessMapping($admin)->willReturn(
             array('edit_action' => array('EDIT_ROLE'))
@@ -241,7 +241,7 @@ class AdminTest extends \PHPUnit_Framework_TestCase
         $commentAdmin->setCurrentChild($subCommentAdmin);
 
         $menuFactory = $this->getMock('Knp\Menu\FactoryInterface');
-        $menu        = $this->getMock('Knp\Menu\ItemInterface');
+        $menu = $this->getMock('Knp\Menu\ItemInterface');
         $translatorStrategy = $this->getMock(
             'Sonata\AdminBundle\Translator\LabelTranslatorStrategyInterface'
         );
@@ -397,7 +397,7 @@ class AdminTest extends \PHPUnit_Framework_TestCase
         $admin->initialize();
 
         $menuFactory = $this->getMock('Knp\Menu\FactoryInterface');
-        $menu        = $this->getMock('Knp\Menu\ItemInterface');
+        $menu = $this->getMock('Knp\Menu\ItemInterface');
         $translatorStrategy = $this->getMock(
             'Sonata\AdminBundle\Translator\LabelTranslatorStrategyInterface'
         );
@@ -452,12 +452,12 @@ class AdminTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Sonata\AdminBundle\Admin\Admin::hasChild
-     * @covers Sonata\AdminBundle\Admin\Admin::addChild
-     * @covers Sonata\AdminBundle\Admin\Admin::getChild
-     * @covers Sonata\AdminBundle\Admin\Admin::isChild
-     * @covers Sonata\AdminBundle\Admin\Admin::hasChildren
-     * @covers Sonata\AdminBundle\Admin\Admin::getChildren
+     * @covers Sonata\AdminBundle\Admin\AbstractAdmin::hasChild
+     * @covers Sonata\AdminBundle\Admin\AbstractAdmin::addChild
+     * @covers Sonata\AdminBundle\Admin\AbstractAdmin::getChild
+     * @covers Sonata\AdminBundle\Admin\AbstractAdmin::isChild
+     * @covers Sonata\AdminBundle\Admin\AbstractAdmin::hasChildren
+     * @covers Sonata\AdminBundle\Admin\AbstractAdmin::getChildren
      */
     public function testChildren()
     {
@@ -481,7 +481,7 @@ class AdminTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Sonata\AdminBundle\Admin\Admin::configure
+     * @covers Sonata\AdminBundle\Admin\AbstractAdmin::configure
      */
     public function testConfigure()
     {
@@ -783,8 +783,8 @@ class AdminTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Sonata\AdminBundle\Admin\Admin::setUniqid
-     * @covers Sonata\AdminBundle\Admin\Admin::getUniqid
+     * @covers Sonata\AdminBundle\Admin\AbstractAdmin::setUniqid
+     * @covers Sonata\AdminBundle\Admin\AbstractAdmin::getUniqid
      */
     public function testUniqid()
     {
@@ -826,14 +826,14 @@ class AdminTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Sonata\AdminBundle\Admin\Admin::getSubClasses
-     * @covers Sonata\AdminBundle\Admin\Admin::getSubClass
-     * @covers Sonata\AdminBundle\Admin\Admin::setSubClasses
-     * @covers Sonata\AdminBundle\Admin\Admin::hasSubClass
-     * @covers Sonata\AdminBundle\Admin\Admin::hasActiveSubClass
-     * @covers Sonata\AdminBundle\Admin\Admin::getActiveSubClass
-     * @covers Sonata\AdminBundle\Admin\Admin::getActiveSubclassCode
-     * @covers Sonata\AdminBundle\Admin\Admin::getClass
+     * @covers Sonata\AdminBundle\Admin\AbstractAdmin::getSubClasses
+     * @covers Sonata\AdminBundle\Admin\AbstractAdmin::getSubClass
+     * @covers Sonata\AdminBundle\Admin\AbstractAdmin::setSubClasses
+     * @covers Sonata\AdminBundle\Admin\AbstractAdmin::hasSubClass
+     * @covers Sonata\AdminBundle\Admin\AbstractAdmin::hasActiveSubClass
+     * @covers Sonata\AdminBundle\Admin\AbstractAdmin::getActiveSubClass
+     * @covers Sonata\AdminBundle\Admin\AbstractAdmin::getActiveSubclassCode
+     * @covers Sonata\AdminBundle\Admin\AbstractAdmin::getClass
      */
     public function testSubClass()
     {
@@ -889,7 +889,7 @@ class AdminTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Sonata\AdminBundle\Admin\Admin::hasActiveSubClass
+     * @covers Sonata\AdminBundle\Admin\AbstractAdmin::hasActiveSubClass
      */
     public function testOnlyOneSubclassNeededToBeActive()
     {
@@ -1367,8 +1367,8 @@ class AdminTest extends \PHPUnit_Framework_TestCase
     {
         $admin = new PostAdmin('sonata.post.admin.post', 'NewsBundle\Entity\Post', 'SonataNewsBundle:PostAdmin');
 
-        $this->assertSame(array('LIST'), $admin->getPermissionsShow(Admin::CONTEXT_DASHBOARD));
-        $this->assertSame(array('LIST'), $admin->getPermissionsShow(Admin::CONTEXT_MENU));
+        $this->assertSame(array('LIST'), $admin->getPermissionsShow(AbstractAdmin::CONTEXT_DASHBOARD));
+        $this->assertSame(array('LIST'), $admin->getPermissionsShow(AbstractAdmin::CONTEXT_MENU));
         $this->assertSame(array('LIST'), $admin->getPermissionsShow('foo'));
     }
 
@@ -1389,8 +1389,8 @@ class AdminTest extends \PHPUnit_Framework_TestCase
 
         $admin->setSecurityHandler($securityHandler);
 
-        $this->assertTrue($admin->showIn(Admin::CONTEXT_DASHBOARD));
-        $this->assertTrue($admin->showIn(Admin::CONTEXT_MENU));
+        $this->assertTrue($admin->showIn(AbstractAdmin::CONTEXT_DASHBOARD));
+        $this->assertTrue($admin->showIn(AbstractAdmin::CONTEXT_MENU));
         $this->assertTrue($admin->showIn('foo'));
     }
 
@@ -1620,42 +1620,6 @@ class AdminTest extends \PHPUnit_Framework_TestCase
         $this->assertContains($post, $tag->getPosts());
     }
 
-    private function createTagAdmin(Post $post)
-    {
-        $postAdmin = $this->getMockBuilder('Sonata\AdminBundle\Tests\Fixtures\Admin\PostAdmin')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $postAdmin->expects($this->any())->method('getObject')->will($this->returnValue($post));
-
-        $formBuilder = $this->getMock('Symfony\Component\Form\FormBuilderInterface');
-        $formBuilder->expects($this->any())->method('getForm')->will($this->returnValue(null));
-
-        $tagAdmin = $this->getMockBuilder('Sonata\AdminBundle\Tests\Fixtures\Admin\TagAdmin')
-            ->disableOriginalConstructor()
-            ->setMethods(array('getFormBuilder'))
-            ->getMock();
-
-        $tagAdmin->expects($this->any())->method('getFormBuilder')->will($this->returnValue($formBuilder));
-        $tagAdmin->setParent($postAdmin);
-
-        $tag = new Tag();
-        $tagAdmin->setSubject($tag);
-
-        $request = $this->getMock('Symfony\Component\HttpFoundation\Request');
-        $tagAdmin->setRequest($request);
-
-        $configurationPool = $this->getMockBuilder('Sonata\AdminBundle\Admin\Pool')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $configurationPool->expects($this->any())->method('getPropertyAccessor')->will($this->returnValue(PropertyAccess::createPropertyAccessor()));
-
-        $tagAdmin->setConfigurationPool($configurationPool);
-
-        return $tagAdmin;
-    }
-
     public function testRemoveFieldFromFormGroup()
     {
         $formGroups = array(
@@ -1810,7 +1774,7 @@ class AdminTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Sonata\AdminBundle\Admin\Admin::configureActionButtons
+     * @covers Sonata\AdminBundle\Admin\AbstractAdmin::configureActionButtons
      */
     public function testGetActionButtonsList()
     {
@@ -1826,7 +1790,7 @@ class AdminTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Sonata\AdminBundle\Admin\Admin::getDashboardActions
+     * @covers Sonata\AdminBundle\Admin\AbstractAdmin::getDashboardActions
      * @dataProvider provideGetBaseRouteName
      */
     public function testDefaultDashboardActionsArePresent($objFqn, $expected)
@@ -1858,6 +1822,42 @@ class AdminTest extends \PHPUnit_Framework_TestCase
 
         $this->assertArrayHasKey('list', $admin->getDashboardActions());
         $this->assertArrayHasKey('create', $admin->getDashboardActions());
+    }
+
+    private function createTagAdmin(Post $post)
+    {
+        $postAdmin = $this->getMockBuilder('Sonata\AdminBundle\Tests\Fixtures\Admin\PostAdmin')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $postAdmin->expects($this->any())->method('getObject')->will($this->returnValue($post));
+
+        $formBuilder = $this->getMock('Symfony\Component\Form\FormBuilderInterface');
+        $formBuilder->expects($this->any())->method('getForm')->will($this->returnValue(null));
+
+        $tagAdmin = $this->getMockBuilder('Sonata\AdminBundle\Tests\Fixtures\Admin\TagAdmin')
+            ->disableOriginalConstructor()
+            ->setMethods(array('getFormBuilder'))
+            ->getMock();
+
+        $tagAdmin->expects($this->any())->method('getFormBuilder')->will($this->returnValue($formBuilder));
+        $tagAdmin->setParent($postAdmin);
+
+        $tag = new Tag();
+        $tagAdmin->setSubject($tag);
+
+        $request = $this->getMock('Symfony\Component\HttpFoundation\Request');
+        $tagAdmin->setRequest($request);
+
+        $configurationPool = $this->getMockBuilder('Sonata\AdminBundle\Admin\Pool')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $configurationPool->expects($this->any())->method('getPropertyAccessor')->will($this->returnValue(PropertyAccess::createPropertyAccessor()));
+
+        $tagAdmin->setConfigurationPool($configurationPool);
+
+        return $tagAdmin;
     }
 }
 
